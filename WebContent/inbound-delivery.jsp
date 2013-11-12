@@ -48,11 +48,17 @@
 							<label for="inputPassword" class="col-lg-1 control-label">Type</label>
 							<div class="col-lg-4">
 								<select class="form-control">
+									<option>Please Select</option>
 									<option>Organization</option>
 									<option>Individual</option>
 								</select>
 							</div>
 						</div>
+						<div class="form-group">
+							<label for="inputPassword" class="col-lg-1 control-label">Donor</label>
+							<div class="col-lg-4">
+									<input class="form-control" type="text" />
+							</div>
 					</form>
 					<div class="table-responsive">
 						<table class="table table-hover table-striped tablesorter table-condensed">
@@ -63,49 +69,22 @@
 									<th>Item Description <i class="icon-sort"></i></th>
 									<th class="col-lg-1">Quantity<i class="icon-sort"></i></th>
 									<th class="col-lg-1">Unit of Measure<i class="icon-sort"></i></th>
+									<th class="col-lg-1">Unit Price<i class="icon-sort"></i></th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="add-list">
 								<tr>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
+									<td><input class="form-control input-sm" type="text" style="width: 100%;" name="id"/></td>
+									<td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code"/></td>
+									<td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-desc"/></td>
+									<td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity"/></td>
+									<td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price"/></td>
+									<td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-measure"/></td>
 								</tr>
-								<tr>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-								</tr>
-								<tr>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-								</tr>
-								<tr>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-								</tr>
-								<tr>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" /></td>
-								</tr>
-								<tr colspan="5">
-									<td><button type="button" class="btn btn-xs btn-default"><i class="icon-plus"></i> Add row </button></td>
-								</tr>
+								
 							</tbody>
 						</table>
+						<button type="button" class="btn btn-xs btn-default" id="addRow"><i class="icon-plus"></i> Add row </button>
 					</div>
 				</div>
 			</div>
@@ -114,7 +93,14 @@
 	<!-- /.row -->
 </div>
 <!-- sample-content.jsp -->
-
+<script>
+$(document).ready(function(){
+    $("#addRow").on('click',function(){
+        $("#add-list").append('<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-desc"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-measure"/></td></tr>');  
+    });
+    
+});
+</script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
 	<jsp:param value="/path/to/js1" name="js" />
