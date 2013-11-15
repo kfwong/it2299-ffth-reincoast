@@ -93,6 +93,7 @@
 	<!-- /.row -->
 </div>
 <!-- sample-content.jsp -->
+<!-- Add row function -->
 <script>
 $(document).ready(function(){
     $("#addRow").on('click',function(){
