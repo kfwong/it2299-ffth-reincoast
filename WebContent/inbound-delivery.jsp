@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
 	<jsp:param value="/path/to/css1" name="css" />
@@ -17,10 +18,12 @@
 		<div class="col-lg-12">
 			<h2>Inbound Delivery</h2>
 			<ol class="breadcrumb">
-				<li class="active"><i class="icon-dashboard"></i> Inbound Delivery</li>
+				<li class="active"><i class="icon-dashboard"></i> Inbound
+					Delivery</li>
 			</ol>
 			<div class="alert alert-success alert-dismissable">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<button type="button" class="close" data-dismiss="alert"
+					aria-hidden="true">&times;</button>
 				Transaction completed successfully. T.Code: 6000864578
 			</div>
 			<div class="panel panel-primary">
@@ -31,13 +34,19 @@
 				</div>
 				<div class="panel-body">
 					<form class="form-horizontal" role="form">
-						<div class="form-group" style="padding:0px 10px 0px 10px;">
+						<div class="form-group" style="padding: 0px 10px 0px 10px;">
 							<div class="btn-group">
-								<button type="button" class="btn btn-xs btn-default"><i class="icon-ok"></i> Save </button>
-								<button type="button" class="btn btn-xs btn-default"><i class="icon-tags"></i> Other </button>
-								<button type="button" class="btn btn-xs btn-default"><i class="icon-tags"></i> Other </button>
+								<button type="button" class="btn btn-xs btn-default">
+									<i class="icon-ok"></i> Save
+								</button>
+								<button type="button" class="btn btn-xs btn-default">
+									<i class="icon-tags"></i> Other
+								</button>
+								<button type="button" class="btn btn-xs btn-default">
+									<i class="icon-tags"></i> Other
+								</button>
 							</div>
-						</div>						
+						</div>
 						<div class="form-group">
 							<label class="col-lg-1 control-label">Receipt No.</label>
 							<div class="col-lg-4">
@@ -57,11 +66,13 @@
 						<div class="form-group">
 							<label for="inputPassword" class="col-lg-1 control-label">Donor</label>
 							<div class="col-lg-4">
-									<input class="form-control" type="text" />
+								<input class="form-control" type="text" />
 							</div>
+						</div>
 					</form>
 					<div class="table-responsive">
-						<table class="table table-hover table-striped tablesorter table-condensed">
+						<table
+							class="table table-hover table-striped tablesorter table-condensed">
 							<thead>
 								<tr>
 									<th class="col-lg-1">#<i class="icon-sort"></i></th>
@@ -74,17 +85,25 @@
 							</thead>
 							<tbody id="add-list">
 								<tr>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" name="id"/></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code"/></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-desc"/></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity"/></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price"/></td>
-									<td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-measure"/></td>
+									<td><input class="form-control input-sm" type="text"
+										style="width: 100%;" name="id" /></td>
+									<td><input class="form-control input-sm" type="text"
+										style="width: 100%;" name="item-code" /></td>
+									<td><input class="form-control input-sm" type="text"
+										style="width: 100%;" name="item-desc" /></td>
+									<td><input class="form-control input-sm" type="text"
+										style="width: 100%;" name="item-quantity" /></td>
+									<td><input class="form-control input-sm" type="text"
+										style="width: 100%;" name="item-price" /></td>
+									<td><input class="form-control input-sm" type="text"
+										style="width: 100%;" name="item-measure" /></td>
 								</tr>
-								
+
 							</tbody>
 						</table>
-						<button type="button" class="btn btn-xs btn-default" id="addRow"><i class="icon-plus"></i> Add row </button>
+						<button type="button" class="btn btn-xs btn-default" id="addRow">
+							<i class="icon-plus"></i> Add row
+						</button>
 					</div>
 				</div>
 			</div>
@@ -95,12 +114,19 @@
 <!-- sample-content.jsp -->
 <!-- Add row function -->
 <script>
-$(document).ready(function(){
-    $("#addRow").on('click',function(){
-        $("#add-list").append('<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-desc"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-measure"/></td></tr>');  
-    });
-    
-});
+	$(document)
+			.ready(
+					function() {
+						$("#addRow")
+								.on(
+										'click',
+										function() {
+											$("#add-list")
+													.append(
+															'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-desc"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-measure"/></td></tr>');
+										});
+
+					});
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
