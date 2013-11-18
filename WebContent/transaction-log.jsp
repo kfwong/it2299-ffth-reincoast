@@ -27,170 +27,29 @@
 							<th>Movement/Status <i class="icon-sort"></i></th>
 							<th>Date <i class="icon-sort"></i></th>
 							<th>Person <i class="icon-sort"></i></th>
+							<th>Total price<i class="icon-sort"></i></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr class="success">
 							<td>1</td>
-							<td>6000867531</td>
+							<td><a href='http://localhost:8080/it2299-ffth-reincoast/historyItem.jsp'/>6000867531</td>
 							<td>0320567846</td>
 							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
 							<td><span class="label label-success">Inbound Delivery</span></td>
 							<td>13/07/2013</td>
 							<td>John Smith</td>
+							<td>$2000</td>
 						</tr>
 						<tr class="success">
 							<td>1</td>
-							<td>6000867531</td>
+							<td><a href='#'/>6000867531</td>
 							<td>0320567846</td>
 							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-success">Inbound Delivery</span></td>
+							<td><span class="label label-success">Outbound Delivery</span></td>
 							<td>13/07/2013</td>
 							<td>John Smith</td>
-						</tr>
-						<tr class="success">
-							<td>1</td>
-							<td>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-success">Inbound Delivery</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-						</tr>
-						<tr class="success">
-							<td>1</td>
-							<td>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-success">Inbound Delivery</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-						</tr>
-						<tr class="success">
-							<td>1</td>
-							<td>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-success">Inbound Delivery</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-						</tr>
-						<tr class="success">
-							<td>1</td>
-							<td>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-success">Inbound Delivery</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-						</tr>
-						<tr class="success">
-							<td>1</td>
-							<td>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-success">Inbound Delivery</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-						</tr>
-						<tr class="success">
-							<td>1</td>
-							<td>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-success">Inbound Delivery</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-						</tr>
-						<tr class="warning">
-							<td>1</td>
-							<td>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-warning">Outbound Delivery</span>&nbsp;<span class="label label-info">Preparing</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-						</tr>
-						<tr class="success">
-							<td>1</td>
-							<td>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-success">Inbound Delivery</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-						</tr>
-						<tr class="success">
-							<td>1</td>
-							<td>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-success">Inbound Delivery</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-						</tr>
-						<tr class="success">
-							<td>1</td>
-							<td>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-success">Inbound Delivery</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-						</tr>
-						<tr class="success">
-							<td>1</td>
-							<td>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-success">Inbound Delivery</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-						</tr>
-						<tr class="warning">
-							<td>1</td>
-							<td>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-warning">Outbound Delivery</span>&nbsp;<span class="label label-info">Scheduled</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-						</tr>
-						<tr class="warning">
-							<td>1</td>
-							<td>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-warning">Outbound Delivery</span>&nbsp;<span class="label label-info">Dispatched</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-						</tr>
-						<tr class="success">
-							<td>1</td>
-							<td>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-success">Inbound Delivery</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-						</tr>
-						<tr class="success">
-							<td>1</td>
-							<td>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-success">Inbound Delivery</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-						</tr>
-						<tr class="danger">
-							<td>1</td>
-							<td>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-danger">Cancellation</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
+							<td>$4000</td>
 						</tr>
 					</tbody>
 				</table>
