@@ -36,19 +36,26 @@
 					<tr>
 						<th>Item Description</th>
 						<th>Quantity</th>
+						<td>Type</td>
 						<th>Total Price</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>89247147812</td>
-						<td>150</td>
-						<td>$1000</td>
+						<td>20</td>
+						<td>canned food</td>
+						<td>$1.5</td>
 					</tr>
 					<tr>
 						<td>23183973</td>
-						<td>150</td>
-						<td>$1200</td>
+						<td>10</td>
+						<td>drink</td>
+						<td>$2.0</td>
+					</tr>
+					<tr>
+						<td>Total value:</td>
+						<td>$50</td>
 					</tr>
 				</tbody>
 			</table>

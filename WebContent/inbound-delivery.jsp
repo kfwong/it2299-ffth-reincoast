@@ -127,20 +127,26 @@
 											$("#add-list").scrollIntoView();
 										});
 					});
-	
-	$(document).ready(function(){
 
-        $('addRow').click(function () {
+	$(document)
+			.ready(
+					function() {
 
-              var newTr = $('<tr></tr>');
+						$('addRow')
+								.click(
+										function() {
 
-                newTr.html('<td width="29px" style="text-align:center;">x</td><td width="144px">Product 1</td><td width="44px" style="text-align:center;">2</td><td width="86px style="text-align:right;">16.50</td>');
+											var newTr = $('<tr></tr>');
 
-                newTr.appendTo("#add-list");
+											newTr
+													.html('<td width="29px" style="text-align:center;">x</td><td width="144px">Product 1</td><td width="44px" style="text-align:center;">2</td><td width="86px style="text-align:right;">16.50</td>');
 
-                $("#add-list tr:last-child").focus();
-          });
-    });
+											newTr.appendTo("#add-list");
+
+											$("#add-list tr:last-child")
+													.focus();
+										});
+					});
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
