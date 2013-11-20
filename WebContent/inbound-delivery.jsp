@@ -69,47 +69,52 @@
 								<input class="form-control" type="text" />
 							</div>
 						</div>
-					</form>
-					<div class="table-responsive">
-						<table
-							class="table table-hover table-striped tablesorter table-condensed">
-							<thead>
-								<tr>
-									<th class="col-lg-1">#<i class="icon-sort"></i></th>
-									<th class="col-lg-2">Item Code <i class="icon-sort"></i></th>
-									<th>Item Description <i class="icon-sort"></i></th>
-									<th class="col-lg-1">Quantity<i class="icon-sort"></i></th>
-									<th class="col-lg-1">Unit of Measure<i class="icon-sort"></i></th>
-									<th class="col-lg-1">Unit Price<i class="icon-sort"></i></th>
-								</tr>
-							</thead>
-							<tbody id="add-list">
-								<tr>
-									<td><input class="form-control input-sm" type="text"
-										style="width: 100%;" name="id" /></td>
-									<td><input class="form-control input-sm" type="text"
-										style="width: 100%;" name="item-code" /></td>
-									<td><input class="form-control input-sm" type="text"
-										style="width: 100%;" name="item-desc" /></td>
-									<td><input class="form-control input-sm" type="text"
-										style="width: 100%;" name="item-quantity" /></td>
-									<td><input class="form-control input-sm" type="text"
-										style="width: 100%;" name="item-price" /></td>
-									<td><input class="form-control input-sm" type="text"
-										style="width: 100%;" name="item-measure" /></td>
-								</tr>
 
-							</tbody>
-						</table>
-						<button type="button" class="btn btn-xs btn-default" id="addRow">
-							<i class="icon-plus"></i> Add row
-						</button>
-					</div>
+						<div class="table-responsive">
+							<table
+								class="table table-hover table-striped tablesorter table-condensed">
+								<thead>
+									<tr>
+										<th class="col-lg-1">#<i class="icon-sort"></i></th>
+										<th class="col-lg-2">Item Code <i class="icon-sort"></i></th>
+										<th>Item Description <i class="icon-sort"></i></th>
+										<th class="col-lg-1">Quantity<i class="icon-sort"></i></th>
+										<th class="col-lg-1">Unit of Measure<i class="icon-sort"></i></th>
+										<th class="col-lg-1">Unit Price<i class="icon-sort"></i></th>
+									</tr>
+								</thead>
+								<tbody id="add-list">
+									<tr>
+										<td><input class="form-control input-sm" type="text"
+											style="width: 100%;" name="id" /></td>
+										<td><input class="form-control input-sm" type="text"
+											style="width: 100%;" name="item-code" /></td>
+										<td><input class="form-control input-sm" type="text"
+											style="width: 100%;" name="item-desc" /></td>
+										<td><input class="form-control input-sm" type="text"
+											style="width: 100%;" name="item-quantity" /></td>
+										<td><input class="form-control input-sm" type="text"
+											style="width: 100%;" name="item-price" /></td>
+										<td><input class="form-control input-sm" type="text"
+											style="width: 100%;" name="item-measure" /></td>
+									</tr>
+
+								</tbody>
+								<tr colspan="5">
+								<td><button type="button" class="btn btn-xs btn-default"
+										id="addRow">
+										<i class="icon-plus"></i> Add row
+									</button></td>
+							</tr>
+							</table>
+							<input type="submit" />
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- /.row -->
+</div>
+<!-- /.row -->
 </div>
 <!-- sample-content.jsp -->
 <!-- Add row function -->
@@ -124,7 +129,10 @@
 											$("#add-list")
 													.append(
 															'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-desc"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-measure"/></td></tr>');
-											$("#add-list").scrollIntoView();
+											<!--$("#add-list").scrollIntoView();
+											-->
+											$(document).scrollTop(
+													$(document).height());
 										});
 					});
 </script>

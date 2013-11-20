@@ -59,7 +59,7 @@
 								<input class="form-control" type="text" id="package_description" />
 							</div>
 						</div>
-					</form>
+					
 					<div class="table-responsive">
 						<table
 							class="table table-hover table-striped tablesorter table-condensed">
@@ -95,6 +95,8 @@
 									</button></td>
 							</tr>
 						</table>
+						<input type="submit"/>
+					</form>
 					</div>
 				</div>
 			</div>
@@ -115,6 +117,8 @@
 											$("#add-list")
 													.append(
 															'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-desc"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-measure"/></td></tr>');
+											$(document).scrollTop(
+													$(document).height());
 										});
 
 					});
