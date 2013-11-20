@@ -30,27 +30,8 @@
 							<th>Total price<i class="icon-sort"></i></th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr class="success">
-							<td>1</td>
-							<td><a href='http://localhost:8080/it2299-ffth-reincoast/historyItem.jsp'/>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-success">Inbound Delivery</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-							<td>$2000</td>
-						</tr>
-						<tr class="success">
-							<td>1</td>
-							<td><a href='#'/>6000867531</td>
-							<td>0320567846</td>
-							<td>ANGRY BIRD CHOC FILLED BISCUITS</td>
-							<td><span class="label label-success">Outbound Delivery</span></td>
-							<td>13/07/2013</td>
-							<td>John Smith</td>
-							<td>$4000</td>
-						</tr>
+					<tbody id="tran-list">
+						
 					</tbody>
 				</table>
 			</div>
@@ -59,7 +40,16 @@
 	<!-- /.row -->
 </div>
 <!-- sample-content.jsp -->
+<script>
+$(document).ready(function(){
+	for(var i=0;i< 5; i++){
+		var number = 1 + Math.floor(Math.random() * i);
+		var name = "ANGRY BIRD CHOC FILLED BISCUITS";
+	$("#tran-list").append("<tr class='success'><td>"+ number +"</td><td><a href='http://localhost:8080/it2299-ffth-reincoast/historyItem.jsp'>" + (number * 0320567846)/2 +"</a></td><td>" + (number*0320567846)/2 + "</td><td>ANGRY BIRD CHOC FILLED BISCUITS</td><td><span class='label label-success'>Inbound Delivery</span></td><td>13/07/2013</td><td>John Smith</td><td>$" + (number * 1000)*2.5 + "</td></tr>");
+}
+});
 
+</script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
 	<jsp:param value="/path/to/js1" name="js" />

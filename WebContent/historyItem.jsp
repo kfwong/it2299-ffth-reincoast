@@ -37,26 +37,14 @@
 						<th>Item Description</th>
 						<th>Quantity</th>
 						<td>Type</td>
-						<th>Total Price</th>
+						<th>Unit Price</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td>89247147812</td>
-						<td>20</td>
-						<td>canned food</td>
-						<td>$1.5</td>
-					</tr>
-					<tr>
-						<td>23183973</td>
-						<td>10</td>
-						<td>drink</td>
-						<td>$2.0</td>
-					</tr>
-					<tr>
-						<td>Total value:</td>
-						<td>$50</td>
-					</tr>
+				<tbody id="item-list">
+
+				</tbody>
+				<tbody id="total-value">
+
 				</tbody>
 			</table>
 		</div>
@@ -66,7 +54,22 @@
 <!-- /.row -->
 
 <!-- sample-content.jsp -->
-
+<script>
+	$(document).ready(
+			function() {
+				var total = 0;
+				for (var i = 0; i < 5; i++) {
+					var number = 1 + Math.floor(Math.random() * i);
+					$("#item-list").append(
+							"<tr><td>" + number * 314 + "</td><td>" + number
+									* 4 + "</td><td>Canned</td><td>$"
+									+ (number * 3) + "</td></tr>");
+					total = total + ((number * 4) + (number * 3));
+				}
+				$("#total-value").append(
+						"<tr><td>Total Value</td><td>" + total + "</td></tr>");
+			});
+</script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
 	<jsp:param value="/path/to/js1" name="js" />
