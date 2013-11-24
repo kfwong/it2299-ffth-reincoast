@@ -43,7 +43,7 @@
 			<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-collapse"></i> Schedules <b class="caret"></b></a>
 				<ul class="dropdown-menu">
 					<li><a href="#">Self Collection Centers</a></li>
-					<li><a href="#">Food Drive Schedule</a></li>
+					<li><a href="schedule-fooddrive.jsp">Food Drive Schedule</a></li>
 					<li><a href="#">Event Planner</a></li>
 				</ul>
 			</li>
