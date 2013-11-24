@@ -34,9 +34,10 @@
 			</li>
 			<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-collapse"></i> Contacts <b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li><a href="#">Sponsors</a></li>
-					<li><a href="#">Partners</a></li>
-					<li><a href="#">Beneficiaries</a></li>
+					<li><a href="contacts-donors-individual.jsp">Donors - Individual</a></li>
+					<li><a href="#">Donors - Corporate</a></li>
+					<li><a href="#">Beneficiaries - School</a></li>
+					<li><a href="#">Beneficiaries - S.C.C</a></li>
 				</ul>
 			</li>
 			<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-collapse"></i> Schedules <b class="caret"></b></a>
