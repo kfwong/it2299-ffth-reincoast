@@ -8,7 +8,7 @@ public class Donation {
 	private String itemDescription;
 	private int itemQuantity;
 	private int unitOfMeasure;
-	private int unitPrice;
+	private double unitPrice;
 	public String getReceiptNo() {
 		return receiptNo;
 	}
@@ -51,11 +51,11 @@ public class Donation {
 	public void setUnitOfMeasure(int unitOfMeasure) {
 		this.unitOfMeasure = unitOfMeasure;
 	}
-	public int getUnitPrice() {
+	public double getUnitPrice() {
 		return unitPrice;
 	}
-	public void setUnitPrice(int unitPrice) {
-		this.unitPrice = unitPrice;
+	public void setUnitPrice(double d) {
+		this.unitPrice = d;
 	}
 	
 

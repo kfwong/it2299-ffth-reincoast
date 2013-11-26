@@ -96,6 +96,7 @@
 							</tr>
 						</table>
 						<input type="submit"/>
+						</div>
 					</form>
 					</div>
 				</div>
