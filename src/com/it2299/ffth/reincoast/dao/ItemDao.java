@@ -10,6 +10,7 @@ import com.it2299.ffth.reincoast.dto.Item;
  * @author kfwong
  *
  * Implementation of Item Data Access Object.
+ * Please make sure you extends AbstractDAO so that we have common interfaces for calling each other's function.
  */
 public class ItemDao extends AbstractDao<Item> {
 	
