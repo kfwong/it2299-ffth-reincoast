@@ -14,6 +14,13 @@
 <div id="page-wrapper">
 	<h1>Contacts <small>Donors - Individual</small></h1>
 
+	<form method="post" action="contacts-donors-individual-edit.jsp" style="padding-bottom:10px">
+		<div class="form-group">
+			<button type="submit" class="pull-right btn btn-default">Add / Edit</button>
+		</div>
+		<div class="clearfix"></div>
+	</form>
+
 	<table class="table table-hover table-striped table-bordered">
 	<tr>
 		<th>Name</th>
