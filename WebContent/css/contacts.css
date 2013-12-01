@@ -1,0 +1,19 @@
+.edit-button{
+	padding-bottom:10px;
+}
+
+.table-column-name{
+	width:350px;	
+}
+
+.table-column-address{
+	width:1000px;
+}
+
+.table-column-number{
+	width:160px;
+}
+
+.table-column-email{
+	width:300px;
+}
