@@ -34,7 +34,7 @@
 				</div>
 				<div class="panel-body">
 					<form class="form-horizontal" role="form" action="post"
-						action="it2299-ffth-reincoast/InboundControler.java">
+						action="com.it2299.controllers/InboundControler.java">
 						<div class="form-group" style="padding: 0px 10px 0px 10px;">
 							<div class="btn-group">
 								<button type="button" class="btn btn-xs btn-default">
@@ -61,6 +61,20 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-lg-2 control-label">Pre-Package</label>
+							<div class="col-lg-4">
+								<select class="form-control onchange='getPackage(this.value)'"
+									id="Pack">
+									<option value="default">Please select a Pack</option>
+									<option value="pack1">Package 1</option>
+									<option value="pack2">Package 2</option>
+								</select>
+							</div>
+							<button type="button" class="btn btn-xs btn-default" id="addPack">
+								<i class="icon-plus"></i> Add Package
+							</button>
+						</div>
+						<div class="form-group">
 							<label class="col-lg-2 control-label">Item Search</label>
 							<div class="col-lg-4">
 								<input class="form-control" type="text" id="search" />
@@ -71,7 +85,8 @@
 						</div>
 						<div class="table-responsive">
 							<table
-								class="table table-hover table-striped tablesorter table-condensed">
+								class="table table-hover table-striped tablesorter table-condensed"
+								id="tableRec">
 								<thead id="addHeader">
 									<tr>
 										<th><div class="alert alert-info text-center">
@@ -85,7 +100,7 @@
 								</tbody>
 
 							</table>
-							<input type="submit" />
+
 						</div>
 					</form>
 				</div>
@@ -130,6 +145,37 @@
 											}
 										});
 					});
+	$(document)
+			.ready(
+					function() {
+						$("#addPack")
+								.on(
+										'click',
+										function() {
+
+											if (count == 1) {
+												$("#addHeader").empty();
+												$("#tableRec")
+														.append(
+																'<input type="submit" />');
+												$("#addHeader")
+														.append(
+																'<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Description <i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit of Measure<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th></tr>');
+												getPackage($(
+														'select#Pack option:selected')
+														.val());
+												$(document).scrollTop(
+														$(document).height());
+											} else {
+												getPackage($(
+														'select#Pack option:selected')
+														.val());
+												$(document).scrollTop(
+														$(document).height());
+											}
+
+										});
+					});
 
 	function getItem() {
 
@@ -162,6 +208,30 @@
 													+ obj.unitOfMeasure
 													+ 'g"/></td></tr>');
 							count++;
+						});
+
+	}
+	function getPackage(str) {
+		var values = [];
+		var itemPack = str;
+		$.ajax({
+			type : "POST",
+			url : "InboundController",
+			data : {
+				ItemPack : itemPack
+			}
+
+		});
+		$
+				.each(
+						[51 ,59],
+						function(index, value) {
+							$("#add-list")
+									.append(
+											'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id" value="'
+													+ index
+													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
+													+ value + '"/></td>');
 						});
 
 	}

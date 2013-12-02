@@ -34,7 +34,7 @@
 				</div>
 				<div class="panel-body">
 					<form class="form-horizontal" role="form" method="post"
-						action="it2299-ffth-reincoast/InboundControler.java">
+						action="com.it2299.controllers/InboundControler.java">
 						<div class="form-group" style="padding: 0px 10px 0px 10px;">
 							<div class="btn-group">
 								<button type="button" class="btn btn-xs btn-default">
@@ -51,7 +51,7 @@
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Donor Type</label>
 							<div class="col-lg-4">
-								<select>
+								<select class="form-control">
 									<option value="organization">Organization</option>
 									<option value="individual">Individual</option>
 
@@ -73,7 +73,6 @@
 								<i class="icon-plus"></i> Add row
 							</button>
 						</div>
-
 						<div class="table-responsive" id="tableRec">
 							<table
 								class="table table-hover table-striped tablesorter table-condensed">
@@ -104,35 +103,41 @@
 	$(document)
 			.ready(
 					function() {
-						$("#addRow").on('click',function() {
-										if($('#search').val() == ''){
-											alert("Please Enter Item Code");
-										}else{
-											if (count == 1) {
-												$("#addHeader").empty();
-												$("#tableRec")
-														.append(
-																'<input type="submit" />');
-												$("#addHeader")
-														.append(
-																'<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Description <i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit of Measure<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th></tr>');
-												getItem();
-												$(document).scrollTop(
-														$(document).height());
+						$("#addRow")
+								.on(
+										'click',
+										function() {
+											if ($('#search').val() == '') {
+												alert("Please Enter Item Code");
 											} else {
-												getItem();
-												$(document).scrollTop(
-														$(document).height());
+												if (count == 1) {
+													$("#addHeader").empty();
+													$("#tableRec")
+															.append(
+																	'<input type="submit" />');
+													$("#addHeader")
+															.append(
+																	'<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Description <i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit of Measure<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th></tr>');
+													getItem();
+													$(document).scrollTop(
+															$(document)
+																	.height());
+												} else {
+													getItem();
+													$(document).scrollTop(
+															$(document)
+																	.height());
+												}
 											}
-										}
-						});
+										});
 					});
 
 	function getItem() {
 
 		var itemCode = $('#search').val();
 
-		$.ajax({
+		$
+				.ajax({
 					type : "POST",
 					url : "InboundController",
 					data : {
