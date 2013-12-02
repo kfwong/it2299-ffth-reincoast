@@ -13,7 +13,7 @@
 <div id="page-wrapper">
 	<h1>Contacts <small>Donors - Individual</small></h1>
 
-	<form method="post" action="contacts-donors-individual-edit.jsp" class="edit-button">
+	<form method="post" action="contacts-donors-individual-edit.jsp" class="contact-button">
 		<div class="form-group">
 			<button type="submit" class="pull-right btn btn-default">Add / Edit</button>
 		</div>

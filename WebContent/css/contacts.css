@@ -1,19 +1,19 @@
-.edit-button{
-	padding-bottom:10px;
+.contact-button{
+	margin-right:10px;
+	margin-bottom:10px;
 }
 
 .table-column-name{
-	width:350px;	
+	width:330px;	
 }
 
 .table-column-address{
-	width:1000px;
 }
 
 .table-column-number{
-	width:160px;
+	width:150px;
 }
 
 .table-column-email{
-	width:300px;
+	width:220px;
 }
