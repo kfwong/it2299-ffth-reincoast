@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
-	<jsp:param value="/path/to/css1" name="css" />
-	<jsp:param value="/path/to/css2" name="css" />
+	<jsp:param value="css/contacts.css" name="css" />
 </jsp:include>
 <!-- header.jsp -->
 
@@ -14,60 +13,60 @@
 <div id="page-wrapper">
 	<h1>Contacts <small>Donors - Individual</small></h1>
 
-	<form action="contact-donors-individual-edit.jsp" style="padding-bottom:10px">
+	<form method="post" action="contacts-donors-individual.jsp" class="edit-button">
 		<div class="form-group">
-			<button type="button" class="pull-right btn btn-default">Add / Edit</button>
+			<button type="submit" class="pull-right btn btn-default">Save</button>
 		</div>
 		<div class="clearfix"></div>
 	</form>
 
 	<table class="table table-hover table-striped table-bordered">
 	<tr>
-		<th>Name</th>
-		<th>Address</th>
-		<th>Contact Number</th>
-		<th>Email</th>
+		<th class="table-column-name">Name</th>
+		<th class="table-column-address">Address</th>
+		<th class="table-column-number">Contact Number</th>
+		<th class="table-column-email">Email</th>
 	</tr>
 	<tr>
-		<td>John Smith</td>
-		<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-		<td>91234567</td>
-		<td>johnsmith@gmail.com</td>
-	</tr>
-	
-	<tr>
-		<td>John Smith</td>
-		<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-		<td>91234567</td>
-		<td>johnsmith@gmail.com</td>
+		<td class="table-column-name"><input type="text" class="form-control" value="John Smith"></td>
+		<td class="table-column-address"><input type="text" class="form-control" value="BLK 123 Choa Chu Kang Avenue 3 Singapore 670123"></td>
+		<td class="table-column-number"><input type="text" class="form-control" value="91234567"></td>
+		<td class="table-column-email"><input type="text" class="form-control" value="johnsmith@gmail.com"></td>
 	</tr>
 	
 	<tr>
-		<td>John Smith</td>
-		<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-		<td>91234567</td>
-		<td>johnsmith@gmail.com</td>
+		<td class="table-column-name"><input type="text" class="form-control" value="John Smith"></td>
+		<td class="table-column-address"><input type="text" class="form-control" value="BLK 123 Choa Chu Kang Avenue 3 Singapore 670123"></td>
+		<td class="table-column-number"><input type="text" class="form-control" value="91234567"></td>
+		<td class="table-column-email"><input type="text" class="form-control" value="johnsmith@gmail.com"></td>
 	</tr>
 	
 	<tr>
-		<td>John Smith</td>
-		<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-		<td>91234567</td>
-		<td>johnsmith@gmail.com</td>
+		<td class="table-column-name"><input type="text" class="form-control" value="John Smith"></td>
+		<td class="table-column-address"><input type="text" class="form-control" value="BLK 123 Choa Chu Kang Avenue 3 Singapore 670123"></td>
+		<td class="table-column-number"><input type="text" class="form-control" value="91234567"></td>
+		<td class="table-column-email"><input type="text" class="form-control" value="johnsmith@gmail.com"></td>
 	</tr>
 	
 	<tr>
-		<td>John Smith</td>
-		<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-		<td>91234567</td>
-		<td>johnsmith@gmail.com</td>
+		<td class="table-column-name"><input type="text" class="form-control" value="John Smith"></td>
+		<td class="table-column-address"><input type="text" class="form-control" value="BLK 123 Choa Chu Kang Avenue 3 Singapore 670123"></td>
+		<td class="table-column-number"><input type="text" class="form-control" value="91234567"></td>
+		<td class="table-column-email"><input type="text" class="form-control" value="johnsmith@gmail.com"></td>
 	</tr>
 	
 	<tr>
-		<td>John Smith</td>
-		<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-		<td>91234567</td>
-		<td>johnsmith@gmail.com</td>
+		<td class="table-column-name"><input type="text" class="form-control" value="John Smith"></td>
+		<td class="table-column-address"><input type="text" class="form-control" value="BLK 123 Choa Chu Kang Avenue 3 Singapore 670123"></td>
+		<td class="table-column-number"><input type="text" class="form-control" value="91234567"></td>
+		<td class="table-column-email"><input type="text" class="form-control" value="johnsmith@gmail.com"></td>
+	</tr>
+	
+	<tr>
+		<td class="table-column-name"><input type="text" class="form-control" value="John Smith"></td>
+		<td class="table-column-address"><input type="text" class="form-control" value="BLK 123 Choa Chu Kang Avenue 3 Singapore 670123"></td>
+		<td class="table-column-number"><input type="text" class="form-control" value="91234567"></td>
+		<td class="table-column-email"><input type="text" class="form-control" value="johnsmith@gmail.com"></td>
 	</tr>
 	
 	</table>
