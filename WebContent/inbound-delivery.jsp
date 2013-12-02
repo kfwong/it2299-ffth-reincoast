@@ -34,7 +34,7 @@
 				</div>
 				<div class="panel-body">
 					<form class="form-horizontal" role="form" method="post"
-						action="com.it2299.controllers/InboundControler.java">
+						action="/it2299-ffth-reincoast/InBoundServlet">
 						<div class="form-group" style="padding: 0px 10px 0px 10px;">
 							<div class="btn-group">
 								<button type="button" class="btn btn-xs btn-default">
@@ -49,9 +49,15 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-lg-2 control-label">Receipt No</label>
+							<div class="col-lg-4">
+								<input class="form-control" type="text" id="receiptno" name="ReceiptNO"/>
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-lg-2 control-label">Donor Type</label>
 							<div class="col-lg-4">
-								<select class="form-control">
+								<select class="form-control" id="Type">
 									<option value="organization">Organization</option>
 									<option value="individual">Individual</option>
 
@@ -139,7 +145,7 @@
 		$
 				.ajax({
 					type : "POST",
-					url : "InboundController",
+					url : "GetItemServlet",
 					data : {
 						ItemCode : itemCode
 					}
@@ -152,13 +158,13 @@
 											'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id" value="'
 													+ count
 													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
-													+ obj.itemCode
+													+ obj.name
 													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-desc" value="'
-													+ obj.itemDescription
+													+ obj.description
 													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
 													+ obj.itemQuantity
 													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value="$ '
-													+ obj.unitPrice
+													+ obj.price
 													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-measure" value ="'
 													+ obj.unitOfMeasure
 													+ 'g"/></td></tr>');
