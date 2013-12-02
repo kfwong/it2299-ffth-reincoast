@@ -37,7 +37,7 @@
 						alt="Bar Graph" width="60" height="60" class="btnBar"></li>
 					<li><input type="image"
 						src="<%=request.getContextPath()%>/img/report-curve-graph.png"
-						alt="Curve Graph" width="60" height="60" class="btnCurve"></li>
+						alt="Curve Graph" width="60" height="60" class="btnLine"></li>
 					<li><input type="image"
 						src="<%=request.getContextPath()%>/img/report-pie-graph.png"
 						alt="Pie Graph" width="60" height="60" class="btnPie"></li>
@@ -49,6 +49,7 @@
 				<canvas id="bar" width="600" height="400"></canvas>
 
 				<canvas id="pie" width="600" height="400"></canvas>
+				<canvas id="line" width="600" height="400"></canvas>
 
 			</div>
 		</div>
@@ -62,11 +63,11 @@
 		$(document).ready(function() {
 			$("#pie").hide();
 			$("#bar").hide();
-			$("#curve").hide();
+			$("#line").hide();
 			$(".btnPie").on("click", function() {
 				
-				$("#bar").hide();
-				$("#curve").hide();
+				$("#line").hide();
+				$("#line").hide();
 				$("#pie").show();
 			});
 			
@@ -74,12 +75,28 @@
 		});
 		
 		$(document).ready(function() {
+			$("#pie").hide();
 			$("#bar").hide();
+			$("#line").hide();
 			
 			$(".btnBar").on("click", function() {
 				$("#pie").hide();
-				$("#curve").hide();
+				$("#line").hide();
 				$("#bar").show();
+			});
+			
+			
+		});
+		
+		$(document).ready(function() {
+			$("#pie").hide();
+			$("#bar").hide();
+			$("#line").hide();
+			
+			$(".btnLine").on("click", function() {
+				$("#pie").hide();
+				$("#line").show();
+				$("#bar").hide();
 			});
 			
 			
