@@ -11,7 +11,8 @@
   <property name="show_sql">true</property>
   <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
   <property name="hibernate.current_session_context_class">thread</property>
-  <property name="hibernate.hbm2ddl.auto">create</property>
-  <mapping class="com.it2299.ffth.reincoast.dto.Item"/>
+  <property name="hibernate.hbm2ddl.auto">update</property>
+  <mapping class="com.it2299.ffth.reincoast.dto.Product"/>
+  <mapping class="com.it2299.ffth.reincoast.dto.ProductMeta"/>
  </session-factory>
 </hibernate-configuration>

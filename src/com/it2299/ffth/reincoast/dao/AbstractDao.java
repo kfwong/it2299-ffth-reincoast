@@ -43,7 +43,7 @@ abstract class AbstractDao<T> {
 	 * 
 	 * Persist object parameter. Object will be updated if primary key (id) exist, if not a new record will be created.
 	 */
-	abstract void save(T t);
+	abstract void saveOrUpdate(T t);
 
 	/**
 	 * @return

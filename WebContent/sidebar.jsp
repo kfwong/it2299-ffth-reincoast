@@ -13,12 +13,12 @@
 		<strong>
 			<small>
 				<ul class="nav navbar-nav navbar-left navbar-user">
-					<li class="visible-lg" style="display: inline-block !important;"><a class="navbar-brand" href="dashboard.jsp"><img src="img/logo-250px.jpg"/></a></li>
+					<li class="visible-lg" style="display: inline-block !important;"><a class="navbar-brand" href="dashboard.jsp"><img class="visible-sm visible-md visible-lg" src="img/logo-250px.jpg"/></a></li>
 					<li class="active"><a href="dashboard.jsp"><i class="icon-dashboard"></i> Dashboard</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-collapse"></i> Item Management <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="item-database.jsp">Item Database</a></li>
-							<li><a href="register-new-item.jsp">Register New Item</a></li>
+							<li><a href="product-add-new.jsp">Register New Item</a></li>
 						</ul>
 					</li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-collapse"></i> Shipments <b class="caret"></b></a>

@@ -10,10 +10,6 @@ For more info and more free Bootstrap 3 HTML themes, visit http://startbootstrap
 
 /* Global Styles */
 
-body {
-  margin-top: 100px;
-}
-
 #wrapper {
   padding-left: 0;
 }
@@ -21,6 +17,9 @@ body {
 #page-wrapper {
   width: 100%;
   padding: 5px 15px;
+  max-width:1280px;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 /* Nav Messages */
@@ -89,7 +88,9 @@ table.tablesorter thead tr th:hover {
   /* Wrappers */
 
   #page-wrapper {
+  	position: relative;
 	padding: 15px 25px;
+	top: 150px;
   }
 
   /* Side Nav */
@@ -152,4 +153,26 @@ table.tablesorter thead tr th:hover {
 	white-space: normal;
   }
 
+}
+
+@media (min-width:1430px) {
+
+  /* Wrappers */
+
+  #page-wrapper {
+  	position: relative;
+	padding: 15px 25px;
+	top: 100px;
+  }
+}
+
+@media (max-width:768px) {
+
+  /* Wrappers */
+
+  #page-wrapper {
+  	position: relative;
+	padding: 15px 25px;
+	top: 30px;
+  }
 }
