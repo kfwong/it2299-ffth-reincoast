@@ -17,6 +17,9 @@
 		<div class="col-lg-12">
 			<div class="col-lg-6">
 				<br>
+				<br>
+				<br>
+				<br>
 				<div class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
 						class="icon-collapse"></i> Dropdown <b class="caret"></b></a>
@@ -30,6 +33,10 @@
 				</div>
 			</div>
 			<div class="col-lg-6">
+				<br>
+				<br>
+				<br>
+				<br>
 				<ul class="nav nav-pills">
 
 					<li><input type="image"
@@ -65,44 +72,39 @@
 			$("#bar").hide();
 			$("#line").hide();
 			$(".btnPie").on("click", function() {
-				
+
 				$("#line").hide();
 				$("#line").hide();
 				$("#pie").show();
 			});
-			
-			
+
 		});
-		
+
 		$(document).ready(function() {
 			$("#pie").hide();
 			$("#bar").hide();
 			$("#line").hide();
-			
+
 			$(".btnBar").on("click", function() {
 				$("#pie").hide();
 				$("#line").hide();
 				$("#bar").show();
 			});
-			
-			
+
 		});
-		
+
 		$(document).ready(function() {
 			$("#pie").hide();
 			$("#bar").hide();
 			$("#line").hide();
-			
+
 			$(".btnLine").on("click", function() {
 				$("#pie").hide();
 				$("#line").show();
 				$("#bar").hide();
 			});
-			
-			
+
 		});
-		
-		
 	</script>
 	<!-- footer.jsp -->
 
