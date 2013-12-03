@@ -11,14 +11,11 @@
 <jsp:include page="sidebar.jsp"></jsp:include>
 <!-- sidebar.jsp -->
 
-<!-- sample-content.jsp -->
+<!-- sample-content.jsp -->3
 <div id="page-wrapper">
 	<div class="row">
 		<div class="col-lg-12">
-			<div class="col-lg-6">
-				<br>
-				<br>
-				<br>
+			<div class="col-lg-3">
 				<br>
 				<div class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
@@ -33,12 +30,7 @@
 				</div>
 			</div>
 			<div class="col-lg-6">
-				<br>
-				<br>
-				<br>
-				<br>
 				<ul class="nav nav-pills">
-
 					<li><input type="image"
 						src="<%=request.getContextPath()%>/img/report-bar-graph.png"
 						alt="Bar Graph" width="60" height="60" class="btnBar"></li>
@@ -48,18 +40,32 @@
 					<li><input type="image"
 						src="<%=request.getContextPath()%>/img/report-pie-graph.png"
 						alt="Pie Graph" width="60" height="60" class="btnPie"></li>
-
 				</ul>
+
 			</div>
-
+			<div class="col-lg-3"></div>
 			<div class="col-lg-6">
+			<h1 id=title>{title}</h1>
 				<canvas id="bar" width="600" height="400"></canvas>
-
 				<canvas id="pie" width="600" height="400"></canvas>
 				<canvas id="line" width="600" height="400"></canvas>
-
 			</div>
+			<div class="col-lg-6">
+				<canvas width="600" height="500"></canvas>
+			</div>
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6">
+				<button class="btn btn-primary" type="button" id="img">Export
+					as image</button>
+				<button class="btn btn-primary" type="button" id="pdf">Export
+					as PDF</button>
+			</div>
+			<div class="col-lg-3"></div>
+
 		</div>
+
+
+
 	</div>
 	<!-- /.row -->
 
@@ -68,40 +74,59 @@
 
 	<script>
 		$(document).ready(function() {
+			$("#img").hide();
+			$("#pdf").hide();
 			$("#pie").hide();
 			$("#bar").hide();
 			$("#line").hide();
+			$("#title").hide();
+			
 			$(".btnPie").on("click", function() {
 
 				$("#line").hide();
 				$("#line").hide();
 				$("#pie").show();
+				$("#img").show();
+				$("#pdf").show();
+				$("#title").show();
 			});
 
 		});
 
 		$(document).ready(function() {
+			$("#img").hide();
+			$("#pdf").hide();
 			$("#pie").hide();
 			$("#bar").hide();
 			$("#line").hide();
+			$("#title").hide();
 
 			$(".btnBar").on("click", function() {
 				$("#pie").hide();
 				$("#line").hide();
 				$("#bar").show();
+				$("#img").show();
+				$("#pdf").show();
+				$("#title").show();
 			});
 
 		});
 
 		$(document).ready(function() {
+			$("#img").hide();
+			$("#pdf").hide();
 			$("#pie").hide();
 			$("#bar").hide();
 			$("#line").hide();
+			$("#title").hide();
 
 			$(".btnLine").on("click", function() {
 				$("#pie").hide();
 				$("#line").show();
 				$("#bar").hide();
+				$("#img").show();
+				$("#pdf").show();
+				$("#title").show();
 			});
 
 		});
