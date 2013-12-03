@@ -60,7 +60,6 @@
 					as image</button>
 				<button class="btn btn-primary" type="button" id="pdf">Export
 					as PDF</button>
-					
 					<button class="btn btn-primary" type="button" id="cvs">Export
 					as cvs</button>
 			
