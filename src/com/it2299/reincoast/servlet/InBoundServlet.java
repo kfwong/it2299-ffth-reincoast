@@ -1,8 +1,10 @@
 package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,11 +43,26 @@ public class InBoundServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		InboundTrans trans = new InboundTrans();
-		//InboundItem item = new InboundItem();
 		trans.setDonor(request.getParameter("Donor"));
 		trans.setDonorType(request.getParameter("Type"));
-		System.out.println(request.getParameter("ReceiptNO"));
+		trans.setDate(Calendar.getInstance());
 		trans.setReceiptNo(Integer.parseInt(request.getParameter("ReceiptNO")));
+		String [] id = request.getParameterValues("id");
+		String [] code = request.getParameterValues("item-code");
+		String [] name = request.getParameterValues("item-name");
+		String [] quantity = request.getParameterValues("item-quantity");
+		String [] price = request.getParameterValues("item-price");
+		String [] unit = request.getParameterValues("item-measure");
+		ArrayList<InboundItem> itemArray = new ArrayList<InboundItem>();
+		for(int i=0; i< id.length;i++){
+			InboundItem item = new InboundItem();
+			item.setId(Integer.parseInt(id[i]));
+			item.setCode(code[i]);
+			item.setReceiptno(Integer.parseInt(request.getParameter("ReceiptNO")));
+			itemArray.add(item);
+		}
+		
+		trans.setInboundItems(itemArray);
 		InboundTransDao transDao = new InboundTransDao();
 		transDao.openSession();
 		transDao.getSession().beginTransaction();

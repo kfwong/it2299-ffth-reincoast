@@ -57,7 +57,7 @@
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Donor Type</label>
 							<div class="col-lg-4">
-								<select class="form-control" id="Type">
+								<select class="form-control" id="Type" name=Type>
 									<option value="organization">Organization</option>
 									<option value="individual">Individual</option>
 
@@ -67,7 +67,7 @@
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Donor Name</label>
 							<div class="col-lg-4">
-								<input class="form-control" type="text" id="Donor" />
+								<input class="form-control" type="text" id="Donor" name="Donor" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -123,7 +123,7 @@
 																	'<input type="submit" />');
 													$("#addHeader")
 															.append(
-																	'<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Description <i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit of Measure<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th></tr>');
+																	'<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Name<i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit of Measure<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th></tr>');
 													getItem();
 													$(document).scrollTop(
 															$(document)
@@ -158,16 +158,16 @@
 											'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id" value="'
 													+ count
 													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
+													+ obj.code
+													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-name" value="'
 													+ obj.name
-													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-desc" value="'
-													+ obj.description
 													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
-													+ obj.itemQuantity
-													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value="$ '
+													+ "0"
+													+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value="$ '
 													+ obj.price
 													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-measure" value ="'
 													+ obj.unitOfMeasure
-													+ 'g"/></td></tr>');
+													+ '"g/></td></tr>');
 							count++;
 						});
 

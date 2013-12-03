@@ -36,7 +36,16 @@ public class InboundItem {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="INBOUND_TRANS_ID")
+	
 	private InboundTrans inboundTrans;
+
+	public InboundTrans getInboundTrans() {
+		return inboundTrans;
+	}
+
+	public void setInboundTrans(InboundTrans inboundTrans) {
+		this.inboundTrans = inboundTrans;
+	}
 
 	public int getId() {
 		return id;

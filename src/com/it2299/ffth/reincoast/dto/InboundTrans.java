@@ -1,5 +1,6 @@
 package com.it2299.ffth.reincoast.dto;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class InboundTrans {
 	private int receiptNo;
 
 	@Column(name = "Date")
-	private Date date;
+	private Calendar date;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="inboundTrans")
 	private List<InboundItem> inboundItems;
@@ -73,11 +74,11 @@ public class InboundTrans {
 		this.receiptNo = receiptNo;
 	}
 
-	public Date getDate() {
+	public Calendar getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Calendar date) {
 		this.date = date;
 	}
 
