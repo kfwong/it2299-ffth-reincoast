@@ -54,12 +54,17 @@
 				<canvas width="600" height="500"></canvas>
 			</div>
 			<div class="col-lg-3"></div>
-			<div class="col-lg-6">
+			<div class="col-lg-6" id="btnSec">
+			
 				<button class="btn btn-primary" type="button" id="img">Export
 					as image</button>
 				<button class="btn btn-primary" type="button" id="pdf">Export
 					as PDF</button>
-			</div>
+					
+					<button class="btn btn-primary" type="button" id="cvs">Export
+					as cvs</button>
+			
+		</div>
 			<div class="col-lg-3"></div>
 
 		</div>
@@ -74,20 +79,23 @@
 
 	<script>
 		$(document).ready(function() {
+			$("#title").hide();
 			$("#img").hide();
 			$("#pdf").hide();
+			$("#cvs").hide();
 			$("#pie").hide();
 			$("#bar").hide();
 			$("#line").hide();
-			$("#title").hide();
+			
 			
 			$(".btnPie").on("click", function() {
 
 				$("#line").hide();
-				$("#line").hide();
+				$("#line").hide();		
 				$("#pie").show();
 				$("#img").show();
 				$("#pdf").show();
+				$("#cvs").show();
 				$("#title").show();
 			});
 
@@ -95,6 +103,7 @@
 
 		$(document).ready(function() {
 			$("#img").hide();
+			$("#cvs").hide();
 			$("#pdf").hide();
 			$("#pie").hide();
 			$("#bar").hide();
@@ -104,6 +113,7 @@
 			$(".btnBar").on("click", function() {
 				$("#pie").hide();
 				$("#line").hide();
+				$("#cvs").show();
 				$("#bar").show();
 				$("#img").show();
 				$("#pdf").show();
@@ -115,6 +125,7 @@
 		$(document).ready(function() {
 			$("#img").hide();
 			$("#pdf").hide();
+			$("#cvs").hide();
 			$("#pie").hide();
 			$("#bar").hide();
 			$("#line").hide();
@@ -126,6 +137,7 @@
 				$("#bar").hide();
 				$("#img").show();
 				$("#pdf").show();
+				$("#cvs").show();
 				$("#title").show();
 			});
 
