@@ -2,9 +2,13 @@ package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
 
+
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.it2299.ffth.reincoast.dao.InboundTransDao;
 import com.it2299.ffth.reincoast.dto.InboundItem;
-import com.it2299.ffth.reincoast.dto.InboundTrans;
+import com.it2299.ffth.reincoast.dto.InboundTran;
+
 
 /**
  * Servlet implementation class InBoundServlet
@@ -42,11 +47,12 @@ public class InBoundServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		InboundTrans trans = new InboundTrans();
+		InboundTran trans = new InboundTran();
 		trans.setDonor(request.getParameter("Donor"));
 		trans.setDonorType(request.getParameter("Type"));
-		trans.setDate(Calendar.getInstance());
-		trans.setReceiptNo(Integer.parseInt(request.getParameter("ReceiptNO")));
+		Date date = new Date();
+		trans.setDate(date);
+		trans.setReceiptno(Integer.parseInt(request.getParameter("ReceiptNO")));
 		String [] id = request.getParameterValues("id");
 		String [] code = request.getParameterValues("item-code");
 		String [] name = request.getParameterValues("item-name");
@@ -57,8 +63,7 @@ public class InBoundServlet extends HttpServlet {
 		for(int i=0; i< id.length;i++){
 			InboundItem item = new InboundItem();
 			item.setId(Integer.parseInt(id[i]));
-			item.setCode(code[i]);
-			item.setReceiptno(Integer.parseInt(request.getParameter("ReceiptNO")));
+			item.setItemid(Integer.parseInt(code[i]));
 			itemArray.add(item);
 		}
 		

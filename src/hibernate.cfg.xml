@@ -15,6 +15,6 @@
 		<mapping class="com.it2299.ffth.reincoast.dto.Product" />
 		<mapping class="com.it2299.ffth.reincoast.dto.ProductMeta" />
 		<mapping class="com.it2299.ffth.reincoast.dto.InboundItem" />
-		<mapping class="com.it2299.ffth.reincoast.dto.InboundTrans" />
+		<mapping class="com.it2299.ffth.reincoast.dto.InboundTran" />
 	</session-factory>
 </hibernate-configuration>
