@@ -123,7 +123,7 @@
 																	'<input type="submit" />');
 													$("#addHeader")
 															.append(
-																	'<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Name<i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit of Measure<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th></tr>');
+																	'<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Name<i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th><th class="col-lg-1">Unit of Measure<i class="icon-sort"></i></th></tr>');
 													getItem();
 													$(document).scrollTop(
 															$(document)
@@ -163,7 +163,7 @@
 													+ obj.name
 													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
 													+ "0"
-													+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value="$ '
+													+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
 													+ obj.price
 													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-measure" value ="'
 													+ obj.unitOfMeasure

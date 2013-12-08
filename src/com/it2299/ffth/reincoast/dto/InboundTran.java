@@ -3,7 +3,6 @@ package com.it2299.ffth.reincoast.dto;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -29,9 +28,8 @@ public class InboundTran implements Serializable {
 
 	private int receiptno;
 
-	//bi-directional many-to-one association to InboundItem
-	@OneToMany(mappedBy="inboundTran")
-	private List<InboundItem> inboundItems;
+	@Column(name="total_price")
+	private double totalPrice;
 
 	public InboundTran() {
 	}
@@ -76,26 +74,12 @@ public class InboundTran implements Serializable {
 		this.receiptno = receiptno;
 	}
 
-	public List<InboundItem> getInboundItems() {
-		return this.inboundItems;
+	public double getTotalPrice() {
+		return this.totalPrice;
 	}
 
-	public void setInboundItems(List<InboundItem> inboundItems) {
-		this.inboundItems = inboundItems;
-	}
-
-	public InboundItem addInboundItem(InboundItem inboundItem) {
-		getInboundItems().add(inboundItem);
-		inboundItem.setInboundTran(this);
-
-		return inboundItem;
-	}
-
-	public InboundItem removeInboundItem(InboundItem inboundItem) {
-		getInboundItems().remove(inboundItem);
-		inboundItem.setInboundTran(null);
-
-		return inboundItem;
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 }
