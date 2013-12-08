@@ -33,7 +33,7 @@ import org.hibernate.annotations.Type;
 // care of. Mapping configuration required in hibernate.cfg.xml.
 @Table(name = "PRODUCT")
 // The table name that will be created upon persistence.
-public class Product {
+public class Product implements Auditable {
 
 	@Id
 	// Declare this attribute as primary key
@@ -78,7 +78,7 @@ public class Product {
 
 	@ElementCollection
 	@GenericGenerator(name = "hilo-gen", strategy = "hilo")
-	@CollectionId(columns = @Column(name="ID"), type=@Type(type="int"), generator = "hilo-gen" )
+	@CollectionId(columns = @Column(name = "ID"), type = @Type(type = "int"), generator = "hilo-gen")
 	@CollectionTable(name = "PRODUCT_META", joinColumns = @JoinColumn(name = "PRODUCT_ID"))
 	private List<ProductMeta> productMetas;
 
@@ -184,6 +184,21 @@ public class Product {
 
 	public void setProductMetas(List<ProductMeta> productMetas) {
 		this.productMetas = productMetas;
+	}
+
+	@Override
+	public String auditDelete() {
+		return "Product " + name + " is deleted.";
+	}
+
+	@Override
+	public String auditUpdate() {
+		return "Product " + name + " is updated.";
+	}
+
+	@Override
+	public String auditSave() {
+		return "Product " + name + " is created.";
 	}
 
 }

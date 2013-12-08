@@ -36,33 +36,33 @@ abstract class AbstractDao<T> {
 	 * 
 	 * Return a single object.
 	 */
-	abstract T get(Integer id);
+	abstract public T get(Integer id);
 
 	/**
 	 * @param t
 	 * 
 	 * Persist object parameter. Object will be updated if primary key (id) exist, if not a new record will be created.
 	 */
-	abstract void saveOrUpdate(T t);
+	abstract public void saveOrUpdate(T t);
 
 	/**
 	 * @return
 	 * 
 	 * Return list of all the records.
 	 */
-	abstract List<T> getAll();
+	abstract public List<T> getAll();
 
 	/**
 	 * @return
 	 * 
 	 * Return the existing number of records.
 	 */
-	abstract Integer countAll();
+	abstract public Integer countAll();
 
 	/**
 	 * @param t
 	 * 
 	 * Delete object from record.
 	 */
-	abstract void delete(T t);
+	abstract public void delete(T t);
 }

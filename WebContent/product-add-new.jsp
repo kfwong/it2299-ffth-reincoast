@@ -28,7 +28,7 @@
 		<!-- /.row -->
 
 		<div class="row">
-			<div class="col-lg-9">
+			<div class="col-lg-7">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<h4>
@@ -37,6 +37,9 @@
 								<div class="btn-group">
 									<button id="p_import" type="button" class="btn btn-xs btn-default" data-content="<small><i class='glyphicon glyphicon-repeat'></i>&nbsp;Hacking NTUC database...<small>" data-toggle="modal" data-placement="left" data-html="true" data-container="body" data-trigger="manual" data-target="#myModal">
 										<i class="glyphicon glyphicon-import"></i> Import
+									</button>
+									<button id="p_action" type="submit" class="btn btn-xs btn-default" name="p_action" value="Submit">
+										<i class="glyphicon glyphicon-ok"></i> Submit
 									</button>
 								</div>
 							</div>
@@ -76,7 +79,7 @@
 						<div class="form-group">
 							<label>Weight</label> 
 							<input id="p_weight" class="form-control input-sm" name="p_weight">
-							<p class="help-block">In Kilograms (KG)</p>
+							<p class="help-block">In grams (G)</p>
 						</div>
 						<div class="form-group">
 							<label>Category</label> 
@@ -84,6 +87,43 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="col-lg-5">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h4>
+							<label>Image</label>
+							<div class="form-group pull-right" style="padding: 0px 10px 0px 10px;">
+								<div class="btn-group">
+									<button type="button" class="btn btn-xs btn-default">
+										<i class="glyphicon glyphicon-hdd"></i> Browse
+									</button>
+								</div>
+							</div>
+						</h4>
+						<div class="row">
+							<div class="col-lg-7">
+								<p>Upload an image of this product.</p>
+								<small>
+									<ul>
+										<li>Recommend dimension is 160x160px.</li>
+										<li>Bigger image will be cropped.</li>
+										<li>You can also make use of import feature to import image from NTUC website, if available.</li>
+									</ul>
+								</small>
+							</div>
+							<div class="col-lg-5">
+								<div style="width:160px;height:160px;">
+									<a href="#" class="thumbnail">
+								      <img id="p_image" src="http://placehold.it/160x160">
+								    </a>
+								</div>	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-5">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<h4>
@@ -117,38 +157,6 @@
 						</div>
 						&nbsp;
 					</div>
-				</div>
-				<div id="area-example"></div>
-			</div>
-			<div class="col-lg-3">
-				<div class="panel panel-default">
-					<div class="panel-heading" style="background-color: #101010; color: white; border-bottom-color: #00aaff; border-bottom-width: 3px;">
-						<h3 class="panel-title">
-							<strong>Register</strong>
-						</h3>
-					</div>
-					<table class="table">
-						<tbody>
-							<tr>
-								<td style="padding-left: 14px;">Status:</td>
-								<td><strong>Published</strong></td>
-							</tr>
-							<tr>
-								<td style="padding-left: 14px;">Published on:</td>
-								<td><span class="glyphicon glyphicon-calendar"></span> Nov 24, 2013 @ 6:56</td>
-							</tr>
-							<tr>
-								<td style="padding-left: 14px;">Registered by:</td>
-								<td>James Bond</td>
-							</tr>
-							<tr>
-								<td style="padding-left: 14px;" colspan="2"><small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula sit amet felis ac hendrerit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </small></td>
-							</tr>
-							<tr>
-								<td colspan="2"><input type="submit" class="btn btn-primary pull-right" name="p_action" value="Submit"></input></td>
-							</tr>
-						</tbody>
-					</table>
 				</div>
 			</div>
 		</div>
@@ -197,6 +205,7 @@
 				$('#p_name').val(data.name);
 				$('#p_weight').val(data.weight);
 				$('#p_price').val(data.price);
+				$('#p_image').attr('src', data.image);
 			});
 		});
 	});

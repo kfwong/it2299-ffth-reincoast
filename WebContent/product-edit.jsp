@@ -31,11 +31,18 @@
 		<!-- /.row -->
 
 		<div class="row">
-			<div class="col-lg-9">
+			<div class="col-lg-7">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<h4>
 							<label>Primary Details</label>
+							<div class="form-group pull-right" style="padding: 0px 10px 0px 10px;">
+								<div class="btn-group">
+									<button id="p_action" type="submit" class="btn btn-xs btn-default" name="p_action" value="Update">
+										<i class="glyphicon glyphicon-ok"></i> Update
+									</button>
+								</div>
+							</div>
 						</h4>
 						<div class="form-group">
 							<label class="control-label">Name</label> <input class="form-control input-sm" name="p_name" value="${product.name}">
@@ -66,13 +73,49 @@
 						</div>
 						<div class="form-group">
 							<label>Weight</label> <input class="form-control input-sm" name="p_weight" value="${product.weight}">
-							<p class="help-block">In Kilograms (KG)</p>
+							<p class="help-block">In grams (G)</p>
 						</div>
 						<div class="form-group">
 							<label>Category</label> <input class="form-control input-sm" name="p_category" value="${product.category}">
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="col-lg-5">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h4>
+							<label>Image</label>
+							<div class="form-group pull-right" style="padding: 0px 10px 0px 10px;">
+								<div class="btn-group">
+									<button type="button" class="btn btn-xs btn-default">
+										<i class="glyphicon glyphicon-hdd"></i> Browse
+									</button>
+								</div>
+							</div>
+						</h4>
+						<div class="row">
+							<div class="col-lg-7">
+								<p>Upload an image of this product.</p>
+								<small>
+									<ul>
+										<li>Recommend dimension is 160x160px.</li>
+										<li>Bigger image will be cropped.</li>
+									</ul>
+								</small>
+							</div>
+							<div class="col-lg-5">
+								<div style="width:160px;height:160px;">
+									<a href="#" class="thumbnail">
+								      <img id="p_image" src="http://placehold.it/160x160">
+								    </a>
+								</div>	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-5">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<h4>
@@ -100,38 +143,6 @@
 						</div>
 						&nbsp;
 					</div>
-				</div>
-				<div id="area-example"></div>
-			</div>
-			<div class="col-lg-3">
-				<div class="panel panel-default">
-					<div class="panel-heading" style="background-color: #101010; color: white; border-bottom-color: #00aaff; border-bottom-width: 3px;">
-						<h3 class="panel-title">
-							<strong>Register</strong>
-						</h3>
-					</div>
-					<table class="table">
-						<tbody>
-							<tr>
-								<td style="padding-left: 14px;">Status:</td>
-								<td><strong>Published</strong></td>
-							</tr>
-							<tr>
-								<td style="padding-left: 14px;">Published on:</td>
-								<td><span class="glyphicon glyphicon-calendar"></span> Nov 24, 2013 @ 6:56</td>
-							</tr>
-							<tr>
-								<td style="padding-left: 14px;">Registered by:</td>
-								<td>James Bond</td>
-							</tr>
-							<tr>
-								<td style="padding-left: 14px;" colspan="2"><small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vehicula sit amet felis ac hendrerit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </small></td>
-							</tr>
-							<tr>
-								<td colspan="2"><input type="submit" class="btn btn-primary pull-right" name="p_action" value="Update"></input></td>
-							</tr>
-						</tbody>
-					</table>
 				</div>
 			</div>
 		</div>

@@ -27,8 +27,9 @@
 							<li><a href="#">Outbound Delivery</a></li>
 						</ul>
 					</li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-collapse"></i> Transaction <b class="caret"></b></a>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-collapse"></i> Audit <b class="caret"></b></a>
 						<ul class="dropdown-menu">
+							<li><a href="/it2299-ffth-reincoast/AuditLogServlet">Audit Log</a></li>
 							<li><a href="transaction-log.jsp">Transaction Log</a></li>
 							<li><a href="#">Cancellation</a></li>
 							<li><a href="transaction-overview.jsp">Transaction Overview</a></li>

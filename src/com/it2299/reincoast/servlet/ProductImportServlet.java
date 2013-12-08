@@ -56,19 +56,23 @@ public class ProductImportServlet extends HttpServlet {
 		Pattern p1 = Pattern.compile("<span class=\"p_detail_name\">(.*?)</span>");
 		Pattern p2 = Pattern.compile("<td class=\"p_detail_attr_cell\">(.*?)</td>");
 		Pattern p3 = Pattern.compile("<span class=\"fp_list_price\">(.*?)</span>");
+		Pattern p4 = Pattern.compile("class=\"p_detail_img_full\" src=\"(.*?)\"");
 
 		Matcher m1 = p1.matcher(sbf);
 		Matcher m2 = p2.matcher(sbf);
 		Matcher m3 = p3.matcher(sbf);
+		Matcher m4 = p4.matcher(sbf);
 
 		String name = m1.find() ? m1.group(1).trim() : "";
-		String weight = m2.find() ? m2.group(1).trim().replaceAll("\t", "") : "";
-		String price = m3.find() ? m3.group(1).trim() : "";
+		String weight = m2.find() ? m2.group(1).replace("G", "").trim().replaceAll("\t", "") : "";
+		String price = m3.find() ? m3.group(1).replace("$", "").trim() : "";
+		String image = m4.find() ? "http://www.fairprice.com.sg" + m4.group(1).trim() : "";
 
 		Map<String, String> dataMap = new HashMap<String, String>();
 		dataMap.put("name", name);
 		dataMap.put("weight", weight);
 		dataMap.put("price", price);
+		dataMap.put("image", image);
 
 		Gson gson = new Gson();
 		String data = gson.toJson(dataMap);

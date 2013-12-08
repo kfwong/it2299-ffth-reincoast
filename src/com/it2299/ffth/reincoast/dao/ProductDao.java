@@ -12,7 +12,7 @@ import com.it2299.ffth.reincoast.dto.Product;
  * Implementation of Item Data Access Object.
  * Please make sure you extends AbstractDAO so that we have common interfaces for calling each other's function.
  */
-public class ProductDao extends AbstractDao<Product> {
+public class ProductDao extends AbstractDao<Product>{
 	
 	@Override
 	public Product get(Integer id) {
