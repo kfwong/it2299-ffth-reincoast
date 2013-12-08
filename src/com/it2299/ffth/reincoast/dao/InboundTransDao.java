@@ -19,7 +19,7 @@ public class InboundTransDao extends AbstractDao<InboundTran> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<InboundTran> getAll() {
-		return session.createQuery("FROM InboundTrans").list();
+		return session.createQuery("FROM InboundTran").list();
 	}
 
 	@Override

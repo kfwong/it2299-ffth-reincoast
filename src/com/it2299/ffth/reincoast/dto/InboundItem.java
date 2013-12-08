@@ -34,6 +34,8 @@ public class InboundItem implements Serializable {
 
 	public InboundItem() {
 	}
+	
+	
 
 	public int getId() {
 		return this.id;

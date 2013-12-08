@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.it2299.ffth.reincoast.dao.InboundItemDao;
 import com.it2299.ffth.reincoast.dao.InboundTransDao;
 import com.it2299.ffth.reincoast.dto.InboundItem;
 import com.it2299.ffth.reincoast.dto.InboundTran;
@@ -53,6 +54,7 @@ public class InBoundServlet extends HttpServlet {
 		Date date = new Date();
 		trans.setDate(date);
 		trans.setReceiptno(Integer.parseInt(request.getParameter("ReceiptNO")));
+		double total =0;
 		String [] id = request.getParameterValues("id");
 		String [] code = request.getParameterValues("item-code");
 		String [] name = request.getParameterValues("item-name");
@@ -64,16 +66,25 @@ public class InBoundServlet extends HttpServlet {
 			InboundItem item = new InboundItem();
 			item.setId(Integer.parseInt(id[i]));
 			item.setItemid(Integer.parseInt(code[i]));
+			total = total + (Double.parseDouble(price[i])* Integer.parseInt(quantity[i]));
 			itemArray.add(item);
 		}
-		
-		trans.setInboundItems(itemArray);
+		trans.setTotalPrice(total);
+		//trans.setInboundItems(itemArray);
 		InboundTransDao transDao = new InboundTransDao();
+		InboundItemDao itemDao = new InboundItemDao();
 		transDao.openSession();
 		transDao.getSession().beginTransaction();
 		transDao.saveOrUpdate(trans);
 		transDao.getSession().getTransaction().commit();
 		transDao.closeSession();
+		itemDao.openSession();
+		itemDao.getSession().beginTransaction();
+		for(int i=0;i<itemArray.size();i++){
+			itemDao.saveOrUpdate(itemArray.get(i));	
+		}
+		itemDao.getSession().getTransaction().commit();
+		itemDao.closeSession();
 		
 		PrintWriter out = response.getWriter();
 		out.print("ok");

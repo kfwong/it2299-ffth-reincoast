@@ -59,6 +59,6 @@ public class GetItemServlet extends HttpServlet {
 		}
 			out.println(itemGson);
 		}
+			
 	
-
 }

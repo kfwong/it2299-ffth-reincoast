@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
 	<jsp:param value="/path/to/css1" name="css" />
@@ -17,13 +18,12 @@
 		<div class="col-lg-12">
 			<h2>Transaction Log</h2>
 			<div class="table-responsive">
-				<table class="table table-hover table-striped tablesorter table-condensed">
+				<table
+					class="table table-hover table-striped tablesorter table-condensed">
 					<thead>
 						<tr>
 							<th># <i class="icon-sort"></i></th>
 							<th>T.Code <i class="icon-sort"></i></th>
-							<th>Item Code</th>
-							<th>Item Description</th>
 							<th>Movement/Status <i class="icon-sort"></i></th>
 							<th>Date <i class="icon-sort"></i></th>
 							<th>Person <i class="icon-sort"></i></th>
@@ -31,7 +31,7 @@
 						</tr>
 					</thead>
 					<tbody id="tran-list">
-						
+
 					</tbody>
 				</table>
 			</div>
@@ -41,14 +41,31 @@
 </div>
 <!-- sample-content.jsp -->
 <script>
-$(document).ready(function(){
-	for(var i=0;i< 5; i++){
-		var number = 1 + Math.floor(Math.random() * i);
-		var name = "ANGRY BIRD CHOC FILLED BISCUITS";
-	$("#tran-list").append("<tr class='success'><td>"+ number +"</td><td><a href='http://localhost:8080/it2299-ffth-reincoast/historyItem.jsp'>" + (number * 0320567846)/2 +"</a></td><td>" + (number*0320567846)/2 + "</td><td>ANGRY BIRD CHOC FILLED BISCUITS</td><td><span class='label label-success'>Inbound Delivery</span></td><td>13/07/2013</td><td>John Smith</td><td>$" + (number * 1000)*2.5 + "</td></tr>");
-}
-});
+	var count = 0;
+	$(document).ready(
 
+			function getTrans() {
+				var tran = null;
+				$.ajax({
+					type : "POST",
+					url : "GetTransHistory",
+					data : {
+						tran : tran
+					}
+				}).done(
+						function(data) {
+
+							var obj = $.parseJSON(data);
+							alert(count);
+							$("#tran-list").append(
+									"<tr><td>" + count + "</td><td>"
+											+ obj.receiptno
+											+ "</td><td>haha</td><td>"
+											+ obj.date + "</td><td>"
+											+ obj.donor + "</td><td>$" + obj.totalPrice +"</td></tr>");
+						});
+				count++;
+			});
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
