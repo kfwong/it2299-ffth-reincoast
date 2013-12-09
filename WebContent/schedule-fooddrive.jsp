@@ -22,7 +22,11 @@
 		</form>
 		
 		<span class="pull-left alert alert-info row-selected-count">No records selected</span>
-		<h4 class="text-center"><span class="glyphicon glyphicon-chevron-left"></span>January 2013<span class="glyphicon glyphicon-chevron-right"></span></h4>
+		<div class="date-selector">
+			<span class="glyphicon glyphicon-chevron-left"></span>
+				<span class="date-selector-selected">January 2013</span>
+			<span class="glyphicon glyphicon-chevron-right"></span>
+		</div>
 		<div class="clearfix"></div>
 	</div>
 	

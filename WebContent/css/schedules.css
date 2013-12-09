@@ -19,3 +19,13 @@
 	line-height:32px;
 }
 
+.date-selector{
+	width:160px;
+	margin:0 auto 0 auto;
+}
+
+.date-selector-selected{
+	line-height:34px;
+	font-size:18px;
+	font-weight:bold;
+}
