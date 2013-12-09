@@ -13,15 +13,22 @@
 <div id="page-wrapper">
 	<h1>Contacts <small>Donors - Individual</small></h1>
 
-	<form method="post" action="contacts-donors-individual.jsp">
+	<div class="table-above contact-button-group">
+		<form method="post" action="contacts-donors-individual.jsp">
 		<div class="form-group">	
 			<button type="submit" class="pull-left btn btn-default contact-button">Discard</button>
 			<button type="button" class="pull-left btn btn-default contact-button reset-button">Reset</button>
 			<button type="submit" class="pull-right btn btn-default">Save</button>
 			<button type="button" class="pull-right btn btn-default contact-button new-contact-button">New Contact</button>
 		</div>
+		</form>
+		
+		<span class="pull-left alert alert-info row-selected-count">No changes detected</span>
+		
 		<div class="clearfix"></div>
-	</form>
+	</div>
+
+	
 
 	<table class="table table-hover table-striped table-bordered">
 		<tr>
@@ -32,45 +39,17 @@
 		</tr>
 		<tbody class="table-new-contact">
 			<tr>
-				<td class="table-column-name"><input type="text" class="form-control" value="John Smith" readonly></td>
-				<td class="table-column-address"><input type="text" class="form-control" value="BLK 123 Choa Chu Kang Avenue 3 Singapore 670123" readonly></td>
-				<td class="table-column-number"><input type="text" class="form-control" value="91234567" readonly></td>
-				<td class="table-column-email"><input type="text" class="form-control" value="johnsmith@gmail.com" readonly></td>
+				<td class="table-column-name"><input type="text" class="form-control" value="John Smith" ></td>
+				<td class="table-column-address"><input type="text" class="form-control" value="BLK 123 Choa Chu Kang Avenue 3 Singapore 670123" ></td>
+				<td class="table-column-number"><input type="text" class="form-control" value="91234567" ></td>
+				<td class="table-column-email"><input type="text" class="form-control" value="johnsmith@gmail.com" ></td>
 			</tr>
 			
 			<tr>
-				<td class="table-column-name"><input type="text" class="form-control" value="John Smith" readonly></td>
-				<td class="table-column-address"><input type="text" class="form-control" value="BLK 123 Choa Chu Kang Avenue 3 Singapore 670123" readonly></td>
-				<td class="table-column-number"><input type="text" class="form-control" value="91234567" readonly></td>
-				<td class="table-column-email"><input type="text" class="form-control" value="johnsmith@gmail.com" readonly></td>
-			</tr>
-			
-			<tr>
-				<td class="table-column-name"><input type="text" class="form-control" value="John Smith" readonly></td>
-				<td class="table-column-address"><input type="text" class="form-control" value="BLK 123 Choa Chu Kang Avenue 3 Singapore 670123" readonly></td>
-				<td class="table-column-number"><input type="text" class="form-control" value="91234567" readonly></td>
-				<td class="table-column-email"><input type="text" class="form-control" value="johnsmith@gmail.com" readonly></td>
-			</tr>
-			
-			<tr>
-				<td class="table-column-name"><input type="text" class="form-control" value="John Smith" readonly></td>
-				<td class="table-column-address"><input type="text" class="form-control" value="BLK 123 Choa Chu Kang Avenue 3 Singapore 670123" readonly></td>
-				<td class="table-column-number"><input type="text" class="form-control" value="91234567" readonly></td>
-				<td class="table-column-email"><input type="text" class="form-control" value="johnsmith@gmail.com" readonly></td>
-			</tr>
-			
-			<tr>
-				<td class="table-column-name"><input type="text" class="form-control" value="John Smith" readonly></td>
-				<td class="table-column-address"><input type="text" class="form-control" value="BLK 123 Choa Chu Kang Avenue 3 Singapore 670123" readonly></td>
-				<td class="table-column-number"><input type="text" class="form-control" value="91234567" readonly></td>
-				<td class="table-column-email"><input type="text" class="form-control" value="johnsmith@gmail.com" readonly></td>
-			</tr>
-			
-			<tr>
-				<td class="table-column-name"><input type="text" class="form-control" value="John Smith" readonly></td>
-				<td class="table-column-address"><input type="text" class="form-control" value="BLK 123 Choa Chu Kang Avenue 3 Singapore 670123" readonly></td>
-				<td class="table-column-number"><input type="text" class="form-control" value="91234567" readonly></td>
-				<td class="table-column-email"><input type="text" class="form-control" value="johnsmith@gmail.com" readonly></td>
+				<td class="table-column-name"><input type="text" class="form-control" value="John Smith" ></td>
+				<td class="table-column-address"><input type="text" class="form-control" value="BLK 123 Choa Chu Kang Avenue 3 Singapore 670123" ></td>
+				<td class="table-column-number"><input type="text" class="form-control" value="91234567" ></td>
+				<td class="table-column-email"><input type="text" class="form-control" value="johnsmith@gmail.com" ></td>
 			</tr>
 		</tbody>
 	</table>
@@ -80,6 +59,8 @@
 
 <script>
 	$(document).ready(function(){
+		var rowSelectedCount = 0;
+		
 		$(".reset-button").on("click", function(){
 			location.reload();
 		});
@@ -97,26 +78,36 @@
 		});
 		
 		
-		$(".table-column-name, .table-column-address, .table-column-number, .table-column-email").on("click", function(event){
+		/*$(".table-column-name input, .table-column-address input, .table-column-number input, .table-column-email input").on("focus", function(event){
 			var elementSelected = event.target;
 			var rowSelected = $(elementSelected).parents("tr");
 			var childElements = rowSelected.children().children();
-			$(childElements).attr("readonly", null);
-		});
+			$(childElements).attr("readonly", null); 
+			console.log("focus");
+		});	
 		
-		/* $(".table-column-name, .table-column-address, .table-column-number, .table-column-email").on("focusout", function(event){
+		$(".table-column-name input, .table-column-address input, .table-column-number input, .table-column-email input").on("focusout", function(event){
 			var elementSelected = event.target;
 			var rowSelected = $(elementSelected).parents("tr");
 			var childElements = rowSelected.children().children();
-			$(childElements).attr("readonly", "readonly");
-		}); */
+			$(childElements).attr("readonly", "readonly");	
+			console.log("focusout");
+		});	 */
 		
-		$(".table-column-name, .table-column-address, .table-column-number, .table-column-email").on("change", function(event){
+		$(".table-column-name input, .table-column-address input, .table-column-number input, .table-column-email input").on("change", function(event){
+			var elementSelected = event.target;
+			var rowSelected = $(elementSelected).parents("tr");
 			
-			var elementSelected = event.target;
-			var rowSelected = $(elementSelected).parents("tr");
-			var childElements = rowSelected.children().children();
-			$(childElements).attr("readonly", null);
+			if($(rowSelected).hasClass("warning selected")){
+
+			}
+			else{
+				$(rowSelected).addClass("warning selected");
+				rowSelectedCount++;
+			}	
+			
+			$(".row-selected-count").text(rowSelectedCount + " records changed");
+			console.log(rowSelectedCount);
 		});
 	});
 </script>

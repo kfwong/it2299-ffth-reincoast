@@ -1,6 +1,18 @@
+.contact-button-group{
+	margin-bottom:10px;
+}
+
 .contact-button{
 	margin-right:10px;
-	margin-bottom:10px;
+}
+
+.alert{
+	padding: 0px 10px 0px 10px;
+	margin:0px;
+}
+
+.row-selected-count{
+	line-height:32px;
 }
 
 .table-column-name{
