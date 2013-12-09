@@ -15,12 +15,12 @@
 
 	<div class="table-above contact-button-group">
 		<form method="post" action="contacts-donors-individual.jsp">
-		<div class="form-group">	
-			<button type="submit" class="pull-left btn btn-default contact-button">Discard</button>
-			<button type="button" class="pull-left btn btn-default contact-button reset-button">Reset</button>
-			<button type="submit" class="pull-right btn btn-default">Save</button>
-			<button type="button" class="pull-right btn btn-default contact-button new-contact-button">New Contact</button>
-		</div>
+			<div class="form-group">	
+				<button type="submit" class="pull-left btn btn-default contact-button">Discard</button>
+				<button type="button" class="pull-left btn btn-default contact-button reset-button">Reset</button>
+				<button type="submit" class="pull-right btn btn-default">Save</button>
+				<button type="button" class="pull-right btn btn-default contact-button new-contact-button">New Contact</button>
+			</div>
 		</form>
 		
 		<span class="pull-left alert alert-info row-selected-count">No changes detected</span>
