@@ -7,7 +7,7 @@ import com.it2299.ffth.reincoast.dto.InboundTran;
 public class InboundTransDao extends AbstractDao<InboundTran> {
 
 	@Override
-	InboundTran get(Integer id) {
+	public InboundTran get(Integer id) {
 		return (InboundTran) session.get(InboundTran.class, id);
 	}
 

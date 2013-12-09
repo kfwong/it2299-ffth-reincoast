@@ -1,7 +1,9 @@
 package com.it2299.ffth.reincoast.dto;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name="inbound_trans")
 @NamedQuery(name="InboundTran.findAll", query="SELECT i FROM InboundTran i")
-public class InboundTran implements Serializable {
+public class InboundTran implements Serializable , Auditable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -107,6 +109,24 @@ public class InboundTran implements Serializable {
 		inboundItem.setInboundTran(null);
 
 		return inboundItem;
+	}
+
+	@Override
+	public String auditDelete() {
+		// TODO Auto-generated method stub
+		return "Inbound Transaction " + receiptno + "has been deleted.";
+	}
+
+	@Override
+	public String auditUpdate() {
+		// TODO Auto-generated method stub
+		return "Inbound Transaction " + receiptno + "has been updated.";
+	}
+
+	@Override
+	public String auditSave() {
+		// TODO Auto-generated method stub
+		return "Inbound Transaction " + receiptno + " has been created.";
 	}
 
 }

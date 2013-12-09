@@ -54,7 +54,6 @@
 				}).done(
 						function(data) {
 							var obj = $.parseJSON(data);
-							alert(obj.receiptno);
 							$("#tran-list").append(
 									"<tr><td>" + count + "</td><td>"
 											+ obj.receiptno
