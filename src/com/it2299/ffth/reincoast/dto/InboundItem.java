@@ -1,9 +1,7 @@
 package com.it2299.ffth.reincoast.dto;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
 import java.util.Date;
 
 
@@ -34,8 +32,6 @@ public class InboundItem implements Serializable {
 
 	public InboundItem() {
 	}
-	
-	
 
 	public int getId() {
 		return this.id;
@@ -57,8 +53,8 @@ public class InboundItem implements Serializable {
 		return this.itemid;
 	}
 
-	public void setItemid(int code) {
-		this.itemid = code;
+	public void setItemid(int itemid) {
+		this.itemid = itemid;
 	}
 
 	public int getQuantity() {

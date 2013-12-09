@@ -51,7 +51,8 @@
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Receipt No</label>
 							<div class="col-lg-4">
-								<input class="form-control" type="text" id="receiptno" name="ReceiptNO"/>
+								<input class="form-control" type="text" id="receiptno"
+									name="ReceiptNO" />
 							</div>
 						</div>
 						<div class="form-group">

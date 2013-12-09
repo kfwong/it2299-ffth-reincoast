@@ -42,8 +42,7 @@
 <!-- sample-content.jsp -->
 <script>
 	var count = 0;
-	$(document).ready(
-
+	$(document).load(
 			function getTrans() {
 				var tran = null;
 				$.ajax({
@@ -54,15 +53,15 @@
 					}
 				}).done(
 						function(data) {
-
 							var obj = $.parseJSON(data);
-							alert(count);
+							alert(obj.receiptno);
 							$("#tran-list").append(
 									"<tr><td>" + count + "</td><td>"
 											+ obj.receiptno
 											+ "</td><td>haha</td><td>"
 											+ obj.date + "</td><td>"
-											+ obj.donor + "</td><td>$" + obj.totalPrice +"</td></tr>");
+											+ obj.donor + "</td><td>$"
+											+ obj.totalPrice + "</td></tr>");
 						});
 				count++;
 			});

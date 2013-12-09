@@ -2,7 +2,6 @@ package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
 
-
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -21,67 +20,72 @@ import com.it2299.ffth.reincoast.dao.InboundTransDao;
 import com.it2299.ffth.reincoast.dto.InboundItem;
 import com.it2299.ffth.reincoast.dto.InboundTran;
 
-
 /**
  * Servlet implementation class InBoundServlet
  */
 @WebServlet("/InBoundServlet")
 public class InBoundServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public InBoundServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public InBoundServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		InboundTran trans = new InboundTran();
 		trans.setDonor(request.getParameter("Donor"));
 		trans.setDonorType(request.getParameter("Type"));
 		Date date = new Date();
 		trans.setDate(date);
 		trans.setReceiptno(Integer.parseInt(request.getParameter("ReceiptNO")));
-		double total =0;
-		String [] id = request.getParameterValues("id");
-		String [] code = request.getParameterValues("item-code");
-		String [] name = request.getParameterValues("item-name");
-		String [] quantity = request.getParameterValues("item-quantity");
-		String [] price = request.getParameterValues("item-price");
-		String [] unit = request.getParameterValues("item-measure");
+		double total = 0;
+		String[] id = request.getParameterValues("id");
+		String[] code = request.getParameterValues("item-code");
+		String[] name = request.getParameterValues("item-name");
+		String[] quantity = request.getParameterValues("item-quantity");
+		String[] price = request.getParameterValues("item-price");
+		String[] unit = request.getParameterValues("item-measure");
 		ArrayList<InboundItem> itemArray = new ArrayList<InboundItem>();
-		for(int i=0; i< id.length;i++){
+		for (int i = 0; i < id.length; i++) {
 			InboundItem item = new InboundItem();
 			item.setId(Integer.parseInt(id[i]));
 			item.setItemid(Integer.parseInt(code[i]));
-			total = total + (Double.parseDouble(price[i])* Integer.parseInt(quantity[i]));
+			total = total
+					+ (Double.parseDouble(price[i]) * Integer
+							.parseInt(quantity[i]));
 			itemArray.add(item);
 		}
 		trans.setTotalPrice(total);
-		//trans.setInboundItems(itemArray);
+		trans.setInboundItems(itemArray);
 		InboundTransDao transDao = new InboundTransDao();
-		InboundItemDao itemDao = new InboundItemDao();
 		transDao.openSession();
 		transDao.getSession().beginTransaction();
 		transDao.saveOrUpdate(trans);
 		transDao.getSession().getTransaction().commit();
 		transDao.closeSession();
+		InboundItemDao itemDao = new InboundItemDao();
 		itemDao.openSession();
 		itemDao.getSession().beginTransaction();
 		for(int i=0;i<itemArray.size();i++){
-			itemDao.saveOrUpdate(itemArray.get(i));	
+			itemDao.saveOrUpdate(itemArray.get(i));
 		}
 		itemDao.getSession().getTransaction().commit();
 		itemDao.closeSession();
