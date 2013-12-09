@@ -12,6 +12,10 @@
 }
 
 .row-selected-count{
+	margin-right:10px;
+}
+
+.row-selected-count, .row-added-count{
 	line-height:32px;
 }
 

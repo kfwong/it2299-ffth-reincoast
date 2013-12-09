@@ -24,7 +24,7 @@
 		</form>
 		
 		<span class="pull-left alert alert-info row-selected-count">No changes detected</span>
-		
+		<span class="pull-left alert alert-info row-added-count hide"></span>
 		<div class="clearfix"></div>
 	</div>
 
@@ -62,6 +62,7 @@
 <script>
 	$(document).ready(function(){
 		var rowSelectedCount = 0;
+		var rowAddedCount = 0;
 		
 		$(".reset-button").on("click", function(){
 			location.reload();
@@ -77,6 +78,10 @@
 				'<td class="table-column-email"><input type="text" class="form-control"></td>' +
 				'</tr>'
 			);
+			
+			rowAddedCount++;
+			$(".row-added-count").removeClass("hide");
+			$(".row-added-count").text(rowAddedCount + " records added");
 		});
 		
 		$(".table-column-name input, .table-column-address input, .table-column-number input, .table-column-email input").on("change", function(event){

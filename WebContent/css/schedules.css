@@ -6,11 +6,16 @@
 	margin-right:10px;
 }
 
-.row-selected-count{
-	line-height:32px;
-}
-
 .alert{
 	padding: 0px 10px 0px 10px;
 	margin:0px;
 }
+
+.row-selected-count{
+	margin-right:10px;
+}
+
+.row-selected-count, .row-added-count{
+	line-height:32px;
+}
+
