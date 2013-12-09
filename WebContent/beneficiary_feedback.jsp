@@ -17,27 +17,65 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Beneficiary Feedback</h3>
+					<h2 class="panel-title">Beneficiary Feedback</h2>
 				</div>
 				<div class="panel-body">
-				<!-- FORM -->
-				
-				
-				<button type="button" class="btn btn-default">Submit</button>
-				<button type="button" class="btn btn-default">Cancel</button>
-				
-				
+					<!-- FORM -->
+					<form role="form">
+						<!--  ROW FOR NAME  -->
+
+						<div class="row">
+							<div class="col-xs-12 col-sm-4 col-md-6">
+								<label for="Display_Name">NAME *</label> <input type="text"
+									class="form-control" name="Name" id="Display_Name"
+									placeholder="Enter Name">
+							</div>
+						</div>
+						<br>
+
+						<!--  ROW FOR EMAIL  -->
+
+						<div class="row">
+							<div class="col-xs-12 col-sm-4 col-md-6">
+								<label for="Display_Email">EMAIL*</label> <input type="text"
+									class="form-control" name="Name" id="Display_Email"
+									placeholder="Enter Email">
+							</div>
+						</div>
+						<br>
+						
+						
+						<!--  ROW FOR FEEDBACK  -->
+						<div class="row">
+							<div class="col-xs-12 col-sm-4 col-md-6">
+							<label for="Feedback">FEEDBACK*</label>
+						<textarea class="form-control" rows="3" id="Feedback"></textarea>
+						</div>
+						</div>
+						<br><br>
+						
+						<!--  ROW FOR BUTTONS  -->
+
+						<div class="row">
+							<div class="col-xs-6 col-sm-4">
+								<button type="button" class="btn btn-default">Submit</button>
+								<button type="button" class="btn btn-default">Cancel</button>
+							</div>
+						</div>
+
+					</form>
 				</div>
 			</div>
 		</div>
-
-
-		<!-- /.row -->
 	</div>
-	<!-- sample-content.jsp -->
 
-	<!-- footer.jsp -->
-	<jsp:include page="footer.jsp">
-		<jsp:param value="/path/to/js1" name="js" />
-	</jsp:include>
-	<!-- footer.jsp -->
+
+	<!-- /.row -->
+</div>
+<!-- sample-content.jsp -->
+
+<!-- footer.jsp -->
+<jsp:include page="footer.jsp">
+	<jsp:param value="/path/to/js1" name="js" />
+</jsp:include>
+<!-- footer.jsp -->
