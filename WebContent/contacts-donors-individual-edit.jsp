@@ -31,12 +31,14 @@
 	
 
 	<table class="table table-hover table-striped table-bordered">
-		<tr>
-			<th class="table-column-name">Name</th>
-			<th class="table-column-address">Address</th>
-			<th class="table-column-number">Contact Number</th>
-			<th class="table-column-email">Email</th>
-		</tr>
+		<thead>
+			<tr>
+				<th class="table-column-name">Name</th>
+				<th class="table-column-address">Address</th>
+				<th class="table-column-number">Contact Number</th>
+				<th class="table-column-email">Email</th>
+			</tr>
+		</thead>
 		<tbody class="table-new-contact">
 			<tr>
 				<td class="table-column-name"><input type="text" class="form-control" value="John Smith" ></td>
@@ -76,23 +78,6 @@
 				'</tr>'
 			);
 		});
-		
-		
-		/*$(".table-column-name input, .table-column-address input, .table-column-number input, .table-column-email input").on("focus", function(event){
-			var elementSelected = event.target;
-			var rowSelected = $(elementSelected).parents("tr");
-			var childElements = rowSelected.children().children();
-			$(childElements).attr("readonly", null); 
-			console.log("focus");
-		});	
-		
-		$(".table-column-name input, .table-column-address input, .table-column-number input, .table-column-email input").on("focusout", function(event){
-			var elementSelected = event.target;
-			var rowSelected = $(elementSelected).parents("tr");
-			var childElements = rowSelected.children().children();
-			$(childElements).attr("readonly", "readonly");	
-			console.log("focusout");
-		});	 */
 		
 		$(".table-column-name input, .table-column-address input, .table-column-number input, .table-column-email input").on("change", function(event){
 			var elementSelected = event.target;

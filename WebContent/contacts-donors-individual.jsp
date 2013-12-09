@@ -46,54 +46,57 @@
 	</div><!-- /.modal -->
 		
 	<table class="table table-hover table-striped table-bordered">
-	<tr>
-		<th class="table-column-name">Name</th>
-		<th class="table-column-address">Address</th>
-		<th class="table-column-number">Contact Number</th>
-		<th class="table-column-email">Email</th>
-	</tr>
-	<tr class="table-row">
-		<td>John Smith</td>
-		<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-		<td>91234567</td>
-		<td>johnsmith@gmail.com</td>
-	</tr>
-	
-	<tr class="table-row">
-		<td>John Smith</td>
-		<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-		<td>91234567</td>
-		<td>johnsmith@gmail.com</td>
-	</tr>
-	
-	<tr class="table-row">
-		<td>John Smith</td>
-		<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-		<td>91234567</td>
-		<td>johnsmith@gmail.com</td>
-	</tr>
-	
-	<tr class="table-row">
-		<td>John Smith</td>
-		<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-		<td>91234567</td>
-		<td>johnsmith@gmail.com</td>
-	</tr>
-	
-	<tr class="table-row">
-		<td>John Smith</td>
-		<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-		<td>91234567</td>
-		<td>johnsmith@gmail.com</td>
-	</tr>
-	
-	<tr class="table-row">
-		<td>John Smith</td>
-		<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-		<td>91234567</td>
-		<td>johnsmith@gmail.com</td>
-	</tr>
-	
+		<thead>
+			<tr>
+				<th class="table-column-name">Name</th>
+				<th class="table-column-address">Address</th>
+				<th class="table-column-number">Contact Number</th>
+				<th class="table-column-email">Email</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="table-row">
+				<td>John Smith</td>
+				<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
+				<td>91234567</td>
+				<td>johnsmith@gmail.com</td>
+			</tr>
+			
+			<tr class="table-row">
+				<td>John Smith</td>
+				<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
+				<td>91234567</td>
+				<td>johnsmith@gmail.com</td>
+			</tr>
+			
+			<tr class="table-row">
+				<td>John Smith</td>
+				<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
+				<td>91234567</td>
+				<td>johnsmith@gmail.com</td>
+			</tr>
+			
+			<tr class="table-row">
+				<td>John Smith</td>
+				<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
+				<td>91234567</td>
+				<td>johnsmith@gmail.com</td>
+			</tr>
+			
+			<tr class="table-row">
+				<td>John Smith</td>
+				<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
+				<td>91234567</td>
+				<td>johnsmith@gmail.com</td>
+			</tr>
+			
+			<tr class="table-row">
+				<td>John Smith</td>
+				<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
+				<td>91234567</td>
+				<td>johnsmith@gmail.com</td>
+			</tr>
+		</tbody>
 	</table>
 
 </div>

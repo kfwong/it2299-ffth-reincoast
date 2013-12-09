@@ -1,0 +1,16 @@
+.schedule-button-group{
+	margin-bottom:10px;
+}
+
+.schedule-button{
+	margin-right:10px;
+}
+
+.row-selected-count{
+	line-height:32px;
+}
+
+.alert{
+	padding: 0px 10px 0px 10px;
+	margin:0px;
+}
