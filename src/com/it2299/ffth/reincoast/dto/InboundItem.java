@@ -1,7 +1,9 @@
 package com.it2299.ffth.reincoast.dto;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
 
 
@@ -15,7 +17,7 @@ import java.util.Date;
 public class InboundItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id @GeneratedValue
 	private int id;
 
 	@Temporal(TemporalType.DATE)

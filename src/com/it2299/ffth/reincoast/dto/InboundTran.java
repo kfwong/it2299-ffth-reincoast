@@ -18,7 +18,7 @@ import java.util.List;
 public class InboundTran implements Serializable , Auditable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id 
 	private int id;
 
 	@Temporal(TemporalType.DATE)

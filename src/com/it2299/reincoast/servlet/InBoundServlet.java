@@ -66,7 +66,7 @@ public class InBoundServlet extends HttpServlet {
 		ArrayList<InboundItem> itemArray = new ArrayList<InboundItem>();
 		for (int i = 0; i < id.length; i++) {
 			InboundItem item = new InboundItem();
-			item.setId(Integer.parseInt(id[i]));
+			//item.setId(Integer.parseInt(id[i]));
 			item.setItemid(Integer.parseInt(code[i]));
 			total = total
 					+ (Double.parseDouble(price[i]) * Integer
