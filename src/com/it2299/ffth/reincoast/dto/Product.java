@@ -7,6 +7,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -76,7 +77,7 @@ public class Product implements Auditable {
 	@Column(name = "REGISTERED_BY")
 	private String registeredBy;
 
-	@ElementCollection
+	@ElementCollection(fetch = FetchType.EAGER)
 	@GenericGenerator(name = "hilo-gen", strategy = "hilo")
 	@CollectionId(columns = @Column(name = "ID"), type = @Type(type = "int"), generator = "hilo-gen")
 	@CollectionTable(name = "PRODUCT_META", joinColumns = @JoinColumn(name = "PRODUCT_ID"))
