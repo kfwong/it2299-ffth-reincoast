@@ -46,7 +46,7 @@ public class GetItemServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("ItemCode"));
 		
 		ProductDao productID = new ProductDao();
-		productID.openSession();
+		
 		Product product = productID.get(id);
 
 		PrintWriter out = response.getWriter();

@@ -1,7 +1,6 @@
 package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
-
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,10 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.it2299.ffth.reincoast.dao.InboundDeliveryDao;
 import com.it2299.ffth.reincoast.dao.InboundItemDao;
 import com.it2299.ffth.reincoast.dao.InboundTransDao;
+import com.it2299.ffth.reincoast.dto.InboundDelivery;
 import com.it2299.ffth.reincoast.dto.InboundItem;
 import com.it2299.ffth.reincoast.dto.InboundTran;
+import com.it2299.ffth.reincoast.dto.Item;
 
 /**
  * Servlet implementation class InBoundServlet
@@ -50,12 +52,10 @@ public class InBoundServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		InboundTran trans = new InboundTran();
-		trans.setDonor(request.getParameter("Donor"));
+		InboundDelivery trans = new InboundDelivery();
+		trans.setDonorName(request.getParameter("Donor"));
 		trans.setDonorType(request.getParameter("Type"));
 		Date date = new Date();
-		trans.setDate(date);
-		trans.setReceiptno(Integer.parseInt(request.getParameter("ReceiptNO")));
 		double total = 0;
 		String[] id = request.getParameterValues("id");
 		String[] code = request.getParameterValues("item-code");
@@ -63,32 +63,21 @@ public class InBoundServlet extends HttpServlet {
 		String[] quantity = request.getParameterValues("item-quantity");
 		String[] price = request.getParameterValues("item-price");
 		String[] unit = request.getParameterValues("item-measure");
-		ArrayList<InboundItem> itemArray = new ArrayList<InboundItem>();
+		ArrayList<Item> itemArray = new ArrayList<Item>();
 		for (int i = 0; i < id.length; i++) {
-			InboundItem item = new InboundItem();
-			//item.setId(Integer.parseInt(id[i]));
-			item.setItemid(Integer.parseInt(code[i]));
+			Item item = new Item();
+			item.setQuantity(Integer.parseInt(quantity[i]));
 			total = total
 					+ (Double.parseDouble(price[i]) * Integer
 							.parseInt(quantity[i]));
 			itemArray.add(item);
 		}
 		trans.setTotalPrice(total);
-		trans.setInboundItems(itemArray);
-		InboundTransDao transDao = new InboundTransDao();
-		transDao.openSession();
-		transDao.getSession().beginTransaction();
+		trans.setItems(itemArray);
+		InboundDeliveryDao transDao = new InboundDeliveryDao();
 		transDao.saveOrUpdate(trans);
-		transDao.getSession().getTransaction().commit();
-		transDao.closeSession();
-		InboundItemDao itemDao = new InboundItemDao();
-		itemDao.openSession();
-		itemDao.getSession().beginTransaction();
-		for(int i=0;i<itemArray.size();i++){
-			itemDao.saveOrUpdate(itemArray.get(i));
-		}
-		itemDao.getSession().getTransaction().commit();
-		itemDao.closeSession();
+		
+	
 		
 		PrintWriter out = response.getWriter();
 		out.print("ok");
