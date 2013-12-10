@@ -22,11 +22,7 @@ public class AuditInterceptor extends EmptyInterceptor {
 			audit.setMovementType("Delete");
 			
 			AuditDao auditDao = new AuditDao();
-			auditDao.openSession();
-			auditDao.getSession().beginTransaction();
 			auditDao.delete(audit);
-			auditDao.getSession().getTransaction().commit();
-			auditDao.closeSession();
 			
 		}
 	}
@@ -41,11 +37,7 @@ public class AuditInterceptor extends EmptyInterceptor {
 			audit.setMovementType("Update");
 			
 			AuditDao auditDao = new AuditDao();
-			auditDao.openSession();
-			auditDao.getSession().beginTransaction();
 			auditDao.saveOrUpdate(audit);
-			auditDao.getSession().getTransaction().commit();
-			auditDao.closeSession();
 			
 			return true;
 		}
@@ -61,11 +53,7 @@ public class AuditInterceptor extends EmptyInterceptor {
 			audit.setMovementType("Insert");
 			
 			AuditDao auditDao = new AuditDao();
-			auditDao.openSession();
-			auditDao.getSession().beginTransaction();
 			auditDao.saveOrUpdate(audit);
-			auditDao.getSession().getTransaction().commit();
-			auditDao.closeSession();
 			
 			return true;
 		}
