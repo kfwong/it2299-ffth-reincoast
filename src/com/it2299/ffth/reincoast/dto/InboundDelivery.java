@@ -1,6 +1,7 @@
 package com.it2299.ffth.reincoast.dto;
 
 import java.util.Date;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -26,6 +27,33 @@ public class InboundDelivery {
 	@Column(name="DATE_DELIVERED")
 	private Date dateDelivered;
 	
+	@Column(name="DONOR_NAME")
+	private String donorName;
+	
+	@Column(name="DONOR_TYPE")
+	private String donorType;
+	
+	@Column(name="TOTAL_PRICE")
+	private double totalPrice;
+	
+	public String getDonorName() {
+		return donorName;
+	}
+	public void setDonorName(String donorName) {
+		this.donorName = donorName;
+	}
+	public String getDonorType() {
+		return donorType;
+	}
+	public void setDonorType(String donorType) {
+		this.donorType = donorType;
+	}
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 	public int getId() {
 		return id;
 	}

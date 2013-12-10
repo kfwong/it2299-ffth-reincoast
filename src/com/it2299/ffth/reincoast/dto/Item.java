@@ -1,5 +1,7 @@
 package com.it2299.ffth.reincoast.dto;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,12 +33,16 @@ public class Item {
 	@JoinColumn(name="INBOUND_DELIVERY_ID")
 	private InboundDelivery inboundDelivery;
 	
+	@Column(name="ITEM_EXPIRYDATE")
+	private Date expiryDate;
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public int getQuantity() {
 		return quantity;
 	}
