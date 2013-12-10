@@ -34,7 +34,6 @@ public class ProductEditServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		
 		ProductDao productDao = new ProductDao();
-		productDao.openSession();
 		Product product = (Product) productDao.get(id);
 		
 		request.setAttribute("product", product);

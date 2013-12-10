@@ -71,11 +71,7 @@ public class ProductRegistrationServlet extends HttpServlet {
 		product.setProductMetas(productMetas);
 
 		ProductDao productDao = new ProductDao();
-		productDao.openSession();
-		productDao.getSession().beginTransaction();
 		productDao.saveOrUpdate(product);
-		productDao.getSession().getTransaction().commit();
-		productDao.closeSession();
 
 		PrintWriter out = response.getWriter();
 		out.print("ok");

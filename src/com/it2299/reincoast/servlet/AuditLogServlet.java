@@ -36,7 +36,6 @@ public class AuditLogServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		AuditDao auditDao = new AuditDao();
-		auditDao.openSession();
 		List<Audit> audits = auditDao.getAll();
 		
 		request.setAttribute("audits", audits);
