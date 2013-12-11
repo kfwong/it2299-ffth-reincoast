@@ -43,6 +43,13 @@ public class Item {
 		this.id = id;
 	}
 	
+	public Date getExpiryDate() {
+		return expiryDate;
+	}
+	public void setExpiryDate(Date expiryDate) {
+		this.expiryDate = expiryDate;
+	}
+	
 	public int getQuantity() {
 		return quantity;
 	}

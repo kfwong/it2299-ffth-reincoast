@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
 	<jsp:param value="/path/to/css1" name="css" />
@@ -49,9 +51,9 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-lg-2 control-label">Receipt No</label>
+							<label class="col-lg-2 control-label">Date</label>
 							<div class="col-lg-4">
-								<input class="form-control" type="text" id="receiptno"
+								<input class="form-control" type="text" id="datepicker"
 									name="ReceiptNO" />
 							</div>
 						</div>
@@ -107,6 +109,7 @@
 <!-- Add row function -->
 <script>
 	var count = 1;
+
 	$(document)
 			.ready(
 					function() {
@@ -124,7 +127,7 @@
 																	'<input type="submit" />');
 													$("#addHeader")
 															.append(
-																	'<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Name<i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th><th class="col-lg-1">Unit of Measure<i class="icon-sort"></i></th></tr>');
+																	'<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Name<i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th><th class="col-lg-1">Date<i class="icon-sort"></i></th></tr>');
 													getItem();
 													$(document).scrollTop(
 															$(document)
@@ -138,11 +141,11 @@
 											}
 										});
 					});
-
+	
 	function getItem() {
 
 		var itemCode = $('#search').val();
-
+		
 		$
 				.ajax({
 					type : "POST",
@@ -157,7 +160,7 @@
 							$("#add-list")
 									.append(
 											'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id" value="'
-													+ count
+													+ obj.id
 													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
 													+ obj.code
 													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-name" value="'
@@ -166,13 +169,14 @@
 													+ "0"
 													+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
 													+ obj.price
-													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-measure" value ="'
-													+ obj.unitOfMeasure
-													+ '"g/></td></tr>');
+													+ '"/></td><td><p><input class="form-control input-sm" type="text" style="width: 100%;" name="expiry-date" id="datepicker"/></P></td></tr>');
 							count++;
 						});
 
 	}
+	jQuery(function($){
+	    $( "#datepicker" ).datepicker();
+	  });
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">

@@ -21,6 +21,7 @@ import com.it2299.ffth.reincoast.dto.InboundDelivery;
 import com.it2299.ffth.reincoast.dto.InboundItem;
 import com.it2299.ffth.reincoast.dto.InboundTran;
 import com.it2299.ffth.reincoast.dto.Item;
+import com.it2299.ffth.reincoast.dto.Product;
 
 /**
  * Servlet implementation class InBoundServlet
@@ -62,11 +63,16 @@ public class InBoundServlet extends HttpServlet {
 		String[] name = request.getParameterValues("item-name");
 		String[] quantity = request.getParameterValues("item-quantity");
 		String[] price = request.getParameterValues("item-price");
-		String[] unit = request.getParameterValues("item-measure");
+		String[] expiryDate = request.getParameterValues("expiry-date");
+		
 		ArrayList<Item> itemArray = new ArrayList<Item>();
 		for (int i = 0; i < id.length; i++) {
 			Item item = new Item();
+			Product product = new Product();
+			product.setId(Integer.parseInt(id[i]));
+			item.setProduct(product);
 			item.setQuantity(Integer.parseInt(quantity[i]));
+			
 			total = total
 					+ (Double.parseDouble(price[i]) * Integer
 							.parseInt(quantity[i]));
