@@ -60,10 +60,6 @@
 						</div>
 
 						<div class="form-group">
-							<label class="control-label">SKU</label> <input class="form-control input-sm" name="p_sku" value="${product.sku}">
-							<p class="help-block">The stock keeping unit number.</p>
-						</div>
-						<div class="form-group">
 							<label>Unit of Measure</label> <input class="form-control input-sm" name="p_unit_of_measure" value="${product.unitOfMeasure}">
 						</div>
 

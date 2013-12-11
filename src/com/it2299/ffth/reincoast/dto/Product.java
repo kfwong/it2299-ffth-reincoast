@@ -47,9 +47,6 @@ public class Product implements Auditable {
 	@Column(name = "CODE")
 	private String code;
 
-	@Column(name = "SKU")
-	private String sku;
-
 	@Column(name = "NAME")
 	private String name;
 
@@ -97,14 +94,6 @@ public class Product implements Auditable {
 
 	public void setCode(String code) {
 		this.code = code;
-	}
-
-	public String getSku() {
-		return sku;
-	}
-
-	public void setSku(String sku) {
-		this.sku = sku;
 	}
 
 	public String getName() {

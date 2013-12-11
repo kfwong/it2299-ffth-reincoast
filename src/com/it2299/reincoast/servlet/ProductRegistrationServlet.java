@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.it2299.ffth.reincoast.dao.ProductDao;
 import com.it2299.ffth.reincoast.dto.Product;
 import com.it2299.ffth.reincoast.dto.ProductMeta;
@@ -36,14 +38,13 @@ public class ProductRegistrationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Product product = new Product();
-		product.setCategory(request.getParameter("p_category"));
+		product.setCategory(StringUtils.join(request.getParameterValues("p_category"), ","));
 		product.setCode(request.getParameter("p_code"));
 		product.setDateRegistered(new Date());
 		product.setDescription(request.getParameter("p_description"));
 		product.setName(request.getParameter("p_name"));
 		product.setPrice(Double.parseDouble(request.getParameter("p_price")));
 		product.setRegisteredBy("Foo Bar");
-		product.setSku(request.getParameter("p_sku"));
 		product.setStatus(request.getParameter("p_status"));
 		product.setUnitOfMeasure(request.getParameter("p_unit_of_measure"));
 		product.setWeight(Double.parseDouble(request.getParameter("p_weight")));
