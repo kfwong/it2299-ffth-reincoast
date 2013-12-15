@@ -1,6 +1,7 @@
 package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,11 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.it2299.ffth.reincoast.dao.InboundDeliveryDao;
-import com.it2299.ffth.reincoast.dao.InboundItemDao;
-import com.it2299.ffth.reincoast.dao.InboundTransDao;
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
-import com.it2299.ffth.reincoast.dto.InboundItem;
-import com.it2299.ffth.reincoast.dto.InboundTran;
 import com.it2299.ffth.reincoast.dto.Item;
 import com.it2299.ffth.reincoast.dto.Product;
 
