@@ -1,6 +1,7 @@
 package com.it2299.ffth.reincoast.util;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistryBuilder;
 
@@ -21,7 +22,7 @@ public class HibernateUtil {
 	private static SessionFactory buildSessionFactory() {
 		try {
 			// Create the SessionFactory from hibernate.cfg.xml
-			Configuration configuration = new Configuration();
+			Configuration configuration = new AnnotationConfiguration();
 			configuration.setInterceptor(new AuditInterceptor());
 			configuration.configure();
 			ServiceRegistryBuilder serviceRegistryBuilder = new ServiceRegistryBuilder().applySettings(configuration.getProperties());
