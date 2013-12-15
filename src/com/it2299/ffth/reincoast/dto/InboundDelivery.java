@@ -1,7 +1,6 @@
 package com.it2299.ffth.reincoast.dto;
 
 import java.util.Date;
-
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="INBOUND_DELIVERY")
-public class InboundDelivery {
+public class InboundDelivery implements Auditable {
 	
 	@Id
 	@GeneratedValue
@@ -71,6 +70,21 @@ public class InboundDelivery {
 	}
 	public void setDateDelivered(Date dateDelivered) {
 		this.dateDelivered = dateDelivered;
+	}
+	@Override
+	public String auditDelete() {
+		// TODO Auto-generated method stub
+		return "Ibound Delivery " + id + " is deleted.";
+	}
+	@Override
+	public String auditUpdate() {
+		// TODO Auto-generated method stub
+		return "Ibound Delivery " + id + " is updated.";
+	}
+	@Override
+	public String auditSave() {
+		// TODO Auto-generated method stub
+		return "Ibound Delivery " + id + " is created.";
 	}
 	
 	
