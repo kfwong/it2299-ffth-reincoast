@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.it2299.ffth.reincoast.dao.InboundDeliveryDao, com.it2299.ffth.reincoast.dto.InboundDelivery, java.util.List, com.it2299.ffth.reincoast.dao.AuditDeliveryDao, com.it2299.ffth.reincoast.dto.AuditDelivery "%>
+	
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
 	<jsp:param value="/path/to/css1" name="css" />
@@ -31,40 +32,32 @@
 						</tr>
 					</thead>
 					<tbody id="tran-list">
-
+					<%
+						InboundDeliveryDao deliveryList = new InboundDeliveryDao();
+						List<InboundDelivery> list = deliveryList.getAll();
+						AuditDeliveryDao adDao = new AuditDeliveryDao();
+						AuditDelivery ad = new AuditDelivery();
+						for(int i=0; i<list.size();i++){
+							ad = adDao.get(list.get(i).getId());
+					%>
+						<tr>
+							<td><%=(i+1) %></td>
+							<td><%=list.get(i).getId() %></td>
+							<td><%=ad.getMovementType() %></td>
+							<td><%=list.get(i).getDateDelivered() %></td>
+							<td><%=list.get(i).getDonorName() %></td>
+							<td><%=list.get(i).getTotalPrice() %></td>
+						</tr>
+						<%
+						}
+						%>
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
 	<!-- /.row -->
-</div>
 <!-- sample-content.jsp -->
-<script>
-	var count = 0;
-	$(document).load(
-			function getTrans() {
-				var tran = null;
-				$.ajax({
-					type : "POST",
-					url : "GetTransHistory",
-					data : {
-						tran : tran
-					}
-				}).done(
-						function(data) {
-							var obj = $.parseJSON(data);
-							$("#tran-list").append(
-									"<tr><td>" + count + "</td><td>"
-											+ obj.receiptno
-											+ "</td><td>haha</td><td>"
-											+ obj.date + "</td><td>"
-											+ obj.donor + "</td><td>$"
-											+ obj.totalPrice + "</td></tr>");
-						});
-				count++;
-			});
-</script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
 	<jsp:param value="/path/to/js1" name="js" />

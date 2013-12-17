@@ -95,7 +95,7 @@ public class InboundDelivery implements Auditable {
 		
 		AuditDeliveryDao auditDao = new AuditDeliveryDao();
 		auditDao.saveOrUpdate(audit);
-		return "Ibound Delivery " + id + " is updated.";
+		return "Inbound Delivery " + id + " is updated.";
 	}
 	@Override
 	public String auditSave() {
@@ -106,7 +106,7 @@ public class InboundDelivery implements Auditable {
 		
 		AuditDeliveryDao auditDao = new AuditDeliveryDao();
 		auditDao.saveOrUpdate(audit);
-		return "Ibound Delivery " + id + " is created.";
+		return "Inbound Delivery " + id + " is created.";
 	}
 	
 	

@@ -84,6 +84,7 @@ public class InBoundServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			product.setId(Integer.parseInt(id[i]));
+			
 			item.setProduct(product);
 			item.setQuantity(Integer.parseInt(quantity[i]));
 			stock.setProduct(product);
