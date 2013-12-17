@@ -9,6 +9,7 @@ import org.hibernate.criterion.Projections;
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
 import com.it2299.ffth.reincoast.dto.Item;
 import com.it2299.ffth.reincoast.dto.Product;
+import com.it2299.ffth.reincoast.interceptor.AuditDeliveryInterceptor;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 
 public class InboundDeliveryDao implements Dao<InboundDelivery> {

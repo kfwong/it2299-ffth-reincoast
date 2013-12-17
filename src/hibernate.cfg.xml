@@ -17,5 +17,6 @@
 		<mapping class="com.it2299.ffth.reincoast.dto.Audit" />
 		<mapping class="com.it2299.ffth.reincoast.dto.Item" />
 		<mapping class="com.it2299.ffth.reincoast.dto.InboundDelivery" />
+		<mapping class="com.it2299.ffth.reincoast.dto.AuditDelivery" />
 	</session-factory>
 </hibernate-configuration>

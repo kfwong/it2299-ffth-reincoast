@@ -36,7 +36,7 @@
 					<tr>
 						<th>Item Description</th>
 						<th>Quantity</th>
-						<td>Type</td>
+						<th>Type</th>
 						<th>Unit Price</th>
 					</tr>
 				</thead>
@@ -44,7 +44,14 @@
 
 				</tbody>
 				<tbody id="total-value">
-
+				<c:forEach items="${auditDelivery}" var="auditDelivery">
+						   <tr>
+						   	<td>${auditDeliveryt.id}</td>
+						   	<td>${auditDelivery.description}</td>
+						   	<td><span class='label label-info'>${auditDelivery.movementType}</span></td>
+						   	<td>${auditDelivery.dateAudited}</td>
+						   </tr>
+						</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -54,7 +61,7 @@
 <!-- /.row -->
 
 <!-- sample-content.jsp -->
-<script>
+<!--<script>
 	$(document).ready(
 			function() {
 				var total = 0;
@@ -69,7 +76,7 @@
 				$("#total-value").append(
 						"<tr><td>Total Value</td><td>" + total + "</td></tr>");
 			});
-</script>
+</script>-->
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
 	<jsp:param value="/path/to/js1" name="js" />

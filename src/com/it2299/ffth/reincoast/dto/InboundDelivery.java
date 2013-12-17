@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.it2299.ffth.reincoast.dao.AuditDeliveryDao;
+
 @Entity
 @Table(name="INBOUND_DELIVERY")
 public class InboundDelivery implements Auditable {
@@ -73,19 +75,40 @@ public class InboundDelivery implements Auditable {
 	}
 	@Override
 	public String auditDelete() {
-		// TODO Auto-generated method stub
-		return "Ibound Delivery " + id + " is deleted.";
+			AuditDelivery audit = new AuditDelivery();
+			audit.setDateAudited(new Date());
+			audit.setDescription("Inbound Delivery" + id + "is deleted");
+			audit.setMovementType("Delete");
+			
+			AuditDeliveryDao auditDao = new AuditDeliveryDao();
+			auditDao.saveOrUpdate(audit);
+			
+		
+		return "Inbound Delivery " + id + " is deleted.";
 	}
 	@Override
 	public String auditUpdate() {
-		// TODO Auto-generated method stub
+		AuditDelivery audit = new AuditDelivery();
+		audit.setDateAudited(new Date());
+		audit.setDescription("Inbound Delivery " + id + "is updated");
+		audit.setMovementType("Update");
+		
+		AuditDeliveryDao auditDao = new AuditDeliveryDao();
+		auditDao.saveOrUpdate(audit);
 		return "Ibound Delivery " + id + " is updated.";
 	}
 	@Override
 	public String auditSave() {
-		// TODO Auto-generated method stub
+		AuditDelivery audit = new AuditDelivery();
+		audit.setDateAudited(new Date());
+		audit.setDescription("Inbound Delivery " + id + "is created");
+		audit.setMovementType("Insert");
+		
+		AuditDeliveryDao auditDao = new AuditDeliveryDao();
+		auditDao.saveOrUpdate(audit);
 		return "Ibound Delivery " + id + " is created.";
 	}
+	
 	
 	
 }

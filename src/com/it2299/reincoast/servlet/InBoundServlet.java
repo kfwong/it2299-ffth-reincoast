@@ -1,13 +1,14 @@
 package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
-
 import java.io.PrintWriter;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +20,7 @@ import com.it2299.ffth.reincoast.dao.InboundDeliveryDao;
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
 import com.it2299.ffth.reincoast.dto.Item;
 import com.it2299.ffth.reincoast.dto.Product;
+import com.it2299.ffth.reincoast.dto.Stock;
 
 /**
  * Servlet implementation class InBoundServlet
@@ -53,7 +55,14 @@ public class InBoundServlet extends HttpServlet {
 		InboundDelivery trans = new InboundDelivery();
 		trans.setDonorName(request.getParameter("Donor"));
 		trans.setDonorType(request.getParameter("Type"));
-		Date date = new Date();
+		String string = request.getParameter("deliveryDate");
+		try {
+			Date date = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH).parse(string);
+			trans.setDateDelivered(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		double total = 0;
 		String[] id = request.getParameterValues("id");
 		String[] code = request.getParameterValues("item-code");
@@ -66,10 +75,19 @@ public class InBoundServlet extends HttpServlet {
 		for (int i = 0; i < id.length; i++) {
 			Item item = new Item();
 			Product product = new Product();
+			Stock stock = new Stock();
+			try {
+				Date date1 = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH).parse(expiryDate[i]);
+				item.setExpiryDate(date1);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			product.setId(Integer.parseInt(id[i]));
 			item.setProduct(product);
 			item.setQuantity(Integer.parseInt(quantity[i]));
-			
+			stock.setProduct(product);
+			stock.setQuantity(Integer.parseInt(quantity[i]));
 			total = total
 					+ (Double.parseDouble(price[i]) * Integer
 							.parseInt(quantity[i]));

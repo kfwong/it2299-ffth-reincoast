@@ -51,10 +51,9 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-lg-2 control-label">Date</label>
+							<label class="col-lg-2 control-label">DeliveryDate</label>
 							<div class="col-lg-4">
-								<input class="form-control" type="text" id="datepicker"
-									name="ReceiptNO" />
+								<input class="form-control datepicker" type="text" name="deliveryDate" readonly />
 							</div>
 						</div>
 						<div class="form-group">
@@ -113,6 +112,7 @@
 	$(document)
 			.ready(
 					function() {
+						getDate();
 						$("#addRow")
 								.on(
 										'click',
@@ -161,25 +161,27 @@
 									.append(
 											'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id" value="'
 													+ obj.id
-													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
+													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
 													+ obj.code
-													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-name" value="'
+													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-name" value="'
 													+ obj.name
-													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
+													+ '" readonly /></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
 													+ "0"
 													+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
 													+ obj.price
-													+ '"/></td><td><p><input class="form-control input-sm" type="text" style="width: 100%;" name="expiry-date" id="datepicker"/></P></td></tr>');
+													+ '" readonly/></td><td><p><input class="form-control input-sm datepicker" type="text" style="width: 100%;" name="expiry-date" readonly/></P></td></tr>');
 							count++;
+							getDate().datepicker("refresh");
 						});
 
 	}
-	jQuery(function($){
-	    $( "#datepicker" ).datepicker();
-	  });
+	function getDate(){
+		$( ".datepicker" ).datepicker();
+	}
+	
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
-	<jsp:param value="/path/to/js1" name="js" />
+	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js" name="js" />
 </jsp:include>
 <!-- footer.jsp -->
