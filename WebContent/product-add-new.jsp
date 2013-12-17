@@ -83,7 +83,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 						</div>
 						<div class="form-group">
 							<label>Category</label>
-							<small class="help-block">Categorize your product. <a href="#"><i>Click here to add more choices into the list.</i></a></small>
+							<small class="help-block">Categorize your product. </small>
 							<select id="p_category" class="form-control input-sm" name="p_category" data-placeholder="Choose categories..." tabindex="1" multiple="true">
 					            <option value=""></option>
 					            <option value="United States">United States</option>
