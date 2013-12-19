@@ -13,7 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 @Entity
+@Audited
 @Table(name="INBOUND_LINE_ITEM")
 public class InboundLineItem {
 
@@ -33,9 +36,7 @@ public class InboundLineItem {
 	@JoinColumn(name="INBOUND_DELIVERY_ID")
 	private InboundDelivery inboundDelivery;
 	
-	@ManyToOne
-	@JoinColumn(name="OUTBOUND_DELIVERY_ID")
-	
+
 	@Column(name="ITEM_EXPIRYDATE")
 	private Date expiryDate;
 	

@@ -9,16 +9,18 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.it2299.ffth.reincoast.dao.OutboundDeliveryDao;
-import com.it2299.ffth.reincoast.dto.InboundLineItem;
 import com.it2299.ffth.reincoast.dto.OutboundDelivery;
+import com.it2299.ffth.reincoast.dto.OutboundLineItem;
 import com.it2299.ffth.reincoast.dto.Product;
 import com.it2299.ffth.reincoast.dto.Stock;
 
+@WebServlet("/OutboundServlet")
 public class OutboundServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
@@ -37,25 +39,26 @@ public class OutboundServlet extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			outD.setCollectionCenter(request.getParameter("cc"));
-			outD.setDescription(request.getParameter("package_description"));
 			String[] id = request.getParameterValues("id");
 			String[] quantity = request.getParameterValues("item-quantity");
 			String[] price = request.getParameterValues("item-price");
 			double total = 0;
-			ArrayList<InboundLineItem> itemArray = new ArrayList<InboundLineItem>();
+			ArrayList<OutboundLineItem> itemArray = new ArrayList<OutboundLineItem>();
 			for (int i = 0; i < id.length; i++) {
-				InboundLineItem item = new InboundLineItem();
+				OutboundLineItem item = new OutboundLineItem();
 				Product product = new Product();
 				
 				product.setId(Integer.parseInt(id[i]));
 				
 				item.setProduct(product);
+				item.setOutboundDelivery(outD);
 				item.setQuantity(Integer.parseInt(quantity[i]));
 				total = total+ (Double.parseDouble(price[i]) * Integer.parseInt(quantity[i]));
 				itemArray.add(item);
 			}
 			outD.setTotalPrice(total);
+			outD.setCollectionCenter(request.getParameter("collectLoc"));
+			outD.setItems(itemArray);
 			OutboundDeliveryDao outDao = new OutboundDeliveryDao();
 			outDao.saveOrUpdate(outD);
 			

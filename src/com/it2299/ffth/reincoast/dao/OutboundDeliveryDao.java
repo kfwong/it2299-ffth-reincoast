@@ -2,13 +2,12 @@ package com.it2299.ffth.reincoast.dao;
 
 import java.util.List;
 
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
-
-import com.it2299.ffth.reincoast.dto.InboundLineItem;
 import com.it2299.ffth.reincoast.dto.OutboundDelivery;
-import com.it2299.ffth.reincoast.dto.OutboundItem;
+import com.it2299.ffth.reincoast.dto.OutboundLineItem;
 import com.it2299.ffth.reincoast.dto.Stock;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 
@@ -31,13 +30,6 @@ public class OutboundDeliveryDao implements Dao<OutboundDelivery> {
 		session.beginTransaction();
 		
 		session.saveOrUpdate(outboundDelivery);
-		
-		for(InboundLineItem item : outboundDelivery.getItems()){
-			Stock stock = new Stock();
-			
-			item.setOutboundDelivery(outboundDelivery);
-			session.saveOrUpdate(item);
-		}		
 		
 		session.getTransaction().commit();
 		session.close();

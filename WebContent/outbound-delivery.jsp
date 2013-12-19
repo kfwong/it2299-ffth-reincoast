@@ -68,7 +68,7 @@
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Collection location</label>
 							<div class="col-lg-4">
-								<input class="form-control" type="text" id="Donor" name="Donor" />
+								<input class="form-control" type="text" id="collect" name="collectLoc" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -145,15 +145,13 @@
 
 		var itemCode = $('#search').val();
 		
-		$
-				.ajax({
+		$.ajax({
 					type : "POST",
 					url : "GetItemServlet",
 					data : {
 						ItemCode : itemCode
 					}
-				})
-				.done(
+				}).done(
 						function(data) {
 							var obj = $.parseJSON(data);
 							$("#add-list")
