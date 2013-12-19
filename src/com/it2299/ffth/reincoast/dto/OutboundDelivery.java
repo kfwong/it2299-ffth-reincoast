@@ -3,6 +3,7 @@ package com.it2299.ffth.reincoast.dto;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,17 +21,44 @@ public class OutboundDelivery {
 	@Column(name="ID")
 	private int id;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="outboundDelivery")
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="outboundDelivery", cascade=CascadeType.PERSIST)
 	private List<Item> items;
 	
 	@Column(name="DATE_DELIVERED")
 	private Date dateDelivered;
 	
-	@Column(name="DONOR_NAME")
-	private String donorName;
+	@Column(name="COLLECTION_CENTER")
+	private String collectionCenter;
 	
-	@Column(name="DONOR_TYPE")
-	private String donorType;
+	@Column(name="DESCRIPTION")
+	private String description;
+	
+	@Column(name="TOTALPRICE")
+	private double totalPrice;
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public String getCollectionCenter() {
+		return collectionCenter;
+	}
+
+	public void setCollectionCenter(String collectionCenter) {
+		this.collectionCenter = collectionCenter;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	public int getId() {
 		return id;
@@ -56,21 +84,7 @@ public class OutboundDelivery {
 		this.dateDelivered = dateDelivered;
 	}
 
-	public String getDonorName() {
-		return donorName;
-	}
-
-	public void setDonorName(String donorName) {
-		this.donorName = donorName;
-	}
-
-	public String getDonorType() {
-		return donorType;
-	}
-
-	public void setDonorType(String donorType) {
-		this.donorType = donorType;
-	}
+	
 	
 	
 }

@@ -3,6 +3,7 @@ package com.it2299.ffth.reincoast.dto;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 import com.it2299.ffth.reincoast.dao.AuditDeliveryDao;
 
@@ -22,7 +24,7 @@ public class InboundDelivery implements Auditable {
 	@Column(name="ID")
 	private int id;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="inboundDelivery")
+	@OneToMany(targetEntity=Item.class, fetch=FetchType.LAZY, mappedBy="inboundDelivery", cascade=CascadeType.ALL)
 	private List<Item> items;
 	
 	@Column(name="DATE_DELIVERED")

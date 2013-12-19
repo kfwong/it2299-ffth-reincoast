@@ -2,74 +2,75 @@ package com.it2299.ffth.reincoast.dao;
 
 import java.util.List;
 
-
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 
-import com.it2299.ffth.reincoast.dto.InboundDelivery;
 import com.it2299.ffth.reincoast.dto.Item;
+import com.it2299.ffth.reincoast.dto.OutboundDelivery;
+import com.it2299.ffth.reincoast.dto.OutboundItem;
 import com.it2299.ffth.reincoast.dto.Stock;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 
-public class InboundDeliveryDao implements Dao<InboundDelivery> {
+public class OutboundDeliveryDao implements Dao<OutboundDelivery> {
 
 	@Override
-	public InboundDelivery get(Integer id) {
+	public OutboundDelivery get(Integer id) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		InboundDelivery inboundDelivery = (InboundDelivery) session.get(InboundDelivery.class, id);
+		OutboundDelivery outboundDelivery = (OutboundDelivery) session.get(OutboundDelivery.class, id);
 		session.close();
 		
-		return inboundDelivery;
+		return outboundDelivery;
 	}
 
 	@Override
-	public void saveOrUpdate(InboundDelivery inboundDelivery) {
+	public void saveOrUpdate(OutboundDelivery outboundDelivery) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		
-		session.saveOrUpdate(inboundDelivery);
+		session.saveOrUpdate(outboundDelivery);
 		
-		for(Item item : inboundDelivery.getItems()){
-			item.setInboundDelivery(inboundDelivery);
+		for(Item item : outboundDelivery.getItems()){
+			Stock stock = new Stock();
+			
+			item.setOutboundDelivery(outboundDelivery);
 			session.saveOrUpdate(item);
 		}		
 		
 		session.getTransaction().commit();
 		session.close();
+		
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<InboundDelivery> getAll() {
+	public List<OutboundDelivery> getAll() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		List<InboundDelivery> inboundDeliveries = session.createQuery("FROM InboundDelivery").list();
+		List<OutboundDelivery> outboundDeliveries = session.createQuery("FROM OutboundDelivery").list();
 		session.close();
 		
-		return inboundDeliveries;
+		return outboundDeliveries;
 	}
 
 	@Override
 	public Integer countAll() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		Integer count = ((Long) session.createCriteria(InboundDelivery.class).setProjection(Projections.rowCount()).uniqueResult()).intValue();
+		Integer count = ((Long) session.createCriteria(OutboundDelivery.class).setProjection(Projections.rowCount()).uniqueResult()).intValue();
 		session.close();
 		
 		return count;
 	}
 
 	@Override
-	public void delete(InboundDelivery inboundDelivery) {
+	public void delete(OutboundDelivery outboundDelivery) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		session.delete(inboundDelivery);
+		session.delete(outboundDelivery);
 		session.close();
-		
 	}
 
 }

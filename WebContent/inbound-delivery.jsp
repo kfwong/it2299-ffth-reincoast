@@ -173,7 +173,6 @@
 							count++;
 							getDate().datepicker("refresh");
 						});
-
 	}
 	function getDate(){
 		$( ".datepicker" ).datepicker();

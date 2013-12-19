@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
 	<jsp:param value="/path/to/css1" name="css" />
@@ -33,8 +35,7 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal" role="form" action="post"
-						action="com.it2299.controllers/InboundControler.java">
+					<form class="form-horizontal" role="form" method="post" action="/it2299-ffth-reincoast/OutboundServlet">
 						<div class="form-group" style="padding: 0px 10px 0px 10px;">
 							<div class="btn-group">
 								<button type="button" class="btn btn-xs btn-default">
@@ -49,30 +50,26 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-lg-2 control-label">Collection Center</label>
+							<label class="col-lg-2 control-label">DeliveryDate</label>
 							<div class="col-lg-4">
-								<input class="form-control" type="text" id="donor" />
+								<input class="form-control datepicker" type="text" name="deliveryDate" readonly />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-lg-2 control-label">Package Description</label>
+							<label class="col-lg-2 control-label">Package Type</label>
 							<div class="col-lg-4">
-								<input class="form-control" type="text" id="package_description" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-lg-2 control-label">Pre-Package</label>
-							<div class="col-lg-4">
-								<select class="form-control onchange='getPackage(this.value)'"
-									id="Pack">
-									<option value="default">Please select a Pack</option>
-									<option value="pack1">Package 1</option>
-									<option value="pack2">Package 2</option>
+								<select class="form-control" id="Type" name=Type>
+									<option value="organization">Type 1</option>
+									<option value="individual">Type 2l</option>
+
 								</select>
 							</div>
-							<button type="button" class="btn btn-xs btn-default" id="addPack">
-								<i class="icon-plus"></i> Add Package
-							</button>
+						</div>
+						<div class="form-group">
+							<label class="col-lg-2 control-label">Collection location</label>
+							<div class="col-lg-4">
+								<input class="form-control" type="text" id="Donor" name="Donor" />
+							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Item Search</label>
@@ -83,10 +80,9 @@
 								<i class="icon-plus"></i> Add row
 							</button>
 						</div>
-						<div class="table-responsive">
+						<div class="table-responsive" id="tableRec">
 							<table
-								class="table table-hover table-striped tablesorter table-condensed"
-								id="tableRec">
+								class="table table-hover table-striped tablesorter table-condensed">
 								<thead id="addHeader">
 									<tr>
 										<th><div class="alert alert-info text-center">
@@ -96,11 +92,8 @@
 									</tr>
 								</thead>
 								<tbody id="add-list">
-
 								</tbody>
-
 							</table>
-
 						</div>
 					</form>
 				</div>
@@ -109,14 +102,16 @@
 	</div>
 </div>
 <!-- /.row -->
-</div>
+
 <!-- sample-content.jsp -->
 <!-- Add row function -->
 <script>
 	var count = 1;
+
 	$(document)
 			.ready(
 					function() {
+						getDate();
 						$("#addRow")
 								.on(
 										'click',
@@ -131,7 +126,7 @@
 																	'<input type="submit" />');
 													$("#addHeader")
 															.append(
-																	'<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Description <i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit of Measure<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th></tr>');
+																	'<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Name<i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th></tr>');
 													getItem();
 													$(document).scrollTop(
 															$(document)
@@ -145,46 +140,15 @@
 											}
 										});
 					});
-	$(document)
-			.ready(
-					function() {
-						$("#addPack")
-								.on(
-										'click',
-										function() {
-
-											if (count == 1) {
-												$("#addHeader").empty();
-												$("#tableRec")
-														.append(
-																'<input type="submit" />');
-												$("#addHeader")
-														.append(
-																'<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Description <i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit of Measure<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th></tr>');
-												getPackage($(
-														'select#Pack option:selected')
-														.val());
-												$(document).scrollTop(
-														$(document).height());
-											} else {
-												getPackage($(
-														'select#Pack option:selected')
-														.val());
-												$(document).scrollTop(
-														$(document).height());
-											}
-
-										});
-					});
-
+	
 	function getItem() {
 
 		var itemCode = $('#search').val();
-
+		
 		$
 				.ajax({
 					type : "POST",
-					url : "InboundController",
+					url : "GetItemServlet",
 					data : {
 						ItemCode : itemCode
 					}
@@ -195,49 +159,27 @@
 							$("#add-list")
 									.append(
 											'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id" value="'
-													+ count
-													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
-													+ obj.itemCode
-													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-desc" value="'
-													+ obj.itemDescription
-													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
-													+ obj.itemQuantity
-													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value="$ '
-													+ obj.unitPrice
-													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-measure" value ="'
-													+ obj.unitOfMeasure
-													+ 'g"/></td></tr>');
+													+ obj.id
+													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
+													+ obj.code
+													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-name" value="'
+													+ obj.name
+													+ '" readonly /></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
+													+ "0"
+													+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
+													+ obj.price
+													+ '" readonly/></td></tr>');
 							count++;
+							getDate().datepicker("refresh");
 						});
-
 	}
-	function getPackage(str) {
-		var values = [];
-		var itemPack = str;
-		$.ajax({
-			type : "POST",
-			url : "InboundController",
-			data : {
-				ItemPack : itemPack
-			}
-
-		});
-		$
-				.each(
-						[51 ,59],
-						function(index, value) {
-							$("#add-list")
-									.append(
-											'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id" value="'
-													+ index
-													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
-													+ value + '"/></td>');
-						});
-
+	function getDate(){
+		$( ".datepicker" ).datepicker();
 	}
+	
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
-	<jsp:param value="/path/to/js1" name="js" />
+	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js" name="js" />
 </jsp:include>
 <!-- footer.jsp -->

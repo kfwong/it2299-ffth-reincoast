@@ -37,14 +37,6 @@ public class InBoundServlet extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -59,8 +51,8 @@ public class InBoundServlet extends HttpServlet {
 		
 		double total = 0;
 		String[] id = request.getParameterValues("id");
-		String[] code = request.getParameterValues("item-code");
-		String[] name = request.getParameterValues("item-name");
+		String[]code = request.getParameterValues("item-code");
+		String[]name = request.getParameterValues("item-name");
 		String[] quantity = request.getParameterValues("item-quantity");
 		String[] price = request.getParameterValues("item-price");
 		String[] expiryDate = request.getParameterValues("expiry-date");
@@ -69,7 +61,7 @@ public class InBoundServlet extends HttpServlet {
 		for (int i = 0; i < id.length; i++) {
 			Item item = new Item();
 			Product product = new Product();
-			Stock stock = new Stock();
+			//Stock stock = new Stock();
 			try {
 				Date date1 = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH).parse(expiryDate[i]);
 				item.setExpiryDate(date1);
@@ -81,8 +73,8 @@ public class InBoundServlet extends HttpServlet {
 			
 			item.setProduct(product);
 			item.setQuantity(Integer.parseInt(quantity[i]));
-			stock.setProduct(product);
-			stock.setQuantity(Integer.parseInt(quantity[i]));
+			//stock.setProduct(product);
+			//stock.setQuantity(Integer.parseInt(quantity[i]));
 			total = total
 					+ (Double.parseDouble(price[i]) * Integer
 							.parseInt(quantity[i]));

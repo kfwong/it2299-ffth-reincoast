@@ -2,7 +2,7 @@ package com.it2299.ffth.reincoast.dto;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ITEM")
-public class Item {
+public class OutboundItem {
 
 	@Id
 	@GeneratedValue
@@ -30,8 +30,10 @@ public class Item {
 	private Product product;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="INBOUND_DELIVERY_ID")
-	private InboundDelivery inboundDelivery;
+	@JoinColumn(name="OUTBOUND_DELIVERY_ID")
+	private OutboundDelivery outboundDelivery;
+	
+	
 	
 	@Column(name="ITEM_EXPIRYDATE")
 	private Date expiryDate;
@@ -62,11 +64,11 @@ public class Item {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	public InboundDelivery getInboundDelivery() {
-		return inboundDelivery;
+	public OutboundDelivery getOutboundDelivery() {
+		return outboundDelivery;
 	}
-	public void setInboundDelivery(InboundDelivery inboundDelivery) {
-		this.inboundDelivery = inboundDelivery;
+	public void setOutboundDelivery(OutboundDelivery outboundDelivery) {
+		this.outboundDelivery = outboundDelivery;
 	}
 
 	
