@@ -12,12 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-import com.it2299.ffth.reincoast.dao.AuditDeliveryDao;
-
 @Entity
 @Table(name="INBOUND_DELIVERY")
-public class InboundDelivery implements Auditable {
+public class InboundDelivery {
 	
 	@Id
 	@GeneratedValue
@@ -25,7 +22,7 @@ public class InboundDelivery implements Auditable {
 	private int id;
 	
 	@OneToMany(fetch=FetchType.EAGER, mappedBy="inboundDelivery", cascade=CascadeType.ALL)
-	private List<Item> items;
+	private List<InboundLineItem> items;
 	
 	@Column(name="DATE_DELIVERED")
 	private Date dateDelivered;
@@ -63,10 +60,10 @@ public class InboundDelivery implements Auditable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public List<Item> getItems() {
+	public List<InboundLineItem> getItems() {
 		return items;
 	}
-	public void setItems(List<Item> items) {
+	public void setItems(List<InboundLineItem> items) {
 		this.items = items;
 	}
 	public Date getDateDelivered() {
@@ -74,36 +71,6 @@ public class InboundDelivery implements Auditable {
 	}
 	public void setDateDelivered(Date dateDelivered) {
 		this.dateDelivered = dateDelivered;
-	}
-	@Override
-	public String auditDelete() {
-			AuditDelivery audit = new AuditDelivery();
-			audit.setDateAudited(new Date());
-			audit.setDescription("Inbound Delivery" + id + "is deleted");
-			audit.setMovementType("Delete");
-			
-			AuditDeliveryDao auditDao = new AuditDeliveryDao();
-			auditDao.saveOrUpdate(audit);
-			
-		
-		return "Inbound Delivery " + id + " is deleted.";
-	}
-	@Override
-	public String auditUpdate() {
-		AuditDelivery audit = new AuditDelivery();
-		audit.setDateAudited(new Date());
-		audit.setDescription("Inbound Delivery " + id + "is updated");
-		audit.setMovementType("Update");
-		
-		AuditDeliveryDao auditDao = new AuditDeliveryDao();
-		auditDao.saveOrUpdate(audit);
-		return "Inbound Delivery " + id + " is updated.";
-	}
-	@Override
-	public String auditSave() {
-		return "Inbound Delivery " + donorName + " is created.";
-	}
-	
-	
+	}	
 	
 }

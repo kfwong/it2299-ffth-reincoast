@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 
-import com.it2299.ffth.reincoast.dto.Item;
+import com.it2299.ffth.reincoast.dto.InboundLineItem;
 import com.it2299.ffth.reincoast.dto.OutboundDelivery;
 import com.it2299.ffth.reincoast.dto.OutboundItem;
 import com.it2299.ffth.reincoast.dto.Stock;
@@ -32,7 +32,7 @@ public class OutboundDeliveryDao implements Dao<OutboundDelivery> {
 		
 		session.saveOrUpdate(outboundDelivery);
 		
-		for(Item item : outboundDelivery.getItems()){
+		for(InboundLineItem item : outboundDelivery.getItems()){
 			Stock stock = new Stock();
 			
 			item.setOutboundDelivery(outboundDelivery);

@@ -22,7 +22,7 @@ public class OutboundDelivery {
 	private int id;
 	
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="outboundDelivery", cascade=CascadeType.PERSIST)
-	private List<Item> items;
+	private List<InboundLineItem> items;
 	
 	@Column(name="DATE_DELIVERED")
 	private Date dateDelivered;
@@ -68,11 +68,11 @@ public class OutboundDelivery {
 		this.id = id;
 	}
 
-	public List<Item> getItems() {
+	public List<InboundLineItem> getItems() {
 		return items;
 	}
 
-	public void setItems(List<Item> items) {
+	public void setItems(List<InboundLineItem> items) {
 		this.items = items;
 	}
 

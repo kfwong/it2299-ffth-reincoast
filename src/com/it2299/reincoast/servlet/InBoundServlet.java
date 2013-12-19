@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.it2299.ffth.reincoast.dao.InboundDeliveryDao;
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
-import com.it2299.ffth.reincoast.dto.Item;
+import com.it2299.ffth.reincoast.dto.InboundLineItem;
 import com.it2299.ffth.reincoast.dto.Product;
 import com.it2299.ffth.reincoast.dto.Stock;
 
@@ -42,8 +42,7 @@ public class InBoundServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		InboundDelivery trans = new InboundDelivery();
 		trans.setDonorName(request.getParameter("Donor"));
 		trans.setDonorType(request.getParameter("Type"));
@@ -51,17 +50,15 @@ public class InBoundServlet extends HttpServlet {
 		
 		double total = 0;
 		String[] id = request.getParameterValues("id");
-		String[]code = request.getParameterValues("item-code");
-		String[]name = request.getParameterValues("item-name");
 		String[] quantity = request.getParameterValues("item-quantity");
 		String[] price = request.getParameterValues("item-price");
 		String[] expiryDate = request.getParameterValues("expiry-date");
 		
-		ArrayList<Item> itemArray = new ArrayList<Item>();
+		ArrayList<InboundLineItem> itemArray = new ArrayList<InboundLineItem>();
 		for (int i = 0; i < id.length; i++) {
-			Item item = new Item();
+			InboundLineItem item = new InboundLineItem();
 			Product product = new Product();
-			//Stock stock = new Stock();
+			
 			try {
 				Date date1 = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH).parse(expiryDate[i]);
 				item.setExpiryDate(date1);
@@ -72,20 +69,23 @@ public class InBoundServlet extends HttpServlet {
 			product.setId(Integer.parseInt(id[i]));
 			
 			item.setProduct(product);
+			item.setInboundDelivery(trans);
 			item.setQuantity(Integer.parseInt(quantity[i]));
-			//stock.setProduct(product);
-			//stock.setQuantity(Integer.parseInt(quantity[i]));
-			total = total
-					+ (Double.parseDouble(price[i]) * Integer
-							.parseInt(quantity[i]));
+			
+			total = total + (Double.parseDouble(price[i]) * Integer.parseInt(quantity[i]));
 			itemArray.add(item);
 		}
 		trans.setTotalPrice(total);
 		trans.setItems(itemArray);
+		try {
+			Date date1 = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH).parse(string);
+			trans.setDateDelivered(date1);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		InboundDeliveryDao transDao = new InboundDeliveryDao();
 		transDao.saveOrUpdate(trans);
-		
-	
 		
 		PrintWriter out = response.getWriter();
 		out.print("ok");

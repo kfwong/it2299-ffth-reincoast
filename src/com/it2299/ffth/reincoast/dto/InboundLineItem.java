@@ -14,8 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ITEM")
-public class Item {
+@Table(name="INBOUND_LINE_ITEM")
+public class InboundLineItem {
 
 	@Id
 	@GeneratedValue
@@ -29,9 +29,12 @@ public class Item {
 	@JoinColumn(name="PRODUCT_ID")
 	private Product product;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name="INBOUND_DELIVERY_ID")
 	private InboundDelivery inboundDelivery;
+	
+	@ManyToOne
+	@JoinColumn(name="OUTBOUND_DELIVERY_ID")
 	
 	@Column(name="ITEM_EXPIRYDATE")
 	private Date expiryDate;

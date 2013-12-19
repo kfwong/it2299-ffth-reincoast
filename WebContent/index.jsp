@@ -9,34 +9,32 @@
 <body>
 	<h1>Hello Hibernate!</h1>
 	<%
-	
-	ProductDao productDao = new ProductDao();
-	Product product = productDao.get(1);
-	
-	Item item1 = new Item();
-	item1.setQuantity(5);
-	item1.setProduct(product);
-	
-	Item item2 = new Item();
-	item2.setQuantity(7);
-	item2.setProduct(product);
-	
-	Item item3 = new Item();
-	item3.setQuantity(9);
-	item3.setProduct(product);
-	
-	List<Item> items = new ArrayList<Item>();
-	items.add(item1);
-	items.add(item2);
-	items.add(item3);
-	
-	InboundDelivery inboundDelivery = new InboundDelivery();
-	inboundDelivery.setDateDelivered(new Date()); // Current time
-	inboundDelivery.setItems(items);
-	
-	InboundDeliveryDao inboundDeliveryDao = new InboundDeliveryDao();
-	inboundDeliveryDao.saveOrUpdate(inboundDelivery);
-	
+		ProductDao productDao = new ProductDao();
+		Product product = productDao.get(1);
+		
+		InboundLineItem item1 = new InboundLineItem();
+		item1.setQuantity(5);
+		item1.setProduct(product);
+		
+		InboundLineItem item2 = new InboundLineItem();
+		item2.setQuantity(7);
+		item2.setProduct(product);
+		
+		InboundLineItem item3 = new InboundLineItem();
+		item3.setQuantity(9);
+		item3.setProduct(product);
+		
+		List<InboundLineItem> items = new ArrayList<InboundLineItem>();
+		items.add(item1);
+		items.add(item2);
+		items.add(item3);
+		
+		InboundDelivery inboundDelivery = new InboundDelivery();
+		inboundDelivery.setDateDelivered(new Date()); // Current time
+		inboundDelivery.setItems(items);
+		
+		InboundDeliveryDao inboundDeliveryDao = new InboundDeliveryDao();
+		inboundDeliveryDao.saveOrUpdate(inboundDelivery);
 	%>
 </body>
 </html>

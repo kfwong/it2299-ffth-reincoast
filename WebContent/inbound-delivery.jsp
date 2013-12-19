@@ -24,8 +24,7 @@
 					Delivery</li>
 			</ol>
 			<div class="alert alert-success alert-dismissable">
-				<button type="button" class="close" data-dismiss="alert"
-					aria-hidden="true">&times;</button>
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 				Transaction completed successfully. T.Code: 6000864578
 			</div>
 			<div class="panel panel-primary">
@@ -109,34 +108,23 @@
 <script>
 	var count = 1;
 
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function() {
 						getDate();
-						$("#addRow")
-								.on(
-										'click',
-										function() {
+						$("#addRow").on('click',function() {
 											if ($('#search').val() == '') {
 												alert("Please Enter Item Code");
 											} else {
 												if (count == 1) {
 													$("#addHeader").empty();
-													$("#tableRec")
-															.append(
-																	'<input type="submit" />');
-													$("#addHeader")
-															.append(
-																	'<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Name<i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th><th class="col-lg-1">Date<i class="icon-sort"></i></th></tr>');
+													$("#tableRec").append('<input type="submit" />');
+													$("#addHeader").append('<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Name<i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th><th class="col-lg-1">Date<i class="icon-sort"></i></th></tr>');
 													getItem();
 													$(document).scrollTop(
-															$(document)
-																	.height());
+															$(document).height());
 												} else {
 													getItem();
 													$(document).scrollTop(
-															$(document)
-																	.height());
+															$(document).height());
 												}
 											}
 										});
@@ -146,16 +134,12 @@
 
 		var itemCode = $('#search').val();
 		
-		$
-				.ajax({
-					type : "POST",
+		$.ajax({	type : "POST",
 					url : "GetItemServlet",
 					data : {
 						ItemCode : itemCode
 					}
-				})
-				.done(
-						function(data) {
+				}).done(function(data) {
 							var obj = $.parseJSON(data);
 							$("#add-list")
 									.append(

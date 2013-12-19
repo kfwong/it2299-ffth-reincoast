@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.it2299.ffth.reincoast.dao.OutboundDeliveryDao;
-import com.it2299.ffth.reincoast.dto.Item;
+import com.it2299.ffth.reincoast.dto.InboundLineItem;
 import com.it2299.ffth.reincoast.dto.OutboundDelivery;
 import com.it2299.ffth.reincoast.dto.Product;
 import com.it2299.ffth.reincoast.dto.Stock;
@@ -43,9 +43,9 @@ public class OutboundServlet extends HttpServlet{
 			String[] quantity = request.getParameterValues("item-quantity");
 			String[] price = request.getParameterValues("item-price");
 			double total = 0;
-			ArrayList<Item> itemArray = new ArrayList<Item>();
+			ArrayList<InboundLineItem> itemArray = new ArrayList<InboundLineItem>();
 			for (int i = 0; i < id.length; i++) {
-				Item item = new Item();
+				InboundLineItem item = new InboundLineItem();
 				Product product = new Product();
 				
 				product.setId(Integer.parseInt(id[i]));

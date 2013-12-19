@@ -6,24 +6,24 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 
-import com.it2299.ffth.reincoast.dto.Item;
+import com.it2299.ffth.reincoast.dto.InboundLineItem;
 import com.it2299.ffth.reincoast.dto.Product;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 
-public class ItemDao implements Dao<Item> {
+public class ItemDao implements Dao<InboundLineItem> {
 
 	@Override
-	public Item get(Integer id) {
+	public InboundLineItem get(Integer id) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		Item item = (Item) session.get(Item.class, id);
+		InboundLineItem item = (InboundLineItem) session.get(InboundLineItem.class, id);
 		session.close();
 		
 		return item;
 	}
 
 	@Override
-	public void saveOrUpdate(Item item) {
+	public void saveOrUpdate(InboundLineItem item) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
@@ -34,10 +34,10 @@ public class ItemDao implements Dao<Item> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Item> getAll() {
+	public List<InboundLineItem> getAll() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		List<Item> items = session.createQuery("FROM Item").list();
+		List<InboundLineItem> items = session.createQuery("FROM Item").list();
 		session.close();
 		
 		return items;
@@ -47,19 +47,18 @@ public class ItemDao implements Dao<Item> {
 	public Integer countAll() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		Integer count = ((Long) session.createCriteria(Item.class).setProjection(Projections.rowCount()).uniqueResult()).intValue();
+		Integer count = ((Long) session.createCriteria(InboundLineItem.class).setProjection(Projections.rowCount()).uniqueResult()).intValue();
 		session.close();
 		
 		return count;
 	}
 
 	@Override
-	public void delete(Item item) {
+	public void delete(InboundLineItem item) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.delete(item);
 		session.close();
-		
 	}
 
 }

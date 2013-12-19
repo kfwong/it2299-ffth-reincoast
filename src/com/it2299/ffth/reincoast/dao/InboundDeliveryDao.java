@@ -9,7 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
-import com.it2299.ffth.reincoast.dto.Item;
+import com.it2299.ffth.reincoast.dto.InboundLineItem;
 import com.it2299.ffth.reincoast.dto.Stock;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 
@@ -32,11 +32,6 @@ public class InboundDeliveryDao implements Dao<InboundDelivery> {
 		session.beginTransaction();
 		
 		session.saveOrUpdate(inboundDelivery);
-		
-		for(Item item : inboundDelivery.getItems()){
-			item.setInboundDelivery(inboundDelivery);
-			session.saveOrUpdate(item);
-		}		
 		
 		session.getTransaction().commit();
 		session.close();

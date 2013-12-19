@@ -10,7 +10,6 @@ import org.hibernate.EmptyInterceptor;
 import org.hibernate.type.Type;
 
 import com.it2299.ffth.reincoast.dao.AuditDao;
-import com.it2299.ffth.reincoast.dao.AuditDeliveryDao;
 import com.it2299.ffth.reincoast.dto.Audit;
 import com.it2299.ffth.reincoast.dto.AuditDelivery;
 import com.it2299.ffth.reincoast.dto.Auditable;
@@ -74,8 +73,6 @@ public class AuditInterceptor extends EmptyInterceptor {
 				audit.setMovementType("Insert");
 				audit.setInboundDelivery((InboundDelivery) auditSave);
 				
-				AuditDeliveryDao auditDao = new AuditDeliveryDao();
-				auditDao.saveOrUpdate(audit);
 				
 				System.out.println(auditSave.getId());
 				System.out.println(((InboundDelivery) auditSave).getDonorName());
