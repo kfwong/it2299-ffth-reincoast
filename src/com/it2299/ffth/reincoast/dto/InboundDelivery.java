@@ -24,7 +24,7 @@ public class InboundDelivery implements Auditable {
 	@Column(name="ID")
 	private int id;
 	
-	@OneToMany(targetEntity=Item.class, fetch=FetchType.LAZY, mappedBy="inboundDelivery", cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="inboundDelivery", cascade=CascadeType.ALL)
 	private List<Item> items;
 	
 	@Column(name="DATE_DELIVERED")
