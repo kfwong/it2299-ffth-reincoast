@@ -85,10 +85,11 @@
 								class="table table-hover table-striped tablesorter table-condensed">
 								<thead id="addHeader">
 									<tr>
-										<th><div class="alert alert-info text-center">
-												<button type="button" class="close" data-dismiss="alert">&times;</button>
-												Please Enter Record
-											</div></th>
+									<th class="col-lg-1">#<i class="icon-sort"></i></th>
+									<th class="col-lg-2">Item Code <i class="icon-sort"></i></th>
+									<th>Item Name<i class="icon-sort"></i></th>
+									<th class="col-lg-1">Quantity<i class="icon-sort"></i></th>
+									<th class="col-lg-1">Unit Price<i class="icon-sort"></i></th>
 									</tr>
 								</thead>
 								<tbody id="add-list">
@@ -106,32 +107,25 @@
 <!-- sample-content.jsp -->
 <!-- Add row function -->
 <script>
-	var count = 1;
+	var count =1;
 
 	$(document)
 			.ready(
 					function() {
 						getDate();
-						$("#addRow")
-								.on(
-										'click',
-										function() {
+						$("#addRow").on('click', function() {
 											if ($('#search').val() == '') {
 												alert("Please Enter Item Code");
 											} else {
 												if (count == 1) {
-													$("#addHeader").empty();
-													$("#tableRec")
-															.append(
-																	'<input type="submit" />');
-													$("#addHeader")
-															.append(
-																	'<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Name<i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th></tr>');
+													$("#tableRec").append('<input type="submit" />');
+													count++;
 													getItem();
 													$(document).scrollTop(
 															$(document)
 																	.height());
 												} else {
+													
 													getItem();
 													$(document).scrollTop(
 															$(document)
@@ -167,7 +161,6 @@
 													+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
 													+ obj.price
 													+ '" readonly/></td></tr>');
-							count++;
 							getDate().datepicker("refresh");
 						});
 	}

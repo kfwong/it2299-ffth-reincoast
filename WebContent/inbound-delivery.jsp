@@ -85,10 +85,12 @@
 								class="table table-hover table-striped tablesorter table-condensed">
 								<thead id="addHeader">
 									<tr>
-										<th><div class="alert alert-info text-center">
-												<button type="button" class="close" data-dismiss="alert">&times;</button>
-												Please Enter Record
-											</div></th>
+									<th class="col-lg-1">#<i class="icon-sort"></i></th>
+									<th class="col-lg-2">Item Code <i class="icon-sort"></i></th>
+									<th class="col-lg-2">Item Name<i class="icon-sort"></i></th>
+									<th class="col-lg-1">Quantity<i class="icon-sort"></i></th>
+									<th class="col-lg-1">Unit Price<i class="icon-sort"></i></th>
+									<th class="col-lg-1">Date<i class="icon-sort"></i></th>
 									</tr>
 								</thead>
 								<tbody id="add-list">
@@ -115,9 +117,10 @@
 												alert("Please Enter Item Code");
 											} else {
 												if (count == 1) {
-													$("#addHeader").empty();
-													$("#tableRec").append('<input type="submit" />');
-													$("#addHeader").append('<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Name<i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th><th class="col-lg-1">Date<i class="icon-sort"></i></th></tr>');
+													$("#add-list").empty();
+													$("#btn_submit").remove();
+													$("#tableRec").append('<input type="submit" id= "btn_submit" />');
+													count++;
 													getItem();
 													$(document).scrollTop(
 															$(document).height());
@@ -154,7 +157,6 @@
 													+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
 													+ obj.price
 													+ '" readonly/></td><td><p><input class="form-control input-sm datepicker" type="text" style="width: 100%;" name="expiry-date" readonly/></P></td></tr>');
-							count++;
 							getDate().datepicker("refresh");
 						});
 	}
