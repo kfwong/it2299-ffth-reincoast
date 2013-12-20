@@ -56,13 +56,7 @@ public class InBoundServlet extends HttpServlet {
 		trans.setDonorName(request.getParameter("Donor"));
 		trans.setDonorType(request.getParameter("Type"));
 		String string = request.getParameter("deliveryDate");
-		try {
-			Date date = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH).parse(string);
-			trans.setDateDelivered(date);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		double total = 0;
 		String[] id = request.getParameterValues("id");
 		String[] code = request.getParameterValues("item-code");

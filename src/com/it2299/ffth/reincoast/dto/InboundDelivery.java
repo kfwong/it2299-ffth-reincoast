@@ -99,13 +99,6 @@ public class InboundDelivery implements Auditable {
 	}
 	@Override
 	public String auditSave() {
-		AuditDelivery audit = new AuditDelivery();
-		audit.setDateAudited(new Date());
-		audit.setDescription("Inbound Delivery " + id + "is created");
-		audit.setMovementType("Insert");
-		audit.setInboundDelivery(this);
-		AuditDeliveryDao auditDao = new AuditDeliveryDao();
-		auditDao.saveOrUpdate(audit);
 		return "Inbound Delivery " + donorName + " is created.";
 	}
 	

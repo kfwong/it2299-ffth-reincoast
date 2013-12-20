@@ -3,6 +3,7 @@ package com.it2299.ffth.reincoast.dto;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -11,11 +12,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 /**
  * @author kfwong
@@ -30,6 +34,7 @@ import org.hibernate.annotations.Type;
  *         org.hibernate package.
  */
 @Entity
+@Audited
 // Declare this class as entity so that Hibernate will know this is to be taken
 // care of. Mapping configuration required in hibernate.cfg.xml.
 @Table(name = "PRODUCT")
@@ -74,10 +79,7 @@ public class Product implements Auditable {
 	@Column(name = "REGISTERED_BY")
 	private String registeredBy;
 
-	@ElementCollection(fetch = FetchType.EAGER)
-	@GenericGenerator(name = "hilo-gen", strategy = "hilo")
-	@CollectionId(columns = @Column(name = "ID"), type = @Type(type = "int"), generator = "hilo-gen")
-	@CollectionTable(name = "PRODUCT_META", joinColumns = @JoinColumn(name = "PRODUCT_ID"))
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="product")
 	private List<ProductMeta> productMetas;
 
 	public int getId() {
@@ -188,7 +190,7 @@ public class Product implements Auditable {
 
 	@Override
 	public String auditSave() {
-		return "Product " + name + " is created.";
+		return "Product " + id + " is created.";
 	}
 
 }

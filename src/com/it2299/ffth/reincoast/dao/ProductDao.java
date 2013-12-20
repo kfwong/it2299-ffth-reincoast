@@ -1,12 +1,25 @@
 package com.it2299.ffth.reincoast.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
+import org.hibernate.envers.DefaultRevisionEntity;
+import org.hibernate.envers.query.AuditEntity;
+import org.hibernate.envers.query.AuditQuery;
 
 import com.it2299.ffth.reincoast.dto.Product;
+import com.it2299.ffth.reincoast.dto.ProductMeta;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 
 /**
@@ -32,7 +45,9 @@ public class ProductDao implements Dao<Product>{
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
+		
 		session.saveOrUpdate(product);
+		
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -65,5 +80,60 @@ public class ProductDao implements Dao<Product>{
 		Session session = sessionFactory.openSession();
 		session.delete(product);
 		session.close();
+	}
+	
+	public Set<String> getCategories(){
+		Set<String> categories = new HashSet<String>();
+		
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("SELECT category FROM Product WHERE category != '' AND category IS NOT NULL");
+		String[] results = StringUtils.join(query.list(), ",").split(",");
+		
+		for(String result : results){
+			categories.add(result);
+		}
+		
+		return categories;
+	}
+	
+	public List<String[]> getAuditTrails(int id){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();// this being HibernateDaoSupport  
+		   
+		AuditReader reader = AuditReaderFactory.get(session);  
+		  
+		AuditQuery query=reader.createQuery().forRevisionsOfEntity(Product.class, false, true);  
+		  
+		query.add(AuditEntity.id().eq(id));
+		  
+		List<Object[]> results = query.getResultList();
+		List<String[]> histories = new ArrayList<String[]>();
+		
+		for(int i=0;i<results.size();i++){
+			/*
+			System.out.println(histories.get(i)[0]); //entity
+			System.out.println(((DefaultRevisionEntity)histories.get(i)[1]).getRevisionDate()); //DefaultRevisionEntity(id, revisionDate)
+			System.out.println(histories.get(i)[2]); //operation type (ADD, MOD, DEL)
+			*/
+			String date = ((DefaultRevisionEntity)results.get(i)[1]).getRevisionDate().toString();
+			String operation = "";
+			
+			switch(results.get(i)[2].toString()){
+			case "ADD":
+				operation = "INSERT";
+				break;
+			case "MOD":
+				operation = "UPDATE";
+				break;
+			case "DEL":
+				operation = "DELETE";
+				break;
+			}
+			histories.add(new String[]{operation, date});
+		}
+		
+		return histories;
+		
 	}
 }
