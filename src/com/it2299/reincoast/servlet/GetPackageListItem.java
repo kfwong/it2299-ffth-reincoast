@@ -1,7 +1,10 @@
 package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,15 +12,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.it2299.ffth.reincoast.dao.PackingListDao;
-import com.it2299.ffth.reincoast.dao.PackingListItemDao;
-import com.it2299.ffth.reincoast.dto.PackageList;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.it2299.ffth.reincoast.dao.PackingDao;
+import com.it2299.ffth.reincoast.dao.PackingLineItemDao;
+import com.it2299.ffth.reincoast.dao.ProductDao;
+import com.it2299.ffth.reincoast.dto.Packing;
+import com.it2299.ffth.reincoast.dto.PackingLineItem;
 import com.it2299.ffth.reincoast.dto.Product;
 
 /**
  * Servlet implementation class getPackageListItem
  */
-@WebServlet("/getPackageListItem")
+@WebServlet("/GetPackageListItem")
 public class GetPackageListItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,18 +37,31 @@ public class GetPackageListItem extends HttpServlet {
     }
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int pName = Integer.parseInt(request.getParameter("pName"));
 		
-		PackingListDao pListDao = new PackingListDao();
-		PackageList pList = pListDao.get(pName);
 		
-		PackingListItemDao pItemDao = new PackingListItemDao();
-		pItemDao.getAll();
-		ArrayList<Product> packageProduct = new ArrayList<Product>();
-		for(int i=0; i<; i++){
-			
-		}
+		PackingLineItemDao packingLineItemDao = new PackingLineItemDao();
+		ArrayList<PackingLineItem>itemList = (ArrayList<PackingLineItem>) packingLineItemDao.getAll(Integer.parseInt(request.getParameter("packID")));
 		
+		ProductDao productID = new ProductDao();
+		ArrayList<Map<String, String>> myMap = new ArrayList<Map<String, String>>();
+		
+		for(int i=0; i< itemList.size(); i++){
+			Map<String, String> map = new HashMap<String, String>();
+			Product product = productID.get(itemList.get(i).getProduct().getId());
+			map.put("name", product.getName());
+			map.put("code", product.getCode());
+			map.put("id", Integer.toString(product.getId()));
+			map.put("price", Double.toString(product.getPrice()));
+			myMap.add(map);
+			}
+		
+		
+		
+		Gson gson = new GsonBuilder().create();
+		String packageGson = gson.toJson(myMap);
+		
+		PrintWriter out = response.getWriter();
+		out.println(packageGson);
 		
 	}
 

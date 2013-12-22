@@ -1,18 +1,21 @@
 package com.it2299.ffth.reincoast.dto;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="PACKING_LIST_ITEM")
-public class PackageListItem {
+public class PackingLineItem {
 
 	@Id
 	@GeneratedValue
@@ -25,7 +28,7 @@ public class PackageListItem {
 	
 	@ManyToOne
 	@JoinColumn(name="PACKING_LIST_ID")
-	private PackageList packingList;
+	private Packing packings;
 	
 	@Column(name="QUANTITY")
 	private int quantity;
@@ -54,11 +57,11 @@ public class PackageListItem {
 		this.product = product;
 	}
 
-	public PackageList getPackingList() {
-		return packingList;
+	public Packing getPacking() {
+		return packings;
 	}
 
-	public void setPackingList(PackageList packingList) {
-		this.packingList = packingList;
+	public void setPacking(Packing packing) {
+		this.packings= packing;
 	}
 }
