@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+	import="com.it2299.ffth.reincoast.dto.PackageList, com.it2299.ffth.reincoast.dao.PackingListDao, java.util.List"
+	%>
 
 
 <!-- header.jsp -->
@@ -58,11 +60,23 @@
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Package Type</label>
 							<div class="col-lg-4">
-								<select class="form-control" id="Type" name=Type>
-									<option value="organization">Type 1</option>
-									<option value="individual">Type 2l</option>
-
+								<select class="form-control" id="PackageType" name=Type>
+								<%
+								PackingListDao pListDao = new PackingListDao();
+								List<PackageList> pList  = pListDao.getAll();
+								System.out.println(pList.size());
+								System.out.println(pList.get(0).getPackageName());
+								for(int i=0; i< pList.size(); i++){
+								%>
+									<option value="<%=pList.get(i).getId() %>"><%= pList.get(i).getPackageName() %></option>
+								<%
+								}
+								%>
+								
 								</select>
+								<button type="button" class="btn btn-xs btn-default" id="addPackage">
+								<i class="icon-plus"></i> Add This Package
+							</button>
 							</div>
 						</div>
 						<div class="form-group">
@@ -133,8 +147,34 @@
 												}
 											}
 										});
+						$("#addPackage").on('click', function(){
+							
+						});
 					});
-	
+	function getPackageItem(){
+		var pName = $("#PackageType option:selected").text();
+		$.ajax({
+			type:"POST",
+			url:"GetPackageListItem",
+			data:{ pName : pName }
+			
+		}).done(function(data){
+			var obj = $.parseJSON(data);
+			$("#add-list")
+					.append('<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id" value="'
+									+ obj.id
+									+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
+									+ obj.code
+									+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-name" value="'
+									+ obj.name
+									+ '" readonly /></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
+									+ "0"
+									+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
+									+ obj.price
+									+ '" readonly/></td></tr>');
+			
+		});
+	}
 	function getItem() {
 
 		var itemCode = $('#search').val();

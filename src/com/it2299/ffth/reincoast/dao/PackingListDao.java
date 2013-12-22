@@ -2,36 +2,31 @@ package com.it2299.ffth.reincoast.dao;
 
 import java.util.List;
 
-
-
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
-
-import com.it2299.ffth.reincoast.dto.InboundDelivery;
-
+import com.it2299.ffth.reincoast.dto.PackageList;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 
-public class InboundDeliveryDao implements Dao<InboundDelivery> {
+public class PackingListDao implements Dao<PackageList> {
 
 	@Override
-	public InboundDelivery get(Integer id) {
+	public PackageList get(Integer id) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		InboundDelivery inboundDelivery = (InboundDelivery) session.get(InboundDelivery.class, id);
+		PackageList pList = (PackageList) session.get(PackageList.class, id);
 		session.close();
 		
-		return inboundDelivery;
+		return pList;
 	}
 
 	@Override
-	public void saveOrUpdate(InboundDelivery inboundDelivery) {
+	public void saveOrUpdate(PackageList t) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		
-		session.saveOrUpdate(inboundDelivery);
+		session.saveOrUpdate(t);
 		
 		session.getTransaction().commit();
 		session.close();
@@ -39,32 +34,31 @@ public class InboundDeliveryDao implements Dao<InboundDelivery> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<InboundDelivery> getAll() {
+	public List<PackageList> getAll() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		List<InboundDelivery> inboundDeliveries = session.createQuery("FROM InboundDelivery").list();
+		List<PackageList> pList = session.createQuery("FROM PackageList").list();
 		session.close();
 		
-		return inboundDeliveries;
+		return pList;
 	}
 
 	@Override
 	public Integer countAll() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		Integer count = ((Long) session.createCriteria(InboundDelivery.class).setProjection(Projections.rowCount()).uniqueResult()).intValue();
+		Integer count = ((Long) session.createCriteria(PackageList.class).setProjection(Projections.rowCount()).uniqueResult()).intValue();
 		session.close();
 		
 		return count;
 	}
 
 	@Override
-	public void delete(InboundDelivery inboundDelivery) {
+	public void delete(PackageList t) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		session.delete(inboundDelivery);
+		session.delete(t);
 		session.close();
-		
 	}
-
+	
 }

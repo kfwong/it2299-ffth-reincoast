@@ -34,7 +34,7 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal" role="form" method="post" action="/it2299-ffth-reincoast/OutboundServlet">
+					<form class="form-horizontal" role="form" method="post" action="/it2299-ffth-reincoast/CreatePackageListServlet">
 						<div class="form-group" style="padding: 0px 10px 0px 10px;">
 							<div class="btn-group">
 								<button type="button" class="btn btn-xs btn-default">
