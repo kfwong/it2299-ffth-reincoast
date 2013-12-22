@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.it2299.ffth.reincoast.dao.InboundDeliveryDao, com.it2299.ffth.reincoast.dto.InboundDelivery, java.util.List, com.it2299.ffth.reincoast.dao.AuditDeliveryDao, com.it2299.ffth.reincoast.dto.AuditDelivery "%>
+	pageEncoding="UTF-8" import="com.it2299.ffth.reincoast.dao.InboundDeliveryDao, com.it2299.ffth.reincoast.dto.InboundDelivery, java.util.List, com.it2299.ffth.reincoast.dto.AuditDelivery "%>
 	
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
@@ -32,25 +32,7 @@
 						</tr>
 					</thead>
 					<tbody id="tran-list">
-					<%
-						InboundDeliveryDao deliveryList = new InboundDeliveryDao();
-						List<InboundDelivery> list = deliveryList.getAll();
-						AuditDeliveryDao adDao = new AuditDeliveryDao();
-						AuditDelivery ad = new AuditDelivery();
-						for(int i=0; i<list.size();i++){
-							ad = adDao.get(list.get(i).getId());
-					%>
-						<tr>
-							<td><%=(i+1) %></td>
-							<td><%=list.get(i).getId() %></td>
-							<td><%=ad.getMovementType() %></td>
-							<td><%=list.get(i).getDateDelivered() %></td>
-							<td><%=list.get(i).getDonorName() %></td>
-							<td><%=list.get(i).getTotalPrice() %></td>
-						</tr>
-						<%
-						}
-						%>
+					
 					</tbody>
 				</table>
 			</div>
