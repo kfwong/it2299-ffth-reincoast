@@ -10,6 +10,8 @@
 	<h1>Hello Hibernate!</h1>
 	<%
 	
+	
+	/*
 	ProductDao productDao = new ProductDao();
 	Product product = productDao.get(1);
 	
@@ -36,7 +38,36 @@
 	
 	InboundDeliveryDao inboundDeliveryDao = new InboundDeliveryDao();
 	inboundDeliveryDao.saveOrUpdate(inboundDelivery);
+	*/
+	
+	/*Member member1 = new Member();
+	member1.setName("admin");
+	member1.setNric("SXXXXXXXXA");
+	member1.setType("admin");
+	member1.setUserName("admin");
+	member1.setPassword("1");
+	member1.setContactNo(62597176);
+	
+	Member member2 = new Member();	
+	member2.setName("volunteer");
+	member2.setNric("SXXXXXXXXA");
+	member2.setType("volunteer");
+	member2.setUserName("volunteer");
+	member2.setPassword("2");
+	member2.setContactNo(62597176);
+	*/
+	
+	
+	
+	MemberDao memberDao = new MemberDao();
+	//memberDao.saveOrUpdate(member1);
+	//memberDao.saveOrUpdate(member2);
+
+	Member member = memberDao.get(1);
+	
 	
 	%>
+	
+	<%=member.getName() %>
 </body>
 </html>
