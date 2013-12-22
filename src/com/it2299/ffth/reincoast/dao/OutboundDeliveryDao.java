@@ -2,62 +2,66 @@ package com.it2299.ffth.reincoast.dao;
 
 import java.util.List;
 
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
-
-import com.it2299.ffth.reincoast.dto.InboundLineItem;
-import com.it2299.ffth.reincoast.dto.Product;
+import com.it2299.ffth.reincoast.dto.OutboundDelivery;
+import com.it2299.ffth.reincoast.dto.OutboundLineItem;
+import com.it2299.ffth.reincoast.dto.Stock;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 
-public class ItemDao implements Dao<InboundLineItem> {
+public class OutboundDeliveryDao implements Dao<OutboundDelivery> {
 
 	@Override
-	public InboundLineItem get(Integer id) {
+	public OutboundDelivery get(Integer id) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		InboundLineItem item = (InboundLineItem) session.get(InboundLineItem.class, id);
+		OutboundDelivery outboundDelivery = (OutboundDelivery) session.get(OutboundDelivery.class, id);
 		session.close();
 		
-		return item;
+		return outboundDelivery;
 	}
 
 	@Override
-	public void saveOrUpdate(InboundLineItem item) {
+	public void saveOrUpdate(OutboundDelivery outboundDelivery) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		session.saveOrUpdate(item);
+		
+		session.saveOrUpdate(outboundDelivery);
+		
 		session.getTransaction().commit();
 		session.close();
+		
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<InboundLineItem> getAll() {
+	public List<OutboundDelivery> getAll() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		List<InboundLineItem> items = session.createQuery("FROM Item").list();
+		List<OutboundDelivery> outboundDeliveries = session.createQuery("FROM OutboundDelivery").list();
 		session.close();
 		
-		return items;
+		return outboundDeliveries;
 	}
 
 	@Override
 	public Integer countAll() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		Integer count = ((Long) session.createCriteria(InboundLineItem.class).setProjection(Projections.rowCount()).uniqueResult()).intValue();
+		Integer count = ((Long) session.createCriteria(OutboundDelivery.class).setProjection(Projections.rowCount()).uniqueResult()).intValue();
 		session.close();
 		
 		return count;
 	}
 
 	@Override
-	public void delete(InboundLineItem item) {
+	public void delete(OutboundDelivery outboundDelivery) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		session.delete(item);
+		session.delete(outboundDelivery);
 		session.close();
 	}
 

@@ -16,64 +16,67 @@ import org.hibernate.envers.Audited;
 
 @Entity
 @Audited
-@Table(name="INBOUND_DELIVERY")
-public class InboundDelivery {
-	
+@Table(name="OUTBOUND_DELIVERY")
+public class OutboundDelivery {
+
 	@Id
 	@GeneratedValue
 	@Column(name="ID")
 	private int id;
 	
-	@OneToMany(fetch=FetchType.EAGER, mappedBy="inboundDelivery", cascade=CascadeType.ALL)
-	private List<InboundLineItem> items;
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="outboundDelivery", cascade=CascadeType.ALL)
+	private List<OutboundLineItem> items;
 	
 	@Column(name="DATE_DELIVERED")
 	private Date dateDelivered;
 	
-	@Column(name="DONOR_NAME")
-	private String donorName;
+	@Column(name="COLLECTION_CENTER")
+	private String collectionCenter;
 	
-	@Column(name="DONOR_TYPE")
-	private String donorType;
-	
-	@Column(name="TOTAL_PRICE")
+	@Column(name="TOTALPRICE")
 	private double totalPrice;
-	
-	public String getDonorName() {
-		return donorName;
-	}
-	public void setDonorName(String donorName) {
-		this.donorName = donorName;
-	}
-	public String getDonorType() {
-		return donorType;
-	}
-	public void setDonorType(String donorType) {
-		this.donorType = donorType;
-	}
+
 	public double getTotalPrice() {
 		return totalPrice;
 	}
+
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+
+	public String getCollectionCenter() {
+		return collectionCenter;
+	}
+
+	public void setCollectionCenter(String collectionCenter) {
+		this.collectionCenter = collectionCenter;
+	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public List<InboundLineItem> getItems() {
+
+	public List<OutboundLineItem> getItems() {
 		return items;
 	}
-	public void setItems(List<InboundLineItem> items) {
+
+	public void setItems(List<OutboundLineItem> items) {
 		this.items = items;
 	}
+
 	public Date getDateDelivered() {
 		return dateDelivered;
 	}
+
 	public void setDateDelivered(Date dateDelivered) {
 		this.dateDelivered = dateDelivered;
-	}	
+	}
+
+	
+	
 	
 }

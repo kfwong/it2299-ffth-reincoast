@@ -30,11 +30,25 @@ public class Member implements Auditable {
 	private String name;
 
 	@Column(name = "CONTACT_NO")
-	private String contactNo;
+	private int contactNo;
 
+	@Column(name="STATUS")
+	private String status;
 	
+	/**
+	 * TYPE: Admin/Volunteer
+	 * STATUS : Active or deactivated
+	 * 
+	 * **/
 	
-	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -83,11 +97,11 @@ public class Member implements Auditable {
 		this.name = name;
 	}
 
-	public String getContactNo() {
+	public int getContactNo() {
 		return contactNo;
 	}
 
-	public void setContactNo(String contactNo) {
+	public void setContactNo(int contactNo) {
 		this.contactNo = contactNo;
 	}
 
@@ -100,19 +114,19 @@ public class Member implements Auditable {
 	@Override
 	public String auditDelete() {
 		// TODO Auto-generated method stub
-		return null;
+		return "Member " + id + " is deleted";
 	}
 
 	@Override
 	public String auditUpdate() {
 		// TODO Auto-generated method stub
-		return null;
+		return  "Member " + id + " is updated.";
 	}
 
 	@Override
 	public String auditSave() {
 		// TODO Auto-generated method stub
-		return null;
+		return  "Member " + id + " is created ^^V";
 	}
 
 }

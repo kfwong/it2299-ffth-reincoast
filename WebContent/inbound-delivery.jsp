@@ -24,8 +24,7 @@
 					Delivery</li>
 			</ol>
 			<div class="alert alert-success alert-dismissable">
-				<button type="button" class="close" data-dismiss="alert"
-					aria-hidden="true">&times;</button>
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 				Transaction completed successfully. T.Code: 6000864578
 			</div>
 			<div class="panel panel-primary">
@@ -51,10 +50,9 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-lg-2 control-label">Date</label>
+							<label class="col-lg-2 control-label">DeliveryDate</label>
 							<div class="col-lg-4">
-								<input class="form-control" type="text" id="datepicker"
-									name="ReceiptNO" />
+								<input class="form-control datepicker" type="text" name="deliveryDate" readonly />
 							</div>
 						</div>
 						<div class="form-group">
@@ -87,10 +85,12 @@
 								class="table table-hover table-striped tablesorter table-condensed">
 								<thead id="addHeader">
 									<tr>
-										<th><div class="alert alert-info text-center">
-												<button type="button" class="close" data-dismiss="alert">&times;</button>
-												Please Enter Record
-											</div></th>
+									<th class="col-lg-1">#<i class="icon-sort"></i></th>
+									<th class="col-lg-2">Item Code <i class="icon-sort"></i></th>
+									<th class="col-lg-2">Item Name<i class="icon-sort"></i></th>
+									<th class="col-lg-1">Quantity<i class="icon-sort"></i></th>
+									<th class="col-lg-1">Unit Price<i class="icon-sort"></i></th>
+									<th class="col-lg-1">Date<i class="icon-sort"></i></th>
 									</tr>
 								</thead>
 								<tbody id="add-list">
@@ -110,33 +110,24 @@
 <script>
 	var count = 1;
 
-	$(document)
-			.ready(
-					function() {
-						$("#addRow")
-								.on(
-										'click',
-										function() {
+	$(document).ready(function() {
+						getDate();
+						$("#addRow").on('click',function() {
 											if ($('#search').val() == '') {
 												alert("Please Enter Item Code");
 											} else {
 												if (count == 1) {
-													$("#addHeader").empty();
-													$("#tableRec")
-															.append(
-																	'<input type="submit" />');
-													$("#addHeader")
-															.append(
-																	'<tr><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-2">Item Code <i class="icon-sort"></i></th><th>Item Name<i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Unit Price<i class="icon-sort"></i></th><th class="col-lg-1">Date<i class="icon-sort"></i></th></tr>');
+													$("#add-list").empty();
+													$("#btn_submit").remove();
+													$("#tableRec").append('<input type="submit" id= "btn_submit" />');
+													count++;
 													getItem();
 													$(document).scrollTop(
-															$(document)
-																	.height());
+															$(document).height());
 												} else {
 													getItem();
 													$(document).scrollTop(
-															$(document)
-																	.height());
+															$(document).height());
 												}
 											}
 										});
@@ -146,40 +137,36 @@
 
 		var itemCode = $('#search').val();
 		
-		$
-				.ajax({
-					type : "POST",
+		$.ajax({	type : "POST",
 					url : "GetItemServlet",
 					data : {
 						ItemCode : itemCode
 					}
-				})
-				.done(
-						function(data) {
+				}).done(function(data) {
 							var obj = $.parseJSON(data);
 							$("#add-list")
 									.append(
 											'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id" value="'
 													+ obj.id
-													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
+													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
 													+ obj.code
-													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-name" value="'
+													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-name" value="'
 													+ obj.name
-													+ '"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
+													+ '" readonly /></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
 													+ "0"
 													+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
 													+ obj.price
-													+ '"/></td><td><p><input class="form-control input-sm" type="text" style="width: 100%;" name="expiry-date" id="datepicker"/></P></td></tr>');
-							count++;
+													+ '" readonly/></td><td><p><input class="form-control input-sm datepicker" type="text" style="width: 100%;" name="expiry-date" readonly/></P></td></tr>');
+							getDate().datepicker("refresh");
 						});
-
 	}
-	jQuery(function($){
-	    $( "#datepicker" ).datepicker();
-	  });
+	function getDate(){
+		$( ".datepicker" ).datepicker();
+	}
+	
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
-	<jsp:param value="/path/to/js1" name="js" />
+	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js" name="js" />
 </jsp:include>
 <!-- footer.jsp -->

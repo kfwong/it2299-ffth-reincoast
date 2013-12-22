@@ -36,7 +36,7 @@
 					<tr>
 						<th>Item Description</th>
 						<th>Quantity</th>
-						<td>Type</td>
+						<th>Type</th>
 						<th>Unit Price</th>
 					</tr>
 				</thead>
@@ -44,7 +44,7 @@
 
 				</tbody>
 				<tbody id="total-value">
-
+				
 				</tbody>
 			</table>
 		</div>
@@ -55,20 +55,7 @@
 
 <!-- sample-content.jsp -->
 <script>
-	$(document).ready(
-			function() {
-				var total = 0;
-				for (var i = 0; i < 5; i++) {
-					var number = 1 + Math.floor(Math.random() * i);
-					$("#item-list").append(
-							"<tr><td>" + number * 314 + "</td><td>" + number
-									* 4 + "</td><td>Canned</td><td>$"
-									+ (number * 3) + "</td></tr>");
-					total = total + ((number * 4) + (number * 3));
-				}
-				$("#total-value").append(
-						"<tr><td>Total Value</td><td>" + total + "</td></tr>");
-			});
+	
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">

@@ -1,10 +1,11 @@
 package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
-
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.it2299.ffth.reincoast.dao.ProductDao;
 import com.it2299.ffth.reincoast.dto.Product;
@@ -41,24 +43,25 @@ public class GetItemServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		Gson gson = new Gson();
+		
 
 		int id = Integer.parseInt(request.getParameter("ItemCode"));
-		
-		ProductDao productID = new ProductDao();
-		
-		Product product = productID.get(id);
 
-		PrintWriter out = response.getWriter();
-		String itemGson = null;
+		ProductDao productID = new ProductDao();
+
+		Product product = productID.get(id);
 		
-		if(product == null){
-			System.out.println("null");
-		}else{
-			itemGson = gson.toJson(product);
-		}
-			out.println(itemGson);
-		}
-			
-	
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("name", product.getName());
+		map.put("code", product.getCode());
+		map.put("id", Integer.toString(product.getId()));
+		map.put("price", Double.toString(product.getPrice()));
+		
+		Gson gson = new GsonBuilder().create();
+		PrintWriter out = response.getWriter();
+		String itemGson = gson.toJson(map);
+
+		out.println(itemGson);
+	}
+
 }

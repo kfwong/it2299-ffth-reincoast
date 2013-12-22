@@ -2,10 +2,14 @@ package com.it2299.ffth.reincoast.dto;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -18,8 +22,9 @@ public class AuditDelivery {
 	@Column(name="ID")
 	private int id;
 	
-	@Column(name="DeliveryID")
-	private int deliveryId;
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="INBOUND_DELIVERY_ID")
+	private InboundDelivery inboundDelivery;
 	
 	@Column(name="Description")
 	private String description;
@@ -30,6 +35,14 @@ public class AuditDelivery {
 	@Column(name="DATE_AUDITED")
 	private Date dateAudited;
 
+	public InboundDelivery getInboundDelivery() {
+		return inboundDelivery;
+	}
+
+	public void setInboundDelivery(InboundDelivery inboundDelivery) {
+		this.inboundDelivery = inboundDelivery;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -37,15 +50,7 @@ public class AuditDelivery {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public int getDeliveryId() {
-		return deliveryId;
-	}
-
-	public void setDeliveryId(int deliveryId) {
-		this.deliveryId = deliveryId;
-	}
-
+	
 	public String getDescription() {
 		return description;
 	}

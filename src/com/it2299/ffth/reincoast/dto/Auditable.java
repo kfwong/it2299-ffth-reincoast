@@ -4,4 +4,5 @@ public interface Auditable {
 	public String auditDelete();
 	public String auditUpdate();
 	public String auditSave();
+	public int getId();
 }
