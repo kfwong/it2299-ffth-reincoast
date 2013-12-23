@@ -14,12 +14,13 @@
 <!-- sample-content.jsp -->
 <div id="page-wrapper"></div>
 <!-- sample-content.jsp -->
-	<div id="col-lg-12 row"> 
+	<form class="form-signin" role="form">
+		<h2> SIGN UP</h2>
+		<input type="text" class="form-control" placeholder="User Name" required autofocus>
+		<input type="password" class="form-control" placeholder="Password" required autofocus>
+		<button class="btn-lg btn-primary btn-block" type="submit"> SIGN IN </button>
 	
-	
-	
-	</div>
-
+	</form>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
 	<jsp:param value="/path/to/js1" name="js" />
