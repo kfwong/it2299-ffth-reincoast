@@ -23,6 +23,7 @@
 		<mapping class="com.it2299.ffth.reincoast.dto.AuditDelivery" />
 		<mapping class="com.it2299.ffth.reincoast.dto.PackageList" />
 		<mapping class="com.it2299.ffth.reincoast.dto.PackageListItem" />
+		<mapping class="com.it2299.ffth.reincoast.dto.Member" />
 		<listener class="org.hibernate.envers.event.AuditEventListener" type="post-insert"/>
     	<listener class="org.hibernate.envers.event.AuditEventListener" type="post-update"/>
     	<listener class="org.hibernate.envers.event.AuditEventListener" type="post-delete"/>
