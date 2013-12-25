@@ -2,6 +2,7 @@ package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,8 +36,10 @@ public class ProductListServlet extends HttpServlet {
 		
 		ProductDao productDao = new ProductDao();
 		List<Product> products = productDao.getAll();
+		Set<String> p_categories = productDao.getCategories();
 		
 		request.setAttribute("products", products);
+		request.setAttribute("p_categories", p_categories);
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/item-database.jsp");
 		requestDispatcher.forward(request, response);
