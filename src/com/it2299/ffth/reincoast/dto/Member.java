@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "MEMBER")
-public class Member implements Auditable {
+public class Member{
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
@@ -30,7 +30,7 @@ public class Member implements Auditable {
 	private String name;
 
 	@Column(name = "CONTACT_NO")
-	private int contactNo;
+	private String contactNo;
 
 	@Column(name="STATUS")
 	private String status;
@@ -97,36 +97,18 @@ public class Member implements Auditable {
 		this.name = name;
 	}
 
-	public int getContactNo() {
+	public String getContactNo() {
 		return contactNo;
 	}
 
-	public void setContactNo(int contactNo) {
-		this.contactNo = contactNo;
+	public void setContactNo(String string) {
+		this.contactNo = string;
 	}
 
 
 
 	public String getUserName() {
 		return userName;
-	}
-
-	@Override
-	public String auditDelete() {
-		// TODO Auto-generated method stub
-		return "Member " + id + " is deleted";
-	}
-
-	@Override
-	public String auditUpdate() {
-		// TODO Auto-generated method stub
-		return  "Member " + id + " is updated.";
-	}
-
-	@Override
-	public String auditSave() {
-		// TODO Auto-generated method stub
-		return  "Member " + id + " is created ^^V";
 	}
 
 }
