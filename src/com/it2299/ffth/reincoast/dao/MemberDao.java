@@ -3,15 +3,15 @@ package com.it2299.ffth.reincoast.dao;
 
 
 import java.util.List;
-
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 
 import com.it2299.ffth.reincoast.dto.Member;
-import com.it2299.ffth.reincoast.dto.Product;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 public class MemberDao implements Dao<Member>{
+	
 
 	@Override
 	public Member get(Integer id){
@@ -22,6 +22,8 @@ public class MemberDao implements Dao<Member>{
 		
 		return member;
 	}
+	
+	
 
 	@Override
 	public void saveOrUpdate(Member member) {
@@ -63,4 +65,33 @@ public class MemberDao implements Dao<Member>{
 		session.close();
 		
 	}
+	
+
+	public Member getByUsername(String userName){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("FROM Member where username= :Uname");
+		//Query query = session.createQuery("FROM Member where username='" +userName+"' ");
+		query.setParameter("Uname", userName);
+		Member member = (Member)query.uniqueResult();
+		session.close();
+		
+		return member;
+	}
+	
+	public boolean authenticate(String userName, String password){
+		Member member = getByUsername(userName);
+		if(member!=null && member.getUserName().equals(userName) && member.getPassword().equals(password)){
+			return true;
+		}else
+		{
+			return false; 
+		}
+		
+		
+	}
+
+
+
+	
 }
