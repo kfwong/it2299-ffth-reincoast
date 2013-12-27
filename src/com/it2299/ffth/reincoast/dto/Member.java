@@ -73,7 +73,7 @@ public class Member{
 		this.type = type;
 	}
 	
-	public String getUsername() {
+	public String getUserName() {
 		return userName;
 	}
 
@@ -107,8 +107,6 @@ public class Member{
 
 
 
-	public String getUserName() {
-		return userName;
-	}
+
 
 }

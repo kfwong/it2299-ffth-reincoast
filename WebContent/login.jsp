@@ -21,7 +21,8 @@
 				action="/it2299-ffth-reincoast/LogInServlet">
 				<h2>LOGIN </h2>
 				<input type="text" class="form-control" placeholder="User Name"
-					name="userName" required autofocus> <input type="password"
+					name="userName" required autofocus> 
+					<input type="password"
 					class="form-control" placeholder="Password" name="password"
 					required autofocus> <br> 
 					
