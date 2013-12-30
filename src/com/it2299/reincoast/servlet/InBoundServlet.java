@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.it2299.ffth.reincoast.dao.InboundDeliveryDao;
+import com.it2299.ffth.reincoast.dao.StockDao;
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
 import com.it2299.ffth.reincoast.dto.InboundLineItem;
 import com.it2299.ffth.reincoast.dto.Product;
@@ -55,10 +56,11 @@ public class InBoundServlet extends HttpServlet {
 		String[] expiryDate = request.getParameterValues("expiry-date");
 		
 		ArrayList<InboundLineItem> itemArray = new ArrayList<InboundLineItem>();
+		ArrayList<Stock> myStock = new ArrayList<Stock>();
 		for (int i = 0; i < id.length; i++) {
 			InboundLineItem item = new InboundLineItem();
 			Product product = new Product();
-			
+			Stock stock = new Stock();
 			try {
 				Date date1 = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH).parse(expiryDate[i]);
 				item.setExpiryDate(date1);
@@ -71,9 +73,12 @@ public class InBoundServlet extends HttpServlet {
 			item.setProduct(product);
 			item.setInboundDelivery(trans);
 			item.setQuantity(Integer.parseInt(quantity[i]));
+			stock.setProduct(product);
+			stock.setQuantity(Integer.parseInt(quantity[i]));
 			
 			total = total + (Double.parseDouble(price[i]) * Integer.parseInt(quantity[i]));
 			itemArray.add(item);
+			myStock .add(stock);
 		}
 		trans.setTotalPrice(total);
 		trans.setItems(itemArray);
@@ -86,6 +91,22 @@ public class InBoundServlet extends HttpServlet {
 		}
 		InboundDeliveryDao transDao = new InboundDeliveryDao();
 		transDao.saveOrUpdate(trans);
+		StockDao stockDao = new StockDao();
+		for(int i=0; i< myStock .size();i++){
+			boolean valid = stockDao.isExists(myStock .get(i).getProduct());
+			if(!valid){
+				System.out.println("update");
+				int currentQuantity = stockDao.get(Integer.parseInt(id[i])).getQuantity();
+				
+				int newQuantity = currentQuantity + myStock .get(i).getQuantity();
+				
+				myStock .get(i).setQuantity(newQuantity);
+				stockDao.updateStock(myStock.get(i));
+			}else{
+				System.out.println("Create new");
+				stockDao.saveOrUpdate(myStock.get(i));
+			}
+		}
 		
 		PrintWriter out = response.getWriter();
 		out.print("ok");

@@ -2,11 +2,13 @@ package com.it2299.ffth.reincoast.dao;
 
 import java.util.List;
 
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 
-import com.it2299.ffth.reincoast.dto.InboundLineItem;
+import com.it2299.ffth.reincoast.dto.Product;
 import com.it2299.ffth.reincoast.dto.Stock;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 
@@ -23,7 +25,7 @@ public class StockDao implements Dao<Stock> {
 		session.close();
 		return stock;
 	}
-
+	
 	@Override
 	public void saveOrUpdate(Stock t) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -34,7 +36,35 @@ public class StockDao implements Dao<Stock> {
 		session.close();
 		
 	}
-
+	
+	public int updateStock(Stock t){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("UPDATE Stock set quantity =: quantity WHERE product = : product");
+		query.setParameter("product", t.getProduct());
+		query.setParameter("quantity", t.getQuantity());
+		
+		
+		int result = query.executeUpdate();
+		session.close();
+		
+		return result;
+	}
+	@SuppressWarnings("rawtypes")
+	public boolean isExists(Product product){
+		boolean valid = false;
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		Query query = session.createQuery("from Stock where product = :productID");
+		query.setParameter("productID", product.getId());
+		List list = query.list();
+		session.close();
+		if(list != null){
+			valid = true;
+		}
+		return valid;
+	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Stock> getAll() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -44,7 +74,7 @@ public class StockDao implements Dao<Stock> {
 		
 		return stocks;
 	}
-
+	
 	@Override
 	public Integer countAll() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -63,5 +93,7 @@ public class StockDao implements Dao<Stock> {
 		session.close();
 		
 	}
+	
+	
 
 }

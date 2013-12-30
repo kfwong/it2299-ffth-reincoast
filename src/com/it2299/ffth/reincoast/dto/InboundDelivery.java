@@ -1,6 +1,7 @@
 package com.it2299.ffth.reincoast.dto;
 
 import java.util.Date;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
