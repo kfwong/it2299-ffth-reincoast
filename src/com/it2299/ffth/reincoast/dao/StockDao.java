@@ -40,7 +40,7 @@ public class StockDao implements Dao<Stock> {
 	public int updateStock(Stock t){
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("UPDATE Stock set quantity =: quantity WHERE product = : product");
+		Query query = session.createQuery("UPDATE Stock set quantity = :quantity WHERE product = :product");
 		query.setParameter("product", t.getProduct());
 		query.setParameter("quantity", t.getQuantity());
 		
@@ -50,20 +50,7 @@ public class StockDao implements Dao<Stock> {
 		
 		return result;
 	}
-	@SuppressWarnings("rawtypes")
-	public boolean isExists(Product product){
-		boolean valid = false;
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session session = sf.openSession();
-		Query query = session.createQuery("from Stock where product = :productID");
-		query.setParameter("productID", product.getId());
-		List list = query.list();
-		session.close();
-		if(list != null){
-			valid = true;
-		}
-		return valid;
-	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Stock> getAll() {

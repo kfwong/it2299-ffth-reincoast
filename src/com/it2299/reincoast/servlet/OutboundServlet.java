@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.it2299.ffth.reincoast.dao.OutboundDeliveryDao;
+import com.it2299.ffth.reincoast.dao.StockDao;
 import com.it2299.ffth.reincoast.dto.OutboundDelivery;
 import com.it2299.ffth.reincoast.dto.OutboundLineItem;
 import com.it2299.ffth.reincoast.dto.Product;
@@ -55,6 +57,20 @@ public class OutboundServlet extends HttpServlet{
 				item.setQuantity(Integer.parseInt(quantity[i]));
 				total = total+ (Double.parseDouble(price[i]) * Integer.parseInt(quantity[i]));
 				itemArray.add(item);
+				StockDao stockDao = new StockDao();
+				List<Stock> myStock = stockDao.getAll();
+
+				if (!myStock.isEmpty()) {
+				if(myStock.get(i).getProduct().getId() == product.getId()){
+					Stock stock = new Stock();
+						int newQuantity = myStock.get(i).getQuantity() - item.getQuantity();
+						stock.setProduct(product);
+						stock.setQuantity(newQuantity);
+						stockDao.updateStock(stock);
+					}
+				}else{
+					response.sendRedirect(product.getName() + "is currently out of stock");
+				}
 			}
 			outD.setTotalPrice(total);
 			outD.setCollectionCenter(request.getParameter("collectLoc"));
