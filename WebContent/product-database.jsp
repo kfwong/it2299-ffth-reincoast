@@ -395,13 +395,14 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 	
 		$(".s_dropdown_options a").click(function(e){
 			e.preventDefault();
-			$(this).closest("ul").prev().prev().html($(this).text()+' <span class="caret"></span>');
+			$(this).closest('div').children('button').html($(this).text()+' <span class="caret"></span>');
 			$(this).closest("ul").prev().val($(this).prev().val());
 	
 			if($(this).prev().val() == "BETWEEN"){
 				$(this).closest(".input-group").children().last().prev("span").andSelf().removeClass('hidden');
 			}else{
-				$(this).closest(".input-group").children().last().prev("span").andSelf().addClass('hidden');}
+				$(this).closest(".input-group").children().last().prev("span").andSelf().addClass('hidden');
+			}
 		});
 	
 		$.validator.addMethod("money", function(value, element) {
