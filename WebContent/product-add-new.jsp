@@ -3,16 +3,18 @@
 <jsp:include page="header.jsp">
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.css" name="css" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2-bootstrap.css" name="css" />
+	<jsp:param value="css/bootstrap-fileupload.css" name="css" />
 </jsp:include>
 <style>
-.chosen-container-multi .chosen-choices li.search-field input[type="text"] { min-height: 25px; }
-.chosen-choices{border-radius:3px;border: 1px solid rgb(204, 204, 204) !important;background-image: none !important;}
-label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}	
+label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 </style>
 <!-- header.jsp -->
 
 <!-- sidebar.jsp -->
-<jsp:include page="sidebar.jsp"></jsp:include>
+<jsp:include page="sidebar.jsp">
+	<jsp:param value="Product Management" name="active" />
+	<jsp:param value="New Product" name="sub-active" />
+</jsp:include>
 <!-- sidebar.jsp -->
 
 <!-- sample-content.jsp -->
@@ -27,7 +29,8 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 				</div>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="icon-dashboard"></i> Home</a></li>
-					<li class="active"><i class="icon-edit"></i> Register New Product</li>
+					<li class="active"><i class="icon-briefcase"></i> Product Management</li>
+					<li class="active">New Product</li>
 				</ol>
 			</div>
 		</div>
@@ -89,46 +92,6 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-lg-5">
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<h4>
-							<label>Image</label>
-							<div class="form-group pull-right" style="padding: 0px 10px 0px 10px;">
-								<div class="btn-group">
-									<button type="button" class="btn btn-xs btn-default">
-										<i class="glyphicon glyphicon-hdd"></i> Browse
-									</button>
-									<button type="button" class="btn btn-xs btn-default">
-										<i class="glyphicon glyphicon-remove"></i> Clear
-									</button>
-								</div>
-							</div>
-						</h4>
-						<div class="row">
-							<div class="col-lg-7">
-								<p>Upload an image of this product.</p>
-								<small>
-									<ul>
-										<li>Recommend dimension is 160x160px.</li>
-										<li>Bigger image will be cropped.</li>
-										<li>You can also make use of import feature to import image from NTUC website, if available.</li>
-									</ul>
-								</small>
-							</div>
-							<div class="col-lg-5">
-								<div style="width:160px;height:100%;">
-									<a href="#" class="thumbnail">
-								      <img id="p_image" src="http://placehold.it/160x160">
-								    </a>
-								</div>	
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-5">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<h4>
@@ -138,14 +101,6 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 					</div>
 					<table class="table">
 						<tbody id="p_meta_fields">
-							<tr>
-								<td class="col-sm-3" style="padding-left: 14px;"><input class="form-control input-sm" placeholder="key" name="p_meta_key"></td>
-								<td><input class="form-control input-sm" placeholder="value" name="p_meta_value"></td>
-							</tr>
-							<tr>
-								<td class="col-sm-3" style="padding-left: 14px;"><input class="form-control input-sm" placeholder="key" name="p_meta_key"></td>
-								<td><input class="form-control input-sm" placeholder="value" name="p_meta_value"></td>
-							</tr>
 							<tr>
 								<td class="col-sm-3" style="padding-left: 14px;"><input class="form-control input-sm" placeholder="key" name="p_meta_key"></td>
 								<td><input class="form-control input-sm" placeholder="value" name="p_meta_value"></td>
@@ -163,6 +118,69 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 						&nbsp;
 					</div>
 				</div>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h4>
+							<label>Email Alerts</label>
+						</h4>
+						<div class="checkbox">
+						    <label>
+						      <input type="checkbox"> Send me an email when this product information is being modified.
+						    </label>
+						</div>
+						<div class="checkbox">
+						    <label>
+						      <input type="checkbox"> Send me an email when this product is low in stock.
+						    </label>
+						</div>
+						<div class="checkbox">
+						    <label>
+						      <input id="p_stock_movement_alert" type="checkbox"> Send me an email when there are stock movement.
+						    </label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-5">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="fileinput fileinput-new" data-provides="fileinput" style="width: 100%;">
+							<h4>
+								<label>Image</label>
+								<div class="form-group pull-right">
+								  	<div class="btn-group">
+									    <span class="btn btn-xs btn-default btn-file"><span class="fileinput-new"><i class="glyphicon glyphicon-hdd"></i> Browse</span><span class="fileinput-exists"><i class="glyphicon glyphicon-hdd"></i> Change</span><input type="file" name="..."></span>
+									    <a href="#" class="btn btn-xs btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</h4>
+							<div class="row">
+								<div class="col-lg-7">
+									<p>Upload an image of this product.</p>
+									<small>
+										<ul>
+											<li>Recommended dimension is 160x160px.</li>
+											<li>Bigger image will be scaled down.</li>
+											<li>You can also make use of import feature to import image from NTUC website, if available.</li>
+										</ul>
+									</small>
+								</div>
+								<div class="col-lg-5">
+								  	<div class="fileinput-new thumbnail pull-right" style="width: 160px; height: 160px;">
+								  		<input id="p_image_url" type="hidden" name="p_image_url" value="http://placehold.it/160x160"/>
+									    <img id="p_image" src="http://placehold.it/160x160">
+									</div>
+									<div class="clearfix"></div>
+									<div class="fileinput-preview fileinput-exists thumbnail pull-right" style="max-width: 200px; max-height: 150px;"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-5">
+				
 			</div>
 		</div>
 	</form>
@@ -192,6 +210,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 	<jsp:include page="footer.jsp">
 		<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.min.js" name="js" />
 		<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js" name="js" />
+		<jsp:param value="js/bootstrap-fileupload.js" name="js" />
 	</jsp:include>
 	<!-- footer.jsp -->
 	<script type="text/javascript">
@@ -212,6 +231,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 				$('#p_weight').val(data.weight);
 				$('#p_price').val(data.price);
 				$('#p_image').attr('src', data.image);
+				$('#p_image_url').val(data.image);
 			});
 		});
 
@@ -231,7 +251,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 
 		$.validator.addMethod("money", function(value, element) {
 		    return this.optional(element) || /^(\d{1,9})(\.\d{1,2})?$/.test(value);
-		}, "Must be in US currency format 0.99");
+		}, "Must be in SGD currency format 0.99");
 
 		$('#p_form').validate({
 			rules:{

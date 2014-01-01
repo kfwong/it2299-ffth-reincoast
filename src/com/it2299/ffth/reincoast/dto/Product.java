@@ -15,11 +15,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.lucene.document.Field.Store;
+import org.apache.solr.analysis.StandardTokenizerFactory;
+import org.apache.solr.analysis.LowerCaseFilterFactory;
+import org.apache.solr.analysis.SnowballPorterFilterFactory;
+import org.apache.solr.analysis.WordDelimiterFilterFactory;
+import org.apache.solr.analysis.NGramFilterFactory;
 import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Analyzer;
+import org.hibernate.search.annotations.AnalyzerDef;
+import org.hibernate.search.annotations.ContainedIn;
+import org.hibernate.search.annotations.FieldBridge;
+import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.NumericField;
+import org.hibernate.search.annotations.TokenizerDef;
+import org.hibernate.search.annotations.TokenFilterDef;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Parameter;
+import org.hibernate.search.bridge.builtin.DoubleBridge;
 
 /**
  * @author kfwong
@@ -35,12 +55,20 @@ import org.hibernate.envers.NotAudited;
  */
 @Entity
 @Audited
+@Indexed
+@AnalyzerDef(name="productanalyzer",
+		tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class),
+		filters = {
+			@TokenFilterDef(factory = LowerCaseFilterFactory.class),
+			@TokenFilterDef(factory = SnowballPorterFilterFactory.class, params={
+				@Parameter(name="language", value="English")
+			})
+})
 // Declare this class as entity so that Hibernate will know this is to be taken
 // care of. Mapping configuration required in hibernate.cfg.xml.
 @Table(name = "PRODUCT")
 // The table name that will be created upon persistence.
 public class Product {
-
 	@Id
 	// Declare this attribute as primary key
 	@GeneratedValue
@@ -53,21 +81,31 @@ public class Product {
 	private String code;
 
 	@Column(name = "NAME")
+	@Field
+	@Analyzer(definition = "productanalyzer")
 	private String name;
 
 	@Column(name = "DESCRIPTION")
+	@Field
+	@Analyzer(definition = "productanalyzer")
 	private String description;
 
 	@Column(name = "UNIT_OF_MEASURE")
 	private String unitOfMeasure;
 
 	@Column(name = "PRICE")
+	@Field
+	@NumericField
 	private double price;
 
 	@Column(name = "WEIGHT")
+	@Field
+	@NumericField
 	private double weight;
 
 	@Column(name = "CATEGORY")
+	@Field
+	@Analyzer(definition = "productanalyzer")
 	private String category;
 
 	@Column(name = "STATUS")
@@ -78,8 +116,12 @@ public class Product {
 
 	@Column(name = "REGISTERED_BY")
 	private String registeredBy;
+	
+	@Column(name = "IMAGE_URL")
+	private String imageUrl;
 
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="product")
+	@IndexedEmbedded
 	private List<ProductMeta> productMetas;
 
 	public int getId() {
@@ -168,6 +210,14 @@ public class Product {
 
 	public void setRegisteredBy(String registeredBy) {
 		this.registeredBy = registeredBy;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 	public List<ProductMeta> getProductMetas() {

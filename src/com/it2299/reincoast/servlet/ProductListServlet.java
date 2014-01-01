@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.it2299.ffth.reincoast.dao.ProductDao;
 import com.it2299.ffth.reincoast.dto.Product;
 
@@ -20,28 +22,25 @@ import com.it2299.ffth.reincoast.dto.Product;
 @WebServlet("/ProductListServlet")
 public class ProductListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ProductListServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ProductListServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		ProductDao productDao = new ProductDao();
-		List<Product> products = productDao.getAll();
-		Set<String> p_categories = productDao.getCategories();
-		
-		request.setAttribute("products", products);
-		request.setAttribute("p_categories", p_categories);
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/item-database.jsp");
+		request.setAttribute("s_categories", "\""+StringUtils.join(productDao.getCategories(), "\",\"")+"\"");	
+
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/product-database.jsp");
 		requestDispatcher.forward(request, response);
 	}
 

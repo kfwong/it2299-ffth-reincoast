@@ -11,9 +11,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
+import org.hibernate.search.annotations.ContainedIn;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
 
 @Entity
 @Audited
+@Indexed
 @Table(name="PRODUCT_META")
 public class ProductMeta {
 	
@@ -23,9 +28,11 @@ public class ProductMeta {
 	private int id;
 	
 	@Column (name="META_KEY")
+	@Field
 	private String metaKey;
 	
 	@Column (name="META_VALUE")
+	@Field
 	private String metaValue;
 	
 	@ManyToOne
