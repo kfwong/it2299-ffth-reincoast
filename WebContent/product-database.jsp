@@ -426,7 +426,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
         $('#pagination').bootstrapPaginator({
         	bootstrapMajorVersion: 3,
             currentPage: "${s_current_page}",
-            totalPages: "${(s_matching_total)/10}",
+            totalPages: Math.ceil(${(s_matching_total)/10}),
             pageUrl: function(type, page, current){
                 return "${s_url}&page="+page;
             },

@@ -10,6 +10,19 @@ For more info and more free Bootstrap 3 HTML themes, visit http://startbootstrap
 
 /* Global Styles */
 
+.pagination > li a{
+	background-color: rgb(245,245,245);
+	border: none;
+	color: black;
+}
+
+.pagination > .active > a,
+.pagination > .active > a:hover{
+	background-color: rgb(245,245,245);
+	border:none;
+	color: #00adff;
+}
+
 .sub-active a{
 	color: #00adff !important;
 }
