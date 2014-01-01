@@ -14,7 +14,7 @@
 		<strong>
 			<small>
 				<ul class="nav navbar-nav navbar-user side-nav">
-					<li class="active"><a href="dashboard.jsp"><i class="icon-dashboard"></i> Dashboard</a></li>
+					<li class="active"><a href="dashboard.jsp"><i class="fa fa-dashboard"></i> Dashboard</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-briefcase"></i> Product Management <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="ProductSearchServlet?">Product Database</a></li>
