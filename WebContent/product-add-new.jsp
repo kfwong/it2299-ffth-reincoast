@@ -203,7 +203,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-		
+</div>
 	<!-- sample-content.jsp -->
 
 	<!-- footer.jsp -->

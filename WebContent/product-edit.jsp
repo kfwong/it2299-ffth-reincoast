@@ -278,7 +278,7 @@
 			</div>
 		</div>
 	</form>
-
+</div>
 	<!-- sample-content.jsp -->
 	<script>
 	$(document).ready(function(){

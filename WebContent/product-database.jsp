@@ -267,6 +267,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 			<!-- /.row -->
 		</div>
 	</form>
+</div>
 	<!-- sample-content.jsp -->
 	<!-- footer.jsp -->
 	<jsp:include page="footer.jsp">
