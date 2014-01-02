@@ -2,10 +2,12 @@ package com.it2299.ffth.reincoast.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 
+import com.it2299.ffth.reincoast.dto.InboundDelivery;
 import com.it2299.ffth.reincoast.dto.InboundLineItem;
 import com.it2299.ffth.reincoast.dto.Product;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
@@ -21,7 +23,8 @@ public class ItemDao implements Dao<InboundLineItem> {
 		
 		return item;
 	}
-
+	
+	
 	@Override
 	public void saveOrUpdate(InboundLineItem item) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -37,10 +40,21 @@ public class ItemDao implements Dao<InboundLineItem> {
 	public List<InboundLineItem> getAll() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		List<InboundLineItem> items = session.createQuery("FROM Item").list();
+		List<InboundLineItem> items = session.createQuery("FROM InboundLineItem").list();
 		session.close();
 		
 		return items;
+	}
+	
+public List<InboundLineItem> getList(InboundDelivery inboundDelivery){
+	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	Session session = sessionFactory.openSession();
+	Query query = session.createQuery("FROM InboundLineItem Where inboundDelivery = :inboundDelivery");
+	query.setParameter("inboundDelivery", inboundDelivery);
+	List list = query.list();
+	session.close();
+	
+	return list;
 	}
 
 	@Override
