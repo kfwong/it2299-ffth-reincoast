@@ -8,50 +8,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-@Entity
-@Table (name="AUDIT")
 public class Audit {
+	private Date date;
+	private String operation;
+	private Object entity;
+	private int revisionId;
 	
-	@Id
-	@GeneratedValue
-	@Column(name="ID")
-	private int id;
-	
-	@Column(name="DESCRIPTION")
-	private String description;
-	
-	@Column(name="MOVEMENT_TYPE")
-	private String movementType;
-	
-	@Column(name="DATE_AUDITED")
-	private Date dateAudited;
-	
-	public int getId() {
-		return id;
+	public Date getDate() {
+		return date;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setDate(Date date) {
+		this.date = date;
 	}
-	public String getDescription() {
-		return description;
+	public String getOperation() {
+		return operation;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setOperation(String operation) {
+		this.operation = operation;
 	}
-	public String getMovementType() {
-		return movementType;
+	public Object getEntity() {
+		return entity;
 	}
-	public void setMovementType(String movementType) {
-		this.movementType = movementType;
+	public void setEntity(Object entity) {
+		this.entity = entity;
 	}
-	public Date getDateAudited() {
-		return dateAudited;
+	public int getRevisionId() {
+		return revisionId;
 	}
-	public void setDateAudited(Date dateAudited) {
-		this.dateAudited = dateAudited;
+	public void setRevisionId(int revisionId) {
+		this.revisionId = revisionId;
 	}
-	
-	
-
 }

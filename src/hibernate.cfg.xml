@@ -17,7 +17,6 @@
 		
 		<mapping class="com.it2299.ffth.reincoast.dto.Product" />
 		<mapping class="com.it2299.ffth.reincoast.dto.ProductMeta" />
-		<mapping class="com.it2299.ffth.reincoast.dto.Audit" />
 		<mapping class="com.it2299.ffth.reincoast.dto.InboundLineItem" />
 		<mapping class="com.it2299.ffth.reincoast.dto.OutboundLineItem" />
 		<mapping class="com.it2299.ffth.reincoast.dto.InboundDelivery" />

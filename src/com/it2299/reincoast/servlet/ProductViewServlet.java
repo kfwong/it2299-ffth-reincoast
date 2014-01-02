@@ -49,7 +49,7 @@ public class ProductViewServlet extends HttpServlet {
 		
 		request.setAttribute("p_category", "\""+StringUtils.join(productDao.getCategories(), "\",\"")+"\"");	
 		request.setAttribute("product", product);
-		request.setAttribute("p_audit_trails", productDao.getAuditTrails(id));
+		request.setAttribute("p_audits", productDao.getAudits(id));
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/product-view.jsp");
 		requestDispatcher.forward(request, response);

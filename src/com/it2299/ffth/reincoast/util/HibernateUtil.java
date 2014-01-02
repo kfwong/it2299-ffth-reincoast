@@ -1,11 +1,8 @@
 package com.it2299.ffth.reincoast.util;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistryBuilder;
-
-import com.it2299.ffth.reincoast.interceptor.AuditInterceptor;
 
 /**
  * @author kfwong
@@ -22,8 +19,7 @@ public class HibernateUtil {
 	private static SessionFactory buildSessionFactory() {
 		try {
 			// Create the SessionFactory from hibernate.cfg.xml
-			Configuration configuration = new AnnotationConfiguration();
-			configuration.setInterceptor(new AuditInterceptor());
+			Configuration configuration = new Configuration();
 			configuration.configure();
 			ServiceRegistryBuilder serviceRegistryBuilder = new ServiceRegistryBuilder().applySettings(configuration.getProperties());
 			return configuration.buildSessionFactory(serviceRegistryBuilder.buildServiceRegistry());

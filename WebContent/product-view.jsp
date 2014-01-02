@@ -177,10 +177,11 @@
 					</div>
 					<table class="table">
 						<tbody>
-							<c:forEach items="${p_audit_trails}" var="p_audit_trail">
+							<c:forEach items="${p_audits}" var="p_audit">
 								<tr style="padding-bottom:5px;">
-									<td class="col-lg-1"><span class="badge">${p_audit_trail[0]}</span></td>
-									<td><i class="fa fa-calendar"></i>&nbsp;${p_audit_trail[1]}</td>
+									<td class="col-lg-1"><span class="badge">${p_audit.operation}</span></td>
+									<td><i class="fa fa-calendar"></i>&nbsp;${p_audit.date}</td>
+									<td><a class="audit" href="#" data-revision-id="${p_audit.revisionId }" data-poload="TestServlet">View Details</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -216,12 +217,37 @@
 				</div>
 			</div>
 		</div>
-	</form>
-
+	</form>	
+	
 	<!-- sample-content.jsp -->
 	<script>
 	$(document).ready(function(){
-
+		$('.audit').on('click', function(event){
+			event.preventDefault();
+			var target = $(this);
+			
+			clearTimeout(window.timer);
+			window.timer=setTimeout(function(){
+				$.get(target.data('poload'), {
+					entityId: ${product.id},
+					revisionId: target.data("revision-id")
+				}).done(function(data) {
+					var audit = $.parseJSON(data);
+			    	target.popover({
+				    	html: true,
+				    	placement: 'left',
+				    	trigger: 'hover',
+				    	container: 'body',
+				    	content: "<label>"+audit.name+"</label>"+
+				    		"<p><small>"+audit.description+"</small></p>"+
+				    		"<p><small><strong>Price</strong>: "+audit.price+"</small></p>"+
+				    		"<p><small><strong>weight</strong>: "+audit.weight+"</small></p>"+
+				    		"<p><small><strong>Category</strong>: "+audit.category+"</small></p>"
+				    }).popover('show');
+			    });
+			}, 500);
+		});
+		
 		$('#p_add_meta_field').on("click", function(e){
 			$('#p_meta_fields').append(
 					'<tr>'+

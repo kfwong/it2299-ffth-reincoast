@@ -191,7 +191,8 @@
 								</div>
 								<div class="col-lg-5">
 								  	<div class="fileinput-new thumbnail pull-right" style="width: 160px; height: 160px;">
-									    <img id="p_image" src="http://placehold.it/160x160">
+								  		<input id="p_image_url" type="hidden" name="p_image_url" value="${product.imageUrl }"/>
+									    <img id="p_image" src="${product.imageUrl }">
 									</div>
 									<div class="clearfix"></div>
 									<div class="fileinput-preview fileinput-exists thumbnail pull-right" style="max-width: 200px; max-height: 150px;"></div>
@@ -237,10 +238,10 @@
 					</div>
 					<table class="table">
 						<tbody>
-							<c:forEach items="${p_audit_trails}" var="p_audit_trail">
+							<c:forEach items="${p_audits}" var="p_audit">
 								<tr style="padding-bottom:5px;">
-									<td class="col-lg-1"><span class="badge">${p_audit_trail[0]}</span></td>
-									<td><i class="fa fa-calendar"></i>&nbsp;${p_audit_trail[1]}</td>
+									<td class="col-lg-1"><span class="badge">${p_audit.operation}</span></td>
+									<td><i class="fa fa-calendar"></i>&nbsp;${p_audit.date}</td>
 								</tr>
 							</c:forEach>
 						</tbody>

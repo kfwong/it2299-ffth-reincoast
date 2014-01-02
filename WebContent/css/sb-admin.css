@@ -10,6 +10,17 @@ For more info and more free Bootstrap 3 HTML themes, visit http://startbootstrap
 
 /* Global Styles */
 
+#footer{
+	padding:30px 0px 15px 15px;
+	background-color: #222222;
+	background-image: url('http://www.stripemania.com/transparent/2-2-45-1-4F4F4F-1-2F2F30-DDEE1E-DDEE1E-DDEE1E-DDEE1E-000000-78D316-78D316-78D316-78D316-yes-yes-yes-yes-yes-.gif');
+	color:rgb(153,153,153);
+	border-left-color: #00adff;
+	border-left-width:10px;
+	border-left-style:solid;
+	font-size:11px;
+}
+
 .pagination > li a{
 	background-color: rgb(245,245,245);
 	border: none;
