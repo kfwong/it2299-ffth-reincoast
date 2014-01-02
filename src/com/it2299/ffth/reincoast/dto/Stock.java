@@ -10,8 +10,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ForeignKey;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 @Entity
+@Audited
 @Table(name="STOCK")
 public class Stock {
 
@@ -23,6 +26,7 @@ public class Stock {
 	
 	@OneToOne(fetch= FetchType.EAGER)
 	@JoinColumn(name="PRODUCT_ID")
+	@NotAudited
 	private Product product;
 	
 	@Column(name="QUANTITY")
