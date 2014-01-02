@@ -1,10 +1,6 @@
 package com.it2299.ffth.reincoast.dao;
 
 import java.util.List;
-
-
-
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
