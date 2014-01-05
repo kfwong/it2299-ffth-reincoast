@@ -8,27 +8,29 @@ import javax.persistence.Table;
 
 @Entity
 
-@Table(name = "CONTACTS")
+@Table(name = "CONTACT")
 
-public class Contacts {
+public class Contact {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
 	private int id;
 	
-	@Column(name = "name")
+	@Column(name = "NAME")
 	private String name;
 	
-	@Column(name = "address")
+	@Column(name = "ADDRESS")
 	private String address;
 	
-	@Column(name = "contactNumber")
+	@Column(name = "CONTACT_NUMBER")
 	private String contactNumber;
 	
-	@Column(name = "email")
+	@Column(name = "EMAIL")
 	private String email;
 	
+	@Column(name = "ORGANIZATION")
+	private String organization;
 	
 	public int getId() {
 		return id;
@@ -59,6 +61,12 @@ public class Contacts {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getOrganization() {
+		return organization;
+	}
+	public void setOrganization(String organization) {
+		this.organization = organization;
 	}
 	
 	

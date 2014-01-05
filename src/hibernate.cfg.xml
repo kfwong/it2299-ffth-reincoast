@@ -24,6 +24,7 @@
 		<mapping class="com.it2299.ffth.reincoast.dto.Member" />
 		<mapping class="com.it2299.ffth.reincoast.dto.Packing" />
 		<mapping class="com.it2299.ffth.reincoast.dto.PackingLineItem" />
+		<mapping class="com.it2299.ffth.reincoast.dto.Contact" />
 
 		<listener class="org.hibernate.envers.event.AuditEventListener" type="post-insert"/>
     	<listener class="org.hibernate.envers.event.AuditEventListener" type="post-update"/>
