@@ -19,7 +19,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 
 <!-- sample-content.jsp -->
 <div id="page-wrapper">
-	<form id="p_form" method="post" action="/it2299-ffth-reincoast/ProductRegistrationServlet" role="form">
+	<form id="p_form" method="post" action="ProductRegistrationServlet" role="form">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="page-header">

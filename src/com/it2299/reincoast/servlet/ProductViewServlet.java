@@ -29,33 +29,43 @@ import com.it2299.ffth.reincoast.util.HibernateUtil;
 @WebServlet("/ProductViewServlet")
 public class ProductViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ProductViewServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		
-		ProductDao productDao = new ProductDao();
-		Product product = (Product) productDao.get(id);
-		
-		request.setAttribute("p_category", "\""+StringUtils.join(productDao.getCategories(), "\",\"")+"\"");	
-		request.setAttribute("product", product);
-		request.setAttribute("p_audits", productDao.getAudits(id));
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/product-view.jsp");
-		requestDispatcher.forward(request, response);
-		
-		
-		
+	public ProductViewServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ProductDao productDao = new ProductDao();
+		Product product = null;
+		try {
+			int id = Integer.parseInt(request.getParameter("id"));
+
+			product = (Product) productDao.get(id);
+
+		} catch (Exception ex) {
+			String code = request.getParameter("code");
+			if (code != null && code != "") {
+				product = (Product) productDao.getByBarcode(code);
+			} else {
+				System.out.println("Empty code.");
+			}
+		} finally {
+
+			request.setAttribute("p_category", "\"" + StringUtils.join(productDao.getCategories(), "\",\"") + "\"");
+			request.setAttribute("product", product);
+			request.setAttribute("p_audits", productDao.getAudits(product.getId()));
+
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/product-view.jsp");
+			requestDispatcher.forward(request, response);
+		}
+
+	}
 }

@@ -18,7 +18,7 @@
 
 <!-- sample-content.jsp -->
 <div id="page-wrapper">
-	<form method="post" action="/it2299-ffth-reincoast/ProductRegistrationServlet" role="form">
+	<form method="post" action="ProductRegistrationServlet" role="form">
 		<input type="hidden" name="p_id" value="${product.id}"/>
 		<div class="row">
 			<div class="col-lg-12">

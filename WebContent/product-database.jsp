@@ -10,6 +10,7 @@
 <style>
 label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 .highlight { color: #00adff; }
+.bold{ font-weight: bold;}
 </style>
 <!-- header.jsp -->
 <!-- sidebar.jsp -->
@@ -21,7 +22,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 
 <!-- sample-content.jsp -->
 <div id="page-wrapper">
-	<form id="s_form" method="get" action="/it2299-ffth-reincoast/ProductSearchServlet" role="form" autocomplete="on">
+	<form id="s_form" method="get" action="ProductSearchServlet" role="form" autocomplete="on">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="page-header">
@@ -109,6 +110,9 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 														<button type="submit" class="btn btn-xs btn-default" value="Search">
 															<i class="glyphicon glyphicon-search"></i> Search
 														</button>
+														<a href="http://zxing.appspot.com/scan?ret=http%3A%2F%2Freincoast-kfwong.rhcloud.com%2FProductViewServlet%3Fcode%3D%7BCODE%7D%26SCAN_FORMATS%3DUPC_A%2CEAN_13" class="btn btn-xs btn-default">
+															<i class="fa fa-barcode"></i> Scan Code
+														</a>
 													</div>
 												</div>
 											</h4>
@@ -120,13 +124,13 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 									<div class="panel-group">
 									  <div class="panel panel-default" style="border:none;border-radius:0px;border-bottom-width:1px; border-bottom-style:solid; border-bottom-color: rgb(221, 221, 221);margin-top:0px;">
 									    <div class="panel-heading">
-									      <h4 class="panel-title">Keyword</h4>
+									      <h4 class="panel-title">Keyword <i class="fa fa-check-circle hidden"></i></h4>
 									    </div>
 									    <div class="panel-collapse">
 									      <div class="panel-body" style="background-color:white;">
 							      			<div class="input-group" style="width:100%;">
 							      				<p><small>Use (*) to match any number of characters, (?) to match any single character.</small></p>
-												<input class="form-control input-sm" name="s_keyword" value="${s_keyword}"/>
+												<input class="form-control input-sm s-flag" name="s_keyword" value="${s_keyword}"/>
 												<h5><strong>Search in:</strong></h5>
 												<div class="checkbox">
 												  <label>
@@ -146,19 +150,19 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 									  </div>
 									  <div class="panel panel-default" style="border:none;border-radius:0px;border-bottom-width:1px; border-bottom-style:solid; border-bottom-color: rgb(221, 221, 221);margin-top:0px;">
 									    <div class="panel-heading">
-									      <h4 class="panel-title">Category</h4>
+									      <h4 class="panel-title">Category <i class="fa fa-check-circle hidden"></i></h4>
 									    </div>
 									    <div class="panel-collapse">
 									      <div class="panel-body" style="background-color:white;">
 							      			<div class="input-group" style="width:100%;">
-												<input id="s_category" class="form-control input-sm" name="s_category" value="${s_category}" />
+												<input id="s_category" class="form-control input-sm s-flag" name="s_category" value="${s_category}" />
 											</div>
 									      </div>
 									    </div>
 									  </div>
 									  <div class="panel panel-default" style="border:none;border-radius:0px;border-bottom-width:1px; border-bottom-style:solid; border-bottom-color: rgb(221, 221, 221);margin-top:0px;overflow:visible;">
 									    <div class="panel-heading">
-									      <h4 class="panel-title">Price</h4>
+									      <h4 class="panel-title">Price <i class="fa fa-check-circle hidden"></i></h4>
 									    </div>
 									    <div class="panel-collapse">
 									      <div class="panel-body" style="background-color:white;overflow:visible;">
@@ -175,7 +179,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 										          <li><input type="hidden" value="BETWEEN"/><a href="#">Between</a></li>
 										        </ul>
 										      </div><!-- /btn-group -->
-										      <input type="text" class="form-control" name="s_price" value="${s_price}">
+										      <input type="text" class="form-control s-flag" name="s_price" value="${s_price}">
 										      <span class="input-group-addon hidden">~</span>
 											  <input type="text" class="form-control hidden" name="s_price_to" value="${s_price_to}">
 										    </div><!-- /input-group -->
@@ -184,7 +188,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 									  </div>
 									  <div class="panel panel-default" style="border:none;border-radius:0px;border-bottom-width:1px; border-bottom-style:solid; border-bottom-color: rgb(221, 221, 221);margin-top:0px;overflow:visible;">
 									    <div class="panel-heading">
-									      <h4 class="panel-title">Weight</h4>
+									      <h4 class="panel-title">Weight <i class="fa fa-check-circle hidden"></i></h4>
 									    </div>
 									    <div class="panel-collapse">
 									      <div class="panel-body" style="background-color:white;overflow:visible;">
@@ -201,7 +205,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 										          <li><input type="hidden" value="BETWEEN"/><a href="#">Between</a></li>
 										        </ul>
 										      </div><!-- /btn-group -->
-										      <input type="text" class="form-control" name="s_weight" value="${s_weight}">
+										      <input type="text" class="form-control s-flag" name="s_weight" value="${s_weight}">
 										      <span class="input-group-addon hidden">~</span>
 											  <input type="text" class="form-control hidden" name="s_weight_to" value="${s_weight_to}">
 										    </div><!-- /input-group -->
@@ -210,7 +214,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 									  </div>
 									  <div class="panel panel-default" style="border:none;border-radius:0px;border-bottom-width:1px; border-bottom-style:solid; border-bottom-color: rgb(221, 221, 221);margin-top:0px;overflow:visible;">
 									    <div class="panel-heading">
-									      <h4 class="panel-title">Stock</h4>
+									      <h4 class="panel-title">Stock <i class="fa fa-check-circle hidden"></i></h4>
 									    </div>
 									    <div class="panel-collapse">
 									      <div class="panel-body" style="background-color:white;overflow:visible;">
@@ -227,7 +231,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 										          <li><input type="hidden" value="BETWEEN"/><a href="#">Between</a></li>
 										        </ul>
 										      </div><!-- /btn-group -->
-										      <input type="text" class="form-control" name="s_stock" value="${s_stock}">
+										      <input type="text" class="form-control s-flag" name="s_stock" value="${s_stock}">
 										      <span class="input-group-addon hidden">~</span>
 											  <input type="text" class="form-control hidden" name="s_stock_to" value="${s_stock_to}">
 										    </div><!-- /input-group -->
@@ -236,7 +240,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 									  </div>
 									  <div class="panel panel-default" style="border:none;border-radius:0px;border-bottom-width:1px; border-bottom-style:solid; border-bottom-color: rgb(221, 221, 221);margin-top:0px;">
 									    <div class="panel-heading">
-									      <h4 class="panel-title">Additional Data</h4>
+									      <h4 class="panel-title">Additional Data <i class="fa fa-check-circle hidden"></i></h4>
 									    </div>
 									    <div class="panel-collapse">
 									      <div class="panel-body" style="background-color:white;">
@@ -292,7 +296,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 			for(var i=0; i< metaKeys.length;i++){
 				$('#s_meta_fields').append(
 						'<tr style="background-color:white;">'+
-							'<td class="col-sm-4" style="padding-left: 14px;"><input class="form-control input-sm" placeholder="key" name="s_meta_key" value="'+metaKeys[i]+'"></td>'+
+							'<td class="col-sm-4" style="padding-left: 14px;"><input class="form-control input-sm s-flag" placeholder="key" name="s_meta_key" value="'+metaKeys[i]+'"></td>'+
 							'<td><input class="form-control input-sm" placeholder="value" name="s_meta_value" value="'+metaValues[i]+'"></td>'+
 							'<td class="col-sm-1">'+
 								'<div class="btn-group">'+
@@ -307,7 +311,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 		}else{
 			$('#s_meta_fields').append(
 					'<tr style="background-color:white;">'+
-						'<td class="col-sm-4" style="padding-left: 14px;"><input class="form-control input-sm" placeholder="key" name="s_meta_key"></td>'+
+						'<td class="col-sm-4" style="padding-left: 14px;"><input class="form-control input-sm s-flag" placeholder="key" name="s_meta_key"></td>'+
 						'<td><input class="form-control input-sm" placeholder="value" name="s_meta_value"></td>'+
 						'<td class="col-sm-1">'+
 							'<div class="btn-group">'+
@@ -319,6 +323,26 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 					'</tr>'
 			);
 		}
+
+		$('.s-flag').each(function(index){
+			if($(this).val() == ""){
+				$(this).closest('.panel').find('.panel-title').removeClass("bold");
+				$(this).closest('.panel').find('.panel-title').children('i').addClass("hidden");
+			}else{
+				$(this).closest('.panel').find('.panel-title').addClass("bold");
+				$(this).closest('.panel').find('.panel-title').children('i').removeClass("hidden");
+			}
+		});
+
+		$('.s-flag').on('change', function(e){
+			if($(this).val() == ""){
+				$(this).closest('.panel').find('.panel-title').removeClass("bold");
+				$(this).closest('.panel').find('.panel-title').children('i').addClass("hidden");
+			}else{
+				$(this).closest('.panel').find('.panel-title').addClass("bold");
+				$(this).closest('.panel').find('.panel-title').children('i').removeClass("hidden");
+			}
+		});
 		
 		$('#s_add_meta_field').on("click", function(e){
 			$('#s_meta_fields').append(

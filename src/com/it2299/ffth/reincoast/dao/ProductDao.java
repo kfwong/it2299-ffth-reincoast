@@ -83,6 +83,20 @@ public class ProductDao implements Dao<Product> {
 		session.delete(product);
 		session.close();
 	}
+	
+	public Product getByBarcode(String code){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		
+		Query query = session.createQuery("FROM Product WHERE code= :code");
+		query.setParameter("code", code);
+		
+		Product product = (Product) query.uniqueResult();
+		
+		session.close();
+		
+		return product;
+	}
 
 	public Set<String> getCategories() {
 		Set<String> categories = new HashSet<String>();
