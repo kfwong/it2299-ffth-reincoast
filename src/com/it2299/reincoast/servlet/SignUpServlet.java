@@ -37,7 +37,7 @@ public class SignUpServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Create Variable
-		HttpSession session;
+
 		Member member = new Member();
 		String[] passwords = new String[2];
 		// Retrieve passwords (& CPwds) from the Textbox
@@ -59,7 +59,7 @@ public class SignUpServlet extends HttpServlet {
 					member.setPassword(passwords[0]); 
 				} else {
 					// If verification fails, forward user to error page.
-					RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("Member_SignUp.jsp");
 					rd.forward(request, response);
 					return;
 				}
