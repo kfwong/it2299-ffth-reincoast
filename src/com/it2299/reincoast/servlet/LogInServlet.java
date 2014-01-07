@@ -56,11 +56,11 @@ public class LogInServlet extends HttpServlet {
 			session.setAttribute("MEMBER_DATAS", member);
 			
 
-			rd = request.getRequestDispatcher("Okay.jsp");
+			rd = request.getRequestDispatcher("member-name.jsp");
 			rd.forward(request, response); 
 		}
 		else {
-			rd = getServletContext().getRequestDispatcher("/login.jsp");
+			rd = getServletContext().getRequestDispatcher("/member-login.jsp");
 			   rd.forward(request, response); 
 			   //validatejs
 		}
