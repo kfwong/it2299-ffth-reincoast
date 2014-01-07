@@ -2,6 +2,7 @@ package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,6 +34,12 @@ public class ContactServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		ContactDao contactDao = new ContactDao();
+		List<Contact> contactArray = contactDao.getAll();
+		
+		request.setAttribute("contactArray", contactArray);
+		RequestDispatcher rd = request.getRequestDispatcher("contacts-donors-individual.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
 	<jsp:param value="css/contacts.css" name="css" />
@@ -55,12 +56,14 @@
 			</tr>
 		</thead>
 		<tbody>
+			<c:forEach var="contact" items="${contactArray}">
 			<tr class="table-row">
-				<td>John Smith</td>
-				<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-				<td>91234567</td>
-				<td>johnsmith@gmail.com</td>
+				<td>${contact.name}</td>
+				<td>${contact.address}</td>
+				<td>${contact.contactNumber}</td>
+				<td>${contact.email}</td>
 			</tr>
+			</c:forEach>
 			
 			<tr class="table-row">
 				<td>John Smith</td>
