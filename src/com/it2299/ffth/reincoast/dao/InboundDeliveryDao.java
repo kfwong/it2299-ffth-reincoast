@@ -1,12 +1,13 @@
 package com.it2299.ffth.reincoast.dao;
 
 import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
-
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 
 public class InboundDeliveryDao implements Dao<InboundDelivery> {
@@ -32,7 +33,18 @@ public class InboundDeliveryDao implements Dao<InboundDelivery> {
 		session.getTransaction().commit();
 		session.close();
 	}
-
+	
+	@SuppressWarnings("unchecked")
+	public List<InboundDelivery> getAllByDonorName(String name){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("FROM InboundDelivery where donorName = :donorName");
+		query.setParameter("donorName", name);
+		List<InboundDelivery> result = query.list();
+		session.close();
+		
+		return result;
+	}
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<InboundDelivery> getAll() {

@@ -19,30 +19,25 @@
 
 	<div class="row">
 		<div class="col-lg-12">
-			<h2>Inbound received</h2>
+			<h2>Food Drive</h2>
 			<ol class="breadcrumb">
-				<li class="active"><i class="icon-dashboard"></i>Stock</li>
+				<li><i class="icon-dashboard"></i>Home</li>
+				<li>Delivery</li>
+				<li class="active">Food Drive</li>
 			</ol>
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-bar-chart"></i> Metadata
+						<i class="icon-bar-chart"></i> Food Drive List
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal" role="form" method="post"
-						action="/it2299-ffth-reincoast/InBoundServlet">
+					<form class="form-horizontal" role="form" >
 						<div class="form-group" style="padding: 0px 10px 0px 10px;">
 							<div class="btn-group">
-								<button type="button" class="btn btn-xs btn-default">
-									<i class="icon-ok"></i> Save
-								</button>
-								<button type="button" class="btn btn-xs btn-default">
-									<i class="icon-tags"></i> Other
-								</button>
-								<button type="button" class="btn btn-xs btn-default">
-									<i class="icon-tags"></i> Other
-								</button>
+								<button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#searchModal">
+									<i class="icon-tags"></i> Search
+								</button>	
 							</div>
 						</div>
 
@@ -63,35 +58,76 @@
 									<%
 										InboundDeliveryDao inboundDao = new InboundDeliveryDao();
 										List<InboundDelivery> inboundList = inboundDao.getAll();
-																	
+														
 										for (int i = 0; i < inboundList.size(); i++) {
 									%>
-
+												
 									<tr>
-										<td><%=i%></td>
-										<td id="deliveryID"><%=inboundList.get(i).getId()%></td>
+										<td><%=i+1%></td>
+										<td><%=inboundList.get(i).getId()%></td>
 										<td><%=inboundList.get(i).getDonorName()%></td>
 										<td><%=inboundList.get(i).getDonorType()%></td>
 										<td><%=inboundList.get(i).getDateDelivered()%></td>
-										<td><button class="btn btn-primary" data-toggle="modal"
-												data-target="#myModal" id="viewList">View Item</button></td>
+										<td><a href ="getItemListServlet?id=<%=inboundList.get(i).getId()%>" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> View</a></td>
 									</tr>
-											<!-- Modal -->
-									<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+											
+									<%
+										}
+									%>
+								</tbody>
+							</table>
+						</div>
+						
+					</form>
+								
+								
+									<!-- Modal -->
+									<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
 													<button type="button" class="close" data-dismiss="modal"
 														aria-hidden="true">&times;</button>
-													<h4 class="modal-title" id="myModalLabel">Donor by <%=inboundList.get(4).getDonorName()%></h4>
+													<h4 class="modal-title" id="myModalLabel">Advanced Search</h4>
 												</div>
-												<div class="modal-body" id="itemList">
-												
+												<div class="modal-body" id="searchID">
+													<table>
+													<tr>
+													<td>
+													Delivery ID:
+													</td>
+													<td>
+													<input class="form-control" type="text" id ="searchId" name="search" />
+													</td>
+													</tr>
+													<tr>
+													<td>
+													Donor Name: 
+													</td>
+													<td>
+													<input class="form-control" type="text" id ="searchName" name="name" />
+													</td>
+													</tr>
+													<tr>
+													<td>
+													Search From
+													</td>
+													<td>
+													<input class="form-control datepicker" type="text" id ="searchDate1" name="Date1" readonly/>
+													</td>
+													<td>
+													To
+													</td>
+													<td>
+													<input class="form-control datepicker" type="text" id ="searchDate2" name="Date2" readonly/>
+													</td>
+													</tr>
+													</table>
 												</div>
 												<div class="modal-footer">
+												<button type="button" class="btn btn-primary" id="deliverySearch">Search</button>
 													<button type="button" class="btn btn-default"
 														data-dismiss="modal">Close</button>
-													<button type="button" class="btn btn-primary">cancel delivery</button>
 												</div>
 											</div>
 											<!-- /.modal-content -->
@@ -99,15 +135,6 @@
 										<!-- /.modal-dialog -->
 									</div>
 									<!-- /.modal -->
-									<%
-										}
-									%>
-								</tbody>
-							</table>
-						</div>
-					</form>
-				
-
 				</div>
 			</div>
 		</div>
@@ -118,13 +145,7 @@
 <!-- sample-content.jsp -->
 <!-- Add row function -->
 <script>
-	$(document).ready(function(){
-		$("#viewList").on('click', function(){
-			var selectedValue =$("#add-list").children("deliveryID").text();
-			alert(selectedId);
-			$("#itemList").append('<table class="table table-hover table-striped tablesorter table-condensed"><thead><th class="col-lg-1">#<i class="icon-sort"></i></th><th class="col-lg-1">Product<i class="icon-sort"></i></th><th class="col-lg-1">Quantity<i class="icon-sort"></i></th><th class="col-lg-1">Expiry Date<i class="icon-sort"></i></th></thead><tbody><tr><td>1</td><td>muhaha</td><td>140</td></tr></tbody></table>');
-		});
-	});
+
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">

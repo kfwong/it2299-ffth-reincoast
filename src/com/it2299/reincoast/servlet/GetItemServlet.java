@@ -1,6 +1,7 @@
 package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 
 import java.util.HashMap;
@@ -33,13 +34,40 @@ public class GetItemServlet extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		try{
+		int id = Integer.parseInt(request.getParameter("ItemCode"));
+		
+		ProductDao productID = new ProductDao();
 
+		Product product = productID.get(id);
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("name", product.getName());
+		map.put("code", product.getCode());
+		map.put("description", product.getDescription());
+		map.put("id", Integer.toString(product.getId()));
+		map.put("price", Double.toString(product.getPrice()));
+		
+		Gson gson = new GsonBuilder().create();
+		PrintWriter out = response.getWriter();
+		String itemGson = gson.toJson(map);
+		
+		out.write(itemGson);
+		}catch(NumberFormatException ex){
+			System.out.println(ex);
+		}
+
+		
+	}
 	/**
 	 * @return
 	 * @return
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	/*
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
@@ -62,5 +90,5 @@ public class GetItemServlet extends HttpServlet {
 
 		out.println(itemGson);
 	}
-
+	*/
 }

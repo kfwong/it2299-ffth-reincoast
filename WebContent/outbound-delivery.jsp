@@ -25,11 +25,7 @@
 				<li class="active"><i class="icon-dashboard"></i> Outbound
 					Delivery</li>
 			</ol>
-			<div class="alert alert-success alert-dismissable">
-				<button type="button" class="close" data-dismiss="alert"
-					aria-hidden="true">&times;</button>
-				Transaction completed successfully. T.Code: 6000864578
-			</div>
+			
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">
@@ -113,6 +109,13 @@
 							</table>
 						</div>
 					</form>
+					<div id="notice">
+						<div class="alert alert-success alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert"
+					aria-hidden="true">&times;</button>
+				Please add Product
+			</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -125,15 +128,14 @@
 <script>
 	var count =1;
 
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function() {
 						getDate();
 						$("#addRow").on('click', function() {
 											if ($('#search').val() == '') {
 												alert("Please Enter Item Code");
 											} else {
 												if (count == 1) {
+													$("#notice").remove();
 													$("#tableRec").append('<input type="submit" />');
 													count++;
 													getItem();
