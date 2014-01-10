@@ -35,10 +35,11 @@ public class CreatePackageListServlet extends HttpServlet {
 		List<PackingLineItem> packingLineItems = new ArrayList<PackingLineItem>();
 		packing.setPackageName(request.getParameter("packageName"));
 		
-		String[] id = request.getParameterValues("id");
+		String[] id = request.getParameterValues("item-code");
 		String[] quantity = request.getParameterValues("item-quantity");
-		
+		System.out.println(id.length);
 		for(int i=0; i< id.length;i++){
+			System.out.println(id[i]);
 			PackingLineItem packingLineItem = new PackingLineItem();
 			packingLineItem.setPacking(packing);
 			Product product = new Product();

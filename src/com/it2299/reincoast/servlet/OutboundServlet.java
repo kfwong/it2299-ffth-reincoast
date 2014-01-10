@@ -41,7 +41,7 @@ public class OutboundServlet extends HttpServlet{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			String[] id = request.getParameterValues("id");
+			String[] id = request.getParameterValues("item-code");
 			String[] quantity = request.getParameterValues("item-quantity");
 			String[] price = request.getParameterValues("item-price");
 			double total = 0;

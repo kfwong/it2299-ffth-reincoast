@@ -6,6 +6,8 @@
 <jsp:include page="header.jsp">
 	<jsp:param value="/path/to/css1" name="css" />
 	<jsp:param value="/path/to/css2" name="css" />
+	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.css" name="css" />
+	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2-bootstrap.css" name="css" />
 </jsp:include>
 <!-- header.jsp -->
 
@@ -30,24 +32,12 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-bar-chart"></i> Metadata
+						<i class="icon-bar-chart"></i> Create Package
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal" role="form" method="post" action="/it2299-ffth-reincoast/CreatePackageListServlet">
-						<div class="form-group" style="padding: 0px 10px 0px 10px;">
-							<div class="btn-group">
-								<button type="button" class="btn btn-xs btn-default">
-									<i class="icon-ok"></i> Save
-								</button>
-								<button type="button" class="btn btn-xs btn-default">
-									<i class="icon-tags"></i> Other
-								</button>
-								<button type="button" class="btn btn-xs btn-default">
-									<i class="icon-tags"></i> Other
-								</button>
-							</div>
-						</div>
+					<form class="form-horizontal" role="form" method="post" action="CreatePackageListServlet">
+						
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Package Name</label>
 							<div class="col-lg-4">
@@ -57,11 +47,15 @@
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Item Search</label>
 							<div class="col-lg-4">
-								<input class="form-control" type="text" id="search" />
+								<select class="form-control" id="productName" class="selectedProduct">
+									
+								</select>
 							</div>
-							<button type="button" class="btn btn-xs btn-default" id="addRow">
-								<i class="icon-plus"></i> Add row
-							</button>
+							<div class="col-lg-1">
+								<button type="button" class="btn btn-xs btn-default" id="addRow">
+									<i class="icon-plus"></i> Add row
+								</button>
+							</div>
 						</div>
 						<div class="table-responsive" id="tableRec">
 							<table
@@ -89,14 +83,16 @@
 <!-- sample-content.jsp -->
 <!-- Add row function -->
 <script>
-	var count =1;
+	var count =0;
 	$(document).ready(function() {
+		$("#productName").select2({
+
+		});
+		getProductName();
 						$("#addRow").on('click',
 										function() {
-											if ($('#search').val() == '') {
-												alert("Please Enter Item Code");
-											} else {
-												if (count ==1) {
+											
+												if (count ==0) {
 													$("#tableRec").append('<input type="submit" />');
 													count++;
 													getItem();
@@ -105,19 +101,19 @@
 													getItem();
 													$(document).scrollTop($(document).height());
 												}
-											}
+											
 										});
 					});
 	
 	function getItem() {
 
-		var itemCode = $('#search').val();
+		var itemCode = $("#productName option:selected").val();
 		
 		$.ajax({
 					type : "POST",
 					url : "GetItemServlet",
 					data : {
-						ItemCode : itemCode
+						itemCode : itemCode
 					}
 				}).done(
 						function(data) {
@@ -125,9 +121,9 @@
 							$("#add-list")
 									.append(
 											'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id" value="'
-													+ obj.id
+													+ count
 													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
-													+ obj.code
+													+ obj.id
 													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-name" value="'
 													+ obj.name
 													+ '" readonly /></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
@@ -137,9 +133,23 @@
 													+ '" readonly/></td></tr>');
 						});
 	}
+	function getProductName(){
+		var itemCode = 1;
+		$.ajax({	type : "POST",
+			url : "getProductNameServlet",
+			data : {
+				ItemCode : itemCode
+			}
+	}).done(function(data){
+			$.each($.parseJSON(data), function(){
+				$("#productName").append('<option value='+this.id + '>'+ this.name +' </option>');
+			});
+		});
+	}
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
+<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.min.js" name="js" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js" name="js" />
 </jsp:include>
 <!-- footer.jsp -->

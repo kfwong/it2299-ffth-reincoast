@@ -22,19 +22,18 @@
 		<div class="col-lg-12">
 			<h2>Inbound Delivery</h2>
 			<ol class="breadcrumb">
-				<li class="active"><i class="icon-dashboard"></i> Outbound
-					Delivery</li>
+				<li class="active"><i class="icon-dashboard"></i> Home</li>
 			</ol>
 			
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-bar-chart"></i> Metadata
+						<i class="icon-bar-chart"></i> inbound
 					</h3>
 				</div>
 				<div class="panel-body">
 					<form class="form-horizontal" role="form" method="post"
-						action="/it2299-ffth-reincoast/InBoundServlet">
+						action="InBoundServlet">
 						
 						<div class="form-group">
 							<label class="col-lg-2 control-label">DeliveryDate</label>
@@ -61,7 +60,7 @@
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Item Search</label>
 							<div class="col-lg-4">
-								<select class="form-control" id="productName">
+								<select class="form-control" id="productName" class="selectedProduct">
 									
 								</select>
 							</div>
@@ -106,18 +105,16 @@
 <!-- sample-content.jsp -->
 <!-- Add row function -->
 <script>
-	var count = 1;
+	var count = 0;
 
 	$(document).ready(function() {
 						getDate();
 						$("#productName").select2({
+							
 						});
 						getProductName();
 						$("#addRow").on('click',function() {
-											if ($('#search').val() == '') {
-												alert("Please Enter Item Code");
-											} else {
-												if (count == 1) {
+												if (count == 0) {
 													$("#add-list").empty();
 													$("#notice").remove();
 													$("#btn_submit").remove();
@@ -132,23 +129,21 @@
 													$(document).scrollTop(
 															$(document).height());
 												}
-											}
+											
 										});
 					});
 	
 	function getItem() {
-
-		var itemCode = $('#search').value;
-		alert(itemCode);
+		var itemCode = $('#productName :selected').val();
+		
 		$.ajax({	type : "POST",
 					url : "GetItemServlet",
 					data : {
-						ItemCode : itemCode
+						itemCode : itemCode
 					}
 				}).done(function(data) {
 							var obj = $.parseJSON(data);
-							$("#add-list")
-									.append(
+							$("#add-list").append(
 											'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id" value="'
 													+ count
 													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
@@ -177,7 +172,7 @@
 			}
 	}).done(function(data){
 			$.each($.parseJSON(data), function(){
-				$("#productName").append('<option value='+this.id + '">"'+ this.name +' </option>');
+				$("#productName").append('<option value='+this.id + '>'+ this.name +' </option>');
 			});
 		});
 	}

@@ -34,10 +34,11 @@ public class GetItemServlet extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	/*
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		try{
-		int id = Integer.parseInt(request.getParameter("ItemCode"));
+		
+		int id = Integer.parseInt(request.getParameter("itemCode"));
 		
 		ProductDao productID = new ProductDao();
 
@@ -55,24 +56,23 @@ public class GetItemServlet extends HttpServlet {
 		String itemGson = gson.toJson(map);
 		
 		out.write(itemGson);
-		}catch(NumberFormatException ex){
-			System.out.println(ex);
-		}
+		
 
 		
 	}
+	*/
 	/**
 	 * @return
 	 * @return
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	/*
+	
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
 
-		int id = Integer.parseInt(request.getParameter("ItemCode"));
+		int id = Integer.parseInt(request.getParameter("itemCode"));
 
 		ProductDao productID = new ProductDao();
 
@@ -90,5 +90,5 @@ public class GetItemServlet extends HttpServlet {
 
 		out.println(itemGson);
 	}
-	*/
+	
 }

@@ -45,7 +45,6 @@
 							<table class="table table-hover table-striped tablesorter table-condensed">
 								<thead id="addHeader">
 									<tr>
-										<th class="col-lg-1">#<i class="icon-sort"></i></th>
 										<th class="col-lg-1">Delivery ID<i class="icon-sort"></i></th>
 										<th class="col-lg-2">Donor<i class="icon-sort"></i></th>
 										<th class="col-lg-2">Donor Type<i class="icon-sort"></i></th>
@@ -63,7 +62,7 @@
 									%>
 												
 									<tr>
-										<td><%=i+1%></td>
+										
 										<td><%=inboundList.get(i).getId()%></td>
 										<td><%=inboundList.get(i).getDonorName()%></td>
 										<td><%=inboundList.get(i).getDonorType()%></td>
@@ -145,7 +144,9 @@
 <!-- sample-content.jsp -->
 <!-- Add row function -->
 <script>
-
+	$(document).read(function(){
+		
+	});
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">

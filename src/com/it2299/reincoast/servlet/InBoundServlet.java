@@ -62,15 +62,14 @@ public class InBoundServlet extends HttpServlet {
 			Product product = new Product();
 			Stock stock = new Stock();
 			try {
-				Date date1 = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH)
-						.parse(expiryDate[i]);
+				Date date1 = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH).parse(expiryDate[i]);
 				item.setExpiryDate(date1);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			product.setId(Integer.parseInt(id[i]));
-
+			
 			item.setProduct(product);
 			item.setInboundDelivery(trans);
 			item.setQuantity(Integer.parseInt(quantity[i]));
@@ -104,8 +103,7 @@ public class InBoundServlet extends HttpServlet {
 		trans.setTotalPrice(total);
 		trans.setItems(itemArray);
 		try {
-			Date date1 = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH)
-					.parse(string);
+			Date date1 = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH).parse(string);
 			trans.setDateDelivered(date1);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
