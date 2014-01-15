@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -57,20 +58,21 @@ public class OutboundServlet extends HttpServlet{
 				item.setQuantity(Integer.parseInt(quantity[i]));
 				total = total+ (Double.parseDouble(price[i]) * Integer.parseInt(quantity[i]));
 				itemArray.add(item);
+				Stock stock = new Stock();
+				stock.setProduct(product);
+				stock.setQuantity(Integer.parseInt(quantity[i]));
 				StockDao stockDao = new StockDao();
-				List<Stock> myStock = stockDao.getAll();
-
-				if (!myStock.isEmpty()) {
-				if(myStock.get(i).getProduct().getId() == product.getId()){
-					Stock stock = new Stock();
-						int newQuantity = myStock.get(i).getQuantity() - item.getQuantity();
-						stock.setProduct(product);
-						stock.setQuantity(newQuantity);
-						stockDao.updateStock(stock);
-					}
+				boolean valid = stockDao.find(stock.getProduct());
+				if(valid){
+					Stock oldQuantity = stockDao.get(stock.getProduct().getId());
+					int totalQuantity = oldQuantity.getQuantity() - stock.getQuantity();
+					stock.setQuantity(totalQuantity);
+					stockDao.updateStock(stock);
 				}else{
-					response.sendRedirect(product.getName() + "is currently out of stock");
+					RequestDispatcher requestDispatcher = request.getRequestDispatcher("remove-failed.jsp");
+					requestDispatcher.forward(request, response);
 				}
+				
 			}
 			outD.setTotalPrice(total);
 			outD.setCollectionCenter(request.getParameter("collectLoc"));
@@ -78,7 +80,7 @@ public class OutboundServlet extends HttpServlet{
 			OutboundDeliveryDao outDao = new OutboundDeliveryDao();
 			outDao.saveOrUpdate(outD);
 			
-			PrintWriter out = response.getWriter();
-			out.print("ok");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("success-outbound.jsp");
+			requestDispatcher.forward(request, response);
 	}
 }

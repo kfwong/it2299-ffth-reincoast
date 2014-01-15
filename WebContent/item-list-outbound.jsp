@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
 	<jsp:param value="/path/to/css1" name="css" />
@@ -19,45 +18,55 @@
 
 	<div class="row">
 		<div class="col-lg-12">
-			<h2>Stock</h2>
+			<h2>Item List</h2>
 			<ol class="breadcrumb">
-				<li class="active"><i class="icon-dashboard"></i>Stock</li>
+				<li><i class="icon-dashboard"></i>Home</li>
+				<li>Delivery</li>
+				<li>Food Drive</li>
+				<li class="active">Item List</li>
 			</ol>
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-bar-chart"></i> Stock
+						<i class="icon-bar-chart"></i> Metadata
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal" role="form" method="post"
-						action="/it2299-ffth-reincoast/InBoundServlet">
-						
-						
+					<form class="form-horizontal" role="form" >
+
 						<div class="table-responsive" id="tableRec">
-							<table
-								class="table table-hover table-striped tablesorter table-condensed">
+							<table class="table table-hover table-striped tablesorter table-condensed">
 								<thead id="addHeader">
 									<tr>
-									<th class="col-lg-1">Product ID<i class="icon-sort"></i></th>
-									<th class="col-lg-2">Product Name<i class="icon-sort"></i></th>
-									<th class="col-lg-1">Product Quantity<i class="icon-sort"></i></th>
-									<th class="col-lg-1">Product value<i class="icon-sort"></i></th>
+										
+										<th class="col-lg-2">Product Name<i class="icon-sort"></i></th>
+										<th class="col-lg-2">Unti of Measure<i class="icon-sort"></i></th>
+										<th class="col-lg-1">Quantity<i class="icon-sort"></i></th>
 									</tr>
 								</thead>
 								<tbody id="add-list">
-								<c:forEach items="${stockList}" var="item">
-									<tr>
-										<td>${item.product.id}</td>
-										<td>${item.product.name}</td>
-										<td>${item.quantity}</td>
-										<td>${item.product.price}</td>
-									</tr>
-								</c:forEach>
+									
+									<c:forEach items="${itemList}" var="item">
+										<tr>
+											<td>
+												${item.product.name}
+											</td>
+											<td>
+												${item.product.unitOfMeasure}
+											</td>
+											<td>
+												${item.quantity}
+											</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
+						
 					</form>
+								
+								
+									
 				</div>
 			</div>
 		</div>
@@ -68,8 +77,7 @@
 <!-- sample-content.jsp -->
 <!-- Add row function -->
 <script>
-	
-	
+
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">

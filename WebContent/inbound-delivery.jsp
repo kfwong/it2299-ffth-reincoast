@@ -177,44 +177,6 @@
 		});
 	}
 	
-
-	/*
-	$("#search").select2({
-							placeholder: "Select a Product",
-							ajax:{
-								url:"GetItemServlet",
-								data:function(term){
-									return{
-										ItemCode: term
-									};
-								},
-								results: function(data){
-									return {results: data};
-								}
-							},
-							formatResult: function (data) {
-							 	alert("result " + data);
-							 	console.log("muhahaha");
-							 	
-						        var markup = "<table class='movie-result'><tr>";
-						        if (results.imageUrl !== undefined && results.imageUrl !== undefined) {
-						            markup += "<td class='movie-image'><img src='" + results.imageUrl + "'/></td>";
-						        }
-						        markup += "<td class='movie-info'><div class='movie-title'>" + results.name + "</div>";
-						        if (results.description !== undefined) {
-						            markup += "<div class='movie-synopsis'>" + results.description + "</div>";
-						        }
-						        else if (results.price !== undefined) {
-						            markup += "<div class='movie-synopsis'>" + results.price + "</div>";
-						        }
-						        markup += "</td></tr></table>";
-						        return markup;
-						    },
-							dropdownCssClass: "bigdrop",
-						    escapeMarkup: function (m) { return m; }
-						});
-	
-	*/
 	 
 	
 	

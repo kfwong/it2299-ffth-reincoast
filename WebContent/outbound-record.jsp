@@ -19,7 +19,7 @@
 
 	<div class="row">
 		<div class="col-lg-12">
-			<h2>Food Drive</h2>
+			<h2>Donation</h2>
 			<ol class="breadcrumb">
 				<li><i class="icon-dashboard"></i>Home</li>
 				<li>Delivery</li>
@@ -46,8 +46,7 @@
 								<thead id="addHeader">
 									<tr>
 										<th class="col-lg-1">Delivery ID<i class="icon-sort"></i></th>
-										<th class="col-lg-2">Donor<i class="icon-sort"></i></th>
-										<th class="col-lg-2">Donor Type<i class="icon-sort"></i></th>
+										<th class="col-lg-2">Collection Center<i class="icon-sort"></i></th>
 										<th class="col-lg-2">Recevied Date<i class="icon-sort"></i></th>
 										<th class="col-lg-1">Item List<i class="icon-sort"></i></th>
 										<th class="col-lg-2">Remove Order<i class="icon-sort"></i></th>
@@ -55,15 +54,14 @@
 								</thead>
 								<tbody id="add-list">
 
-									<c:forEach items="${inboundList}" var="item">
+									<c:forEach items="${outboundList}" var="item">
 												
 									<tr>
 										
 										<td>${item.id}</td>
-										<td>${item.donorName}</td>
-										<td>${item.donorType}</td>
+										<td>${item.collectionCenter}</td>
 										<td>${item.dateDelivered}</td>
-										<td><a href ="getItemListServlet?id=${item.id}" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> View</a></td>
+										<td><a href ="GetOutBoundItemServlet?id=${item.id}" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> View</a></td>
 										<!--  <td><href ="RemoveOrderServlet?id=${item.id}" class="btn btn-primary"><i class="icon-remove-sign"></i>Remove Record</a></td>-->
 										<td><button type="button" class="remove"  id="${item.id}">Remove Order</button></td>
 									</tr>
@@ -136,7 +134,7 @@
 	</div>
 </div>
 <!-- /.row -->
-<form method="GET" action="RemoveOrderServlet" id="hiddenForm">
+<form method="GET" action="RemoveOutboundOrderServlet" id="hiddenForm">
 	<input type="hidden" name="id" id="hiddenInput">
 </form>
 <!-- sample-content.jsp -->

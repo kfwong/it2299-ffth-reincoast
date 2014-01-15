@@ -61,7 +61,9 @@ public class OutboundDeliveryDao implements Dao<OutboundDelivery> {
 	public void delete(OutboundDelivery outboundDelivery) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
+		session.beginTransaction();
 		session.delete(outboundDelivery);
+		session.getTransaction().commit();
 		session.close();
 	}
 

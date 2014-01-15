@@ -1,7 +1,6 @@
 package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
-
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,15 +42,14 @@ public class InBoundServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		InboundDelivery trans = new InboundDelivery();
 		trans.setDonorName(request.getParameter("Donor"));
 		trans.setDonorType(request.getParameter("Type"));
 		String string = request.getParameter("deliveryDate");
 
 		double total = 0;
-		String[] id = request.getParameterValues("id");
+		String[] id = request.getParameterValues("item-code");
 		String[] quantity = request.getParameterValues("item-quantity");
 		String[] price = request.getParameterValues("item-price");
 		String[] expiryDate = request.getParameterValues("expiry-date");
@@ -81,21 +80,12 @@ public class InBoundServlet extends HttpServlet {
 							.parseInt(quantity[i]));
 			itemArray.add(item);
 			StockDao stockDao = new StockDao();
-			List<Stock> myStock = stockDao.getAll();
-			if (!myStock.isEmpty()) {
-				for (int a = 0; a < myStock.size(); a++) {
-					if (myStock.get(a).getProduct().getId() == product.getId()) {
-						
-						int currentQuantity = myStock.get(a).getQuantity();
-						int newQuantity = currentQuantity + item.getQuantity();
-						stock.setQuantity(newQuantity);
-						stockDao.updateStock(stock);
-
-					} else {
-						
-						stockDao.saveOrUpdate(stock);
-					}
-				}
+			boolean valid = stockDao.find(product);
+			if(valid){
+				Stock instock = stockDao.get(Integer.parseInt(id[i]));
+				int totalQuantity = instock.getQuantity() + stock.getQuantity();
+				stock.setQuantity(totalQuantity);
+				stockDao.updateStock(stock);
 			}else{
 				stockDao.saveOrUpdate(stock);
 			}
@@ -112,8 +102,9 @@ public class InBoundServlet extends HttpServlet {
 		InboundDeliveryDao transDao = new InboundDeliveryDao();
 		transDao.saveOrUpdate(trans);
 
-		PrintWriter out = response.getWriter();
-		out.print("ok");
+		
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("success.jsp");
+		requestDispatcher.forward(request, response);
 	}
 
 }

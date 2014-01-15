@@ -135,12 +135,13 @@
 				if (count == 0) {
 					$("#notice").remove();
 					$("#tableRec").append('<input type="submit" />');
-					count++;
+					
 					getItem();
+					count++;
 					$(document).scrollTop($(document).height());
 				} else {
-
 					getItem();
+					count++;
 					$(document).scrollTop($(document).height());
 				}
 			
@@ -152,6 +153,7 @@
 				getPackageItem();
 				$(document).scrollTop($(document).height());
 			} else {
+				count++;
 				getPackageItem();
 				$(document).scrollTop($(document).height());
 			}
@@ -187,6 +189,7 @@
 																		+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
 																		+ this.price
 																		+ '" readonly/></td></tr>');
+												
 											});
 						});
 
@@ -220,6 +223,7 @@
 													+ obj.price
 													+ '" readonly/></td></tr>');
 							getDate().datepicker("refresh");
+						
 						});
 	}
 	function getProductName(){

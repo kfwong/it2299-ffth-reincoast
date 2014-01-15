@@ -24,8 +24,11 @@
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-truck"></i> Delivery <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="inbound-delivery.jsp">Inbound Delivery</a></li>
-							<li><a href="#">Outbound Delivery</a></li>
+							<li><a href="outbound-delivery.jsp">Outbound Delivery</a></li>
 							<li><a href="#">Cancellation</a></li>
+							<li><a href="GetInboundDeliveryListServlet">Inbound Delivery Record</a></li>
+							<li><a href="GetOutboundDeliveryServlet">Outbound Delivery Record</a></li>
+							<li><a href="GetStockServlet">Inventory</a></li>
 						</ul>
 					</li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-paste"></i> Audit <b class="caret"></b></a>

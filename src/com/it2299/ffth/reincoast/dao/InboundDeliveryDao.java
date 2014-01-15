@@ -70,7 +70,9 @@ public class InboundDeliveryDao implements Dao<InboundDelivery> {
 	public void delete(InboundDelivery inboundDelivery) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
+		session.beginTransaction();
 		session.delete(inboundDelivery);
+		session.getTransaction().commit();
 		session.close();
 		
 	}

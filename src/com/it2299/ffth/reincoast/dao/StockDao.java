@@ -3,6 +3,10 @@ package com.it2299.ffth.reincoast.dao;
 import java.util.List;
 
 
+
+
+
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -26,6 +30,21 @@ public class StockDao implements Dao<Stock> {
 		return stock;
 	}
 	
+	public boolean find(Product product){
+		boolean valid = false;
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		Query query = session.createQuery("from Stock WHERE product = :product");
+		query.setParameter("product", product);
+		Object string = query.uniqueResult();
+		System.out.println(string);
+		if(string != null){
+			valid = true;
+		}else{
+			valid = false;
+		}
+		return valid;
+	}
 	@Override
 	public void saveOrUpdate(Stock t) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -51,6 +70,21 @@ public class StockDao implements Dao<Stock> {
 		return result;
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public Stock getProductStock(Product product){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("FROM Stock where product = :product");
+		
+		query.setParameter("product", product);
+		
+		List list = query.list();
+		
+		Stock stock = (Stock) list.get(0);
+		session.close();
+		
+		return stock;
+	}
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Stock> getAll() {

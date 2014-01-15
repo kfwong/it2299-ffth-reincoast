@@ -9,6 +9,8 @@ import org.hibernate.criterion.Projections;
 
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
 import com.it2299.ffth.reincoast.dto.InboundLineItem;
+import com.it2299.ffth.reincoast.dto.OutboundDelivery;
+import com.it2299.ffth.reincoast.dto.OutboundLineItem;
 import com.it2299.ffth.reincoast.dto.Product;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 
@@ -46,11 +48,24 @@ public class ItemDao implements Dao<InboundLineItem> {
 		return items;
 	}
 	
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public List<InboundLineItem> getList(InboundDelivery inboundDelivery){
 	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	Session session = sessionFactory.openSession();
 	Query query = session.createQuery("FROM InboundLineItem Where inboundDelivery = :inboundDelivery");
 	query.setParameter("inboundDelivery", inboundDelivery);
+	List list = query.list();
+	session.close();
+	
+	return list;
+	}
+
+@SuppressWarnings({ "unchecked", "rawtypes" })
+public List<OutboundLineItem> getOutboundList(OutboundDelivery outboundDelivery){
+	SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+	Session session = sessionFactory.openSession();
+	Query query = session.createQuery("FROM OutboundLineItem Where outboundDelivery = :outboundDelivery");
+	query.setParameter("outboundDelivery", outboundDelivery);
 	List list = query.list();
 	session.close();
 	
@@ -71,8 +86,21 @@ public List<InboundLineItem> getList(InboundDelivery inboundDelivery){
 	public void delete(InboundLineItem item) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
+		session.beginTransaction();
 		session.delete(item);
+		session.getTransaction().commit();
 		session.close();
+	}
+
+
+	public void deleteOutbound(OutboundLineItem outboundLineItem) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.delete(outboundLineItem);
+		session.getTransaction().commit();
+		session.close();
+		
 	}
 
 }
