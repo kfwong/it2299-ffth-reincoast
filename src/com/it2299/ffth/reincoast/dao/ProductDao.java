@@ -1,6 +1,7 @@
 package com.it2299.ffth.reincoast.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -15,8 +16,10 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.DefaultRevisionEntity;
+import org.hibernate.envers.RevisionType;
 import org.hibernate.envers.query.AuditEntity;
 import org.hibernate.envers.query.AuditQuery;
+import org.hibernate.envers.query.criteria.AuditProperty;
 
 import com.it2299.ffth.reincoast.dto.Audit;
 import com.it2299.ffth.reincoast.dto.Product;
@@ -113,7 +116,7 @@ public class ProductDao implements Dao<Product> {
 		return categories;
 	}
 
-	public List<Audit> getAudits(int id) {
+	public List<Audit> getAuditsById(int id) {
 		/*
 		 * System.out.println(histories.get(i)[0]); //entity
 		 * System.out.println
@@ -159,5 +162,73 @@ public class ProductDao implements Dao<Product> {
 		}
 		
 		return audits;
+	}
+	
+	
+	public List<Audit> getAudits(){
+		List<Audit> audits = new ArrayList<Audit>();
+
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();// this being
+														// HibernateDaoSupport
+
+		AuditReader reader = AuditReaderFactory.get(session);
+
+		AuditQuery query = reader.createQuery().forRevisionsOfEntity(Product.class, false, true);
+		query.addOrder(AuditEntity.property("dateRegistered").desc());
+		query.setMaxResults(30);
+
+		List<Object[]> results = query.getResultList();
+
+		for (int i = 0; i < results.size(); i++) {
+			Audit audit = new Audit();
+			audit.setEntity(results.get(i)[0]);
+			audit.setDate(((DefaultRevisionEntity) results.get(i)[1]).getRevisionDate());
+			String operation = null;
+			switch (results.get(i)[2].toString()) {
+			case "ADD":
+				operation = "INSERT";
+				break;
+			case "MOD":
+				operation = "UPDATE";
+				break;
+			case "DEL":
+				operation = "DELETE";
+				break;
+			}
+			audit.setOperation(operation);
+			audit.setRevisionId(((DefaultRevisionEntity) results.get(i)[1]).getId());
+			
+			audits.add(audit);
+		}
+		
+		return audits;
+	}
+	
+	public int getAuditsCount(){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();// this being
+														// HibernateDaoSupport
+
+		AuditReader reader = AuditReaderFactory.get(session);
+
+		AuditQuery query = reader.createQuery().forRevisionsOfEntity(Product.class, false, true);
+		query.addProjection(AuditEntity.property("id").count());
+		
+		return ((Long)query.getSingleResult()).intValue();
+	}
+	
+	public int getAuditsCount(RevisionType revisionType){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();// this being
+														// HibernateDaoSupport
+
+		AuditReader reader = AuditReaderFactory.get(session);
+
+		AuditQuery query = reader.createQuery().forRevisionsOfEntity(Product.class, false, true);
+		query.addProjection(AuditEntity.property("id").count());
+		query.add(AuditEntity.revisionType().eq(revisionType));
+		
+		return ((Long)query.getSingleResult()).intValue();
 	}
 }
