@@ -166,7 +166,7 @@
 	function getProductName(){
 		var itemCode = 1;
 		$.ajax({	type : "POST",
-			url : "getProductNameServlet",
+			url : "GetProductNameServlet",
 			data : {
 				ItemCode : itemCode
 			}

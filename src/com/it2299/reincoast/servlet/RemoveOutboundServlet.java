@@ -12,9 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.it2299.ffth.reincoast.dao.InboundDeliveryDao;
 import com.it2299.ffth.reincoast.dao.ItemDao;
+import com.it2299.ffth.reincoast.dao.OutboundDeliveryDao;
+import com.it2299.ffth.reincoast.dao.ProductDao;
 import com.it2299.ffth.reincoast.dao.StockDao;
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
 import com.it2299.ffth.reincoast.dto.InboundLineItem;
+import com.it2299.ffth.reincoast.dto.OutboundDelivery;
+import com.it2299.ffth.reincoast.dto.OutboundLineItem;
 import com.it2299.ffth.reincoast.dto.Product;
 import com.it2299.ffth.reincoast.dto.Stock;
 
@@ -37,46 +41,23 @@ public class RemoveOutboundServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("start");
+	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-
-		InboundDelivery inbound = new InboundDelivery();
-		inbound.setId(id);
-
+		
+		
+		OutboundDeliveryDao outboundDao = new OutboundDeliveryDao();
+		OutboundDelivery outbound = outboundDao.get(id);
 		ItemDao itemDao = new ItemDao();
-		StockDao stockDao = new StockDao();
-		List<InboundLineItem> itemList = itemDao.getList(inbound);
-
-		for (int i = 0; i < itemList.size(); i++) {
-			Product product = new Product();
-			product.setId(itemList.get(i).getProduct().getId());
-			if (stockDao.find(product)) {
-				Stock stock = new Stock();
-				Stock currentStock = stockDao.getProductStock(itemList.get(i)
-						.getProduct());
-
-				int quantity = 0;
-
-				quantity = (currentStock.getQuantity() + itemList.get(i)
-						.getQuantity());
-				stock.setQuantity(quantity);
-				stock.setProduct(product);
-				stockDao.updateStock(stock);
-
-				itemDao.delete(itemList.get(i));
-			} else {
-				RequestDispatcher requestDispatcher = request
-						.getRequestDispatcher("/remove-failed.jsp");
-				requestDispatcher.forward(request, response);
-			}
-
+		List<OutboundLineItem> outItemList = itemDao.getOutboundList(outbound);
+		for(int i=0; i< outItemList.size(); i++){
+			ProductDao productDao = new ProductDao();
+			productDao.increaseQuantity(outItemList.get(i).getProduct().getId(), outItemList.get(i).getQuantity());
 		}
-		InboundDeliveryDao inboundDao = new InboundDeliveryDao();
-		inboundDao.delete(inbound);
-		RequestDispatcher requestDispatcher = request
-				.getRequestDispatcher("GetInboundDeliveryListServlet");
+		
+			outboundDao.delete(outbound);
+		
+		
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("GetOutboundDeliveryServlet");
 		requestDispatcher.forward(request, response);
 	}
 

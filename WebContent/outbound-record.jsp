@@ -134,7 +134,7 @@
 	</div>
 </div>
 <!-- /.row -->
-<form method="GET" action="RemoveOutboundOrderServlet" id="hiddenForm">
+<form method="GET" action="RemoveOutboundServlet" id="hiddenForm">
 	<input type="hidden" name="id" id="hiddenInput">
 </form>
 <!-- sample-content.jsp -->

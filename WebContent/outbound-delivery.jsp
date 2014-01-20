@@ -135,7 +135,6 @@
 				if (count == 0) {
 					$("#notice").remove();
 					$("#tableRec").append('<input type="submit" />');
-					
 					getItem();
 					count++;
 					$(document).scrollTop($(document).height());
@@ -147,7 +146,8 @@
 			
 		});
 		$("#addPackage").on('click', function() {
-			if (count == 1) {
+			if (count == 0) {
+				$("#notice").remove();
 				$("#tableRec").append('<input type="submit" />');
 				count++;
 				getPackageItem();
@@ -229,7 +229,7 @@
 	function getProductName(){
 		var itemCode = 1;
 		$.ajax({	type : "POST",
-			url : "getProductNameServlet",
+			url : "GetProductNameServlet",
 			data : {
 				ItemCode : itemCode
 			}
@@ -243,7 +243,7 @@
 		var packCode =1;
 		$.ajax({
 			type:"POST",
-			url:"getPackage",
+			url:"GetPackage",
 			data:{
 				packCode :packCode
 			}

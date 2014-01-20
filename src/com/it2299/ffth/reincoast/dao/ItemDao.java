@@ -36,6 +36,15 @@ public class ItemDao implements Dao<InboundLineItem> {
 		session.getTransaction().commit();
 		session.close();
 	}
+	
+	public void saveOrUpdateOutbound(OutboundLineItem item) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.saveOrUpdate(item);
+		session.getTransaction().commit();
+		session.close();
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override

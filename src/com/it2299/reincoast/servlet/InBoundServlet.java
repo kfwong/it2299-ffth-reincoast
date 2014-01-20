@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.it2299.ffth.reincoast.dao.InboundDeliveryDao;
+import com.it2299.ffth.reincoast.dao.ItemDao;
+import com.it2299.ffth.reincoast.dao.ProductDao;
 import com.it2299.ffth.reincoast.dao.StockDao;
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
 import com.it2299.ffth.reincoast.dto.InboundLineItem;
@@ -43,67 +45,59 @@ public class InBoundServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		InboundDelivery trans = new InboundDelivery();
-		trans.setDonorName(request.getParameter("Donor"));
-		trans.setDonorType(request.getParameter("Type"));
-		String string = request.getParameter("deliveryDate");
+		
+		
 
-		double total = 0;
+		
 		String[] id = request.getParameterValues("item-code");
 		String[] quantity = request.getParameterValues("item-quantity");
 		String[] price = request.getParameterValues("item-price");
 		String[] expiryDate = request.getParameterValues("expiry-date");
-
-		ArrayList<InboundLineItem> itemArray = new ArrayList<InboundLineItem>();
 		
-		for (int i = 0; i < id.length; i++) {
-			System.out.println(id[i]);
-			InboundLineItem item = new InboundLineItem();
-			Product product = new Product();
-			Stock stock = new Stock();
-			try {
-				Date date1 = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH).parse(expiryDate[i]);
-				item.setExpiryDate(date1);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			product.setId(Integer.parseInt(id[i]));
-			
-			item.setProduct(product);
-			item.setInboundDelivery(trans);
-			item.setQuantity(Integer.parseInt(quantity[i]));
-			stock.setProduct(product);
-			stock.setQuantity(Integer.parseInt(quantity[i]));
-
-			total = total + (Double.parseDouble(price[i]) * Integer.parseInt(quantity[i]));
-			itemArray.add(item);
-			StockDao stockDao = new StockDao();
-			boolean valid = stockDao.find(product);
-			
-			if(valid){
-				Stock instock = stockDao.get(Integer.parseInt(id[i]));
-				int totalQuantity = instock.getQuantity() + stock.getQuantity();
-				System.out.println("total" + totalQuantity);
-				stock.setQuantity(totalQuantity);
-				stockDao.updateStock(stock);
-			}else{
-				stockDao.saveOrUpdate(stock);
-			}
-		}
-		trans.setTotalPrice(total);
-		trans.setItems(itemArray);
-		if(string != null){
+		InboundDeliveryDao inboundDao = new InboundDeliveryDao();
+		InboundDelivery inbound = new InboundDelivery();
+		Date date;
 		try {
-			Date date1 = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH).parse(string);
-			trans.setDateDelivered(date1);
+			date = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH).parse(request.getParameter("deliveryDate"));
+			
+			inbound.setDonorName(request.getParameter("Donor"));
+			inbound.setDonorType(request.getParameter("Type"));
+			inbound.setDateDelivered(date);
+			double totalPrice = 0;
+			for(int i=0 ;i < price.length; i++){
+				totalPrice = totalPrice + Double.parseDouble(price[i]);
+			}
+			inbound.setTotalPrice(totalPrice);
+			inboundDao.saveOrUpdate(inbound);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		for(int i=0; i< id.length; i++){
+			ProductDao productDao = new ProductDao();
+			productDao.increaseQuantity(Integer.parseInt(id[i]), Integer.parseInt(quantity[i]));
+			Product product = new Product();
+			product.setId(Integer.parseInt(id[i]));
+			ItemDao itemDao = new ItemDao();
+			InboundLineItem inboundItem = new InboundLineItem();
+			inboundItem.setProduct(product);
+			inboundItem.setQuantity(Integer.parseInt(quantity[i]));
+			inboundItem.setInboundDelivery(inbound);
+			Date date1 = null;
+			try {
+				date1 = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH).parse(expiryDate[i]);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			inboundItem.setExpiryDate(date1);
+			itemDao.saveOrUpdate(inboundItem);
 		}
-		InboundDeliveryDao transDao = new InboundDeliveryDao();
-		transDao.saveOrUpdate(trans);
+		
+		
+		
+		
 
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("success.jsp");

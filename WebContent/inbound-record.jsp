@@ -63,7 +63,7 @@
 										<td>${item.donorName}</td>
 										<td>${item.donorType}</td>
 										<td>${item.dateDelivered}</td>
-										<td><a href ="getItemListServlet?id=${item.id}" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> View</a></td>
+										<td><a href ="GetItemListServlet?id=${item.id}" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> View</a></td>
 										<!--  <td><href ="RemoveOrderServlet?id=${item.id}" class="btn btn-primary"><i class="icon-remove-sign"></i>Remove Record</a></td>-->
 										<td><button type="button" class="remove"  id="${item.id}">Remove Order</button></td>
 									</tr>

@@ -40,8 +40,7 @@ public class GetOutboundDeliveryServlet extends HttpServlet {
 		OutboundDeliveryDao outboundDao = new OutboundDeliveryDao();
 		List<OutboundDelivery> outboundList = outboundDao.getAll();
 		request.setAttribute("outboundList", outboundList);
-		RequestDispatcher requestDispatcher = request
-				.getRequestDispatcher("/outbound-record.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/outbound-record.jsp");
 		requestDispatcher.forward(request, response);
 	}
 
@@ -55,8 +54,7 @@ public class GetOutboundDeliveryServlet extends HttpServlet {
 		OutboundDeliveryDao outboundDao = new OutboundDeliveryDao();
 		List<OutboundDelivery> outboundList = outboundDao.getAll();
 		request.setAttribute("outboundList", outboundList);
-		RequestDispatcher requestDispatcher = request
-				.getRequestDispatcher("/outbound-record.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/outbound-record.jsp");
 		requestDispatcher.forward(request, response);
 	}
 

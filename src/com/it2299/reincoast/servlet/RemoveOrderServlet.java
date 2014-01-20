@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 
 import com.it2299.ffth.reincoast.dao.InboundDeliveryDao;
 import com.it2299.ffth.reincoast.dao.ItemDao;
+import com.it2299.ffth.reincoast.dao.ProductDao;
 import com.it2299.ffth.reincoast.dao.StockDao;
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
 import com.it2299.ffth.reincoast.dto.InboundLineItem;
@@ -39,44 +40,25 @@ public class RemoveOrderServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("start");
 		int id = Integer.parseInt(request.getParameter("id"));
 		
 		
-		InboundDelivery inbound = new InboundDelivery();
-		inbound.setId(id);
-		
+		InboundDeliveryDao inboundDao = new InboundDeliveryDao();
+		InboundDelivery inbound = inboundDao.get(id);
 		ItemDao itemDao = new ItemDao();
-		StockDao stockDao = new StockDao();
 		List<InboundLineItem> itemList = itemDao.getList(inbound);
 		
 		for(int i=0; i< itemList.size(); i++){
-			Stock stock = new Stock();
-			Stock currentStock = stockDao.getProductStock(itemList.get(i).getProduct());
-			 
-			int quantity= 0;
-			System.out.println(itemList.get(i).getProduct().getId());
-			Product product = new Product();
-			product.setId(itemList.get(i).getProduct().getId());
-			
-			if(currentStock.getQuantity() > itemList.get(i).getQuantity() || currentStock.getQuantity() == itemList.get(i).getQuantity()){
-				quantity = (currentStock.getQuantity() - itemList.get(i).getQuantity());
-				stock.setQuantity(quantity);
-				stock.setProduct(product);
-				stockDao.updateStock(stock);
-			}else{
-				System.out.println("Not enough");
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/remove-failed.jsp");
-				requestDispatcher.forward(request, response);
-				return;
-			}
-			itemDao.delete(itemList.get(i));
+			ProductDao productDao = new ProductDao();
+			Product product = productDao.get(inbound.getItems().get(i).getProduct().getId());
+			productDao.decreaseQuantity(product.getId(), inbound.getItems().get(i).getQuantity());
 		}
-		InboundDeliveryDao inboundDao = new InboundDeliveryDao();
-		inboundDao.delete(inbound);
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/success.jsp");
-		requestDispatcher.forward(request, response);
-		return;
+		
+			inboundDao.delete(inbound);
+			
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/success.jsp");
+			requestDispatcher.forward(request, response);
+		
 	}
 
 	

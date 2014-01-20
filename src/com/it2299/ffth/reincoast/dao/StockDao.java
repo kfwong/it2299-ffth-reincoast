@@ -39,20 +39,13 @@ public class StockDao implements Dao<Stock> {
 		return stock;
 	}
 	
-	public boolean find(Product product){
-		boolean valid = false;
+	public Stock find(Product product){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		Query query = session.createQuery("from Stock WHERE product = :product");
 		query.setParameter("product", product);
-		Object string = query.uniqueResult();
-		System.out.println(string);
-		if(string != null){
-			valid = true;
-		}else{
-			valid = false;
-		}
-		return valid;
+		Stock stock= (Stock) query.uniqueResult();
+		return stock;
 	}
 	@Override
 	public void saveOrUpdate(Stock t) {

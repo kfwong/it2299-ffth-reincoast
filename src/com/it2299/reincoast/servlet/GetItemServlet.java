@@ -80,7 +80,7 @@ public class GetItemServlet extends HttpServlet {
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("name", product.getName());
-		map.put("code", product.getCode());
+		map.put("code",Integer.toString(id));
 		map.put("id", Integer.toString(product.getId()));
 		map.put("price", Double.toString(product.getPrice()));
 		
