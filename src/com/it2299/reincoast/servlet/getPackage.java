@@ -21,14 +21,14 @@ import com.it2299.ffth.reincoast.dto.Packing;
 /**
  * Servlet implementation class getPackage
  */
-@WebServlet("/getPackage")
-public class getPackage extends HttpServlet {
+@WebServlet("/GetPackage")
+public class GetPackage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getPackage() {
+    public GetPackage() {
         super();
         // TODO Auto-generated constructor stub
     }

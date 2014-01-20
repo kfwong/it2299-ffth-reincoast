@@ -59,7 +59,7 @@ public class RemoveOrderServlet extends HttpServlet {
 			Product product = new Product();
 			product.setId(itemList.get(i).getProduct().getId());
 			
-			if(currentStock.getQuantity() > itemList.get(i).getQuantity()){
+			if(currentStock.getQuantity() > itemList.get(i).getQuantity() || currentStock.getQuantity() == itemList.get(i).getQuantity()){
 				quantity = (currentStock.getQuantity() - itemList.get(i).getQuantity());
 				stock.setQuantity(quantity);
 				stock.setProduct(product);
@@ -68,13 +68,15 @@ public class RemoveOrderServlet extends HttpServlet {
 				System.out.println("Not enough");
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/remove-failed.jsp");
 				requestDispatcher.forward(request, response);
+				return;
 			}
 			itemDao.delete(itemList.get(i));
 		}
 		InboundDeliveryDao inboundDao = new InboundDeliveryDao();
 		inboundDao.delete(inbound);
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("GetInboundDeliveryListServlet");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/success.jsp");
 		requestDispatcher.forward(request, response);
+		return;
 	}
 
 	

@@ -55,8 +55,9 @@ public class InBoundServlet extends HttpServlet {
 		String[] expiryDate = request.getParameterValues("expiry-date");
 
 		ArrayList<InboundLineItem> itemArray = new ArrayList<InboundLineItem>();
-
+		
 		for (int i = 0; i < id.length; i++) {
+			System.out.println(id[i]);
 			InboundLineItem item = new InboundLineItem();
 			Product product = new Product();
 			Stock stock = new Stock();
@@ -75,15 +76,15 @@ public class InBoundServlet extends HttpServlet {
 			stock.setProduct(product);
 			stock.setQuantity(Integer.parseInt(quantity[i]));
 
-			total = total
-					+ (Double.parseDouble(price[i]) * Integer
-							.parseInt(quantity[i]));
+			total = total + (Double.parseDouble(price[i]) * Integer.parseInt(quantity[i]));
 			itemArray.add(item);
 			StockDao stockDao = new StockDao();
 			boolean valid = stockDao.find(product);
+			
 			if(valid){
 				Stock instock = stockDao.get(Integer.parseInt(id[i]));
 				int totalQuantity = instock.getQuantity() + stock.getQuantity();
+				System.out.println("total" + totalQuantity);
 				stock.setQuantity(totalQuantity);
 				stockDao.updateStock(stock);
 			}else{
@@ -92,12 +93,14 @@ public class InBoundServlet extends HttpServlet {
 		}
 		trans.setTotalPrice(total);
 		trans.setItems(itemArray);
+		if(string != null){
 		try {
 			Date date1 = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH).parse(string);
 			trans.setDateDelivered(date1);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
 		}
 		InboundDeliveryDao transDao = new InboundDeliveryDao();
 		transDao.saveOrUpdate(trans);

@@ -23,14 +23,14 @@ import com.it2299.ffth.reincoast.dto.InboundDelivery;
 /**
  * Servlet implementation class getDeliveryServlet
  */
-@WebServlet("/getDeliveryServlet")
-public class getDeliveryServlet extends HttpServlet {
+@WebServlet("/GetDeliveryServlet")
+public class GetDeliveryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getDeliveryServlet() {
+    public GetDeliveryServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

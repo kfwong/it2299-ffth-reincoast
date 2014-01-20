@@ -139,6 +139,13 @@
 <form method="GET" action="RemoveOrderServlet" id="hiddenForm">
 	<input type="hidden" name="id" id="hiddenInput">
 </form>
+<form method="POST" action="SearchInboundServlet" id="hiddenForm2">
+	<input type="hidden" name="searchID" id="hiddenID">
+	<input type="hidden" name="searchName" id="hiddenName">
+	<input type="hidden" name="searchDate1" id="hiddenDate1">
+	<input type="hidden" name="searchDate2" id="hiddenDate2">
+	<input type="hidden" name="searchType" id="hiddenType">
+</form>
 <!-- sample-content.jsp -->
 <!-- Add row function -->
 <script>
@@ -153,10 +160,25 @@
 			} else {
 			   alert("Good Choose");
 			}
-			
+			search();
 		});
+		
 	});
 	
+	function search(){
+		$("#deliverySearch").on('click', function(){
+			var id = $("#searchId").val();
+			var name = $("#searchName").val();
+			var date1 = $("#searchDate1").val();
+			var date2 = $("#searchDate2").val();
+			
+			$("#hiddenID").val(id);
+			$("#hiddenName").val(name);
+			$("#hiddenDate1").val(date1);
+			$("#hiddenDate2").val(date2);
+			$("#hiddenForm2").submit();
+		});
+	}
 	
 </script>
 <!-- footer.jsp -->

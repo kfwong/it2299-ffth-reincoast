@@ -20,14 +20,14 @@ import com.it2299.ffth.reincoast.dto.Product;
 /**
  * Servlet implementation class getItemListServlet
  */
-@WebServlet("/getItemListServlet")
-public class getItemListServlet extends HttpServlet {
+@WebServlet("/GetItemListServlet")
+public class GetItemListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getItemListServlet() {
+    public GetItemListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
