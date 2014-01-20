@@ -18,7 +18,7 @@
 		<div class="col-xs-6 col-md-4"></div>
 		<div class="col-xs-6 col-md-4">
 			<h2>SIGNUP HERE</h2>
-			<form id="SignUp" class="Member_SignUp" method="post" action="/it2299-ffth-reincoast/SignUpServlet"> 
+			<form id="SignUp" class="Member_SignUp" method="post" action="/it2299-ffth-reincoast/MemberLogInServlet"> 
 		
 				<div class="form-group">
 					<!--------------------------------------NAME -------------------------------------------->
@@ -40,15 +40,7 @@
 					<label for="Username">Username</label> <input type="text"
 						class="form-control" placeholder="Username" name="Username" id="Username"
 						required autofocus>
-					<!--------------------------------------Password -------------------------------------------->
-					 <label for="Password">
-						Password</label> <input type="password" class="form-control"
-						placeholder="Password" name="Password" id="Password" required autofocus>
-						
-					<!--------------------------------------Confirm Password  -------------------------------------------->
-					<label for="CfmPassword"> Confirm your Password</label> <input type="password"
-						class="form-control" placeholder="Re-type your password"
-						name="CfmPassword" id="CfmPassword" required autofocus>
+					
 						
 						
 						

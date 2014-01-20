@@ -18,7 +18,7 @@
 		<div class="col-xs-6 col-md-4"></div>
 		<div class="col-xs-6 col-md-4">
 			<form class="form-signin" method="post"
-				action="/it2299-ffth-reincoast/LogInServlet">
+				action="/it2299-ffth-reincoast/MemberLogInServlet">
 				<h2>LOGIN </h2>
 				<input type="text" class="form-control" placeholder="User Name"
 					name="userName" required autofocus> 

@@ -1,7 +1,6 @@
 package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,20 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.it2299.ffth.reincoast.dao.MemberDao;
+import com.it2299.ffth.reincoast.dao.VolunteerDao;
 import com.it2299.ffth.reincoast.dto.Member;
+import com.it2299.ffth.reincoast.dto.Volunteer;
 
 /**
- * Servlet implementation class LogInServlet
+ * Servlet implementation class VolunteerLogInServlet
  */
-@WebServlet("/LogInServlet")
-public class LogInServlet extends HttpServlet {
+@WebServlet("/VolunteerLogInServlet")
+public class VolunteerLogInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogInServlet() {
+    public VolunteerLogInServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,18 +42,17 @@ public class LogInServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd= null;
 		
-		
-		String userName = request.getParameter("userName");
+		String userName = request.getParameter("userName").toLowerCase();
 		String password = request.getParameter("password");
 		
-		MemberDao memberdao = new MemberDao();
-		boolean result = memberdao.authenticate(userName, password);
-		Member member = memberdao.getByUsername(userName);
+		VolunteerDao volunteerDao = new VolunteerDao();
+		boolean result = volunteerDao.authenticate(userName, password);
+		Volunteer volunteer = volunteerDao.getByUsername(userName);
 		
 		if(result ==true){
 			HttpSession session = request.getSession();
 			
-			session.setAttribute("MEMBER_DATAS", member);
+			session.setAttribute("VOLUNTEER_DATAS", volunteer);
 			
 
 			rd = request.getRequestDispatcher("member-name.jsp");
@@ -64,11 +63,6 @@ public class LogInServlet extends HttpServlet {
 			   rd.forward(request, response); 
 			   //validatejs
 		}
-		
-	
-		
-				
-				
 	}
 
 }

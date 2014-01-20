@@ -10,8 +10,7 @@
 <body>
 <h1> Success </h1> <br>
 <p>My Name is : </p> ${sessionScope.MEMBER_DATAS.name}
-
-
+<p>My Name is : </p> ${sessionScope.VOLUNTEER_DATAS.name}
 
 </body>
 </html>

@@ -8,19 +8,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.it2299.ffth.reincoast.dao.MemberDao;
+import com.it2299.ffth.reincoast.dao.VolunteerDao;
 import com.it2299.ffth.reincoast.dto.Member;
+import com.it2299.ffth.reincoast.dto.Volunteer;
 
 /**
- * Servlet implementation class SignUpServlet
+ * Servlet implementation class VolunteerSignUp
  */
-@WebServlet("/SignUpServlet")
-public class SignUpServlet extends HttpServlet {
+@WebServlet("/VolunteerSignUp")
+public class VolunteerSignUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public SignUpServlet() {
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public VolunteerSignUp() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,9 +40,8 @@ public class SignUpServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Create Variable
 
-		Member member = new Member();
+		Volunteer volunteer = new Volunteer();
 		String[] passwords = new String[2];
 		// Retrieve passwords (& CPwds) from the Textbox
 		// Save them to String Array
@@ -46,20 +49,24 @@ public class SignUpServlet extends HttpServlet {
 		passwords[1] = request.getParameter("CfmPassword");
 
 		// Other Customer Detail and save to JAVA Bean
-		member.setName(request.getParameter("Name"));
-		member.setNric(request.getParameter("NRIC"));
-		member.setContactNo(request.getParameter("Contact_No"));
-		member.setUserName(request.getParameter("Username").toLowerCase());		
-		member.setStatus("INACTIVE");
-		member.setType("Volunteer");
+		volunteer.setName(request.getParameter("Name"));
+		volunteer.setNric(request.getParameter("NRIC"));
+		volunteer.setGender(request.getParameter("Gender"));
+		volunteer.setEmail(request.getParameter("Email"));
+		volunteer.setAddress(request.getParameter("Address"));
+		volunteer.setPostalCode(request.getParameter("PostalCode"));
+		volunteer.setTel(request.getParameter("Tel"));
+		volunteer.setUserName(request.getParameter("Username").toLowerCase());		
+		volunteer.setStatus("ACTIVE");
+
 		// Verify user input on passwords
 				if (passwords[0].equals("") == false && passwords[0].equals(passwords[1])) {
 					// If passwords are the same and password is not empty
 					// save the password to the Customer Java bean.
-					member.setPassword(passwords[0]); 
+					volunteer.setPassword(passwords[0]); 
 				} else {
 					// If verification fails, forward user to error page.
-					RequestDispatcher rd = request.getRequestDispatcher("Member_SignUp.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("volunteer-signup.jsp");
 					rd.forward(request, response);
 					return;
 				}
@@ -67,17 +74,16 @@ public class SignUpServlet extends HttpServlet {
 
 					//If successful, ADD INTO Database ^^V
 					
-					MemberDao memberDao = new MemberDao();
-					memberDao.saveOrUpdate(member);
+					VolunteerDao volunteerdao = new VolunteerDao();
+					volunteerdao.saveOrUpdate(volunteer);
 					
 					
 					// Forward the user to the Success page.
-					RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("member-login.jsp");
 					rd.forward(request, response);
 				} catch (Exception ex) {
 					throw new ServletException(ex);
 				}
 		
 	}
-
 }

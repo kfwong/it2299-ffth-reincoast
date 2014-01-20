@@ -6,14 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "MEMBER")
-public class Member{
+@Entity 
+@Table (name="VOLUNTEER")
+public class Volunteer {
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
 	private int id;
-
 
 	@Column(name = "NAME")
 	private String name;
