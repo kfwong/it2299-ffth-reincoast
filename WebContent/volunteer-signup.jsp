@@ -15,25 +15,26 @@
 <div id="page-wrapper">
 
 	<div class="row">
-<div class="col-lg-5 col-lg-offset-3 ">
+		<div class="col-lg-5 col-lg-offset-3 ">
 			<h2>SIGNUP HERE</h2>
-			<form id="VSU" class="Volunteer_SignUp" method="post" action="/it2299-ffth-reincoast/VolunteerSignUp"> 
-		
+			<form id="VSU" class="Volunteer_SignUp" method="post"
+				action="/it2299-ffth-reincoast/VolunteerSignUp">
+
 				<div class="form-group">
-				
+
 					<!--------------------------------------NAME -------------------------------------------->
 					<div class="row">
-					<label for="Name">Name </label> <input type="text"
-						class="form-control" placeholder="Name (in NRIC)" name="Name" id="Name"
-						required autofocus>  
+						<label for="Name">Name </label> <input type="text"
+							class="form-control" placeholder="Name (in NRIC)" name="Name"
+							id="Name" required autofocus>
 					</div>
 					<!--------------------------------------NRIC -------------------------------------------->
 					<div class="row">
-					<label for="NRIC">NRIC</label> <input
-						type="text" class="form-control" placeholder="NRIC" name="NRIC" id="NRIC"
-						required autofocus>
-						</div>
-						
+						<label for="NRIC">NRIC</label> <input type="text"
+							class="form-control" placeholder="NRIC" name="NRIC" id="NRIC"
+							required autofocus>
+					</div>
+
 					<!--------------------------------------GENDER -------------------------------------------->
 					<div class="row">
 						<label for="Gender">Gender</label> <br>
@@ -48,20 +49,21 @@
 							</label>
 						</div>
 					</div>
-					</div>
-					<br>
+				</div>
+				<br>
 				<div class="form-group">
-					<!--------------------------------------Contact Number -------------------------------------------->	
-				<div class="row">
-					<label for="Contact_No">Contact
-						No</label> <input type="text" class="form-control"
-						placeholder="Contact Number" name="Tel" id="Tel" required autofocus> 
+					<!--------------------------------------Contact Number -------------------------------------------->
+					<div class="row">
+						<label for="Contact_No">Contact No</label> <input type="text"
+							class="form-control" placeholder="Contact Number" name="Tel"
+							id="Tel" required autofocus>
 					</div>
 					<!--------------------------------------EMAIL  -------------------------------------------->
 					<div class="row">
-					<label for="Email">Email</label> <input type="text" class="form-control"
-						placeholder="Email" name="Email" id="Email" required autofocus> 
-						</div>
+						<label for="Email">Email</label> <input type="text"
+							class="form-control" placeholder="Email" name="Email" id="Email"
+							required autofocus>
+					</div>
 					<!--------------------------------------Address  -------------------------------------------->
 					<div class="row">
 
@@ -77,8 +79,8 @@
 					</div>
 					<br>
 				</div>
-				
-				
+
+
 				<div class="form-group">
 					<!--------------------------------------UserName -------------------------------------------->
 					<div class="row">
@@ -94,55 +96,57 @@
 					</div>
 					<!--------------------------------------Confirm Password  -------------------------------------------->
 					<div class="row">
-						<label for="CfmPassword"> Confirm your Password</label> <input
-							type="password" class="form-control"
-							placeholder="Re-type your password" name="CfmPassword"
+						<label for="CfmPassword"> Re-enter Password</label> <input type="Password"
+							class="form-control" placeholder="CfmPassword" name="Password"
 							id="CfmPassword" required autofocus>
 					</div>
 
+				<br> <br> <br>
+		</div>
+
+		<button class="btn btn-lg btn-primary btn-block" type="submit">
+			SIGN UP</button>
+		<small>*We will never give your detail to ANYONE</small> <br> <br>
+		<br> <br> <br> <br> <br> <br> <br>
+		<br> </div>
 
 
-				</div>
-				<button class="btn btn-lg btn-primary btn-block" type="submit">
-					SIGN UP</button>
-				<small>*We will never give your detail to ANYONE</small> <br> <br>
-				</form>
-				<br> <br> <br> <br> <br>
-			</div>
-		</div>	
-
-
-	<!-- sample-content.jsp -->
-
-	<!-- footer.jsp -->
-	<jsp:include page="footer.jsp">
-		<jsp:param value="/path/to/js1" name="js" />
-		<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js" name="js" />
-	</jsp:include>
-	<!-- footer.jsp -->
+		</form>
 	
-	<script type="text/javascript">
-$('#VSU').validate({
-	rules: {
+</div>
 
-		Tel:{
-			number: true,
-			maxlength: 8,
-			minlength: 8,
-			
-		},
-		
-		NRIC:{
-			maxlength: 9,
-			minlength: 9,
-		},
-		
-		PostalCode:{
-			maxlength: 6,
-			minlength: 6,
-		},
-	}
-	
+<!-- sample-content.jsp -->
+
+<!-- footer.jsp -->
+<jsp:include page="footer.jsp">
+	<jsp:param value="/path/to/js1" name="js" />
+	<jsp:param
+		value="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"
+		name="js" />
+</jsp:include>
+<!-- footer.jsp -->
+
+<script type="text/javascript">
+	$('#VSU').validate({
+		rules : {
+
+			Tel : {
+				number : true,
+				maxlength : 8,
+				minlength : 8,
+
+			},
+
+			NRIC : {
+				maxlength : 9,
+				minlength : 9,
+			},
+
+			PostalCode : {
+				maxlength : 6,
+				minlength : 6,
+			},
+		}
+
 	});
-
 </script>
