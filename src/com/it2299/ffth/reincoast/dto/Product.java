@@ -102,6 +102,11 @@ public class Product {
 	@Field
 	@NumericField
 	private double weight;
+	
+	@Column(name = "QUANTITY", columnDefinition="int default 0")
+	@Field
+	@NumericField
+	private int quantity;
 
 	@Column(name = "CATEGORY")
 	@Field
@@ -178,6 +183,14 @@ public class Product {
 
 	public void setWeight(double weight) {
 		this.weight = weight;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 	public String getCategory() {

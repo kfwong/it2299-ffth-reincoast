@@ -231,4 +231,34 @@ public class ProductDao implements Dao<Product> {
 		
 		return ((Long)query.getSingleResult()).intValue();
 	}
+	
+	public void increaseQuantity(int id, int increment){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		
+		session.beginTransaction();
+		
+		Product product = (Product) session.get(Product.class, id);
+		product.setQuantity(product.getQuantity()+increment);
+		
+		session.update(product);
+		
+		session.getTransaction().commit();
+		session.close();
+	}
+	
+	public void decreaseQuantity(int id, int decrement){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		
+		session.beginTransaction();
+		
+		Product product = (Product) session.get(Product.class, id);
+		product.setQuantity(product.getQuantity()-decrement);
+		
+		session.update(product);
+		
+		session.getTransaction().commit();
+		session.close();
+	}
 }
