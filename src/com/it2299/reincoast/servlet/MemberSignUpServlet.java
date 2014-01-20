@@ -16,7 +16,7 @@ import com.it2299.ffth.reincoast.dto.Member;
 /**
  * Servlet implementation class SignUpServlet
  */
-@WebServlet("/SignUpServlet")
+@WebServlet("/MemberSignUpServlet")
 public class MemberSignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -39,11 +39,9 @@ public class MemberSignUpServlet extends HttpServlet {
 		// Create Variable
 
 		Member member = new Member();
-		String[] passwords = new String[2];
+
 		// Retrieve passwords (& CPwds) from the Textbox
-		// Save them to String Array
-		passwords[0] = request.getParameter("Password");
-		passwords[1] = request.getParameter("CfmPassword");
+
 
 		// Other Customer Detail and save to JAVA Bean
 		member.setName(request.getParameter("Name"));

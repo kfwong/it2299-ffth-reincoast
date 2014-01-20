@@ -14,38 +14,44 @@
 <!-- sample-content.jsp -->
 <div id="page-wrapper">
 	<!-- sample-content.jsp -->
-	<div class="row">
-		<div class="col-xs-6 col-md-4"></div>
-		<div class="col-xs-6 col-md-4">
-			<form class="form-signin" method="post"
-				action="/it2299-ffth-reincoast/MemberLogInServlet">
-				<h2>LOGIN </h2>
-				<input type="text" class="form-control" placeholder="User Name"
-					name="userName" required autofocus> 
-					<input type="password"
-					class="form-control" placeholder="Password" name="password"
-					required autofocus> <br> 
-					
-					<h5>You are
-					logging in as... <br></h5>
+	<div class="col-md-4 col-md-offset-4">
+	
+			<div class="row">
 
-				<div class="radio-inline">
-					<label> <input type="radio" name="optionsRadios" id="STAFF"
-						value="STAFF" checked> STAFF</label>
+					<form class="form-signin" method="post" action="/it2299-ffth-reincoast/MemberLogInServlet">
+						<h2>LOGIN</h2>
+						<input type="text" class="form-control" placeholder="User Name"
+							name="userName" required autofocus> <input
+							type="password" class="form-control" placeholder="Password"
+							name="password" required autofocus> <br>
+
+						<h5>
+							You are logging in as... <br>
+						</h5>
+
+						<div class="radio-inline">
+							<label> <input type="radio" name="optionsRadios"
+								id="STAFF" value="STAFF" checked> STAFF
+							</label>
+						</div>
+						<div class="radio-inline">
+							<label> <input type="radio" name="optionsRadios"
+								id="VOLUNTEER" value="VOLUNTEER"> VOLUNTEER
+							</label>
+						</div>
+
+						<button class="btn btn-lg btn-primary btn-block" type="submit">
+							SIGN IN</button>
+
+					</form>
 				</div>
-				<div class="radio-inline">
-					<label> <input type="radio" name="optionsRadios"
-						id="VOLUNTEER" value="VOLUNTEER"> VOLUNTEER
-					</label>
-				</div>
+			</div>
 
-				<button class="btn btn-lg btn-primary btn-block" type="submit">
-					SIGN IN</button>
 
-			</form>
 
-		</div>
-	</div>
+
+
+
 	<br> <br>
 	<!-- footer.jsp -->
 	<jsp:include page="footer.jsp">

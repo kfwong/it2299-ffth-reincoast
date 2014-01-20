@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.it2299.ffth.reincoast.dao.MemberDao;
 import com.it2299.ffth.reincoast.dao.VolunteerDao;
-import com.it2299.ffth.reincoast.dto.Member;
 import com.it2299.ffth.reincoast.dto.Volunteer;
 
 /**
@@ -51,7 +49,8 @@ public class VolunteerSignUp extends HttpServlet {
 		// Other Customer Detail and save to JAVA Bean
 		volunteer.setName(request.getParameter("Name"));
 		volunteer.setNric(request.getParameter("NRIC"));
-		volunteer.setGender(request.getParameter("Gender"));
+		String value = request.getParameter("Gender");
+		volunteer.setGender(value);
 		volunteer.setEmail(request.getParameter("Email"));
 		volunteer.setAddress(request.getParameter("Address"));
 		volunteer.setPostalCode(request.getParameter("PostalCode"));
@@ -60,7 +59,7 @@ public class VolunteerSignUp extends HttpServlet {
 		volunteer.setStatus("ACTIVE");
 
 		// Verify user input on passwords
-				if (passwords[0].equals("") == false && passwords[0].equals(passwords[1])) {
+				if (passwords[0].equals("") ==false && passwords[0].equals(passwords[1])) {
 					// If passwords are the same and password is not empty
 					// save the password to the Customer Java bean.
 					volunteer.setPassword(passwords[0]); 
