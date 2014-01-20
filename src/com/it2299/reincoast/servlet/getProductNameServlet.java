@@ -21,14 +21,14 @@ import com.it2299.ffth.reincoast.dto.Product;
 /**
  * Servlet implementation class getProductNameServlet
  */
-@WebServlet("/getProductNameServlet")
-public class getProductNameServlet extends HttpServlet {
+@WebServlet("/GetProductNameServlet")
+public class GetProductNameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getProductNameServlet() {
+    public GetProductNameServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
