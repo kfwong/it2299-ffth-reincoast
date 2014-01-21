@@ -42,7 +42,7 @@
 			<table class="table table-hover table-condensed">
 				<thead>
 					<tr>
-						<th class="col-lg-1">Operation<i class="icon-sort"></i></th>
+						<th class="col-lg-1">Operation</th>
 						<th class="col-lg-3">Date<i class="icon-sort"></i></th>
 						<th>Product Name<i class="icon-sort"></i></th>
 						<th>Options</th>
