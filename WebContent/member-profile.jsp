@@ -17,10 +17,11 @@
 		<div class="panel-body"> 
 		<div class="form-group">
 		<strong>Name</strong>
-		<p><small>${product.name}</small></p> 
+		<p><small> ${sessionScope.MEMBER_DATAS.name}</small></p> 
 		 </div>
 		
 		</div>
+	</div>
 	</div>
 
 	<!-- sample-content.jsp -->

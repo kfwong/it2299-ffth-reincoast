@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 
 import com.it2299.ffth.reincoast.dao.MemberDao;
 import com.it2299.ffth.reincoast.dto.Member;
@@ -40,9 +40,6 @@ public class MemberSignUpServlet extends HttpServlet {
 
 		Member member = new Member();
 
-		// Retrieve passwords (& CPwds) from the Textbox
-
-
 		// Other Customer Detail and save to JAVA Bean
 		member.setName(request.getParameter("Name"));
 		member.setNric(request.getParameter("NRIC"));
@@ -65,7 +62,7 @@ public class MemberSignUpServlet extends HttpServlet {
 					
 					
 					// Forward the user to the Success page.
-					RequestDispatcher rd = request.getRequestDispatcher("member-login.jsp");
+					RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 					rd.forward(request, response);
 				} catch (Exception ex) {
 					throw new ServletException(ex);

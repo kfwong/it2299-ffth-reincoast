@@ -43,17 +43,20 @@ public class MemberLogInServlet extends HttpServlet {
 		RequestDispatcher rd= null;
 		
 		
-		String userName = request.getParameter("userName").toLowerCase();
+		String userName = request.getParameter("username").toLowerCase();
 		String password = request.getParameter("password");
+		//String role = request.getParameter("role");
+		
+//
 		
 		MemberDao memberdao = new MemberDao();
-		boolean result = memberdao.authenticate(userName, password);
-		Member member = memberdao.getByUsername(userName);
+		boolean result = memberdao.authenticateMember(userName, password);
+		Member member = memberdao.getByUsernameMember(userName);
 		
 		if(result ==true){
 			HttpSession session = request.getSession();
 			
-			session.setAttribute("MEMBER_DATAS", member);
+			session.setAttribute("current-user", member);
 			
 
 			rd = request.getRequestDispatcher("member-name.jsp");

@@ -3,12 +3,14 @@ package com.it2299.ffth.reincoast.dao;
 
 
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 
 import com.it2299.ffth.reincoast.dto.Member;
+import com.it2299.ffth.reincoast.dto.Volunteer;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 public class MemberDao implements Dao<Member>{
 	
@@ -67,7 +69,7 @@ public class MemberDao implements Dao<Member>{
 	}
 	
 
-	public Member getByUsername(String userName){
+	public Member getByUsernameMember(String userName){
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		Query query = session.createQuery("FROM Member where username= :Uname");
@@ -79,8 +81,8 @@ public class MemberDao implements Dao<Member>{
 		return member;
 	}
 	
-	public boolean authenticate(String userName, String password){
-		Member member = getByUsername(userName);
+	public boolean authenticateMember(String userName, String password){
+		Member member = getByUsernameMember(userName);
 		if(member!=null && member.getUserName().equals(userName) && member.getPassword().equals(password)){
 			return true;
 		}else
@@ -91,7 +93,7 @@ public class MemberDao implements Dao<Member>{
 		
 	}
 
-
+	
 
 	
 }

@@ -46,13 +46,13 @@ public class VolunteerLogInServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		VolunteerDao volunteerDao = new VolunteerDao();
-		boolean result = volunteerDao.authenticate(userName, password);
-		Volunteer volunteer = volunteerDao.getByUsername(userName);
+		boolean result = volunteerDao.authenticateVolunteer(userName, password);
+		Volunteer volunteer = volunteerDao.getByUsernameVolunteer(userName);
 		
 		if(result ==true){
 			HttpSession session = request.getSession();
 			
-			session.setAttribute("VOLUNTEER_DATAS", volunteer);
+			session.setAttribute("current-user", volunteer);
 			
 
 			rd = request.getRequestDispatcher("member-name.jsp");

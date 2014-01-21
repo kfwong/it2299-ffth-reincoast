@@ -21,7 +21,7 @@
 					<form class="form-signin" method="post" action="MemberLogInServlet">
 						<h2>LOGIN</h2>
 						<input type="text" class="form-control" placeholder="User Name"
-							name="userName" required autofocus> <input
+							name="username" required autofocus> <input
 							type="password" class="form-control" placeholder="Password"
 							name="password" required autofocus> <br>
 
