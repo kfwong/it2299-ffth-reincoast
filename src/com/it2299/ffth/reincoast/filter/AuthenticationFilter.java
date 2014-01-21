@@ -25,11 +25,13 @@ public class AuthenticationFilter implements Filter {
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 
 		// Exclusion List
-		String loginJSPURL = httpRequest.getContextPath() + "/member-login.jsp";
+		String loginJSPURL = httpRequest.getContextPath() + "/login.jsp";
 		String signUpURL = httpRequest.getContextPath() + "/member-signup.jsp";
+		String signUp2URL = httpRequest.getContextPath() + "/volunteer-signup.jsp";
 		String loginServletURL = httpRequest.getContextPath() + "/MemberLogInServlet";
+		String loginServlet2URL = httpRequest.getContextPath() + "/MemberSignUpServlet";
 
-		if (httpRequest.getRequestURI().equals(loginJSPURL) || httpRequest.getRequestURI().equals(loginServletURL) || httpRequest.getRequestURI().equals(signUpURL)) {
+		if (httpRequest.getRequestURI().equals(loginServlet2URL) ||httpRequest.getRequestURI().equals(signUp2URL) ||httpRequest.getRequestURI().equals(loginJSPURL) || httpRequest.getRequestURI().equals(loginServletURL) || httpRequest.getRequestURI().equals(signUpURL)) {
 			chain.doFilter(request, response);
 		} else if (httpRequest.getRequestURI().indexOf("/css") > 0) {
 			chain.doFilter(request, response);
@@ -40,9 +42,9 @@ public class AuthenticationFilter implements Filter {
 		} else {
 			HttpSession session = httpRequest.getSession(false);
 			if (session == null) {
-				httpResponse.sendRedirect("member-login.jsp");
-			} else if (session.getAttribute("MEMBER_DATAS") == null) {
-				httpResponse.sendRedirect("member-login.jsp");
+				httpResponse.sendRedirect("login.jsp");
+			} else if (session.getAttribute("current-user") == null) {
+				httpResponse.sendRedirect("login.jsp");
 			} else {
 				chain.doFilter(request, response);
 			}

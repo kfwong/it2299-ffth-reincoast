@@ -18,7 +18,7 @@
 	
 			<div class="row">
 
-					<form class="form-signin" method="post" action="/it2299-ffth-reincoast/MemberLogInServlet">
+					<form class="form-signin" method="post" action="MemberLogInServlet">
 						<h2>LOGIN</h2>
 						<input type="text" class="form-control" placeholder="User Name"
 							name="userName" required autofocus> <input

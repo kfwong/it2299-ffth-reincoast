@@ -11,11 +11,11 @@
 
 <!-- sample-content.jsp -->
 <div id="page-wrapper">
-<form id="MSU" class="Member_SignUp" method="post" action="/it2299-ffth-reincoast/MemberSignUpServlet"> 
+<form id="MSU" class="Member_SignUp" method="post" action="MemberSignUpServlet"> 
 
 		<div class="row">
 		<div class="col-lg-5 col-lg-offset-3 ">
-			<h2>SIGNUP HERE</h2>
+			<h2>MEMBER SIGNUP HERE</h2>
 			
 
 				<div class="form-group">
@@ -23,7 +23,7 @@
 					<!--------------------------------------NAME -------------------------------------------->
 					<div class="row">
 						<label for="Name">Name </label> <input type="text"
-							class="form-control" placeholder="Name (in NRIC)" name="Name"
+							class="form-control" placeholder="Name" name="Name"
 							id="Name" required autofocus>
 					</div>
 					<!--------------------------------------NRIC -------------------------------------------->
@@ -96,7 +96,7 @@
 
 		</div>
 	</form>
-		
+		</div>
 
 	<!-- sample-content.jsp -->
 
