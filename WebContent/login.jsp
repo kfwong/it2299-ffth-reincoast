@@ -46,12 +46,6 @@
 					</form>
 				</div>
 			</div>
-
-
-
-
-
-
 	<br> <br>
 	<!-- footer.jsp -->
 	<jsp:include page="footer.jsp">

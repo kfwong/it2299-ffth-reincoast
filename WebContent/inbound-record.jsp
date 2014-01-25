@@ -11,7 +11,12 @@
 <!-- header.jsp -->
 
 <!-- sidebar.jsp -->
-<jsp:include page="sidebar.jsp"></jsp:include>
+<jsp:include page="sidebar.jsp">
+<jsp:param value="Inbound Delivery" name="sub-active" />
+<jsp:param value="Outbound Delivery" name="sub-active" />
+<jsp:param value="Inbound Delivery Record" name="active" />
+<jsp:param value="Inventory" name="sub-active" />
+</jsp:include>
 <!-- sidebar.jsp -->
 
 <!-- sample-content.jsp -->
@@ -19,16 +24,21 @@
 
 	<div class="row">
 		<div class="col-lg-12">
-			<h2>Food Drive</h2>
+			<div class="page-header">
+					<h1>
+						Food Drive
+					</h1>
+				</div>
 			<ol class="breadcrumb">
-				<li><i class="icon-dashboard"></i>Home</li>
-				<li>Delivery</li>
-				<li class="active">Food Drive</li>
-			</ol>
-			<div class="panel panel-primary">
+					<li><a href="#"><i class="icon-dashboard"></i> Home</a></li>
+					<li class="active"><i class="icon-briefcase"></i> Delivery</li>
+					<li class="active">Inbound Delivery Record</li>
+				</ol>
+			<div class="col-lg-12">
+			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-bar-chart"></i> Food Drive List
+						<label>Food Drive List</label>
 					</h3>
 				</div>
 				<div class="panel-body">
@@ -131,7 +141,10 @@
 									</div>
 									<!-- /.modal -->
 				</div>
+				
 			</div>
+			</div>
+			
 		</div>
 	</div>
 </div>
@@ -162,6 +175,8 @@
 			}
 			search();
 		});
+		
+		
 		
 	});
 	

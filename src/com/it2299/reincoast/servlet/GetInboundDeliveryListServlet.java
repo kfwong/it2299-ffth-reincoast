@@ -36,8 +36,7 @@ public class GetInboundDeliveryListServlet extends HttpServlet {
 
 		request.setAttribute("inboundList", inboundList);
 
-		RequestDispatcher requestDispatcher = request
-				.getRequestDispatcher("/inbound-record.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/inbound-record.jsp");
 		requestDispatcher.forward(request, response);
 	}
 
@@ -49,8 +48,7 @@ public class GetInboundDeliveryListServlet extends HttpServlet {
 
 		request.setAttribute("inboundList", inboundList);
 
-		RequestDispatcher requestDispatcher = request
-				.getRequestDispatcher("/inbound-record.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/inbound-record.jsp");
 		requestDispatcher.forward(request, response);
 	}
 }

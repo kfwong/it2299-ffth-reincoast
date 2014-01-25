@@ -26,7 +26,7 @@
 					Delivery</li>
 			</ol>
 
-			<div class="panel panel-primary">
+			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						<i class="icon-bar-chart"></i> Metadata
