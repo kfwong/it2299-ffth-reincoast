@@ -13,95 +13,59 @@
 <!-- content -->
 <div id="page-wrapper">
 	<h1>Contacts <small>Donors - Individual</small></h1>
-
-	<div class="table-above contact-button-group">
-		<form method="post" action="contacts-donors-individual-edit.jsp">
+	<form method="get" action="ContactEditServlet">
+		<div class="table-above contact-button-group">
 			<div class="form-group">
-				<button type="submit" class="pull-right btn btn-default">Add / Edit</button>
+				<button type="submit" class="pull-right btn btn-default submit-button">Add / Edit</button>
 				<button type="button" class="pull-right btn btn-default contact-button delete-button">Delete</button>
 			</div>
-		</form>
+							
+			<span class="pull-left alert alert-info row-selected-count">No records selected</span>
+			
+			<div class="clearfix"></div>
+		</div>
 		
-		<span class="pull-left alert alert-info row-selected-count">No records selected</span>
-		
-		<div class="clearfix"></div>
-	</div>
-	
-	<!-- Modal -->
-	<div class="modal delete-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        <h4 class="modal-title" id="myModalLabel">Delete contacts</h4>
-	      </div>
-	      <div class="modal-body">
-	         <p>Are you sure you want to delete the records?</p>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-	        <button type="button" class="btn btn-primary confirm-delete-button">Confirm</button>
-	      </div>
-	    </div><!-- /.modal-content -->
-	  </div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-		
-	<table class="table table-hover table-striped table-bordered">
-		<thead>
-			<tr>
-				<th class="table-column-name">Name</th>
-				<th class="table-column-address">Address</th>
-				<th class="table-column-number">Contact Number</th>
-				<th class="table-column-email">Email</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="contact" items="${contactArray}">
-			<tr class="table-row">
-				<td>${contact.name}</td>
-				<td>${contact.address}</td>
-				<td>${contact.contactNumber}</td>
-				<td>${contact.email}</td>
-			</tr>
-			</c:forEach>
+		<!-- Modal -->
+		<div class="modal delete-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title" id="myModalLabel">Delete contacts</h4>
+		      </div>
+		      <div class="modal-body">
+		         <p>Are you sure you want to delete the records?</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		        <button type="button" class="btn btn-primary confirm-delete-button">Confirm</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 			
-			<tr class="table-row">
-				<td>John Smith</td>
-				<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-				<td>91234567</td>
-				<td>johnsmith@gmail.com</td>
-			</tr>
-			
-			<tr class="table-row">
-				<td>John Smith</td>
-				<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-				<td>91234567</td>
-				<td>johnsmith@gmail.com</td>
-			</tr>
-			
-			<tr class="table-row">
-				<td>John Smith</td>
-				<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-				<td>91234567</td>
-				<td>johnsmith@gmail.com</td>
-			</tr>
-			
-			<tr class="table-row">
-				<td>John Smith</td>
-				<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-				<td>91234567</td>
-				<td>johnsmith@gmail.com</td>
-			</tr>
-			
-			<tr class="table-row">
-				<td>John Smith</td>
-				<td>BLK 123 Choa Chu Kang Avenue 3 Singapore 670123</td>
-				<td>91234567</td>
-				<td>johnsmith@gmail.com</td>
-			</tr>
-		</tbody>
-	</table>
-
+		<table class="table table-hover table-striped table-bordered">
+			<thead>
+				<tr>
+					<th class="table-column-name">Name</th>
+					<th class="table-column-address">Address</th>
+					<th class="table-column-number">Contact Number</th>
+					<th class="table-column-email">Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="contact" items="${contactArray}">
+				<tr class="table-row">
+					<td>${contact.name}</td>
+					<td>${contact.address}</td>
+					<td>${contact.contactNumber}</td>
+					<td>${contact.email}</td>
+					<input class="id" type="hidden" name="id" value="${contact.id}">
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</form>
 </div>
 <!-- /content -->
 
@@ -117,10 +81,12 @@
 			if($(rowSelected).hasClass("warning selected")){
 				$(rowSelected).removeClass("warning selected");
 				rowSelectedCount--;
+				$(rowSelected).find("input").removeClass("selectedId");
 			}
 			else{
 				$(rowSelected).addClass("warning selected"); 
 				rowSelectedCount++;
+				$(rowSelected).find("input").addClass("selectedId");
 			}			
 		
 			if(rowSelectedCount == 0){
@@ -143,7 +109,13 @@
 		
 		$(".confirm-delete-button").on("click", function(){
 			location.reload(true);
-			console.log("test");
+		});
+		
+		$(".submit-button").on("click", function(event){
+			event.preventDefault();
+			$(".id").not(".selectedId").remove();
+			
+			$("form").submit();
 		});
 	});
 </script>

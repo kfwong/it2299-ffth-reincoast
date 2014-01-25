@@ -46,28 +46,7 @@ public class ContactServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-		String [] nameArray = request.getParameterValues("name");
-		String [] addressArray = request.getParameterValues("address");
-		String [] contactNumberArray = request.getParameterValues("number");
-		String [] emailArray = request.getParameterValues("email");
-		String [] organizationArray = request.getParameterValues("organization");
-		
-		
-		for(int i=0; i<nameArray.length; i++){
-			Contact contact = new Contact();
-			contact.setName(nameArray[i]);
-			contact.setAddress(addressArray[i]);
-			contact.setContactNumber(contactNumberArray[i]);
-			contact.setEmail(emailArray[i]);
-			contact.setOrganization(organizationArray[i]);
-			
-			ContactDao contactDao = new ContactDao();
-			contactDao.saveOrUpdate(contact);
-			
-			response.sendRedirect("contacts-donors-individual.jsp");
-		}
 	}
 
 }

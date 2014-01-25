@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
 	<jsp:param value="css/contacts.css" name="css" />
@@ -12,10 +13,10 @@
 <!-- content -->
 <div id="page-wrapper">
 	<h1>Contacts <small>Donors - Individual</small></h1>
-	<form method="post" action="/it2299-ffth-reincoast/ContactServlet">
+	<form method="post" action="ContactEditServlet">
 		<div class="table-above contact-button-group">
 			<div class="form-group">	
-				<button type="button" class="pull-left btn btn-default contact-button">Discard</button>
+				<button type="button" class="pull-left btn btn-default contact-button discard-button">Discard</button>
 				<button type="button" class="pull-left btn btn-default contact-button reset-button">Reset</button>
 				<button type="submit" class="pull-right btn btn-default">Save</button>
 				<button type="button" class="pull-right btn btn-default contact-button new-contact-button">New Contact</button>
@@ -36,22 +37,18 @@
 				</tr>
 			</thead>
 			<tbody class="table-new-contact">
-				<tr>
-					<td class="table-column-name"><input type="text" class="form-control" value="John Smith" ></td>
-					<td class="table-column-address"><input type="text" class="form-control" value="BLK 123 Choa Chu Kang Avenue 3 Singapore 670123" ></td>
-					<td class="table-column-number"><input type="text" class="form-control" value="91234567" ></td>
-					<td class="table-column-email"><input type="text" class="form-control" value="johnsmith@gmail.com" ></td>
+				<c:forEach var="contact" items="${contactArray}">
+				<tr class="table-row">
+					<td class="table-column-name"><input type="text" class="form-control" name="name" value="${contact.name}" ></td>
+					<td class="table-column-address"><input type="text" class="form-control" name="address" value="${contact.address}" ></td>
+					<td class="table-column-number"><input type="text" class="form-control" name="number" value="${contact.contactNumber}" ></td>
+					<td class="table-column-email"><input type="text" class="form-control" name="email" value="${contact.email}" ></td>
+					<input class="id" type="hidden" name="id" value="${contact.id}">
+					<input type="hidden" name="organization" value="individual"/>
 				</tr>
-				
-				<tr>
-					<td class="table-column-name"><input type="text" class="form-control" value="John Smith" ></td>
-					<td class="table-column-address"><input type="text" class="form-control" value="BLK 123 Choa Chu Kang Avenue 3 Singapore 670123" ></td>
-					<td class="table-column-number"><input type="text" class="form-control" value="91234567" ></td>
-					<td class="table-column-email"><input type="text" class="form-control" value="johnsmith@gmail.com" ></td>
-				</tr>
+				</c:forEach>
 			</tbody>
 		</table>
-		<input type="hidden" name="organization" value="individual"/>
 	</form>
 </div>
 <!-- /content -->
@@ -65,6 +62,9 @@
 			location.reload();
 		});
 		
+		$(".discard-button").on("click", function(){
+			window.location.href = "ContactServlet";	
+		});
 		
 		$(".new-contact-button").on("click", function(){
 			$(".table-new-contact").prepend(
@@ -73,6 +73,7 @@
 				'<td class="table-column-address"><input type="text" class="form-control" name="address"></td>'+
 				'<td class="table-column-number"><input type="text" class="form-control" name="number"></td>' +
 				'<td class="table-column-email"><input type="text" class="form-control" name="email"></td>' +
+				'<input type="hidden" name="organization" value="individual"/>' +
 				'</tr>'
 			);
 			

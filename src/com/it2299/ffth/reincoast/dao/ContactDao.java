@@ -1,10 +1,15 @@
 package com.it2299.ffth.reincoast.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 
 import com.it2299.ffth.reincoast.dto.Contact;
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
@@ -46,6 +51,24 @@ public class ContactDao implements Dao<Contact> {
 		
 		session.close();
 		return t;
+	}
+	
+	public List<Contact> getAllById(ArrayList<Integer> ids){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		
+		Criteria criteria = session.createCriteria(Contact.class);
+		Disjunction disjunction = Restrictions.disjunction();
+		for(int id : ids){
+			disjunction.add(Restrictions.idEq(id));
+		}
+		criteria.add(disjunction);
+		
+		List<Contact> contacts = criteria.list();
+		
+		session.close();
+		
+		return contacts;
 	}
 
 	@Override
