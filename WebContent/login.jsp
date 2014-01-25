@@ -30,12 +30,12 @@
 						</h5>
 
 						<div class="radio-inline">
-							<label> <input type="radio" name="optionsRadios"
+							<label> <input type="radio" name="role"
 								id="STAFF" value="STAFF" checked> STAFF
 							</label>
 						</div>
 						<div class="radio-inline">
-							<label> <input type="radio" name="optionsRadios"
+							<label> <input type="radio" name="role"
 								id="VOLUNTEER" value="VOLUNTEER"> VOLUNTEER
 							</label>
 						</div>

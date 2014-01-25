@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.it2299.ffth.reincoast.dao.MemberDao;
+import com.it2299.ffth.reincoast.dao.VolunteerDao;
 import com.it2299.ffth.reincoast.dto.Member;
+import com.it2299.ffth.reincoast.dto.Volunteer;
 
 /**
  * Servlet implementation class LogInServlet
@@ -20,58 +22,73 @@ import com.it2299.ffth.reincoast.dto.Member;
 @WebServlet("/MemberLogInServlet")
 public class MemberLogInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MemberLogInServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public MemberLogInServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd= null;
-		
-		
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rd = null;
+
 		String userName = request.getParameter("username").toLowerCase();
 		String password = request.getParameter("password");
-		//String role = request.getParameter("role");
-		
-//
-		
-		MemberDao memberdao = new MemberDao();
-		boolean result = memberdao.authenticateMember(userName, password);
-		Member member = memberdao.getByUsernameMember(userName);
-		
-		if(result ==true){
-			HttpSession session = request.getSession();
-			
-			session.setAttribute("current-user", member);
-			
+		String status = request.getParameter("role");
 
-			rd = request.getRequestDispatcher("member-name.jsp");
-			rd.forward(request, response); 
-		}
-		else {
-			rd = getServletContext().getRequestDispatcher("/member-login.jsp");
-			   rd.forward(request, response); 
-			   //validatejs
-		}
-		
-	
-		
+		if (status.equals("STAFF")) {
+			MemberDao memberdao = new MemberDao();
+			boolean result = memberdao.authenticateMember(userName, password);
+			Member member = memberdao.getByUsernameMember(userName);
+
+			if (result == true) {
+				HttpSession session = request.getSession();
+
+				session.setAttribute("current-user", member);
+
+				rd = request.getRequestDispatcher("dashboard.jsp");
+				rd.forward(request, response);
+			}
 				
-				
+		} else if (status.equals("VOLUNTEER")) {
+				VolunteerDao volunteerDao = new VolunteerDao();
+				boolean results = volunteerDao.authenticateVolunteer(userName,
+						password);
+				Volunteer volunteer = volunteerDao
+						.getByUsernameVolunteer(userName);
+
+				if (results == true) {
+					HttpSession session = request.getSession();
+
+					session.setAttribute("current-user", volunteer);
+
+					rd = request.getRequestDispatcher("dashboard.jsp");
+					rd.forward(request, response);
+				}
+			}else {
+			rd = getServletContext().getRequestDispatcher("/login.jsp");
+			rd.forward(request, response);
+			// validatejs
+		}
+
 	}
 
 }
+
+	
