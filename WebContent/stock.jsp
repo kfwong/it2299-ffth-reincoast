@@ -7,6 +7,7 @@
 <jsp:include page="header.jsp">
 	<jsp:param value="/path/to/css1" name="css" />
 	<jsp:param value="/path/to/css2" name="css" />
+	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.4.3/morris.css" name="css" />
 </jsp:include>
 <!-- header.jsp -->
 
@@ -19,14 +20,16 @@
 
 	<div class="row">
 		<div class="col-lg-12">
-			<h2>Stock</h2>
+		<h2>Stock</h2>
 			<ol class="breadcrumb">
 				<li class="active"><i class="icon-dashboard"></i>Stock</li>
 			</ol>
-			<div class="panel panel-primary">
+		<div class="col-lg-7">
+			
+			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-bar-chart"></i> Stock
+						<i class="icon-bar-chart"></i> <label>Stock</label>
 					</h3>
 				</div>
 				<div class="panel-body">
@@ -48,10 +51,10 @@
 								<tbody id="add-list">
 								<c:forEach items="${stockList}" var="item">
 									<tr>
-										<td>${item.product.id}</td>
-										<td>${item.product.name}</td>
+										<td>${item.id}</td>
+										<td>${item.name}</td>
 										<td>${item.quantity}</td>
-										<td>${item.product.price}</td>
+										<td>${item.price}</td>
 									</tr>
 								</c:forEach>
 								</tbody>
@@ -61,6 +64,48 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-lg-5">
+		<div class="panel panel-default">
+					<div class="panel-body">
+						<h4>
+							<label>Stock Status</label>
+						</h4>
+						<span>Displaying stock status.</span>
+					</div>
+					<table class="table ">
+						<tbody>
+							<tr>
+								<td class="col-lg-4">Currently Available</td>
+								<td>${totalQuan}</td>
+							</tr>
+							<tr>
+								<td class="col-lg-4">Total Inbound</td>
+								<td>${inboundSize}</td>
+							</tr>
+							<tr>
+								<td class="col-lg-4">Total Outbound</td>
+								<td>${outboundSize}</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="panel-footer">
+						<h4><label>Stock Graph</label></h4>
+						
+						<div id="graph"></div>
+						<div class="btn-group pull-right">
+							<a href="#" class="btn btn-default btn-xs">This Year</a>
+							<a href="#" class="btn btn-default btn-xs">This Month</a>
+							<a href="#" class="btn btn-default btn-xs">This Week</a>
+							<a href="#" class="btn btn-default btn-xs">Today</a>
+						</div>
+						
+						<div class="clearfix"></div>
+					</div>
+					
+				</div>
+		</div>
+	</div>
+	
 	</div>
 </div>
 <!-- /.row -->
@@ -68,11 +113,20 @@
 <!-- sample-content.jsp -->
 <!-- Add row function -->
 <script>
+
+	$(document).ready(function(){
+		${mychart};
+	});
+	
 	
 	
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js" name="js" />
+	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js" name="js" />
+		<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/graphael/0.5.1/g.raphael-min.js" name="js" />
+		<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/graphael/0.5.1/g.dot-min.js" name="js" />
+		<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.4.3/morris.min.js" name="js" />
 </jsp:include>
 <!-- footer.jsp -->
