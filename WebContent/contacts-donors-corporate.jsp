@@ -12,7 +12,7 @@
 
 <!-- content -->
 <div id="page-wrapper">
-	<h1>Contacts <small>Donors - Individual</small></h1>
+	<h1>Contacts <small>Donors - Corporate</small></h1>
 	<form method="get" action="ContactEditServlet">
 		<div class="table-above contact-button-group">
 			<div class="form-group">
@@ -51,6 +51,7 @@
 					<th class="table-column-address">Address</th>
 					<th class="table-column-number">Contact Number</th>
 					<th class="table-column-email">Email</th>
+					<th class="table-column-organization">Company</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -60,12 +61,13 @@
 					<td>${contact.address}</td>
 					<td>${contact.contactNumber}</td>
 					<td>${contact.email}</td>
+					<td>${contact.organization}</td>
 					<input class="id" type="hidden" name="id" value="${contact.id}">
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<input type="hidden" name="type" value="individual">
+		<input type="hidden" name="type" value="corporate">
 	</form>
 </div>
 <!-- /content -->
@@ -115,7 +117,7 @@
 		$(".submit-button").on("click", function(event){
 			event.preventDefault();
 			$(".id").not(".selectedId").remove();
-
+			
 			$("form").submit();
 		});
 	});

@@ -12,7 +12,7 @@
 
 <!-- content -->
 <div id="page-wrapper">
-	<h1>Contacts <small>Donors - Individual</small></h1>
+	<h1>Contacts <small>Donors - Corporate</small></h1>
 	<form method="post" action="ContactEditServlet">
 		<div class="table-above contact-button-group">
 			<div class="form-group">	
@@ -34,6 +34,7 @@
 					<th class="table-column-address">Address</th>
 					<th class="table-column-number">Contact Number</th>
 					<th class="table-column-email">Email</th>
+					<th class="table-column-organization">Company</th>
 				</tr>
 			</thead>
 			<tbody class="table-new-contact">
@@ -42,15 +43,15 @@
 					<td class="table-column-name"><input type="text" class="form-control" name="name" value="${contact.name}" ></td>
 					<td class="table-column-address"><input type="text" class="form-control" name="address" value="${contact.address}" ></td>
 					<td class="table-column-number"><input type="text" class="form-control" name="number" value="${contact.contactNumber}" ></td>
-					<td class="table-column-email"><input type="text" class="form-control" name="email" value="${contact.email}" ></td>
+					<td class="table-column-email"><input type="text" class="form-control" name="email" value="${contact.email}" ></td>	
+					<td class="table-column-organization"><input type="text" class="form-control" name="organization" value="${contact.organization}"></td>
+					<input type="hidden" name="type" value="corporate"/>
 					<input class="id" type="hidden" name="id" value="${contact.id}">
-					<input type="hidden" name="organization" value="individual"/>
-					<input type="hidden" name="type" value="individual"/>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<input type="hidden" name="type" value="individual">
+		<input type="hidden" name="type" value="corporate">
 	</form>
 </div>
 <!-- /content -->
@@ -65,7 +66,7 @@
 		});
 		
 		$(".discard-button").on("click", function(){
-			window.location.href = 'ContactServlet?type=individual';	
+			window.location.href = 'ContactServlet?type=corporate';	
 		});
 		
 		$(".new-contact-button").on("click", function(){
@@ -75,9 +76,9 @@
 				'<td class="table-column-address"><input type="text" class="form-control" name="address"></td>'+
 				'<td class="table-column-number"><input type="text" class="form-control" name="number"></td>' +
 				'<td class="table-column-email"><input type="text" class="form-control" name="email"></td>' +
+				'<td class="table-column-organization"><input type="text" class="form-control" name="organization"></td>' +
 				'<input class="id" type="hidden" name="id" value="-1">' +
-				'<input type="hidden" name="organization" value="individual"/>' +
-				'<input type="hidden" name="type" value="individual"/>' +
+				'<input type="hidden" name="type" value="corporate"' +
 				'</tr>'
 			);
 			

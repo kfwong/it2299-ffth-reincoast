@@ -63,7 +63,7 @@ public class MemberLogInServlet extends HttpServlet {
 			rd.forward(request, response); 
 		}
 		else {
-			rd = getServletContext().getRequestDispatcher("/member-login.jsp");
+			rd = getServletContext().getRequestDispatcher("/login.jsp");
 			   rd.forward(request, response); 
 			   //validatejs
 		}

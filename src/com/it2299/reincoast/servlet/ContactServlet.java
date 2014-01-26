@@ -34,11 +34,25 @@ public class ContactServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String type = request.getParameter("type");
+		String page = "";
+		
 		ContactDao contactDao = new ContactDao();
-		List<Contact> contactArray = contactDao.getAll();
+		List<Contact> contactArray = contactDao.getAllByType(type);
+		
+		switch(type){
+			case "individual": page = "contacts-donors-individual.jsp";
+			break;
+			case "corporate": page = "contacts-donors-corporate.jsp";
+			break;
+			case "school": page = "contacts-beneficiaries-school.jsp";
+			break;
+			case "scc": page = "contacts-beneficiaries-scc.jsp";
+			break;
+		}
 		
 		request.setAttribute("contactArray", contactArray);
-		RequestDispatcher rd = request.getRequestDispatcher("contacts-donors-individual.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher(page);
 		rd.forward(request, response);
 	}
 

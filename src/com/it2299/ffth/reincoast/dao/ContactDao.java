@@ -70,6 +70,24 @@ public class ContactDao implements Dao<Contact> {
 		
 		return contacts;
 	}
+	
+	public List<Contact> getAllByType(String type){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		
+		Criteria criteria = session.createCriteria(Contact.class);
+		Disjunction disjunction = Restrictions.disjunction();
+		
+		disjunction.add(Restrictions.eq("type", type));
+		
+		criteria.add(disjunction);
+		
+		List<Contact> contacts = criteria.list();
+		
+		session.close();
+		
+		return contacts;
+	}
 
 	@Override
 	public Integer countAll() {

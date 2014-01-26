@@ -32,6 +32,9 @@ public class Contact {
 	@Column(name = "ORGANIZATION")
 	private String organization;
 	
+	@Column(name = "TYPE")
+	private String type;
+	
 	public int getId() {
 		return id;
 	}
@@ -67,6 +70,12 @@ public class Contact {
 	}
 	public void setOrganization(String organization) {
 		this.organization = organization;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	

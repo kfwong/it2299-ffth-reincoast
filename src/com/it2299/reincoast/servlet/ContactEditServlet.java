@@ -34,6 +34,10 @@ public class ContactEditServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String type = request.getParameter("type");
+		String page = "";
+		
+
 		String[] idArray = null;
 		idArray = request.getParameterValues("id");
 		if(idArray != null){
@@ -47,7 +51,19 @@ public class ContactEditServlet extends HttpServlet {
 			
 			request.setAttribute("contactArray", contactArray);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("contacts-donors-individual-edit.jsp");
+		
+		switch(type){
+			case "individual": page = "contacts-donors-individual-edit.jsp";
+			break;
+			case "corporate": page = "contacts-donors-corporate-edit.jsp";
+			break;
+			case "school": page = "contacts-beneficiaries-school-edit.jsp";
+			break;
+			case "scc": page = "contacts-beneficiaries-scc-edit.jsp";
+			break;
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher(page);
 		rd.forward(request, response);
 	}
 
@@ -68,22 +84,40 @@ public class ContactEditServlet extends HttpServlet {
 		String [] contactNumberArray = request.getParameterValues("number");
 		String [] emailArray = request.getParameterValues("email");
 		String [] organizationArray = request.getParameterValues("organization");
+		String [] typeArray = request.getParameterValues("type");
 		
+		String type = typeArray[0];
+		String page = "";
 		
 		for(int i=0; i<idArrayList.size(); i++){
 			Contact contact = new Contact();
-			contact.setId(idArrayList.get(i));
+			if(idArrayList.get(i) != -1){
+				contact.setId(idArrayList.get(i));
+			}
 			contact.setName(nameArray[i]);
 			contact.setAddress(addressArray[i]);
 			contact.setContactNumber(contactNumberArray[i]);
 			contact.setEmail(emailArray[i]);
 			contact.setOrganization(organizationArray[i]);
+			contact.setType(typeArray[i]);
 			
 			ContactDao contactDao = new ContactDao();
 			contactDao.saveOrUpdate(contact);
 		}
 		
-		response.sendRedirect("ContactServlet");
+
+		switch(type){
+			case "individual": page = "ContactServlet?type=individual";
+			break;
+			case "corporate": page = "ContactServlet?type=corporate";
+			break;
+			case "school": page = "ContactServlet?type=school";
+			break;
+			case "scc": page = "ContactServlet?type=scc";
+			break;
+		}
+		
+		response.sendRedirect(page);
 	}
 
 }
