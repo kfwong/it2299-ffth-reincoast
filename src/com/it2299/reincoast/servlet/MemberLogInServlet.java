@@ -81,10 +81,10 @@ public class MemberLogInServlet extends HttpServlet {
 					rd = request.getRequestDispatcher("dashboard.jsp");
 					rd.forward(request, response);
 				}
-			}else {
+		}else {
 			rd = getServletContext().getRequestDispatcher("/login.jsp");
 			rd.forward(request, response);
-			// validatejs
+
 		}
 
 	}

@@ -45,6 +45,9 @@ public class Member{
 
 	@Column(name="STATUS")
 	private String status;
+	
+	@Column(name="TYPE")
+	private String type;
 
 	public int getId() {
 		return id;
@@ -133,6 +136,14 @@ public class Member{
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	

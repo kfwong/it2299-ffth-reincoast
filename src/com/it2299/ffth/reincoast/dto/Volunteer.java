@@ -44,6 +44,9 @@ public class Volunteer {
 
 	@Column(name="STATUS")
 	private String status;
+	
+	@Column(name="TYPE")
+	private String type;
 
 	public int getId() {
 		return id;
@@ -134,6 +137,13 @@ public class Volunteer {
 		this.status = status;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	
 }

@@ -57,6 +57,7 @@ public class VolunteerSignUpServlet extends HttpServlet {
                 volunteer.setTel(request.getParameter("Tel"));
                 volunteer.setUserName(request.getParameter("Username").toLowerCase());                
                 volunteer.setStatus("ACTIVE");
+            	volunteer.setType("VOLUNTEER");
 
                 // Verify user input on passwords
                                 if ((pwd.equals("")==false) && (pwd.equals(cfmPwd))) {
