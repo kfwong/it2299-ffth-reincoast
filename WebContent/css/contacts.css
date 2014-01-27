@@ -20,7 +20,7 @@
 }
 
 .table-column-name{
-	width:330px;	
+	width:250px;	
 }
 
 .table-column-address{
@@ -31,9 +31,9 @@
 }
 
 .table-column-email{
-	width:220px;
+	width:200px;
 }
 
 .table-column-organization{
-	width:330px;
+	width:250px;
 }

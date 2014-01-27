@@ -71,6 +71,12 @@ public class ContactDao implements Dao<Contact> {
 		return contacts;
 	}
 	
+	/*	The following types are available:
+		Donors - Individual type = individual
+		Donors - Corporate type = corporate
+		Beneficiaries School type = school
+		Beneficiaries Self Collection Center type = scc
+	*/
 	public List<Contact> getAllByType(String type){
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
