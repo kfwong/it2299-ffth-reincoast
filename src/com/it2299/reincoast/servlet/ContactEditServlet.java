@@ -34,37 +34,79 @@ public class ContactEditServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String type = request.getParameter("type");
-		String page = "";
+		String delete = request.getParameter("delete");
 		
-
-		String[] idArray = null;
-		idArray = request.getParameterValues("id");
-		if(idArray != null){
+		if(delete != null && delete.equals("true")){
+			System.out.println("delete");
+			String[] idArray = null;
+			idArray = request.getParameterValues("id");
 			ArrayList<Integer> idArrayList = new ArrayList<Integer>();
 			for(int i=0; i<idArray.length; i++){
 				idArrayList.add(Integer.parseInt(idArray[i]));
 			}
+
+			String [] typeArray = request.getParameterValues("type");
 			
-			ContactDao contactDao = new ContactDao();
-			List<Contact> contactArray = contactDao.getAllById(idArrayList);
+			String type = typeArray[0];
+			String page = "";
 			
-			request.setAttribute("contactArray", contactArray);
+			for(int i=0; i<idArrayList.size(); i++){
+				Contact contact = new Contact();
+				if(idArrayList.get(i) != -1){
+					contact.setId(idArrayList.get(i));
+					System.out.println(idArrayList.get(i));
+				}
+				ContactDao contactDao = new ContactDao();
+				contactDao.delete(contact);;
+			}
+			
+	
+			switch(type){
+				case "individual": page = "ContactServlet?type=individual";
+				break;
+				case "corporate": page = "ContactServlet?type=corporate";
+				break;
+				case "school": page = "ContactServlet?type=school";
+				break;
+				case "scc": page = "ContactServlet?type=scc";
+				break;
+			}
+			
+			response.sendRedirect(page);
 		}
-		
-		switch(type){
-			case "individual": page = "contacts-donors-individual-edit.jsp";
-			break;
-			case "corporate": page = "contacts-donors-corporate-edit.jsp";
-			break;
-			case "school": page = "contacts-beneficiaries-school-edit.jsp";
-			break;
-			case "scc": page = "contacts-beneficiaries-scc-edit.jsp";
-			break;
+		else{
+			String type = request.getParameter("type");
+			String page = "";
+			
+	
+			String[] idArray = null;
+			idArray = request.getParameterValues("id");
+			if(idArray != null){
+				ArrayList<Integer> idArrayList = new ArrayList<Integer>();
+				for(int i=0; i<idArray.length; i++){
+					idArrayList.add(Integer.parseInt(idArray[i]));
+				}
+				
+				ContactDao contactDao = new ContactDao();
+				List<Contact> contactArray = contactDao.getAllById(idArrayList);
+				
+				request.setAttribute("contactArray", contactArray);
+			}
+			
+			switch(type){
+				case "individual": page = "contacts-donors-individual-edit.jsp";
+				break;
+				case "corporate": page = "contacts-donors-corporate-edit.jsp";
+				break;
+				case "school": page = "contacts-beneficiaries-school-edit.jsp";
+				break;
+				case "scc": page = "contacts-beneficiaries-scc-edit.jsp";
+				break;
+			}
+			
+			RequestDispatcher rd = request.getRequestDispatcher(page);
+			rd.forward(request, response);
 		}
-		
-		RequestDispatcher rd = request.getRequestDispatcher(page);
-		rd.forward(request, response);
 	}
 
 	/**

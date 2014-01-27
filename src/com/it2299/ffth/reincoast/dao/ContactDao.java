@@ -112,7 +112,11 @@ public class ContactDao implements Dao<Contact> {
 		// TODO Auto-generated method stub
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		session.delete("Contact");
+		session.beginTransaction();
+		
+		session.delete(t);
+
+		session.getTransaction().commit();
 		session.close();
 	}
 
