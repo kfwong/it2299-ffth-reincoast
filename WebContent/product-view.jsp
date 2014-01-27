@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
@@ -164,7 +165,24 @@
 						</tbody>
 					</table>
 					<div class="panel-footer">
-						<h4><label>Stock Histogram</label></h4>
+						<h4><label>Stock Graph</label>
+							<div class="form-group pull-right" style="padding: 0px 10px 0px 10px;">
+								<div class="btn-group">
+									<a href="#" class="btn btn-xs btn-primary">
+										Last 24 hours
+									</a>
+									<a href="#" class="btn btn-xs btn-default">
+										Last 7 days
+									</a>
+									<a href="#" class="btn btn-xs btn-default">
+										Last 30 days
+									</a>
+									<a href="#" class="btn btn-xs btn-default">
+										Last 12 months
+									</a>
+								</div>
+							</div>
+						</h4>
 						<div id="line-example"></div>
 					</div>
 				</div>
@@ -270,21 +288,21 @@
 	    }, function () {
 	        this.marker && this.marker.hide();
 	    });
-
-	    Morris.Line({
+	
+	    Morris.Area({
     	  element: 'line-example',
     	  data: [
-    	    { y: '2006', a: 100, b: 90 },
-    	    { y: '2007', a: 75,  b: 65 },
-    	    { y: '2008', a: 50,  b: 40 },
-    	    { y: '2009', a: 75,  b: 65 },
-    	    { y: '2010', a: 50,  b: 40 },
-    	    { y: '2011', a: 75,  b: 65 },
-    	    { y: '2012', a: 100, b: 90 }
+    	    <c:forEach items="${p_audits_past_24_hours}" var="p_audit" varStatus="status">    	    	
+	    		{ date: '<fmt:formatDate type="BOTH" value="${p_audit.date}" pattern="yyyy-MM-dd HH:mm:ss" />', quantity: ${p_audit.entity.quantity}}<c:if test="${!status.last}">,</c:if>
+			</c:forEach>
     	  ],
-    	  xkey: 'y',
-    	  ykeys: ['a', 'b'],
-    	  labels: ['Series A', 'Series B']
+    	  xkey: 'date',
+    	  ykeys: ['quantity'],
+    	  labels: ['Quantity'],
+  	  	  dateFormat: function (x) {
+  	  	  	  return new Date(x).toUTCString();
+  	  	  },
+  	  	  smooth: false
     	});
 	});
 	</script>

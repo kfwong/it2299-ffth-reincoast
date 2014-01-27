@@ -2,7 +2,10 @@ package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,6 +23,7 @@ import org.hibernate.envers.query.AuditEntity;
 import org.hibernate.envers.query.AuditQuery;
 
 import com.it2299.ffth.reincoast.dao.ProductDao;
+import com.it2299.ffth.reincoast.dto.Audit;
 import com.it2299.ffth.reincoast.dto.Product;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 
@@ -62,6 +66,9 @@ public class ProductViewServlet extends HttpServlet {
 			request.setAttribute("p_category", "\"" + StringUtils.join(productDao.getCategories(), "\",\"") + "\"");
 			request.setAttribute("product", product);
 			request.setAttribute("p_audits", productDao.getAuditsById(product.getId()));
+			request.setAttribute("p_audits_past_24_hours", productDao.getAuditsById(product.getId(), 86400000));
+			request.setAttribute("now", new Date());
+			request.setAttribute("past", new Date(new Date().getTime() - 86400000));
 
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/product-view.jsp");
 			requestDispatcher.forward(request, response);

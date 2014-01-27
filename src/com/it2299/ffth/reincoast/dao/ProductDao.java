@@ -1,7 +1,9 @@
 package com.it2299.ffth.reincoast.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +15,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.DefaultRevisionEntity;
@@ -136,6 +139,48 @@ public class ProductDao implements Dao<Product> {
 
 		AuditQuery query = reader.createQuery().forRevisionsOfEntity(Product.class, false, true);
 		query.add(AuditEntity.id().eq(id));
+
+		List<Object[]> results = query.getResultList();
+
+		for (int i = 0; i < results.size(); i++) {
+			Audit audit = new Audit();
+			audit.setEntity(results.get(i)[0]);
+			audit.setDate(((DefaultRevisionEntity) results.get(i)[1]).getRevisionDate());
+			String operation = null;
+			switch (results.get(i)[2].toString()) {
+			case "ADD":
+				operation = "INSERT";
+				break;
+			case "MOD":
+				operation = "UPDATE";
+				break;
+			case "DEL":
+				operation = "DELETE";
+				break;
+			}
+			audit.setOperation(operation);
+			audit.setRevisionId(((DefaultRevisionEntity) results.get(i)[1]).getId());
+			
+			audits.add(audit);
+		}
+		
+		return audits;
+	}
+	
+	public List<Audit> getAuditsById(int id, long duration) {
+		
+		List<Audit> audits = new ArrayList<Audit>();
+
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();// this being
+														// HibernateDaoSupport
+
+		AuditReader reader = AuditReaderFactory.get(session);
+
+		AuditQuery query = reader.createQuery().forRevisionsOfEntity(Product.class, false, true);
+		query.add(AuditEntity.id().eq(id));
+		query.add(AuditEntity.revisionProperty("timestamp").ge(new Date().getTime() - duration));
+		//query.add(AuditEntity.revisionProperty("timestamp").between(new Date().getTime() - 3600000, new Date().getTime() + 3600000));
 
 		List<Object[]> results = query.getResultList();
 
