@@ -120,6 +120,13 @@
 			
 			$("form").submit();
 		});
+		
+		$(".confirm-delete-button").on("click", function(event){
+			event.preventDefault();
+			$(".id").not(".selectedId").remove();
+			$("form").append('<input type="hidden" name="delete" value="true">');
+			$("form").submit();
+		});
 	});
 </script>
 
