@@ -60,28 +60,37 @@ public class MemberLogInServlet extends HttpServlet {
 			if (result == true) {
 				HttpSession session = request.getSession();
 
-				session.setAttribute("current-user", member);
+				session.setAttribute("current_user", member);
 
 				rd = request.getRequestDispatcher("dashboard.jsp");
 				rd.forward(request, response);
+			}else 
+			{
+				rd = getServletContext().getRequestDispatcher("/login.jsp");
+				rd.forward(request, response);
 			}
+			
 				
 		} else if (status.equals("VOLUNTEER")) {
 				VolunteerDao volunteerDao = new VolunteerDao();
 				boolean results = volunteerDao.authenticateVolunteer(userName,
 						password);
-				Volunteer volunteer = volunteerDao
-						.getByUsernameVolunteer(userName);
+				Volunteer volunteer = volunteerDao.getByUsernameVolunteer(userName);
 
 				if (results == true) {
 					HttpSession session = request.getSession();
 
-					session.setAttribute("current-user", volunteer);
+					session.setAttribute("current_user", volunteer);
 
 					rd = request.getRequestDispatcher("dashboard.jsp");
 					rd.forward(request, response);
+				}else 
+				{
+					rd = getServletContext().getRequestDispatcher("/login.jsp");
+					rd.forward(request, response);
 				}
-		}else {
+				
+		}	else {
 			rd = getServletContext().getRequestDispatcher("/login.jsp");
 			rd.forward(request, response);
 

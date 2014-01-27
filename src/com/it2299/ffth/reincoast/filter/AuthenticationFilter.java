@@ -43,7 +43,7 @@ public class AuthenticationFilter implements Filter {
 			HttpSession session = httpRequest.getSession(false);
 			if (session == null) {
 				httpResponse.sendRedirect("login.jsp");
-			} else if (session.getAttribute("current-user") == null) {
+			} else if (session.getAttribute("current_user") == null) {
 				httpResponse.sendRedirect("login.jsp");
 			} else {
 				chain.doFilter(request, response);
