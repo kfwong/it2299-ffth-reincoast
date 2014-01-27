@@ -29,3 +29,8 @@
 	font-size:18px;
 	font-weight:bold;
 }
+
+#calendar{
+	width:60%;
+	float:right;
+}

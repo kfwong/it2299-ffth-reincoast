@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
+	<jsp:param value="js/fullcalendar/fullcalendar/fullcalendar.css" name="css" />
 	<jsp:param value="css/schedules.css" name="css" />
 </jsp:include>
 <!-- header.jsp -->
@@ -12,23 +13,6 @@
 <!-- content -->
 <div id="page-wrapper">
 	<h1>Schedule <small>Food Drive</small></h1>
-	
-	<div class="table-above schedule-button-group">
-		<form method="post" action="schedule-fooddrive-edit.jsp">
-			<div class="form-group">
-				<button type="submit" class="pull-right btn btn-default">Add / Edit</button>
-				<button type="button" class="pull-right btn btn-default schedule-button delete-button">Delete</button>
-			</div>
-		</form>
-		
-		<span class="pull-left alert alert-info row-selected-count">No records selected</span>
-		<div class="date-selector">
-			<span class="glyphicon glyphicon-chevron-left"></span>
-				<span class="date-selector-selected">January 2013</span>
-			<span class="glyphicon glyphicon-chevron-right"></span>
-		</div>
-		<div class="clearfix"></div>
-	</div>
 	
 	<!-- Modal -->
 	<div class="modal delete-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -49,130 +33,72 @@
 	  </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
 	
-	<table class="table table-hover table-striped table-bordered">
-		<thead>
-			<tr>
-				<th>Week</th>
-				<th>Day</th>
-				<th>Location</th>
-				<th>Quantity</th>
-				<th>Status</th>
-				<th>Date</th>
-				<th>Notes</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr class="table-row">
-				<td>1</td>
-				<td>Monday</td>
-				<td>Chua Chu Kang Primary School</td>
-				<td>10</td>
-				<td>KIV</td>
-				<td>1 January 2013</td>
-				<td>need small and medium plastic bags</td>
-			</tr>
-			
-			<tr class="table-row">
-				<td>1</td>
-				<td>Tuesday</td>
-				<td>Ang Mo Kio Secondary School</td>
-				<td>20</td>
-				<td>OK</td>
-				<td>2 January 2013</td>
-				<td>need to check whether bulk or pack</td>
-			</tr>
-			
-			<tr class="table-row">
-				<td>2</td>
-				<td>Wednesday</td>
-				<td>Yishun Primary School</td>
-				<td>30</td>
-				<td>OK</td>
-				<td>10 January 2013</td>
-				<td>need medium plastic bags</td>
-			</tr>
-			
-			<tr class="table-row">
-				<td>2</td>
-				<td>Thursday</td>
-				<td>Wellington Secondary School</td>
-				<td>40</td>
-				<td>KIV</td>
-				<td>11 January 2013</td>
-				<td>need bulk</td>
-			</tr>
-			
-			<tr class="table-row">
-				<td>3</td>
-				<td>Friday</td>
-				<td>Canberra Primary School</td>
-				<td>50</td>
-				<td>OK</td>
-				<td>20 January 2013</td>
-				<td>need pack</td>
-			</tr>
-			
-			<tr class="table-row">
-				<td>4</td>
-				<td>Monday</td>
-				<td>Wellington Secondary School</td>
-				<td>60</td>
-				<td>OK</td>
-				<td>21 January 2013</td>
-				<td>need small and medium plastic bags</td>
-			</tr>
-		</tbody>
-	</table>
-
+	
+	<div id='calendar'></div>
+	<div class="clearfix"></div>
 </div>
 <!-- /content -->
 
 <script>
 	$(document).ready(function(){
-		var rowSelectedCount = 0;
-		$(".table-row").on("click", function(event){
-			$(".row-selected-count").removeClass("alert-danger");
-			
-			var elementSelected = event.target;
-			var rowSelected = $(elementSelected).parents("tr");
-			
-			if($(rowSelected).hasClass("warning selected")){
-				$(rowSelected).removeClass("warning selected");
-				rowSelectedCount--;
-			}
-			else{
-				$(rowSelected).addClass("warning selected"); 
-				rowSelectedCount++;
-			}			
+		$('#calendar').fullCalendar({
+			defaultDate: '2014-01-12',
+			editable: true,
+			events: [
+				{
+					title: 'All Day Event',
+					start: '2014-01-01'
+				},
+				{
+					title: 'Long Event',
+					start: '2014-01-07',
+					end: '2014-01-10'
+				},
+				{
+					id: 999,
+					title: 'Repeating Event',
+					start: '2014-01-09T16:00:00'
+				},
+				{
+					id: 999,
+					title: 'Repeating Event',
+					start: '2014-01-16T16:00:00'
+				},
+				{
+					title: 'Meeting',
+					start: '2014-01-12T10:30:00',
+					end: '2014-01-12T12:30:00'
+				},
+				{
+					title: 'Lunch',
+					start: '2014-01-12T12:00:00'
+				},
+				{
+					title: 'Birthday Party',
+					start: '2014-01-13T07:00:00'
+				},
+				{
+					title: 'Click for Google',
+					url: 'http://google.com/',
+					start: '2014-01-28'
+				}
+			],
 		
-			if(rowSelectedCount == 0){
-				$(".row-selected-count").text("No records selected");
-			}
-			else{
-				$(".row-selected-count").text(rowSelectedCount + " records selected");
-			}
-		});	
-		
-		$(".delete-button").on("click", function(event){
-			if(rowSelectedCount <= 0){
-				$(".row-selected-count").text("No records selected");
-				$(".row-selected-count").addClass("alert-danger");
-			}
-			else{
-				$(".delete-modal").modal();
-			}
+			dayClick: function(date, jsEvent, view) {
+		        $(".delete-modal").modal();
+		    },
+		    
+		    eventClick: function(calEvent, jsEvent, view) {
+		        alert('Event: ' + calEvent.title);
+		    }
 		});
-		
-		$(".confirm-delete-button").on("click", function(){
-			location.reload(true);
-			console.log("test");
-		});
-		
 	});
 </script>
 
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
-	<jsp:param value="/path/to/js1" name="js" />
+	<jsp:param value="js/fullcalendar/lib/moment.min.js" name="js" />
+	<jsp:param value="js/fullcalendar/lib/jquery-ui.custom.min.js" name="js" />
+	<jsp:param value="js/fullcalendar/fullcalendar/fullcalendar.js" name="js" />
 </jsp:include>
 <!-- footer.jsp -->
