@@ -35,7 +35,7 @@ public class MemberViewProfileServlet extends HttpServlet {
 				Member member = (Member)session.getAttribute("current_user");
 				request.setAttribute("member_data", member);
 				
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/memeber-profile-test.jsp");
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/member-profile.jsp");
 				requestDispatcher.forward(request, response);
 			
 		
