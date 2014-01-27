@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.it2299.ffth.reincoast.dao.MemberDao;
+import com.it2299.ffth.reincoast.dao.VolunteerDao;
 import com.it2299.ffth.reincoast.dto.Member;
+import com.it2299.ffth.reincoast.dto.Volunteer;
 
 /**
  * Servlet implementation class LogInServlet
@@ -45,24 +47,47 @@ public class MemberLogInServlet extends HttpServlet {
 		
 		String userName = request.getParameter("username").toLowerCase();
 		String password = request.getParameter("password");
-		//String role = request.getParameter("role");
-		
-//
-		
-		MemberDao memberdao = new MemberDao();
-		boolean result = memberdao.authenticateMember(userName, password);
-		Member member = memberdao.getByUsernameMember(userName);
-		
-		if(result ==true){
-			HttpSession session = request.getSession();
-			
-			session.setAttribute("current-user", member);
-			
+		String status = request.getParameter("role");
 
-			rd = request.getRequestDispatcher("member-name.jsp");
-			rd.forward(request, response); 
-		}
-		else {
+		if (status.equals("STAFF")) {
+			MemberDao memberdao = new MemberDao();
+			boolean result = memberdao.authenticateMember(userName, password);
+			Member member = memberdao.getByUsernameMember(userName);
+
+			if (result == true) {
+				HttpSession session = request.getSession();
+
+				session.setAttribute("current_user", member);
+
+				rd = request.getRequestDispatcher("dashboard.jsp");
+				rd.forward(request, response);
+			}else 
+			{
+				rd = getServletContext().getRequestDispatcher("/login.jsp");
+				rd.forward(request, response);
+			}
+			
+				
+		} else if (status.equals("VOLUNTEER")) {
+				VolunteerDao volunteerDao = new VolunteerDao();
+				boolean results = volunteerDao.authenticateVolunteer(userName,
+						password);
+				Volunteer volunteer = volunteerDao.getByUsernameVolunteer(userName);
+
+				if (results == true) {
+					HttpSession session = request.getSession();
+
+					session.setAttribute("current_user", volunteer);
+
+					rd = request.getRequestDispatcher("dashboard.jsp");
+					rd.forward(request, response);
+				}else 
+				{
+					rd = getServletContext().getRequestDispatcher("/login.jsp");
+					rd.forward(request, response);
+				}
+				
+		}	else {
 			rd = getServletContext().getRequestDispatcher("/login.jsp");
 			   rd.forward(request, response); 
 			   //validatejs

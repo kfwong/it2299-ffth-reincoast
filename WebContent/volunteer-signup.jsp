@@ -14,7 +14,7 @@
 
 
 	<h2>SIGNUP HERE</h2>
-	<form id="VSU" class="Volunteer_SignUp" method="post" action="/it2299-ffth-reincoast/VolunteerSignUpServlet">
+	<form id="VSU" class="Volunteer_SignUp" method="post" action="VolunteerSignUpServlet">
 		<div class="row">
 			<div class="col-lg-5 col-lg-offset-3 ">
 				<div class="form-group">
