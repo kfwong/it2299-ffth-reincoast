@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="com.it2299.ffth.reincoast.dto.Member"%>
+
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
 	<jsp:param value="/path/to/css1" name="css" />
@@ -51,7 +51,6 @@
 	bottom: -10px;
 }
 }
-
 </style>
 
 <!-- sidebar.jsp -->
@@ -60,84 +59,82 @@
 
 <!-- sample-content.jsp -->
 <div id="page-wrapper">
-<form class="Member-edit" method="post" action="MemberDeactivate">
-	<%
-				/*
-				 *
-				 * this line not working 
-				 <strong>Name</strong>
-					<small>$</small>
-					<p><small> ${sessionScope.current-member.username}</small></p> 
-				 *
-				 */
-			%>
 
-	<div class="button bubble-float-bottom">Bubble Float Bottom</div> <br> <br>
+
+
+	<div class="button bubble-float-bottom">Bubble Float Bottom</div>
+	<br> <br>
 	<div class="panel panel-default">
 		<div class="panel-body">
 
-			<%
-				HttpSession sessionTest = request.getSession();
-				Member m = (Member) sessionTest.getAttribute("current-user");
-				m.getUserName();
-			%>
-			
-			
+
 			<div class="table-responsive">
-			
 				<table class="table">
+					<thead>
+					</thead>
+
 
 					<tr>
 						<th>Name</th>
-						<th><small> <%=m.getName()%></small></th>
+						<th><input type="text" class="form-control" placeholder="${member_datas }" name="Name" id="Name" required
+							autofocus></th>
+
+
 					</tr>
 
 					<tr>
 						<th>NRIC</th>
-						<th><small> <%=m.getNric()%></small></th>
+						<th><small> ${member_data.nric}</small></th>
 					</tr>
 
 					<tr>
 						<th>Gender</th>
-						<th><small> <%=m.getGender()%></small></th>
+						<th><small> ${member_data.gender }</small></th>
 					</tr>
 
 					<tr>
 						<th>Address</th>
-						<th><small> <%=m.getAddress()%> Singapore<%=m.getPostalCode()%></small>
-						</th>
+						<th><small> ${member_data.address} Singapore
+								${member_data.postalCode} </small></th>
+
 					</tr>
 
 					<tr>
 						<th>Email</th>
-						<th><small> <%=m.getEmail()%></small></th>
+						<th><small> ${member_data.email }</small></th>
 					</tr>
 
 					<tr>
 						<th>UserName</th>
-						<th><%=m.getUserName()%></th>
+						<th><small> ${member_data.userName }</small></th>
 					</tr>
-					
+
 					<tr>
 						<th>Password</th>
 						<th>Change password in Edit profile</th>
 					</tr>
-					
+
 					<tr>
-					<th> <a class="btn btn-default" href="#">Modify Profile</a>
-						<input class="btn btn-default" type="submit" value="Submit"></th>
+						<th><a class="btn btn-default" href="#">Modify Profile</a>
+						<th><a class="btn btn-default" href="MemberDeactivateServlet">Delete
+								My Account</a>
+						<th>
 					</tr>
+
+
 				</table>
 
 			</div>
-		</div>
-	</div>
- </form>
- </div>
-	<!-- sample-content.jsp -->
 
-	<!-- footer.jsp -->
-	<jsp:include page="footer.jsp">
-		<jsp:param value="/path/to/js1" name="js" />
-	</jsp:include>
-	<!-- footer.jsp -->
+
+		</div>
+
+	</div>
+</div>
+
+<!-- sample-content.jsp -->
+<!-- footer.jsp -->
+<jsp:include page="footer.jsp">
+	<jsp:param value="/path/to/js1" name="js" />
+</jsp:include>
+<!-- footer.jsp -->

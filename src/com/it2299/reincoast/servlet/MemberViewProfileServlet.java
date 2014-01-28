@@ -30,7 +30,7 @@ public class MemberViewProfileServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberDao memberdao = new MemberDao(); 
+		
 			HttpSession session = request.getSession();
 				Member member = (Member)session.getAttribute("current_user");
 				request.setAttribute("member_data", member);

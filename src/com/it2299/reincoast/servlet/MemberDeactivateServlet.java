@@ -35,7 +35,28 @@ public class MemberDeactivateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("before get session");
+		HttpSession session = request.getSession();
+		Member member = (Member) session.getAttribute("current_user");
+		String Uname = (member.getUserName());
+		System.out.println("before deactivate");
+		try {
+
+			MemberDao memberDao = new MemberDao();
+			Member currentMem = memberDao.getByUsernameMember(Uname);
+			System.out.println("USER" + Uname);
+			currentMem.setStatus("INACTIVE");
+			memberDao.saveOrUpdate(currentMem);
+			System.out.println("DEACTIVATED DONE!");
+			
+			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+			rd.forward(request, response);
+		
+
+		} catch (Exception ex) {
+			throw new ServletException(ex);
+
+		}
 	}
 
 	/**
@@ -44,28 +65,7 @@ public class MemberDeactivateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 
-		Member member = (Member) session.getAttribute("current-user");
-		
-		System.out.println(member.getUserName());
-			member.setStatus("INACTIVE");
-			
-			try {
-				MemberDao memberDao = new MemberDao();
-				memberDao.saveOrUpdate(member);
-				
-				
-				System.out.println(member.getStatus());
-				
-				// Forward the user to the Success page.
-				RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-				rd.forward(request, response);
-			} catch (Exception ex) {
-				throw new ServletException(ex);
-			}
-	
-			
-		
 	}
+
 }
