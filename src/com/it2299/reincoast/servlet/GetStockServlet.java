@@ -83,7 +83,6 @@ public class GetStockServlet extends HttpServlet {
 	    			   chart = chart + "xkey: 'y',";
 	    			   chart = chart + "ykeys: ['a'],";
 	    			   chart = chart + " labels: ['Product Quantity']";
-	    			   //chart= chart + "smooth: false";
 	    			   chart = chart + "});";
 		request.setAttribute("mychart", chart);
 		
