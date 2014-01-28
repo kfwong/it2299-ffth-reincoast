@@ -6,6 +6,7 @@
 <jsp:include page="header.jsp">
 	<jsp:param value="/path/to/css1" name="css" />
 	<jsp:param value="/path/to/css2" name="css" />
+	<jsp:param value= "//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/0.0.11/css/bootstrap-datetimepicker.min.css" name="css" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.css" name="css" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2-bootstrap.css" name="css" />
 </jsp:include>
@@ -183,6 +184,7 @@
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
+	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/0.0.11/js/bootstrap-datetimepicker.min.js" name="js" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.min.js" name="js" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js" name="js" />
 </jsp:include>

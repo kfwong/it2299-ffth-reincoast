@@ -42,7 +42,7 @@
 							<li><a href="ContactServlet?type=individual">Donors - Individual</a></li>
 							<li><a href="ContactServlet?type=corporate">Donors - Corporate</a></li>
 							<li><a href="ContactServlet?type=school">Beneficiaries - School</a></li>
-							<li><a href="ContactServlet?type=scc">Beneficiaries - S.C.C</a></li>
+							<li><a href="ContactServlet?type=scc">Beneficiaries - S.C.C.</a></li>
 						</ul>
 					</li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-calendar"></i> Schedules <b class="caret"></b></a>

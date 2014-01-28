@@ -1,13 +1,21 @@
 package com.it2299.ffth.reincoast.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
 
+
+
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.DefaultRevisionEntity;
@@ -45,7 +53,57 @@ public class OutboundDeliveryDao implements Dao<OutboundDelivery> {
 		session.close();
 		
 	}
-
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<OutboundDelivery> getByDate(){
+		Date date = new Date();
+		long time = date.getTime() - 86400000;
+		Date date1 =new Date(time);
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Criteria cri = session.createCriteria(OutboundDelivery.class);
+		cri.add(Restrictions.ge("dateDelivered", date1));
+		List result = cri.list();
+		session.close();
+		
+		return result;
+	}
+	
+	public List<OutboundDelivery> getByMonth(){
+		Date current_date = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(current_date);
+		cal.add(Calendar.MONTH, -30);
+		Date newDate = cal.getTime();
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Criteria cri = session.createCriteria(OutboundDelivery.class);
+		cri.add(Restrictions.ge("dateDelivered", newDate));
+		List result = cri.list();
+		session.close();
+		
+		return result;
+	}
+	
+	public List<OutboundDelivery> getByYear(){
+		Date current_date = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(current_date);
+		cal.add(Calendar.YEAR, -1);
+		
+		Date newDate = cal.getTime();
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Criteria cri = session.createCriteria(OutboundDelivery.class);
+		cri.add(Restrictions.ge("dateDelivered", newDate));
+		List result = cri.list();
+		session.close();
+		
+		return result;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<OutboundDelivery> getAll() {

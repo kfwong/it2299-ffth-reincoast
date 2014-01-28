@@ -7,7 +7,10 @@
 <!-- header.jsp -->
 
 <!-- sidebar.jsp -->
-<jsp:include page="sidebar.jsp"></jsp:include>
+<jsp:include page="sidebar.jsp">
+	<jsp:param value="Contacts" name="active" />
+	<jsp:param value="Donors - Individual" name="sub-active" />
+</jsp:include>
 <!-- sidebar.jsp -->
 
 <!-- content -->

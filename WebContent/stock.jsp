@@ -78,27 +78,14 @@
 								<td class="col-lg-4">Currently Available</td>
 								<td>${totalQuan}</td>
 							</tr>
-							<tr>
-								<td class="col-lg-4">Total Inbound</td>
-								<td>${inboundSize}</td>
-							</tr>
-							<tr>
-								<td class="col-lg-4">Total Outbound</td>
-								<td>${outboundSize}</td>
-							</tr>
+							
 						</tbody>
 					</table>
 					<div class="panel-footer">
 						<h4><label>Stock Graph</label></h4>
 						
 						<div id="graph"></div>
-						<div class="btn-group pull-right">
-							<a href="#" class="btn btn-default btn-xs">This Year</a>
-							<a href="#" class="btn btn-default btn-xs">This Month</a>
-							<a href="#" class="btn btn-default btn-xs">This Week</a>
-							<a href="#" class="btn btn-default btn-xs">Today</a>
-						</div>
-						
+
 						<div class="clearfix"></div>
 					</div>
 					
