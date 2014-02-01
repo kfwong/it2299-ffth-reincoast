@@ -15,6 +15,45 @@
 	<h1>Schedule <small>Food Drive</small></h1>
 	
 	<!-- Modal -->
+	<div class="modal create-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Create event</h4>
+	      </div>
+	      <div class="modal-body">
+	         <form role="form" method="post" action="CalendarFoodDriveServlet">
+				<div class="form-group">
+				  <label for="title">Title</label>
+				  <input type="text" class="form-control" id="title" placeholder="Example: Serangoon S.C.C.">
+				</div>
+				<div class="form-group">
+				  <label for="exampleInputPassword1">Password</label>
+				  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				</div>
+				<div class="form-group">
+				  <label for="exampleInputFile">File input</label>
+				  <input type="file" id="exampleInputFile">
+				  <p class="help-block">Example block-level help text here.</p>
+				</div>
+				<div class="checkbox">
+				  <label>
+				    <input type="checkbox"> Check me out
+				  </label>
+				</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			  </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+	        <button type="button" class="btn btn-primary confirm-create-button">Confirm</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<!-- Modal -->
 	<div class="modal delete-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
@@ -42,47 +81,13 @@
 <script>
 	$(document).ready(function(){
 		$('#calendar').fullCalendar({
-			defaultDate: '2014-01-12',
 			editable: true,
-			events: [
-				{
-					title: 'All Day Event',
-					start: '2014-01-01'
-				},
-				{
-					title: 'Long Event',
-					start: '2014-01-07',
-					end: '2014-01-10'
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: '2014-01-09T16:00:00'
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: '2014-01-16T16:00:00'
-				},
-				{
-					title: 'Meeting',
-					start: '2014-01-12T10:30:00',
-					end: '2014-01-12T12:30:00'
-				},
-				{
-					title: 'Lunch',
-					start: '2014-01-12T12:00:00'
-				},
-				{
-					title: 'Birthday Party',
-					start: '2014-01-13T07:00:00'
-				},
-				{
-					title: 'Click for Google',
-					url: 'http://google.com/',
-					start: '2014-01-28'
-				}
-			],
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			events: "CalendarFoodDriveServlet",
 		
 			dayClick: function(date, jsEvent, view) {
 		        $(".delete-modal").modal();

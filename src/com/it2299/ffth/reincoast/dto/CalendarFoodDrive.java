@@ -1,5 +1,9 @@
 package com.it2299.ffth.reincoast.dto;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,9 +22,9 @@ public class CalendarFoodDrive {
 	
 	private boolean allDay;
 	
-	private String start;
+	private Date start;
 	
-	private String end;
+	private Date end;
 
 	public int getId() {
 		return id;
@@ -46,19 +50,38 @@ public class CalendarFoodDrive {
 		this.allDay = allDay;
 	}
 
-	public String getStart() {
+	public Date getStart() {
 		return start;
 	}
 
 	public void setStart(String start) {
-		this.start = start;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dateInString = start;
+		Date date = null;
+		try {
+			date = sdf.parse(dateInString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.start = date;
 	}
 
-	public String getEnd() {
+	public Date getEnd() {
 		return end;
 	}
 
 	public void setEnd(String end) {
-		this.end = end;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dateInString = end;
+		Date date = null;
+		try {
+			date = sdf.parse(dateInString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.end = date;
 	}
+
 }
