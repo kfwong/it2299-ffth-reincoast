@@ -33,8 +33,7 @@ public class MemberDeactivateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("before get session");
 		HttpSession session = request.getSession();
 		Member member = (Member) session.getAttribute("current_user");
@@ -48,7 +47,7 @@ public class MemberDeactivateServlet extends HttpServlet {
 			currentMem.setStatus("INACTIVE");
 			memberDao.saveOrUpdate(currentMem);
 			System.out.println("DEACTIVATED DONE!");
-			
+			session.invalidate();
 			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
 			rd.forward(request, response);
 		
@@ -59,13 +58,5 @@ public class MemberDeactivateServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-
-	}
 
 }

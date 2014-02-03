@@ -73,7 +73,6 @@ public class MemberDao implements Dao<Member>{
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		Query query = session.createQuery("FROM Member where username= :Uname");
-		//Query query = session.createQuery("FROM Member where username='" +userName+"' ");
 		query.setParameter("Uname", userName);
 		Member member = (Member)query.uniqueResult();
 		session.close();
@@ -81,9 +80,9 @@ public class MemberDao implements Dao<Member>{
 		return member;
 	}
 	
-	public boolean authenticateMember(String userName, String password){
+	public boolean authenticateMember(String userName, String password, String status){
 		Member member = getByUsernameMember(userName);
-		if(member!=null && member.getUserName().equals(userName) && member.getPassword().equals(password)){
+		if(member!=null && member.getUserName().equals(userName) && member.getPassword().equals(password) && member.getStatus().equals("ACTIVE")){
 			return true;
 		}else
 		{
@@ -93,7 +92,6 @@ public class MemberDao implements Dao<Member>{
 		
 	}
 
-	
 
 	
 }

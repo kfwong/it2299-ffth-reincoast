@@ -51,7 +51,7 @@ public class MemberLogInServlet extends HttpServlet {
 
 		if (status.equals("STAFF")) {
 			MemberDao memberdao = new MemberDao();
-			boolean result = memberdao.authenticateMember(userName, password);
+			boolean result = memberdao.authenticateMember(userName, password, status);
 			Member member = memberdao.getByUsernameMember(userName);
 
 			if (result == true) {
@@ -70,8 +70,7 @@ public class MemberLogInServlet extends HttpServlet {
 				
 		} else if (status.equals("VOLUNTEER")) {
 				VolunteerDao volunteerDao = new VolunteerDao();
-				boolean results = volunteerDao.authenticateVolunteer(userName,
-						password);
+				boolean results = volunteerDao.authenticateVolunteer(userName,password, status);
 				Volunteer volunteer = volunteerDao.getByUsernameVolunteer(userName);
 
 				if (results == true) {

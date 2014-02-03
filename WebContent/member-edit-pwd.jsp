@@ -66,7 +66,7 @@
 	<br> <br>
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<form id="MEdit" class="Volunteer_SignUp" method="post" action="MemberEditProfileServlet">
+			<form id="MePwd" class="Volunteer_SignUp" method="post" action="MemberEditPwdServlet">
 
 				<div class="table-responsive">
 					<table class="table">
@@ -74,59 +74,27 @@
 						</thead>
 
 
-						<tr>
-							<th>Name</th>
-							
-							<th><input type="text" class="form-control" value="${member_datas.name}" name="name" id="name" required autofocus></th>
-
-
-						</tr>
-
-						<tr>
-							<th>NRIC</th>
-							<th><small> ${member_datas.nric}</small></th>
-						</tr>
-
-						<tr>
-							<th>Gender</th>
-							<th><small> ${member_datas.gender}</small></th>
-						</tr>
-						<tr>
-							<th>Contact No</th>
-							<th><input type="text" class="form-control" value="${member_datas.tel}" name="tel" id="tel" required autofocus></th>
-						</tr>
-						<tr>
-							<th>Address</th>
-							<th><input type="text" class="form-control" value="${member_datas.address}" name="address" id="address" required autofocus></th>
-						</tr>
-						<tr>
-							<th>Postal Code</th>
-							<th><input type="text" class="form-control" value="${member_datas.postalCode}" name=postalCode id="postalCode" required autofocus></th>
-						</tr>
-
-						<tr>
-							<th>Email</th>
-							<th><input type="text" class="form-control" value="${member_datas.email}" name="email" id="email" required></th>
-						</tr>
-
-						<tr>
-							<th>UserName</th>
-							<th><small>${member_datas.userName }</small></th>
-
-						</tr>
-
 						<!--------------------------------------Confirm Password  -------------------------------------------->
 						<tr> 
 							<th>Current Password</th>
 							<th><input type="password" class="form-control" placeholder="Current Password" name="Current_password" id="Current_password" required autofocus></th>
-							<th><h5><i>*For verification purpose</i></h5>
+						</tr>
+						<tr>
+							<th>Password</th>
+							<th><input type="password" class="form-control"placeholder="Password" name="password" id="password" required autofocus>
+							</th>
+						</tr>
+
+						<tr>
+							<th>Confirm Password</th>
+							<th><input type="Password" class="form-control" placeholder="Confirm Password" name="cfmPassword" id="cfmPassword" required autofocus></th>
 						</tr>
 
 
-
 						<tr>
-							<th><button class="btn btn-default" type="submit">Save Edit</button>
-							<a class="btn btn-default" href="MemberDeactivateServlet">Delete My Account</a>
+							<th><button class="btn btn-default" type="submit">Save password</button> 
+							<a class="btn btn-default" href="dashboard.jsp">Back to homepage</a>
+						</th>
 							<th>
 						</tr>
 
@@ -141,9 +109,27 @@
 	</div>
 </div>
 
+
 <!-- sample-content.jsp -->
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
 	<jsp:param value="/path/to/js1" name="js" />
+	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js" name="js" />			
+
 </jsp:include>
+<script type="text/JavaScript">
+
+</script>
 <!-- footer.jsp -->
+
+<script type="text/javascript">
+$('#MePwd').validate({
+	rules: {
+		 password: "required",
+		 cfmPassword : {
+		      equalTo: "#password"
+		    }
+		}
+	});
+
+</script>

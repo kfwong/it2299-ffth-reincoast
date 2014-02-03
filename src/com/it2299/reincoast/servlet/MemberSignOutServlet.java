@@ -24,10 +24,8 @@ public class MemberSignOutServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-    protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-    	HttpSession session = request.getSession(false);  
-    	   
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	HttpSession session = request.getSession(false);    
         if (session != null) {  
             session.invalidate();  
          
@@ -39,11 +37,6 @@ public class MemberSignOutServlet extends HttpServlet {
         	System.out.println("INcomplete");
         }
     }
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}

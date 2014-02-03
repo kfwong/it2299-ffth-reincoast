@@ -104,6 +104,7 @@
 	<jsp:include page="footer.jsp">
 		<jsp:param value="/path/to/js1" name="js" />
 		<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js" name="js" />
+		
 	</jsp:include>
 	<!-- footer.jsp -->
 	

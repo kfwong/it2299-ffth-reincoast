@@ -30,7 +30,7 @@ body{
 					<input type="text" class="form-control" placeholder="User Name"
 						name="username" required autofocus> <input type="password"
 						class="form-control" placeholder="Password" name="password"
-						required autofocus> <br>
+						required > <br>
 
 				<h5>
 					You are logging in as... <br>
