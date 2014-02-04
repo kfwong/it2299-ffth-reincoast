@@ -60,6 +60,14 @@
 								</tbody>
 							</table>
 						</div>
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="pull-right">
+									<ul id="pagination" class="pagination">
+									</ul>
+								</div>
+							</div>
+						</div>
 					</form>
 				</div>
 			</div>
@@ -88,7 +96,14 @@
 
 						<div class="clearfix"></div>
 					</div>
-					
+					<div class="row">
+							<div class="col-lg-12">
+								<div class="pull-right">
+									<ul id="pagination" class="pagination">
+									</ul>
+								</div>
+							</div>
+						</div>
 				</div>
 		</div>
 	</div>
@@ -102,6 +117,17 @@
 <script>
 
 	$(document).ready(function(){
+		
+		$('#pagination').bootstrapPaginator({
+			bootstrapMajorVersion: 3,
+			size: 'normal',
+			currentPage: "${current_page}",
+			totalPages: Math.ceil(${(total_item)/4}),
+			pageUrl: function( type, page, current){
+				 return "${s_url}"+page;
+			}
+		});
+		
 		${mychart};
 	});
 	
@@ -115,5 +141,6 @@
 		<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/graphael/0.5.1/g.raphael-min.js" name="js" />
 		<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/graphael/0.5.1/g.dot-min.js" name="js" />
 		<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.4.3/morris.min.js" name="js" />
+		<jsp:param value="js/bootstrap-paginator.min.js" name="js" />
 </jsp:include>
 <!-- footer.jsp -->

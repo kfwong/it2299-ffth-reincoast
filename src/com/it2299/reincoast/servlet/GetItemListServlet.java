@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.it2299.ffth.reincoast.dao.InboundDeliveryDao;
 import com.it2299.ffth.reincoast.dao.ItemDao;
 import com.it2299.ffth.reincoast.dao.ProductDao;
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
@@ -38,15 +39,17 @@ public class GetItemListServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-
+		
 		InboundDelivery inbound = new InboundDelivery();
 		inbound.setId(id);
+		InboundDeliveryDao inboundDao = new InboundDeliveryDao();
 		ItemDao itemDao = new ItemDao();
 		List<InboundLineItem> itemList = itemDao.getList(inbound);
 		for(int i=0 ; i<itemList.size(); i++){
 			System.out.println(itemList.get(i).getId());
 		}
-		
+		request.setAttribute("inboundID", id);
+		request.setAttribute("inbound", inboundDao.get(id));
 		request.setAttribute("itemList", itemList);
 		
 		
