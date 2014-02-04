@@ -14,6 +14,12 @@
 		<strong>
 			<small>
 				<ul class="nav navbar-nav navbar-user side-nav">
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> kfwong <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="MemberViewProfileServlet">View Profile</a></li>
+							<li><a href="MemberSignOutServlet">Sign Out</a></li>
+						</ul>
+					</li>
 					<li class="active"><a href="dashboard.jsp"><i class="fa fa-dashboard"></i> Dashboard</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-briefcase"></i> Product Management <b class="caret"></b></a>
 						<ul class="dropdown-menu">
