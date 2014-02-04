@@ -77,9 +77,9 @@ public class VolunteerDao implements Dao<Volunteer>{
 		
 		return  volunteer;
 	}
-	public boolean authenticateVolunteer(String userName, String password){
+	public boolean authenticateVolunteer(String userName, String password, String status){
 		Volunteer volunteer = getByUsernameVolunteer(userName);
-		if(volunteer!=null && volunteer.getUserName().equals(userName) && volunteer.getPassword().equals(password)){
+		if(volunteer!=null && volunteer.getUserName().equals(userName) && volunteer.getPassword().equals(password) && volunteer.getStatus().equals("ACTIVE")){
 			return true;
 		}else
 		{

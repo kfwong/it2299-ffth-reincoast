@@ -65,10 +65,9 @@
 	<div class="button bubble-float-bottom">Bubble Float Bottom</div>
 	<br> <br>
 	<div class="panel panel-default">
+
 		<div class="panel-body">
-		
-		
-		<form class="form-member-edit" method="post" action="MemberDeactivateServlet">
+			<form class="Modify_Profile" method="post" action="MemberViewProfileServlet">
 
 				<div class="table-responsive">
 					<table class="table">
@@ -79,7 +78,7 @@
 						<tr>
 							<th>Name</th>
 							<th><small> ${member_data.name }</small></th>
-							
+
 
 						</tr>
 
@@ -95,8 +94,9 @@
 
 						<tr>
 							<th>Address</th>
-							<th><small> ${member_data.address} Singapore ${member_data.postalCode} </small></th>
-							</th>
+							<th><small> ${member_data.address} Singapore
+									${member_data.postalCode} </small></th>
+
 						</tr>
 
 						<tr>
@@ -111,26 +111,30 @@
 
 						<tr>
 							<th>Password</th>
-							<th>Change password in Edit profile</th>
+							<th><a href="member-edit-pwd.jsp">Edit Password</a></th>
 						</tr>
 
 						<tr>
-							<th><a class="btn btn-default" href="#">Modify Profile</a> <input
-								class="btn btn-default" type="submit" value="Deactivate Account">
+
 							<th>
+								<button class="btn btn-default" type="submit">Modify Account</button> 
+								<a class="btn btn-default" href="MemberDeactivateServlet">Delete My Account</a>
+							</th>
+
 						</tr>
 
 
 					</table>
 
 				</div>
-
 			</form>
 
-	</div>
 
 		</div>
+
 	</div>
+</div>
+
 
 <!-- sample-content.jsp -->
 <!-- footer.jsp -->

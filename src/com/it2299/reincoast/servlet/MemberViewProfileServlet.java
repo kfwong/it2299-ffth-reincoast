@@ -30,7 +30,7 @@ public class MemberViewProfileServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MemberDao memberdao = new MemberDao(); 
+		//Display Profile (non-editable)
 			HttpSession session = request.getSession();
 				Member member = (Member)session.getAttribute("current_user");
 				request.setAttribute("member_data", member);
@@ -39,6 +39,17 @@ public class MemberViewProfileServlet extends HttpServlet {
 				requestDispatcher.forward(request, response);
 			
 		
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Display Profile (Editable)
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("current_user");
+		request.setAttribute("member_datas", member);
+
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/member-edit.jsp");
+		requestDispatcher.forward(request, response);
+	
 	}
 
 	

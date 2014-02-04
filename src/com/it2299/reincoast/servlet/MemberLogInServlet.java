@@ -1,7 +1,6 @@
 package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,7 +50,7 @@ public class MemberLogInServlet extends HttpServlet {
 
 		if (status.equals("STAFF")) {
 			MemberDao memberdao = new MemberDao();
-			boolean result = memberdao.authenticateMember(userName, password);
+			boolean result = memberdao.authenticateMember(userName, password, status);
 			Member member = memberdao.getByUsernameMember(userName);
 
 			if (result == true) {
@@ -63,15 +62,14 @@ public class MemberLogInServlet extends HttpServlet {
 				rd.forward(request, response);
 			}else 
 			{
-				rd = getServletContext().getRequestDispatcher("/login.jsp");
+				rd = getServletContext().getRequestDispatcher("/login.jsp?msg=Invalid%20Username%20Or%20Password.%20Please%20Try%20Again!&isType=alert-danger");
 				rd.forward(request, response);
 			}
 			
 				
 		} else if (status.equals("VOLUNTEER")) {
 				VolunteerDao volunteerDao = new VolunteerDao();
-				boolean results = volunteerDao.authenticateVolunteer(userName,
-						password);
+				boolean results = volunteerDao.authenticateVolunteer(userName,password, status);
 				Volunteer volunteer = volunteerDao.getByUsernameVolunteer(userName);
 
 				if (results == true) {
@@ -88,8 +86,8 @@ public class MemberLogInServlet extends HttpServlet {
 				}
 				
 		}	else {
-			rd = getServletContext().getRequestDispatcher("/login.jsp");
-			   rd.forward(request, response); 
+				rd = getServletContext().getRequestDispatcher("/login.jsp?msg=Invalid%20Username%20Or%20Password.%20Please%20Try%20Again!");
+			  rd.forward(request, response); 
 			   //validatejs
 		}
 		

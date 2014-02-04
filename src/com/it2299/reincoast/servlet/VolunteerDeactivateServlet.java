@@ -11,41 +11,41 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.it2299.ffth.reincoast.dao.MemberDao;
+import com.it2299.ffth.reincoast.dao.VolunteerDao;
 import com.it2299.ffth.reincoast.dto.Member;
 import com.it2299.ffth.reincoast.dto.Volunteer;
 
 /**
- * Servlet implementation class MemberDeactivateServlet
+ * Servlet implementation class VolunteerDeactivateServlet
  */
-@WebServlet("/MemberDeactivateServlet")
-public class MemberDeactivateServlet extends HttpServlet {
+@WebServlet("/VolunteerDeactivateServlet")
+public class VolunteerDeactivateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public VolunteerDeactivateServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public MemberDeactivateServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("before get session");
 		HttpSession session = request.getSession();
-		Member member = (Member) session.getAttribute("current_user");
-		String Uname = (member.getUserName());
+		Volunteer volunteer = (Volunteer)session.getAttribute("current_user");
+		
+		String Uname = (volunteer.getUserName());
 		System.out.println("before deactivate");
 		try {
+			VolunteerDao volunteerdao = new VolunteerDao();
+			Volunteer currentMem = volunteerdao.getByUsernameVolunteer(Uname);
 
-			MemberDao memberDao = new MemberDao();
-			Member currentMem = memberDao.getByUsernameMember(Uname);
-			System.out.println("USER" + Uname);
 			currentMem.setStatus("INACTIVE");
-			memberDao.saveOrUpdate(currentMem);
+			volunteerdao.saveOrUpdate(currentMem);
 			System.out.println("DEACTIVATED DONE!");
 			session.invalidate();
 			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
@@ -57,6 +57,4 @@ public class MemberDeactivateServlet extends HttpServlet {
 
 		}
 	}
-
-
 }

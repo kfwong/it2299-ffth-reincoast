@@ -37,7 +37,6 @@ public class ContactEditServlet extends HttpServlet {
 		String delete = request.getParameter("delete");
 		
 		if(delete != null && delete.equals("true")){
-			System.out.println("delete");
 			String[] idArray = null;
 			idArray = request.getParameterValues("id");
 			ArrayList<Integer> idArrayList = new ArrayList<Integer>();
@@ -54,7 +53,6 @@ public class ContactEditServlet extends HttpServlet {
 				Contact contact = new Contact();
 				if(idArrayList.get(i) != -1){
 					contact.setId(idArrayList.get(i));
-					System.out.println(idArrayList.get(i));
 				}
 				ContactDao contactDao = new ContactDao();
 				contactDao.delete(contact);;
