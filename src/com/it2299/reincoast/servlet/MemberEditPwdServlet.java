@@ -55,14 +55,14 @@ public class MemberEditPwdServlet extends HttpServlet {
 				
 				request.setAttribute("member_data", member);
 			//Updated Password
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/member-profile.jsp");
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/member-profile.jsp?updatedmsg=Profile%20Update!");
 				requestDispatcher.forward(request, response);
 			
 			}
 			
 			else{
 				//Current Password is wrong 
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/member-edit-pwd.jsp");
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/member-edit-pwd.jsp?failmsg=ERORR!%20You%27ve%20entered%20a%20wrong%20current%20password.%20%0APlease%20try%20again");
 				requestDispatcher.forward(request, response);
 			}
 

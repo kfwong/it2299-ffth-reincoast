@@ -35,7 +35,7 @@ public class MemberViewProfileServlet extends HttpServlet {
 				Member member = (Member)session.getAttribute("current_user");
 				request.setAttribute("member_data", member);
 				
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/member-profile.jsp");
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/member-profile.jsp?isHidden=hidden");
 				requestDispatcher.forward(request, response);
 			
 		
@@ -47,7 +47,7 @@ public class MemberViewProfileServlet extends HttpServlet {
 		Member member = (Member)session.getAttribute("current_user");
 		request.setAttribute("member_datas", member);
 
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/member-edit.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/member-edit.jsp?isHidden=hidden");
 		requestDispatcher.forward(request, response);
 	
 	}

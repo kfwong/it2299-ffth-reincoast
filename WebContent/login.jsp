@@ -15,7 +15,7 @@
 <div id="page-wrapper container">
 
 	<div class="col-lg-4">
-	<div class="alert alert-dismissable ${param.isType } ${param.isHidden}">
+	<div class="alert alert-dismissable ${param.isType} ${param.isHidden}">
 			<button type="button" class="close" data-dismiss="alert"aria-hidden="true">&times;</button>
 			
 			${param.msg}

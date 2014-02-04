@@ -29,7 +29,7 @@ public class MemberSignOutServlet extends HttpServlet {
         if (session != null) {  
             session.invalidate();  
          
-    	RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+    	RequestDispatcher rd = request.getRequestDispatcher("/login.jsp?msg=You%20have%20successfully%20signout&isType=alert-success");
 		rd.forward(request, response);
 		System.out.println("Done ");
         } 

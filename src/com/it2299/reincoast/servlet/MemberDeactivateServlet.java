@@ -48,7 +48,8 @@ public class MemberDeactivateServlet extends HttpServlet {
 			memberDao.saveOrUpdate(currentMem);
 			System.out.println("DEACTIVATED DONE!");
 			session.invalidate();
-			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/login.jsp?msg=Your%20account%20has%20been%20successfully%20deactivated%20from%20the%20site.&isType=alert-success");
+			
 			rd.forward(request, response);
 		
 

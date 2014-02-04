@@ -86,8 +86,8 @@ public class MemberLogInServlet extends HttpServlet {
 				}
 				
 		}	else {
-				rd = getServletContext().getRequestDispatcher("/login.jsp?msg=Invalid%20Username%20Or%20Password.%20Please%20Try%20Again!");
-			  rd.forward(request, response); 
+			rd = getServletContext().getRequestDispatcher("/login.jsp?msg=Invalid%20Username%20Or%20Password.%20Please%20Try%20Again!&isType=alert-danger");
+			rd.forward(request, response); 
 			   //validatejs
 		}
 		

@@ -8,50 +8,6 @@
 
 </jsp:include>
 <!-- header.jsp -->
-<style type="text/css">
-.button {
-	margin: .4em;
-	padding: 1em;
-	cursor: pointer;
-	background: #000000;
-	text-decoration: none;
-	color: #666666;
-}
-
-/* Bubble Float Bottom */
-.bubble-float-bottom {
-	display: inline-block;
-	position: relative;
-	transition-duration: 0.3s;
-	transition-property: transform;
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-	transform: translateZ(0);
-	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-}
-
-.bubble-float-bottom:before {
-	pointer-events: none;
-	position: absolute;
-	z-index: -1;
-	content: '';
-	left: calc(50% - 10px);
-	bottom: 0;
-	border-style: solid;
-	border-width: 10px 10px 0 10px;
-	border-color: #000 transparent transparent transparent;
-	transition-duration: 0.3s;
-	transition-property: bottom;
-}
-
-.bubble-float-bottom:hover {
-	transform: translateY(-5px) translateZ(0);
-}
-
-.bubble-float-bottom:hover:before {
-	bottom: -10px;
-}
-}
-</style>
 
 <!-- sidebar.jsp -->
 <jsp:include page="sidebar.jsp"></jsp:include>
@@ -59,11 +15,19 @@
 
 <!-- sample-content.jsp -->
 <div id="page-wrapper">
-
-
-
-	<div class="button bubble-float-bottom">Bubble Float Bottom</div>
-	<br> <br>
+	<div class="page-header">
+		<h1>Change Password</h1>
+	</div>
+	<ol class="breadcrumb">
+					<li><a href="dashboard.jsp"><i class="icon-dashboard"></i>Home</a></li>
+					<li><a href="MemberViewProfileServlet"><i class="icon-briefcase"></i>Profile</a></li>
+					<li class="active">Change Password</li>
+				</ol>
+					<div class="alert alert-dismissable alert-danger ${param.isHidden}">
+				<button type="button" class="close" data-dismiss="alert"aria-hidden="true">&times;</button>
+				
+				${param.failmsg}
+			</div>
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<form id="MePwd" class="Volunteer_SignUp" method="post" action="MemberEditPwdServlet">
@@ -81,13 +45,13 @@
 						</tr>
 						<tr>
 							<th>Password</th>
-							<th><input type="password" class="form-control"placeholder="Password" name="password" id="password" required autofocus>
+							<th><input type="password" class="form-control"placeholder="Password" name="password" id="password" required >
 							</th>
 						</tr>
 
 						<tr>
 							<th>Confirm Password</th>
-							<th><input type="Password" class="form-control" placeholder="Confirm Password" name="cfmPassword" id="cfmPassword" required autofocus></th>
+							<th><input type="Password" class="form-control" placeholder="Confirm Password" name="cfmPassword" id="cfmPassword" required ></th>
 						</tr>
 
 
