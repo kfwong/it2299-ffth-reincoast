@@ -14,7 +14,7 @@
 		<strong>
 			<small>
 				<ul class="nav navbar-nav navbar-user side-nav">
-					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> kfwong <b class="caret"></b></a>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> ${current_user.name} <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="MemberViewProfileServlet">View Profile</a></li>
 							<li><a href="MemberSignOutServlet">Sign Out</a></li>
