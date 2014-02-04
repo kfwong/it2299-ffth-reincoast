@@ -1,7 +1,6 @@
 package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -63,7 +62,7 @@ public class MemberLogInServlet extends HttpServlet {
 				rd.forward(request, response);
 			}else 
 			{
-				rd = getServletContext().getRequestDispatcher("/login.jsp");
+				rd = getServletContext().getRequestDispatcher("/login.jsp?msg=Invalid%20Username%20Or%20Password.%20Please%20Try%20Again!&isType=alert-danger");
 				rd.forward(request, response);
 			}
 			
@@ -87,8 +86,8 @@ public class MemberLogInServlet extends HttpServlet {
 				}
 				
 		}	else {
-			rd = getServletContext().getRequestDispatcher("/login.jsp");
-			   rd.forward(request, response); 
+				rd = getServletContext().getRequestDispatcher("/login.jsp?msg=Invalid%20Username%20Or%20Password.%20Please%20Try%20Again!");
+			  rd.forward(request, response); 
 			   //validatejs
 		}
 		
