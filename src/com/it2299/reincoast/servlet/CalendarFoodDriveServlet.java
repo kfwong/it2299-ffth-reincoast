@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.it2299.ffth.reincoast.dao.CalendarFoodDriveDao;
 import com.it2299.ffth.reincoast.dto.CalendarFoodDrive;
 
 /**
@@ -38,10 +39,8 @@ public class CalendarFoodDriveServlet extends HttpServlet {
 		ArrayList<CalendarFoodDrive> foodDriveArray = new ArrayList<CalendarFoodDrive>();
 		
 		CalendarFoodDrive fd1 = new CalendarFoodDrive();
-		fd1.setAllDay(true);
 		fd1.setTitle("TestTitle");
 		fd1.setStart("2014-01-01");
-		fd1.setEnd("2014-01-02");
 		
 		foodDriveArray.add(fd1);
 		
@@ -55,6 +54,15 @@ public class CalendarFoodDriveServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String title = request.getParameter("title");
+		String start = request.getParameter("start");
+		
+		CalendarFoodDrive fd = new CalendarFoodDrive();
+		fd.setTitle(title);
+		fd.setStart(start);
+		
+		CalendarFoodDriveDao dao = new CalendarFoodDriveDao();
+		dao.saveOrUpdate(fd);
 	}
 
 }

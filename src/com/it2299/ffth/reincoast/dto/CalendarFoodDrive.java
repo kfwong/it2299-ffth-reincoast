@@ -5,11 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
+@Entity
 @Table(name = "CALENDAR_FOOD_DRIVE")
 
 public class CalendarFoodDrive {
@@ -20,11 +21,7 @@ public class CalendarFoodDrive {
 	
 	private String title;
 	
-	private boolean allDay;
-	
 	private Date start;
-	
-	private Date end;
 
 	public int getId() {
 		return id;
@@ -40,14 +37,6 @@ public class CalendarFoodDrive {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public boolean isAllDay() {
-		return allDay;
-	}
-
-	public void setAllDay(boolean allDay) {
-		this.allDay = allDay;
 	}
 
 	public Date getStart() {
@@ -66,22 +55,4 @@ public class CalendarFoodDrive {
 		}
 		this.start = date;
 	}
-
-	public Date getEnd() {
-		return end;
-	}
-
-	public void setEnd(String end) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String dateInString = end;
-		Date date = null;
-		try {
-			date = sdf.parse(dateInString);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		this.end = date;
-	}
-
 }
