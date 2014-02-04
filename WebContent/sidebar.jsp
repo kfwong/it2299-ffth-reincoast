@@ -31,8 +31,8 @@
 						<ul class="dropdown-menu">
 							<li><a href="inbound-delivery.jsp">Inbound Delivery</a></li>
 							<li><a href="outbound-delivery.jsp">Outbound Delivery</a></li>
-							<li><a href="GetInboundDeliveryListServlet">Inbound Delivery Record</a></li>
-							<li><a href="GetOutboundDeliveryServlet">Outbound Delivery Record</a></li>
+							<li><a href="GetInboundDeliveryListServlet?page=1">Inbound Delivery Record</a></li>
+							<li><a href="GetOutboundDeliveryServlet?page=1">Outbound Delivery Record</a></li>
 							<li><a href="GetStockServlet?page=1">Inventory</a></li>
 						</ul>
 					</li>

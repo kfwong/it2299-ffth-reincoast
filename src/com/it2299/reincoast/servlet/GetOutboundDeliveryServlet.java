@@ -10,10 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import com.it2299.ffth.reincoast.dao.InboundDeliveryDao;
 import com.it2299.ffth.reincoast.dao.OutboundDeliveryDao;
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
 import com.it2299.ffth.reincoast.dto.OutboundDelivery;
+import com.it2299.ffth.reincoast.util.HibernateUtil;
 
 /**
  * Servlet implementation class GetOutboundDeliveryServlet
@@ -34,11 +39,20 @@ public class GetOutboundDeliveryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("GET");
+	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		int page = Integer.parseInt(request.getParameter("page"));
 		OutboundDeliveryDao outboundDao = new OutboundDeliveryDao();
-		List<OutboundDelivery> outboundList = outboundDao.getAll();
+		
+		request.setAttribute("total_item", outboundDao.getAll().size());
+		if(page != 1){
+			request.setAttribute("current_page", page);
+			request.setAttribute("s_url", "http://localhost:8080/j2EE-it2299-ffth-reincoast/GetOutboundDeliveryServlet?page=");
+		}else{
+			request.setAttribute("current_page", 1);
+			request.setAttribute("s_url", "http://localhost:8080/j2EE-it2299-ffth-reincoast/GetOutboundDeliveryServlet?page=");
+		}
+		
+		List<OutboundDelivery> outboundList = outboundPaginator(page);
 		request.setAttribute("outboundList", outboundList);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/outbound-record.jsp");
 		requestDispatcher.forward(request, response);
@@ -50,12 +64,28 @@ public class GetOutboundDeliveryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("POST");
+		
 		OutboundDeliveryDao outboundDao = new OutboundDeliveryDao();
 		List<OutboundDelivery> outboundList = outboundDao.getAll();
 		request.setAttribute("outboundList", outboundList);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/outbound-record.jsp");
 		requestDispatcher.forward(request, response);
+	}
+	
+	@SuppressWarnings({ "unchecked", "unused" })
+	private List<OutboundDelivery> outboundPaginator(int page){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		
+		Query query= session.createQuery("FROM OutboundDelivery");
+		query.setFirstResult(5 *(page - 1));
+		query.setMaxResults(5);
+		
+		List<OutboundDelivery> result = query.list();
+		
+		session.close();
+		
+		return result;
 	}
 
 }

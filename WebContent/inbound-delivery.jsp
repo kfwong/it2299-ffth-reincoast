@@ -90,8 +90,10 @@
 									
 								</tbody>
 							</table>
+							
 						</div>
 					</form>
+					
 					<div id="notice">
 					<div class="alert alert-success alert-dismissable">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -111,6 +113,8 @@
 	var count = 0;
 
 	$(document).ready(function() {
+		
+	
 						getDate();
 						$("#productName").select2({
 							
@@ -139,6 +143,8 @@
 												}
 											
 										});
+						
+						
 					});
 	
 	function getItem() {

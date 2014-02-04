@@ -99,8 +99,8 @@ function demoFromHTML() {
 	// Generate from HTML	
 	pdf.fromHTML(
 	    source, // HTML string or DOM elem ref.
-		10, // x coord
-	    10, // y coord
+		15, // x coord
+	    15, // y coord
 	    {
 	    	'width':565, // max width of content on PDF
 	        'elementHandlers': specialElementHandlers
@@ -111,15 +111,21 @@ function demoFromHTML() {
 	var table = tableToJson($('#item-table').get(0))
 	pdf.cellInitialize();
 	pdf.setFontSize(8);
+	pdf.cell(15, 150, 240, 20, "PRODUCT NAME", -1);
+	pdf.cell(15, 150, 150, 20, "UNIT OF MEASURE(IN GRAM)", -1);
+	pdf.cell(15, 150, 50, 20, "PRICE", -1);
+	pdf.cell(15, 150, 90, 20, "EXPIRY DATE", -1);
 	$.each(table, function (i, row){
 	  $.each(row, function (j, cell){
-		 if(j == "quantity" || j == "untiofmreasure"){
-			 pdf.cell(15, 150, 50, 15, cell, i);
-		 }else if(j == "expirydate"){
-			 pdf.cell(15, 150, 90, 15, cell, i);
-		 } else{
 		 
-			 pdf.cell(15, 150, 200, 15, cell, i);
+		if(j == "quantity"){
+			 pdf.cell(15, 150, 50, 20, cell, i);
+		 }else if(j == "expirydate"){
+			 pdf.cell(15, 150, 90, 20, cell, i);
+		 }else if(j == "untiofmeasure"){
+			 pdf.cell(15, 150, 150, 20, cell, i);
+		 }else{
+			 pdf.cell(15, 150, 240, 20, cell, i);
 		 }
 	  })
 	});
