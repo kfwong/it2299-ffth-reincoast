@@ -33,7 +33,7 @@
 							<li><a href="outbound-delivery.jsp">Outbound Delivery</a></li>
 							<li><a href="GetInboundDeliveryListServlet">Inbound Delivery Record</a></li>
 							<li><a href="GetOutboundDeliveryServlet">Outbound Delivery Record</a></li>
-							<li><a href="GetStockServlet">Inventory</a></li>
+							<li><a href="GetStockServlet?page=1">Inventory</a></li>
 						</ul>
 					</li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-paste"></i> Audit <b class="caret"></b></a>
