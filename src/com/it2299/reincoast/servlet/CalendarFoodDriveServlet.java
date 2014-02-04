@@ -36,13 +36,10 @@ public class CalendarFoodDriveServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ArrayList<CalendarFoodDrive> foodDriveArray = new ArrayList<CalendarFoodDrive>();
+		ArrayList<CalendarFoodDrive> foodDriveArray;
 		
-		CalendarFoodDrive fd1 = new CalendarFoodDrive();
-		fd1.setTitle("TestTitle");
-		fd1.setStart("2014-01-01");
-		
-		foodDriveArray.add(fd1);
+		CalendarFoodDriveDao dao = new CalendarFoodDriveDao();
+		foodDriveArray = (ArrayList<CalendarFoodDrive>) dao.getAll();
 		
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
