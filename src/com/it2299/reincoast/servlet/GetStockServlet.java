@@ -16,6 +16,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.search.FullTextQuery;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.it2299.ffth.reincoast.dao.InboundDeliveryDao;
@@ -23,9 +29,11 @@ import com.it2299.ffth.reincoast.dao.OutboundDeliveryDao;
 import com.it2299.ffth.reincoast.dao.ProductDao;
 import com.it2299.ffth.reincoast.dao.StockDao;
 import com.it2299.ffth.reincoast.dto.Audit;
+import com.it2299.ffth.reincoast.dto.Contact;
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
 import com.it2299.ffth.reincoast.dto.OutboundDelivery;
 import com.it2299.ffth.reincoast.dto.Product;
+import com.it2299.ffth.reincoast.util.HibernateUtil;
 
 
 /**
@@ -42,63 +50,82 @@ public class GetStockServlet extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	@SuppressWarnings("unused")
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		int page = Integer.parseInt(request.getParameter("page"));
 		Gson gson = new GsonBuilder().create();
 		ProductDao productDao = new ProductDao();
 		
-		List<Product> productList = productDao.getAll();
-		
-		
-		
-		
-		
+		List<Product> productList =  productPaginator(page);
+				
 		int totalQuan =0;
 		
 		for(int i=0; i< productList.size(); i++){
 		totalQuan = totalQuan + productList.get(i).getQuantity();
 		}
-		
-		
-		
-		
+		request.setAttribute("total_size", productList.size());
 		request.setAttribute("totalQuan", totalQuan);
 		request.setAttribute("stockList", productList);
-		
-		
-		
+		request.setAttribute("total_item", productDao.getAll().size());
+		if(page != 1){
+			
+			request.setAttribute("current_page", page);
+			//request.setAttribute("record_from", Math.min(1 + (Integer.parseInt(request.getParameter("page")) - 1) * 4, productDao.getAll().size()));
+			//request.setAttribute("record_to", Math.min(Integer.parseInt(request.getParameter("page")) * 4, productDao.getAll().size()));
+			request.setAttribute("s_url", "http://localhost:8080/j2EE-it2299-ffth-reincoast/GetStockServlet?page=");
+		}else{
+			request.setAttribute("current_page", 1);
+			//request.setAttribute("record_from", Math.min(1, productDao.getAll().size()));
+			//request.setAttribute("s_record_to", Math.min(4, productDao.getAll().size()));
+			request.setAttribute("s_url", "http://localhost:8080/j2EE-it2299-ffth-reincoast/GetStockServlet?page=");
+		}
 		
 		String chart = "Morris.Bar({element: 'graph',";
 	    	 chart = chart + "data:[";
 	    	
 	    	  chart = chart + generatedChart(productList);
 	    	 	
-	    	 	
 	    	   chart = chart + "],";
 	    			   chart = chart + "xkey: 'y',";
 	    			   chart = chart + "ykeys: ['a'],";
 	    			   chart = chart + " labels: ['Product Quantity']";
-	    			   chart = chart + "});";
+	    			   chart = chart + "})";
 		request.setAttribute("mychart", chart);
+		
 		
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/stock.jsp");
 		requestDispatcher.forward(request, response);
+		
 	}
 	
 	private String generatedChart(List<Product> productList){
 		String chart = "";
 			for(int i=0; i<productList.size() ; i++){
-				
-			chart = chart +  "{ y: '"+ productList.get(i).getName() + "', a: " + productList.get(i).getQuantity() + "},";
-				
+				if(productList.size()-1 == i){
+					chart = chart +  "{ y: '"+ StringEscapeUtils.escapeXml(productList.get(i).getName()) + "', a: " + productList.get(i).getQuantity() + "}";
+				}else{
+			chart = chart +  "{ y: '"+ StringEscapeUtils.escapeXml(productList.get(i).getName()) + "', a: " + productList.get(i).getQuantity() + "},";
+				}
 			}
 		return chart;
 	}
-	//ProductSearchServlet and product database
+	
+	@SuppressWarnings({ "unchecked", "unused" })
+	private List<Product> productPaginator(int page){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		
+		Query query= session.createQuery("FROM Product");
+		query.setFirstResult(4 *(page - 1));
+		query.setMaxResults(4);
+		
+		List<Product> result = query.list();
+		
+		session.close();
+		
+		return result;
+	}
+	
+	
 }

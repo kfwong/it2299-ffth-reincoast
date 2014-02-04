@@ -33,13 +33,6 @@
 				</div>
 				<div class="panel-body">
 					<form class="form-horizontal" role="form" >
-						<div class="form-group" style="padding: 0px 10px 0px 10px;">
-							<div class="btn-group">
-								<button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#searchModal">
-									<i class="icon-tags"></i> Search
-								</button>	
-							</div>
-						</div>
 
 						<div class="table-responsive" id="tableRec">
 							<table class="table table-hover table-striped tablesorter table-condensed">
@@ -69,65 +62,18 @@
 									</c:forEach>
 								</tbody>
 							</table>
+							<div class="row">
+							<div class="col-lg-12">
+								<div class="pull-right">
+									<ul id="pagination" class="pagination">
+									</ul>
+								</div>
+							</div>
+						</div>
 						</div>
 						
 					</form>
 								
-								
-									<!-- Modal -->
-									<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal"
-														aria-hidden="true">&times;</button>
-													<h4 class="modal-title" id="myModalLabel">Advanced Search</h4>
-												</div>
-												<div class="modal-body" id="searchID">
-													<table>
-													<tr>
-													<td>
-													Delivery ID:
-													</td>
-													<td>
-													<input class="form-control" type="text" id ="searchId" name="search" />
-													</td>
-													</tr>
-													<tr>
-													<td>
-													Donor Name: 
-													</td>
-													<td>
-													<input class="form-control" type="text" id ="searchName" name="name" />
-													</td>
-													</tr>
-													<tr>
-													<td>
-													Search From
-													</td>
-													<td>
-													<input class="form-control datepicker" type="text" id ="searchDate1" name="Date1" readonly/>
-													</td>
-													<td>
-													To
-													</td>
-													<td>
-													<input class="form-control datepicker" type="text" id ="searchDate2" name="Date2" readonly/>
-													</td>
-													</tr>
-													</table>
-												</div>
-												<div class="modal-footer">
-												<button type="button" class="btn btn-primary" id="deliverySearch">Search</button>
-													<button type="button" class="btn btn-default"
-														data-dismiss="modal">Close</button>
-												</div>
-											</div>
-											<!-- /.modal-content -->
-										</div>
-										<!-- /.modal-dialog -->
-									</div>
-									<!-- /.modal -->
 				</div>
 			</div>
 		</div>
@@ -141,6 +87,16 @@
 <!-- Add row function -->
 <script>
 	$(document).ready(function(){
+		
+		$('#pagination').bootstrapPaginator({
+			bootstrapMajorVersion: 3,
+			size: 'normal',
+			currentPage: "${current_page}",
+			totalPages: Math.ceil(${(total_item)/5}),
+			pageUrl: function( type, page, current){
+				 return "${s_url}"+page;
+			}
+		});
 		
 		$(".remove").on('click', function(event){
 			var result = event.target.id;
@@ -159,6 +115,7 @@
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
+<jsp:param value="js/bootstrap-paginator.min.js" name="js" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js" name="js" />
 </jsp:include>
 <!-- footer.jsp -->
