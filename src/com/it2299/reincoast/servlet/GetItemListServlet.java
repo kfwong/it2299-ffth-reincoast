@@ -45,9 +45,7 @@ public class GetItemListServlet extends HttpServlet {
 		InboundDeliveryDao inboundDao = new InboundDeliveryDao();
 		ItemDao itemDao = new ItemDao();
 		List<InboundLineItem> itemList = itemDao.getList(inbound);
-		for(int i=0 ; i<itemList.size(); i++){
-			System.out.println(itemList.get(i).getId());
-		}
+		
 		request.setAttribute("inboundID", id);
 		request.setAttribute("inbound", inboundDao.get(id));
 		request.setAttribute("itemList", itemList);

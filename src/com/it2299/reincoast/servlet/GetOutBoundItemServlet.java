@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.it2299.ffth.reincoast.dao.ItemDao;
+import com.it2299.ffth.reincoast.dao.OutboundDeliveryDao;
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
 import com.it2299.ffth.reincoast.dto.InboundLineItem;
 import com.it2299.ffth.reincoast.dto.OutboundDelivery;
@@ -39,22 +40,16 @@ public class GetOutBoundItemServlet extends HttpServlet {
 
 		OutboundDelivery outbound = new OutboundDelivery();
 		outbound.setId(id);
+		OutboundDeliveryDao outboundDao = new OutboundDeliveryDao();
 		ItemDao itemDao = new ItemDao();
 		List<OutboundLineItem> itemList = itemDao.getOutboundList(outbound);
-
 		
+		request.setAttribute("outbound", outboundDao.get(id));
 		request.setAttribute("itemList", itemList);
 		
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/item-list-outbound.jsp");
 		requestDispatcher.forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }
