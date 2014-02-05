@@ -38,7 +38,6 @@
 							
 							<th><input type="text" class="form-control" value="${member_datas.name}" name="name" id="name" required autofocus></th>
 
-
 						</tr>
 
 						<tr>
