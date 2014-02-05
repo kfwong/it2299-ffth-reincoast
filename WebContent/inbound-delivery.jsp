@@ -55,7 +55,9 @@
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Donor Name</label>
 							<div class="col-lg-4">
-								<input class="form-control" type="text" id="Donor" name="Donor" />
+								<select class="form-control" type="text" id="Donor" name="Donor" >
+								
+								</select>
 							</div>
 						</div>
 						<div class="form-group">
@@ -88,8 +90,10 @@
 									
 								</tbody>
 							</table>
+							
 						</div>
 					</form>
+					
 					<div id="notice">
 					<div class="alert alert-success alert-dismissable">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -109,10 +113,17 @@
 	var count = 0;
 
 	$(document).ready(function() {
+		
+	
 						getDate();
 						$("#productName").select2({
 							
 						});
+						
+						$("#Donor").select2({
+							
+						});
+						getDonorName();
 						getProductName();
 						$("#addRow").on('click',function() {
 												if (count == 0) {
@@ -132,6 +143,8 @@
 												}
 											
 										});
+						
+						
 					});
 	
 	function getItem() {
@@ -163,7 +176,21 @@
 		$( ".datepicker" ).datepicker();
 	}
 	
-	
+	function getDonorName(){
+		var donor =1;
+		
+		$.ajax({
+			type: "POST",
+			url: "GetDonorNameServlet",
+			data:{
+				donor : donor
+			}
+		}).done(function(data){
+			$.each($.parseJSON(data), function(){
+				$("#Donor").append('<option value='+this.id + '>'+ this.name +' </option>');
+			})
+		})
+	}
 	function getProductName(){
 		var itemCode = 1;
 		$.ajax({	type : "POST",

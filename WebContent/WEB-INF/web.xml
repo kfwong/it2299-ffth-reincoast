@@ -9,14 +9,12 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
   <filter>
-   <filter-name>AuthenticationFilter</filter-name>
-   <filter-class>com.it2299.ffth.reincoast.filter.AuthenticationFilter</filter-class>
+    <filter-name>AuthenticationFilter</filter-name>
+    <filter-class>com.it2299.ffth.reincoast.filter.AuthenticationFilter</filter-class>
   </filter>
-  
   <filter-mapping>
-   <filter-name>AuthenticationFilter</filter-name>
-   <url-pattern>/*</url-pattern>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
 </web-app>

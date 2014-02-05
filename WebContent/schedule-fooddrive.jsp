@@ -18,37 +18,35 @@
 	<div class="modal create-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        <h4 class="modal-title" id="myModalLabel">Create event</h4>
-	      </div>
-	      <div class="modal-body">
-	         <form role="form" method="post" action="CalendarFoodDriveServlet">
+			<form role="form" method="post" action="CalendarFoodDriveServlet">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title" id="myModalLabel">Create event</h4>
+		      </div>
+		      <div class="modal-body">
 				<div class="form-group">
 				  <label for="title">Title</label>
-				  <input type="text" class="form-control" id="title" placeholder="Example: Serangoon S.C.C.">
+				  <input type="text" class="form-control" id="title" name = "title" placeholder="Example: Serangoon S.C.C.">
 				</div>
 				<div class="form-group">
-				  <label for="exampleInputPassword1">Password</label>
-				  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+
+				  <input type="hidden" class="form-control" id="start" name = "start">
 				</div>
 				<div class="form-group">
-				  <label for="exampleInputFile">File input</label>
-				  <input type="file" id="exampleInputFile">
-				  <p class="help-block">Example block-level help text here.</p>
+
+				  <input type="hidden" class="form-control" id="end" name = "end">
 				</div>
 				<div class="checkbox">
 				  <label>
-				    <input type="checkbox"> Check me out
+				    <input type="checkbox" class="allDay" name ="allDay" value="allDay" checked="checked"> All day event
 				  </label>
 				</div>
-				<button type="submit" class="btn btn-default">Submit</button>
-			  </form>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-	        <button type="button" class="btn btn-primary confirm-create-button">Confirm</button>
-	      </div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+		        <button type="submit" class="btn btn-primary confirm-create-button">Save</button>
+		      </div>
+			</form>
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
@@ -82,6 +80,7 @@
 	$(document).ready(function(){
 		$('#calendar').fullCalendar({
 			editable: true,
+			allDayDefault: true,
 			header: {
 				left: 'prev,next today',
 				center: 'title',
@@ -90,7 +89,9 @@
 			events: "CalendarFoodDriveServlet",
 		
 			dayClick: function(date, jsEvent, view) {
-		        $(".delete-modal").modal();
+		        $(".create-modal").modal();
+		        $("#start").val(date.format("YYYY-MM-DD"));
+		        alert('Clicked on: ' + date.format("YYYY-MM-DD"));
 		    },
 		    
 		    eventClick: function(calEvent, jsEvent, view) {
