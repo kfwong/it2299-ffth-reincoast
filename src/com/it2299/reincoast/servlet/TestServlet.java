@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,6 +47,9 @@ public class TestServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(UUID.randomUUID().toString().substring(0, 8));
+		
+		/*
 		List<Audit> audits = new ArrayList<Audit>();
 
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -76,6 +80,7 @@ public class TestServlet extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		out.print(json);
+		*/
 	}
 
 }

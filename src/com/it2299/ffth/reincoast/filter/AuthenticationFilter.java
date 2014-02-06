@@ -1,6 +1,7 @@
 package com.it2299.ffth.reincoast.filter;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -42,9 +43,9 @@ public class AuthenticationFilter implements Filter {
 		} else {
 			HttpSession session = httpRequest.getSession(false);
 			if (session == null) {
-				httpResponse.sendRedirect("login.jsp");
+				httpResponse.sendRedirect("login.jsp?redirect="+URLEncoder.encode(httpRequest.getRequestURL().toString(), "UTF-8"));
 			} else if (session.getAttribute("current_user") == null) {
-				httpResponse.sendRedirect("login.jsp");
+				httpResponse.sendRedirect("login.jsp?redirect="+URLEncoder.encode(httpRequest.getRequestURL().toString(), "UTF-8"));
 			} else {
 				chain.doFilter(request, response);
 			}

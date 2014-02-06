@@ -38,9 +38,8 @@ public class ScheduleListenerServlet implements ServletContextListener {
 			public void run() {
 				// TODO Auto-generated method stub
 				Calendar now = Calendar.getInstance();
-				final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-				System.out.println("scheduled task");
-				System.out.println(dateFormat.format(now.getTime()));
+				final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
+				System.out.println("Scheduled task: " + dateFormat.format(now.getTime()));
 			}
     		
     	};
@@ -53,8 +52,8 @@ public class ScheduleListenerServlet implements ServletContextListener {
     	cal.set(Calendar.MILLISECOND, 0);
     	
     	Date date = cal.getTime();
-    	final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss aa");
-    	System.out.println(dateFormat.format(date));
+    	final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss aa");
+    	System.out.println("Start time: " + dateFormat.format(date));
     	
     	//every 10 seconds for demo purpose
     	//timer.scheduleAtFixedRate(task, date, 10000);

@@ -12,6 +12,8 @@
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.current_session_context_class">thread</property>
 		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.search.default.directory_provider">filesystem</property>
+		<property name="hibernate.search.default.indexBase">/tmp</property>
 		
 		<mapping class="com.it2299.ffth.reincoast.dto.Stock" />
 		<mapping class="com.it2299.ffth.reincoast.dto.Product" />

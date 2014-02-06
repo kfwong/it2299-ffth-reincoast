@@ -2,6 +2,8 @@ package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -58,10 +60,18 @@ public class ProductViewServlet extends HttpServlet {
 				System.out.println("Empty code.");
 			}
 		} finally {
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DAY_OF_MONTH, -7);
+			Date date = calendar.getTime();
 
 			request.setAttribute("p_category", "\"" + StringUtils.join(productDao.getCategories(), "\",\"") + "\"");
 			request.setAttribute("product", product);
 			request.setAttribute("p_audits", productDao.getAuditsById(product.getId()));
+			request.setAttribute("p_audits_past_7_days", productDao.getAuditsById(product.getId(), date));
+			
+			System.out.println(productDao.getInboundDeliveryAuditsTotal(date));
+			//request.setAttribute("now", new Date());
+			//request.setAttribute("past", new Date(new Date().getTime() - 86400000));
 
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/product-view.jsp");
 			requestDispatcher.forward(request, response);
