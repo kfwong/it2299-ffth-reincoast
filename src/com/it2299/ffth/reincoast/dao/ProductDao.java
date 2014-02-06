@@ -1,7 +1,9 @@
 package com.it2299.ffth.reincoast.dao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -32,6 +34,14 @@ import com.it2299.ffth.reincoast.util.HibernateUtil;
  *         Implementation of Item Data Access Object. Please make sure you
  *         extends AbstractDAO so that we have common interfaces for calling
  *         each other's function.
+ */
+/**
+ * @author kfwong
+ *
+ */
+/**
+ * @author kfwong
+ *
  */
 public class ProductDao implements Dao<Product> {
 
@@ -86,18 +96,18 @@ public class ProductDao implements Dao<Product> {
 		session.delete(product);
 		session.close();
 	}
-	
-	public Product getByBarcode(String code){
+
+	public Product getByBarcode(String code) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		
+
 		Query query = session.createQuery("FROM Product WHERE code= :code");
 		query.setParameter("code", code);
-		
+
 		Product product = (Product) query.uniqueResult();
-		
+
 		session.close();
-		
+
 		return product;
 	}
 
@@ -118,14 +128,13 @@ public class ProductDao implements Dao<Product> {
 
 	public List<Audit> getAuditsById(int id) {
 		/*
-		 * System.out.println(histories.get(i)[0]); //entity
-		 * System.out.println
+		 * System.out.println(histories.get(i)[0]); //entity System.out.println
 		 * (((DefaultRevisionEntity)histories.get(i)[1]).getRevisionDate());
 		 * //DefaultRevisionEntity(id, revisionDate)
-		 * System.out.println(histories.get(i)[2]); //operation type (ADD,
-		 * MOD, DEL)
+		 * System.out.println(histories.get(i)[2]); //operation type (ADD, MOD,
+		 * DEL)
 		 */
-		
+
 		List<Audit> audits = new ArrayList<Audit>();
 
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -157,7 +166,48 @@ public class ProductDao implements Dao<Product> {
 			}
 			audit.setOperation(operation);
 			audit.setRevisionId(((DefaultRevisionEntity) results.get(i)[1]).getId());
-			
+
+			audits.add(audit);
+		}
+
+		return audits;
+	}
+
+	public List<Audit> getAuditsById(int id, Date date) {
+
+		List<Audit> audits = new ArrayList<Audit>();
+
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();// this being
+		// HibernateDaoSupport
+
+		AuditReader reader = AuditReaderFactory.get(session);
+
+		AuditQuery query = reader.createQuery().forRevisionsOfEntity(Product.class, false, true);
+		query.add(AuditEntity.id().eq(id));
+		query.add(AuditEntity.revisionProperty("timestamp").ge(date.getTime()));
+
+		List<Object[]> results = query.getResultList();
+
+		for (int i = 0; i < results.size(); i++) {
+			Audit audit = new Audit();
+			audit.setEntity(results.get(i)[0]);
+			audit.setDate(((DefaultRevisionEntity) results.get(i)[1]).getRevisionDate());
+			String operation = null;
+			switch (results.get(i)[2].toString()) {
+			case "ADD":
+				operation = "INSERT";
+				break;
+			case "MOD":
+				operation = "UPDATE";
+				break;
+			case "DEL":
+				operation = "DELETE";
+				break;
+			}
+			audit.setOperation(operation);
+			audit.setRevisionId(((DefaultRevisionEntity) results.get(i)[1]).getId());
+
 			audits.add(audit);
 		}
 		
@@ -165,7 +215,25 @@ public class ProductDao implements Dao<Product> {
 	}
 	
 	
-	public List<Audit> getAudits(){
+	
+	/**
+	 * @param date
+	 * @return the sum of inbound delivery audits total over a span of duration (long) since today.
+	 */
+	public int getInboundDeliveryAuditsTotal(Date date){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+
+		Query query = session.createSQLQuery("SELECT SUM(QUANTITY) FROM `INBOUND_LINE_ITEM_AUD` WHERE PRODUCT_ID = 1 GROUP BY PRODUCT_ID");
+		
+		int inboundDeliveryAuditsTotal = ((BigDecimal) query.uniqueResult()).intValue();
+		
+		session.close();
+		
+		return inboundDeliveryAuditsTotal;
+	}
+
+	public List<Audit> getAudits() {
 		List<Audit> audits = new ArrayList<Audit>();
 
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -198,14 +266,14 @@ public class ProductDao implements Dao<Product> {
 			}
 			audit.setOperation(operation);
 			audit.setRevisionId(((DefaultRevisionEntity) results.get(i)[1]).getId());
-			
+
 			audits.add(audit);
 		}
-		
+
 		return audits;
 	}
-	
-	public int getAuditsCount(){
+
+	public int getAuditsCount() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();// this being
 														// HibernateDaoSupport
@@ -214,11 +282,11 @@ public class ProductDao implements Dao<Product> {
 
 		AuditQuery query = reader.createQuery().forRevisionsOfEntity(Product.class, false, true);
 		query.addProjection(AuditEntity.property("id").count());
-		
-		return ((Long)query.getSingleResult()).intValue();
+
+		return ((Long) query.getSingleResult()).intValue();
 	}
-	
-	public int getAuditsCount(RevisionType revisionType){
+
+	public int getAuditsCount(RevisionType revisionType) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();// this being
 														// HibernateDaoSupport
@@ -228,36 +296,36 @@ public class ProductDao implements Dao<Product> {
 		AuditQuery query = reader.createQuery().forRevisionsOfEntity(Product.class, false, true);
 		query.addProjection(AuditEntity.property("id").count());
 		query.add(AuditEntity.revisionType().eq(revisionType));
-		
-		return ((Long)query.getSingleResult()).intValue();
+
+		return ((Long) query.getSingleResult()).intValue();
 	}
-	
-	public void increaseQuantity(int id, int increment){
+
+	public void increaseQuantity(int id, int increment) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		
+
 		session.beginTransaction();
-		
+
 		Product product = (Product) session.get(Product.class, id);
-		product.setQuantity(product.getQuantity()+increment);
-		
+		product.setQuantity(product.getQuantity() + increment);
+
 		session.update(product);
-		
+
 		session.getTransaction().commit();
 		session.close();
 	}
-	
-	public void decreaseQuantity(int id, int decrement){
+
+	public void decreaseQuantity(int id, int decrement) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-		
+
 		session.beginTransaction();
-		
+
 		Product product = (Product) session.get(Product.class, id);
-		product.setQuantity(product.getQuantity()-decrement);
-		
+		product.setQuantity(product.getQuantity() - decrement);
+
 		session.update(product);
-		
+
 		session.getTransaction().commit();
 		session.close();
 	}
