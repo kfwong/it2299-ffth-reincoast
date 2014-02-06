@@ -25,6 +25,7 @@
 				<li>Food Drive</li>
 				<li class="active">Item List</li>
 			</ol>
+			<div class="col-lg-12">
 			<div class="row"> 
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -32,16 +33,17 @@
 						<h3 class="panel-title">
 							<label>Inbound ID: ${inboundID}</label>
 						</h3>
-						<h4>
+						<h3 class="panel-title">
 							<label>Donor: ${inbound.donorName}</label>
-						</h4>
-						<h4>
-							<label>Total Price: ${inbound.totalPrice}</label>
-						</h4>
-						<h4>
+						</h3>
+						<h3 class="panel-title">
+							<label>Total Value: ${inbound.totalPrice}</label>
+						</h3>
+						<h3 class="panel-title">
 							<label>Received: ${inbound.dateDelivered}</label>
-						</h4>
+						</h3>
 					</div>
+					
 					<div class="panel-body">
 						<form class="form-horizontal" role="form">
 						<a href="javascript:demoFromHTML()" class="button">Print to PDF</a>
@@ -71,6 +73,7 @@
 							</div>
 
 						</form>
+						</div>
 						</div>
 						</div>
 					</div>

@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.it2299.ffth.reincoast.dao.CalendarFoodDriveDao;
 import com.it2299.ffth.reincoast.dto.CalendarFoodDrive;
 
 /**
@@ -34,20 +36,18 @@ public class CalendarFoodDriveServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		ArrayList<CalendarFoodDrive> foodDriveArray = new ArrayList<CalendarFoodDrive>();
+		// TODO Auto-generated method stub		
+		ArrayList<CalendarFoodDrive> foodDriveArray;
 		
-		CalendarFoodDrive fd1 = new CalendarFoodDrive();
-		fd1.setAllDay(true);
-		fd1.setTitle("TestTitle");
-		fd1.setStart("2014-01-01");
-		fd1.setEnd("2014-01-02");
+		CalendarFoodDriveDao dao = new CalendarFoodDriveDao();
+		foodDriveArray = (ArrayList<CalendarFoodDrive>) dao.getAll();
 		
-		foodDriveArray.add(fd1);
+		String json = new Gson().toJson(foodDriveArray);
 		
-		response.setContentType("application/json");
-		PrintWriter out = response.getWriter();
-		out.write(new Gson().toJson(foodDriveArray));
+		request.setAttribute("json", json);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("schedule-fooddrive.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
@@ -55,6 +55,31 @@ public class CalendarFoodDriveServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String action = request.getParameter("action");
+		
+		if(action != null){
+			if(action.equals("create")){
+				String title = request.getParameter("title");
+				String start = request.getParameter("start");
+				
+				CalendarFoodDrive fd = new CalendarFoodDrive();
+				fd.setTitle(title);
+				fd.setStart(start);
+				
+				CalendarFoodDriveDao dao = new CalendarFoodDriveDao();
+				dao.saveOrUpdate(fd);
+			}
+			if(action.equals("delete")){
+				int id  = Integer.parseInt(request.getParameter("id"));
+				CalendarFoodDrive fd = new CalendarFoodDrive();
+				fd.setId(id);
+				
+				CalendarFoodDriveDao dao = new CalendarFoodDriveDao();
+				dao.delete(fd);
+			}
+		}
+		
+		response.sendRedirect("CalendarFoodDriveServlet");
 	}
 
 }

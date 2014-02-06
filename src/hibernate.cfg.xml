@@ -28,6 +28,7 @@
 		<mapping class="com.it2299.ffth.reincoast.dto.PackingLineItem" />
 		<mapping class="com.it2299.ffth.reincoast.dto.Contact" />
 		<mapping class="com.it2299.ffth.reincoast.dto.Volunteer" />
+		<mapping class="com.it2299.ffth.reincoast.dto.CalendarFoodDrive" />
 
 		<listener class="org.hibernate.envers.event.AuditEventListener" type="post-insert"/>
     	<listener class="org.hibernate.envers.event.AuditEventListener" type="post-update"/>
