@@ -8,19 +8,18 @@
 
 </jsp:include>
 <!-- header.jsp -->
-
 <!-- sidebar.jsp -->
 <jsp:include page="sidebar.jsp"></jsp:include>
 <!-- sidebar.jsp -->
 
 <!-- sample-content.jsp -->
 <div id="page-wrapper">
-	<div class="page-header">
+<div class="page-header">
 		<h1>Change Password</h1>
 	</div>
 	<ol class="breadcrumb">
-					<li><a href="dashboard.jsp"><i class="icon-dashboard"></i>Home</a></li>
-					<li><a href="MemberViewProfileServlet"><i class="icon-briefcase"></i>Profile</a></li>
+					<li><a href="v-dashboard.jsp"><i class="icon-dashboard"></i>Home</a></li>
+					<li><a href="VolunteerViewProfileServlet"><i class="icon-briefcase"></i>Profile</a></li>
 					<li class="active">Change Password</li>
 				</ol>
 					<div class="alert alert-dismissable alert-danger ${param.isHidden}">
@@ -28,9 +27,11 @@
 				
 				${param.failmsg}
 			</div>
+
+	<br> <br>
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<form id="MePwd" class="Volunteer_SignUp" method="post" action="MemberEditPwdServlet">
+			<form id="MEPwd" class="Volunteer_SignUp" method="post" action="VolunteerEditPwdServlet">
 
 				<div class="table-responsive">
 					<table class="table">
@@ -45,19 +46,19 @@
 						</tr>
 						<tr>
 							<th>Password</th>
-							<th><input type="password" class="form-control"placeholder="Password" name="password" id="password" required >
+							<th><input type="password" class="form-control"placeholder="Password" name="password" id="password" required>
 							</th>
 						</tr>
 
 						<tr>
 							<th>Confirm Password</th>
-							<th><input type="Password" class="form-control" placeholder="Confirm Password" name="cfmPassword" id="cfmPassword" required ></th>
+							<th><input type="Password" class="form-control" placeholder="Confirm Password" name="cfmPassword" id="cfmPassword" required></th>
 						</tr>
 
 
 						<tr>
 							<th><button class="btn btn-default" type="submit">Save password</button> 
-							<a class="btn btn-default" href="MemberViewProfileServlet">Cancel</a>
+							<a class="btn btn-default" href="VolunteerViewProfileServlet">Cancel</a>
 						</th>
 							<th>
 						</tr>
@@ -72,7 +73,6 @@
 
 	</div>
 </div>
-
 
 <!-- sample-content.jsp -->
 <!-- footer.jsp -->

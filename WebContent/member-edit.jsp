@@ -23,6 +23,7 @@
 					<li><a href="MemberViewProfileServlet"><i class="icon-briefcase"></i>Profile</a></li>
 					<li class="active">Edit Profile</li>
 				</ol>
+				
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<form id="MEdit" class="Volunteer_SignUp" method="post" action="MemberEditProfileServlet">

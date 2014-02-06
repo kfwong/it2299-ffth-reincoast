@@ -36,7 +36,7 @@ public class VolunteerViewProfileServlet extends HttpServlet {
 		Volunteer volunteer = (Volunteer)session.getAttribute("current_user");
 		request.setAttribute("volunteer_data", volunteer);
 		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/volunteer-profile.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/volunteer-profile.jsp?isHidden=hidden");
 		requestDispatcher.forward(request, response);
 	}
 
@@ -47,7 +47,7 @@ public class VolunteerViewProfileServlet extends HttpServlet {
 				Volunteer volunteer = (Volunteer)session.getAttribute("current_user");
 				request.setAttribute("volunteer_datas", volunteer);
 				
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/volunteer-edit.jsp");
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/volunteer-edit.jsp?isHidden=hidden");
 				requestDispatcher.forward(request, response);
 	}
 

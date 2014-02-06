@@ -48,8 +48,7 @@ public class VolunteerEditPwdServlet extends HttpServlet {
 
 				// Get Parameter from Member-edit.jsp
 				String password = request.getParameter("password");
-				String cfmPassword = request.getParameter("cfmPassword");
-				if(password.equals(cfmPassword)){
+				System.out.print("password" +loginMember.getPassword());
 
 					if ((loginMember.getPassword()).equals(request.getParameter("Current_password"))) {
 						VolunteerDao volunteerdao = new VolunteerDao();
@@ -59,20 +58,18 @@ public class VolunteerEditPwdServlet extends HttpServlet {
 						
 						request.setAttribute("volunteer_data", volunteer);
 					//Updated Password
-						RequestDispatcher requestDispatcher = request.getRequestDispatcher("/volunteer-profile.jsp");
+						RequestDispatcher requestDispatcher = request.getRequestDispatcher("/volunteer-profile.jsp?updatedmsg=Profile%20Update!");
 						requestDispatcher.forward(request, response);
 					
 					}
 					
 					else{
 						//Current Password is wrong 
+						RequestDispatcher requestDispatcher = request.getRequestDispatcher("/volunteer-edit-pwd.jsp?failmsg=ERORR!%20You%27ve%20entered%20a%20wrong%20current%20password.%20%0APlease%20try%20again");
+						requestDispatcher.forward(request, response);
 					}
 
-				}
-				else {
-					//CfmPassword & password does not match 
-				}
-			}
+	}
 	}
 
 

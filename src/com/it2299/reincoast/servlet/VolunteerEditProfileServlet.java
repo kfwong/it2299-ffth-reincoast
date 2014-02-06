@@ -39,8 +39,6 @@ public class VolunteerEditProfileServlet extends HttpServlet {
 	Volunteer loginMember = (Volunteer)session.getAttribute("current_user");
 
 
-	//Check Password in DB == Entered password
-	if( (loginMember.getPassword()).equals(request.getParameter("Current_password"))){
 		VolunteerDao volunteerdao = new VolunteerDao();
 		Volunteer volunteer = volunteerdao.getByUsernameVolunteer(loginMember.getUserName());
 		
@@ -55,15 +53,8 @@ public class VolunteerEditProfileServlet extends HttpServlet {
 		request.setAttribute("volunteer_data", volunteer);
 
 		//Updated Profile
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/volunteer-profile.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/volunteer-profile.jsp?updatedmsg=Profile%20Update!");
 		requestDispatcher.forward(request, response);
 	}
-	else {
-				// Password is wrongly entered, mismatch
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/volunteer-edit.jsp");
-				requestDispatcher.forward(request, response);
-			
 	
-	}
-	}
 }

@@ -1,6 +1,7 @@
 package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,7 +35,7 @@ public class MemberViewProfileServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 				Member member = (Member)session.getAttribute("current_user");
 				request.setAttribute("member_data", member);
-				
+			
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("/member-profile.jsp?isHidden=hidden");
 				requestDispatcher.forward(request, response);
 			
