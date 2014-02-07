@@ -1,4 +1,4 @@
-package com.it2299.reincoast.servlet;
+    package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
 
@@ -67,7 +67,10 @@ public class MemberLogInServlet extends HttpServlet {
 			}
 			
 				
-		} else if (status.equals("VOLUNTEER")) {
+		}
+		
+		
+		else if (status.equals("VOLUNTEER")) {
 				VolunteerDao volunteerDao = new VolunteerDao();
 				boolean results = volunteerDao.authenticateVolunteer(userName,password, status);
 				Volunteer volunteer = volunteerDao.getByUsernameVolunteer(userName);
@@ -77,7 +80,7 @@ public class MemberLogInServlet extends HttpServlet {
 
 					session.setAttribute("current_user", volunteer);
 
-					rd = request.getRequestDispatcher("dashboard.jsp");
+					rd = request.getRequestDispatcher("v-dashboard.jsp");
 					rd.forward(request, response);
 				}else 
 				{

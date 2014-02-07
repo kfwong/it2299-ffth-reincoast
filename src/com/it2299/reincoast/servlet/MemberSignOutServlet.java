@@ -34,7 +34,7 @@ public class MemberSignOutServlet extends HttpServlet {
 		System.out.println("Done ");
         } 
         else {
-        	System.out.println("INcomplete");
+        	System.out.println("Unable to Signout");
         }
     }
 

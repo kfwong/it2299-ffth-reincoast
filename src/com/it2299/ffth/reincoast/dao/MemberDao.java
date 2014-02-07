@@ -80,6 +80,17 @@ public class MemberDao implements Dao<Member>{
 		return member;
 	}
 	
+	public Member getByEmailMember(String email){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("FROM Member where email=:Email");
+		query.setParameter("Email", email);
+		Member member = (Member)query.uniqueResult();
+		session.close();
+		
+		return member;
+	}
+	
 	public boolean authenticateMember(String userName, String password, String status){
 		Member member = getByUsernameMember(userName);
 		if(member!=null && member.getUserName().equals(userName) && member.getPassword().equals(password) && member.getStatus().equals("ACTIVE")){

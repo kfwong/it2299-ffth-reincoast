@@ -52,7 +52,7 @@ public class MemberSignUpServlet extends HttpServlet {
 		member.setStatus("ACTIVE");
 		//Set Password to NRIC first. 
 		member.setPassword(request.getParameter("NRIC"));
-		
+		member.setrPwd(null);
 				try {
 
 					//If successful, ADD INTO Database ^^V

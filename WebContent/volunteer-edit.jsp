@@ -11,11 +11,12 @@
 
 
 <!-- sidebar.jsp -->
-<jsp:include page="sidebar.jsp"></jsp:include>
+<jsp:include page="v-sidebar.jsp"></jsp:include>
 <!-- sidebar.jsp -->
 
 <!-- sample-content.jsp -->
 <div id="page-wrapper">
+<br><br><br><br>
 <div class="page-header">
 		<h1>Edit Profile</h1>
 	</div>

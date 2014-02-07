@@ -30,9 +30,14 @@ public class AuthenticationFilter implements Filter {
 		String signUpURL = httpRequest.getContextPath() + "/member-signup.jsp";
 		String signUp2URL = httpRequest.getContextPath() + "/volunteer-signup.jsp";
 		String loginServletURL = httpRequest.getContextPath() + "/MemberLogInServlet";
-		String loginServlet2URL = httpRequest.getContextPath() + "/MemberSignUpServlet";
+		String signupServletURL = httpRequest.getContextPath() + "/MemberSignUpServlet";
+		String signupServlet2URL = httpRequest.getContextPath() + "/VolunteerSignUpServlet";
+		String forgetpasswordURL = httpRequest.getContextPath() + "/forget-password.jsp";
+		String forgetpwdServletURL = httpRequest.getContextPath() + "/ForgetPasswordServlet";
+		String authenticateAcctURL = httpRequest.getContextPath() + "/authenticate-account.jsp";
+		String authenticateAcctServlet = httpRequest.getContextPath() + "/AuthenticateAccountServlet";
 
-		if (httpRequest.getRequestURI().equals(loginServlet2URL) ||httpRequest.getRequestURI().equals(signUp2URL) ||httpRequest.getRequestURI().equals(loginJSPURL) || httpRequest.getRequestURI().equals(loginServletURL) || httpRequest.getRequestURI().equals(signUpURL)) {
+		if (httpRequest.getRequestURI().equals(authenticateAcctURL)||httpRequest.getRequestURI().equals(authenticateAcctServlet)||httpRequest.getRequestURI().equals(forgetpwdServletURL)||httpRequest.getRequestURI().equals(forgetpasswordURL) || httpRequest.getRequestURI().equals(signupServlet2URL) ||httpRequest.getRequestURI().equals(signupServletURL) ||httpRequest.getRequestURI().equals(signUp2URL) ||httpRequest.getRequestURI().equals(loginJSPURL) || httpRequest.getRequestURI().equals(loginServletURL) || httpRequest.getRequestURI().equals(signUpURL)) {
 			chain.doFilter(request, response);
 		} else if (httpRequest.getRequestURI().indexOf("/css") > 0) {
 			chain.doFilter(request, response);

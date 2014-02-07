@@ -9,11 +9,12 @@
 </jsp:include>
 <!-- header.jsp -->
 <!-- sidebar.jsp -->
-<jsp:include page="sidebar.jsp"></jsp:include>
+<jsp:include page="v-sidebar.jsp"></jsp:include>
 <!-- sidebar.jsp -->
 
 <!-- sample-content.jsp -->
 <div id="page-wrapper">
+<br><br><br><br>
 <div class="page-header">
 		<h1>Change Password</h1>
 	</div>
@@ -31,7 +32,7 @@
 	<br> <br>
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<form id="MEPwd" class="Volunteer_SignUp" method="post" action="VolunteerEditPwdServlet">
+			<form id="VEPwd" class="Volunteer_SignUp" method="post" action="VolunteerEditPwdServlet">
 
 				<div class="table-responsive">
 					<table class="table">
@@ -87,7 +88,7 @@
 <!-- footer.jsp -->
 
 <script type="text/javascript">
-$('#MePwd').validate({
+$('#VEPwd').validate({
 	rules: {
 		 password: "required",
 		 cfmPassword : {

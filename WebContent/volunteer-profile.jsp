@@ -10,12 +10,13 @@
 <!-- header.jsp -->
 
 <!-- sidebar.jsp -->
-<jsp:include page="sidebar.jsp"></jsp:include>
+<jsp:include page="v-sidebar.jsp"></jsp:include>
 <!-- sidebar.jsp -->
 
 <!-- sample-content.jsp -->
 <div id="page-wrapper">
-<div class="page-header">
+<br><br><br><br>
+	<div class="page-header">
 		<h1>Profile</h1>
 	</div>
 	<ol class="breadcrumb">
@@ -28,9 +29,8 @@
 				${param.updatedmsg}
 			</div>
 	<div class="panel panel-default">
-
 		<div class="panel-body">
-			<form class="Modify_Profile" method="post" action="VolunteerViewProfileServlet">
+			<form class="VVP" method="post" action="VolunteerViewProfileServlet">
 
 				<div class="table-responsive">
 					<table class="table">
@@ -105,3 +105,5 @@
 	<jsp:param value="/path/to/js1" name="js" />
 </jsp:include>
 <!-- footer.jsp -->
+
+	

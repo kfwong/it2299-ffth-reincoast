@@ -6,9 +6,6 @@
 	<jsp:param value="/path/to/css2" name="css" />
 </jsp:include>
 <!-- header.jsp -->
-
-
-
 <!-- sample-content.jsp -->
 <div id="page-wrapper">
 
@@ -20,26 +17,26 @@
 				<div class="form-group">
 
 					<!--------------------------------------NAME -------------------------------------------->
-					<div class="row">
+					
 						<label for="Name">Name </label> <input type="text"
 							class="form-control" placeholder="Name" name="Name"
 							id="Name" required autofocus>
-					</div>
+				
 					<!--------------------------------------NRIC -------------------------------------------->
-					<div class="row">
+				
 						<label for="NRIC">NRIC</label> <input type="text"
 							class="form-control" placeholder="NRIC" name="NRIC" id="NRIC"
 							required autofocus>
-					</div>
+				
 
 					<!--------------------------------------GENDER -------------------------------------------->
-					<div class="row">
+			
 						<label for="Gender">Gender</label> <br>
 						<div class="radio-inline">
 							<label> <input type="radio" name="Gender" id="Male"
 								value="Male"> Male
 							</label>
-						</div>
+					
 						<div class="radio-inline">
 							<label> <input type="radio" name="Gender" id="Female"
 								value="Female">Female
@@ -50,54 +47,51 @@
 
 				<div class="form-group">
 					<!--------------------------------------Contact Number -------------------------------------------->
-					<div class="row">
+					
 						<label for="Contact_No">Contact No</label> <input type="text"
 							class="form-control" placeholder="Contact Number" name="Tel"
 							id="Tel" required autofocus>
-					</div>
+					
 					<!--------------------------------------EMAIL  -------------------------------------------->
-					<div class="row">
+					
 						<label for="Email">Email</label> <input type="text"
 							class="form-control" placeholder="Email" name="Email" id="Email"
 							required autofocus>
-					</div>
+					
 					<!--------------------------------------Address  -------------------------------------------->
-					<div class="row">
+					
 
 						<label for="Address">Address </label> <input type="text"
 							class="form-control" placeholder="Mailing Address" name="Address"
 							id="Address" required autofocus>
 
-					</div>
-					<div class="row">
+					
 						<label for="PostalCode">Postal Code </label> <input type="text"
 							class="form-control" placeholder="Postal Code" name="PostalCode"
 							id="PostalCode" required autofocus>
 					</div>
-					<br>
-				</div>
+		
 
 
 				<div class="form-group">
 					<!--------------------------------------UserName -------------------------------------------->
-					<div class="row">
+					
 						<label for="Username">Username</label> <input type="text"
 							class="form-control" placeholder="Username" name="Username"
 							id="Username" required autofocus>
-					</div>
+					
 					<!--------------------------------------Password -------------------------------------------->
-					<div class="row">
+					
 						<label for="Password"> Password</label> <input type="password"
 							class="form-control" placeholder="Password" name="Password"
 							id="Password" required autofocus>
-					</div>
+					
 					<!--------------------------------------Confirm Password  -------------------------------------------->
-					<div class="row">
+				
 						<label for="CfmPassword"> Re-enter Password</label> <input
 							type="Password" class="form-control" placeholder="Confirm Password"
 							name="CfmPassword" id="CfmPassword" required autofocus>
-					</div>
-
+				
 				</div>
 
 				<button class="btn btn-lg btn-primary btn-block" type="submit">

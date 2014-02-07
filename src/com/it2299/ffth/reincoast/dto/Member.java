@@ -41,7 +41,9 @@ public class Member{
 
 	@Column(name = "TEL")
 	private String tel;
-
+	
+	@Column(name = "RESET_PASSWORD")
+	private String rPwd;
 
 	@Column(name="STATUS")
 	private String status;
@@ -126,6 +128,13 @@ public class Member{
 		this.tel = tel;
 	}
 
+	public String getrPwd() {
+		return rPwd;
+	}
+
+	public void setrPwd(String rPwd) {
+		this.rPwd = rPwd;
+	}
 
 	public String getStatus() {
 		return status;
