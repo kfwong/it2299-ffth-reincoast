@@ -430,4 +430,31 @@ public class ProductDao implements Dao<Product> {
 		session.getTransaction().commit();
 		session.close();
 	}
+	
+	public void decreaseQuantity(int id, int decrement, Date expiryDate) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+
+		session.beginTransaction();
+
+		Product product = (Product) session.get(Product.class, id);
+		product.setQuantity(product.getQuantity() - decrement);
+		
+		ProductBatch productBatch = new ProductBatch();
+		productBatch.setProductId(id);
+		productBatch.setExpiryDate(expiryDate);
+		productBatch = (ProductBatch) session.get(ProductBatch.class, productBatch);
+		
+		if(productBatch == null){
+			// no record, do nothing. NOT SUPPOSE TO BE HERE ANYWAY
+		}else{
+			productBatch.setQuantity(productBatch.getQuantity() - decrement);
+		}
+
+		session.update(product);
+		session.update(productBatch);
+
+		session.getTransaction().commit();
+		session.close();
+	}
 }
