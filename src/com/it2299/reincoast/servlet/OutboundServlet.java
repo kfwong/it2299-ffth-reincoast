@@ -20,6 +20,7 @@ import com.it2299.ffth.reincoast.dao.ItemDao;
 import com.it2299.ffth.reincoast.dao.OutboundDeliveryDao;
 import com.it2299.ffth.reincoast.dao.ProductDao;
 import com.it2299.ffth.reincoast.dao.StockDao;
+import com.it2299.ffth.reincoast.dto.InboundLineItem;
 import com.it2299.ffth.reincoast.dto.OutboundDelivery;
 import com.it2299.ffth.reincoast.dto.OutboundLineItem;
 import com.it2299.ffth.reincoast.dto.Product;
@@ -39,8 +40,23 @@ public class OutboundServlet extends HttpServlet{
 			String[] id = request.getParameterValues("item-code");
 			String[] quantity = request.getParameterValues("item-quantity");
 			String[] price = request.getParameterValues("item-price");
-			double total =0;
+			String[] ExpiryDate = request.getParameterValues("ExpiryDate");
 			
+			
+			 
+			double total =0;
+			int count =0;
+			
+			for(int i=0; i< id.length; i++){
+				ItemDao itemDao = new ItemDao();
+				ProductDao productDao = new ProductDao();
+				Product product = productDao.get(Integer.parseInt(id[i]));
+				if(product.getQuantity() > Integer.parseInt(quantity[i])){
+					count++;
+				}
+				
+			}
+			if(count == id.length){
 			OutboundDelivery outbound = new OutboundDelivery();
 			OutboundDeliveryDao outDao = new OutboundDeliveryDao();
 			for(int i=0; i< price.length; i++){
@@ -58,9 +74,11 @@ public class OutboundServlet extends HttpServlet{
 					e.printStackTrace();
 				}
 				outDao.saveOrUpdate(outbound);
+				
 			for(int i=0; i<id.length; i++){
 				ItemDao itemDao = new ItemDao();
 				ProductDao productDao = new ProductDao();
+				
 				Product product = productDao.get(Integer.parseInt(id[i]));
 				OutboundLineItem outboundItem = new OutboundLineItem();
 				outboundItem.setProduct(product);
@@ -73,5 +91,9 @@ public class OutboundServlet extends HttpServlet{
 			
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("success-outbound.jsp");
 			requestDispatcher.forward(request, response);
+			}else{
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("failed-outbound.jsp");
+				requestDispatcher.forward(request, response);
+			}
 	}
 }

@@ -408,7 +408,7 @@ public class ProductDao implements Dao<Product> {
 		}else{
 			productBatch.setQuantity(productBatch.getQuantity() + increment);
 		}
-
+		
 		session.update(product);
 		session.saveOrUpdate(productBatch);
 
