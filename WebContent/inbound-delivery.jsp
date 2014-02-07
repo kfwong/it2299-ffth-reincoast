@@ -78,12 +78,11 @@
 								class="table table-hover table-striped tablesorter table-condensed">
 								<thead id="addHeader">
 									<tr>
-									<th class="col-lg-1">#<i class="icon-sort"></i></th>
 									<th class="col-lg-2">Item Code <i class="icon-sort"></i></th>
 									<th class="col-lg-2">Item Name<i class="icon-sort"></i></th>
 									<th class="col-lg-1">Quantity<i class="icon-sort"></i></th>
 									<th class="col-lg-1">Unit Price<i class="icon-sort"></i></th>
-									<th class="col-lg-1">Date<i class="icon-sort"></i></th>
+									<th class="col-lg-1">Expiry Date<i class="icon-sort"></i></th>
 									</tr>
 								</thead>
 								<tbody id="add-list">
@@ -158,9 +157,7 @@
 				}).done(function(data) {
 							var obj = $.parseJSON(data);
 							$("#add-list").append(
-											'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id" value="'
-													+ count
-													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
+											'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
 													+ obj.id
 													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-name" value="'
 													+ obj.name

@@ -45,7 +45,7 @@
 									<tr>
 										<th class="col-lg-1">Delivery ID<i class="icon-sort"></i></th>
 										<th class="col-lg-2">Collection Center<i class="icon-sort"></i></th>
-										<th class="col-lg-2">Recevied Date<i class="icon-sort"></i></th>
+										<th class="col-lg-2">Send Date<i class="icon-sort"></i></th>
 										<th class="col-lg-1">Item List<i class="icon-sort"></i></th>
 										<th class="col-lg-2">Remove Order<i class="icon-sort"></i></th>
 									</tr>
@@ -59,8 +59,7 @@
 										<td>${item.id}</td>
 										<td>${item.collectionCenter}</td>
 										<td>${item.dateDelivered}</td>
-										<td><a href ="GetOutBoundItemServlet?id=${item.id}" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> View</a></td>
-										<!--  <td><href ="RemoveOrderServlet?id=${item.id}" class="btn btn-primary"><i class="icon-remove-sign"></i>Remove Record</a></td>-->
+										<td><a href ="GetOutBoundItemServlet?id=${item.id}" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> View</a></td>
 										<td><button type="button" class="remove"  id="${item.id}">Remove Order</button></td>
 									</tr>
 											

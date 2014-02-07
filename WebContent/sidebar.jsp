@@ -29,6 +29,7 @@
 					</li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-truck"></i> Delivery <b class="caret"></b></a>
 						<ul class="dropdown-menu">
+							<li><a href="create-package.jsp">Create Packing List</a></li>
 							<li><a href="inbound-delivery.jsp">Inbound Delivery</a></li>
 							<li><a href="outbound-delivery.jsp">Outbound Delivery</a></li>
 							<li><a href="GetInboundDeliveryListServlet?page=1">Inbound Delivery Record</a></li>

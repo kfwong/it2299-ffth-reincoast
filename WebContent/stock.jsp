@@ -7,6 +7,8 @@
 <jsp:include page="header.jsp">
 	<jsp:param value="/path/to/css1" name="css" />
 	<jsp:param value="/path/to/css2" name="css" />
+		<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.css" name="css" />
+	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2-bootstrap.css" name="css" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.4.3/morris.css" name="css" />
 </jsp:include>
 <!-- header.jsp -->
@@ -25,18 +27,23 @@
 				<li class="active"><i class="icon-dashboard"></i>Stock</li>
 			</ol>
 		<div class="col-lg-7">
-			
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
+
 						<i class="icon-bar-chart"></i> <label>Stock</label>
+						
 					</h3>
 				</div>
 				<div class="panel-body">
 					<form class="form-horizontal" role="form" method="post"
 						action="/it2299-ffth-reincoast/InBoundServlet">
 						
-						
+						<div class ="col-lg-6">
+					<label class="col-lg-1 control-label">Category</label>
+								<select class="form-control" id="category" name=Type>
+								</select>
+					</div>
 						<div class="table-responsive" id="tableRec">
 							<table
 								class="table table-hover table-striped tablesorter table-condensed">
@@ -117,6 +124,9 @@
 <script>
 
 	$(document).ready(function(){
+		$("#category").select2({
+
+		});
 		
 		$('#pagination').bootstrapPaginator({
 			bootstrapMajorVersion: 3,
@@ -131,11 +141,25 @@
 		${mychart};
 	});
 	
-	
+	function getCategory(){
+		var category = 1;
+		$.ajax({
+			type:"POST",
+			url:"GetCategoryServlet",
+			data:{
+				category: category
+			}
+		}).done(function(data){
+			$.each($.parseJSON(data), function(){
+				$("#category").append('<option value='+this.name + '>'+ this.name +' </option>');
+			});
+		})
+	}
 	
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
+<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.min.js" name="js" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js" name="js" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js" name="js" />
 		<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/graphael/0.5.1/g.raphael-min.js" name="js" />

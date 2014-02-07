@@ -51,6 +51,7 @@ public class GetItemListServlet extends HttpServlet {
 		request.setAttribute("itemList", itemList);
 		
 		
+		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/item-list.jsp");
 		requestDispatcher.forward(request, response);
 	}

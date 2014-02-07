@@ -3,7 +3,7 @@
 
 
 <!-- header.jsp -->
-<meta http-equiv="refresh" content="5;URL=GetOutboundDeliveryServlet?page=1">
+<meta http-equiv="refresh" content="5;URL=outbound-delivery.jsp">
 <jsp:include page="header.jsp">
 	<jsp:param value="/path/to/css1" name="css" />
 	<jsp:param value="/path/to/css2" name="css" />
@@ -26,7 +26,7 @@
 	<div class="row">
 
 		<div class="col-lg-12">
-			<h2>success</h2>
+			<h2>insufficient quantity</h2>
 			<ol class="breadcrumb">
 				<li class="active"><i class="icon-dashboard"></i> Home</li>
 			</ol>
@@ -34,8 +34,8 @@
 			</div>
 			<div class="col-lg-8">
 			<div class="jumbotron">
-				<h1>congratulations!</h1>
-				<p>Your request has been successfully completed.</p>
+				<h1>Insufficient Quantity in your inventory</h1>
+				<p>Your request has failed. The item may have been donated. Please check your warehouse</p>
 				<p>You will redirect shortly.</p>
 			</div>
 			</div>

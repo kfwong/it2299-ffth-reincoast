@@ -56,6 +56,7 @@
 											<th class="col-lg-2">Unti of Measure</th>
 											<th class="col-lg-1">Quantity</th>
 											<th class="col-lg-2">Expiry Date</th>
+											<th class="col-lg-2">Available Quantity</th>
 										</tr>
 									</thead>
 									<tbody id="add-list">
@@ -66,6 +67,7 @@
 												<td>${item.product.unitOfMeasure}</td>
 												<td>${item.quantity}</td>
 												<td>${item.expiryDate}</td>
+												<td>${item.avaliable}</td>
 											</tr>
 										</c:forEach>
 									</tbody>

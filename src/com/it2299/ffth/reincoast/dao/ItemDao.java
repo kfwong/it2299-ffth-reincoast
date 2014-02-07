@@ -1,5 +1,6 @@
 package com.it2299.ffth.reincoast.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -111,5 +112,19 @@ public List<OutboundLineItem> getOutboundList(OutboundDelivery outboundDelivery)
 		session.close();
 		
 	}
-
+	
+	public List<InboundLineItem> getRecommend(Product product){
+		Date date = new Date();
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("FROM InboundLineItem Where product = :product AND expiryDate < :date AND avaliable > 0");
+		query.setParameter("product", product);
+		query.setParameter("date", date);
+		List list = query.list();
+		session.close();
+		
+		return list;
+	}
+	
+	
 }

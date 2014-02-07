@@ -29,7 +29,7 @@
 					aria-hidden="true">&times;</button>
 				Transaction completed successfully. T.Code: 6000864578
 			</div>
-			<div class="panel panel-primary">
+			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						<i class="icon-bar-chart"></i> Create Package

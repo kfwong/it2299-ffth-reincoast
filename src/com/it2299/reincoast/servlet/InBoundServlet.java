@@ -2,6 +2,7 @@ package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,13 +17,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.time.DateUtils;
+
 import com.it2299.ffth.reincoast.dao.InboundDeliveryDao;
 import com.it2299.ffth.reincoast.dao.ItemDao;
+import com.it2299.ffth.reincoast.dao.ProductBatchDao;
 import com.it2299.ffth.reincoast.dao.ProductDao;
 import com.it2299.ffth.reincoast.dao.StockDao;
 import com.it2299.ffth.reincoast.dto.InboundDelivery;
 import com.it2299.ffth.reincoast.dto.InboundLineItem;
 import com.it2299.ffth.reincoast.dto.Product;
+import com.it2299.ffth.reincoast.dto.ProductBatch;
 import com.it2299.ffth.reincoast.dto.Stock;
 
 /**
@@ -76,9 +81,17 @@ public class InBoundServlet extends HttpServlet {
 		
 		for(int i=0; i< id.length; i++){
 			ProductDao productDao = new ProductDao();
+			
 			productDao.increaseQuantity(Integer.parseInt(id[i]), Integer.parseInt(quantity[i]));
 			Product product = new Product();
 			product.setId(Integer.parseInt(id[i]));
+			try {
+				Date d = DateUtils.parseDate(expiryDate[i], "MM/dd/yyyy");
+				productDao.increaseQuantity(product.getId(), Integer.parseInt(quantity[i]), d);
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			ItemDao itemDao = new ItemDao();
 			InboundLineItem inboundItem = new InboundLineItem();
 			inboundItem.setProduct(product);
