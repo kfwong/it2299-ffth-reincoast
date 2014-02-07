@@ -18,6 +18,7 @@
 		<mapping class="com.it2299.ffth.reincoast.dto.Stock" />
 		<mapping class="com.it2299.ffth.reincoast.dto.Product" />
 		<mapping class="com.it2299.ffth.reincoast.dto.ProductMeta" />
+		<mapping class="com.it2299.ffth.reincoast.dto.ProductBatch" />
 		<mapping class="com.it2299.ffth.reincoast.dto.InboundLineItem" />
 		<mapping class="com.it2299.ffth.reincoast.dto.OutboundLineItem" />
 		<mapping class="com.it2299.ffth.reincoast.dto.InboundDelivery" />
