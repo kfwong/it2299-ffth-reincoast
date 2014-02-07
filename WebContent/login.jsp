@@ -97,16 +97,16 @@
 							  </div>
 							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-offset-4 col-lg-4">
-							<small>
-								<a href="#" >Forget password?</a>
-								<span style="color:rgb(66, 139, 202);">|</span>
-								<a href="#">Sign up as volunteer</a>
-								<span style="color:rgb(66, 139, 202);">|</span>
-								<a href="#">Sign up as member</a>
-							</small>
+						<div class="row">
+							<div class="col-lg-offset-4 col-lg-4">
+								<small>
+									<a href="forget-password.jsp?isHidden=hidden" >Forgot password?</a>
+									<span style="color:rgb(66, 139, 202);">|</span>
+									<a href="volunteer-signup.jsp">Sign up as volunteer</a>
+									<span style="color:rgb(66, 139, 202);">|</span>
+									<a href="member-signup.jsp">Sign up as member</a>
+								</small>
+							</div>
 						</div>
 					</div>
 				</div>

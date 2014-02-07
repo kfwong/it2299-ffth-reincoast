@@ -77,6 +77,18 @@ public class VolunteerDao implements Dao<Volunteer>{
 		
 		return  volunteer;
 	}
+	
+
+	public Volunteer getByEmailVolunteer(String email){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("FROM Volunteer where email= :Email");
+		query.setParameter("Email", email);
+		Volunteer volunteer = (Volunteer)query.uniqueResult();
+		session.close();
+		
+		return  volunteer;
+	}
 	public boolean authenticateVolunteer(String userName, String password, String status){
 		Volunteer volunteer = getByUsernameVolunteer(userName);
 		if(volunteer!=null && volunteer.getUserName().equals(userName) && volunteer.getPassword().equals(password) && volunteer.getStatus().equals("ACTIVE")){
