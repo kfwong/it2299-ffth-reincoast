@@ -122,12 +122,10 @@
 					$("#notice").remove();
 					$("#tableRec").append('<input type="submit" />');
 					getItem();
-					
 					count++;
 					$(document).scrollTop($(document).height());
 				} else {
 					getItem();
-					
 					count++;
 					$(document).scrollTop($(document).height());
 				}
@@ -192,7 +190,7 @@
 													+ '" readonly/></td><td>'
 													+ obj.name
 													+ '</td><td><select class="form-control" id="item" name=Type>'
-													+ '</select></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
+													+ '</select></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value=" '
 													+ "0"
 													+ '" /></td></tr>');
 							getExpiryList();
@@ -223,9 +221,9 @@
 			}
 		}).done(function(data){
 			$.each($.parseJSON(data), function(){
-				$("#item").append('<option value="'+ this.ExpiryDate +'">'+ this.ExpiryDate +'Qty('+ this.Quantity +') </option>');
-			})
-		})
+				$("#item").append('<option  value="'+ this.ExpiryDate +'">'+ this.ExpiryDate +'Qty('+ this.Quantity +') </option>');
+			});
+		});
 	}
 	function getPackageName(){
 		var packCode =1;

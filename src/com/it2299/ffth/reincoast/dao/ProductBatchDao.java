@@ -12,6 +12,14 @@ import com.it2299.ffth.reincoast.util.HibernateUtil;
 
 public class ProductBatchDao {
 	
+	public ProductBatch get(ProductBatch pb){
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		ProductBatch productBatch = (ProductBatch) session.get(ProductBatch.class, pb);
+		session.close();
+
+		return productBatch;
+	}
 	public List<ProductBatch> getBatch(int id){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
