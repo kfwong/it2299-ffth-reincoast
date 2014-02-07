@@ -20,12 +20,26 @@
 		}
 		
 		.container{
+			padding-top:30px;
 			position: absolute;
 			left:50%;
 			top:50%;
 			transform: translate(-50%, -50%);
 			-ms-transform: translate(-50%, -50%);
 			-webkit-transform: translate(-50%, -50%);
+		}
+		
+		@media (max-width:768px) {
+			.container{
+				padding-top:30px;
+				width:95%;
+				position: absolute;
+				left:50%;
+				top:50%;
+				transform: translate(-50%, -50%);
+				-ms-transform: translate(-50%, -50%);
+				-webkit-transform: translate(-50%, -50%);
+			}
 		}
 		
 		</style>
@@ -35,50 +49,52 @@
 			<div id="page-wrapper">
 			<!-- forget password/sign up as volunteer/sign up as member -->
 				<div class="container">
-					<div class="col-lg-12">
-						<div class="row">
-							<div class="col-lg-offset-4 col-lg-4">
-								<div class="alert alert-dismissable ${param.isType} ${param.isHidden}">
-									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-									
-									${param.msg}
-								</div>
-								<div class="panel panel-default">
-								  <div class="panel-body">
-								    <div class="row">
-										<div class="col-lg-12">
-											<h1 style="text-align:center;">Login</h1>
-											
-											<hr/>
-											
-											<div class="form-group">
-												<input type="text" class="form-control" placeholder="User Name" name="username" required autofocus> 
-											</div>
-											
-											<div class="form-group">
-												<input type="password" class="form-control" placeholder="Password" name="password"required>
-											</div>
-
-											<p>
-												<small>You are logging in as...</small>
-											</p>
-											
-											<label class="radio-inline">
-												<input type="radio" name="role" id="STAFF" value="STAFF" checked> Staff
-											</label>
-											<label class="radio-inline">
-												<input type="radio" name="role" id="VOLUNTEER" value="VOLUNTEER"> Volunteer
-											</label>							
-										</div>
+					<div class="row">
+						<div class="col-lg-offset-4 col-lg-4">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="alert alert-dismissable ${param.isType } ${param.isHidden}" style="padding-top:15px;">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+										
+										${param.msg}
 									</div>
-								  </div>
-								  <div class="panel-footer">
-								  	<p>
-										<input class="btn btn-md btn-primary pull-right" type="submit" value="Sign In"></input>
-										<div class="clearfix"></div>
-									</p>
-								  </div>
 								</div>
+							</div>
+							<div class="panel panel-default">
+							  <div class="panel-body">
+							    <div class="row">
+									<div class="col-lg-12">
+										<h1 style="text-align:center;">Login</h1>
+										
+										<hr/>
+										
+										<div class="form-group">
+											<input type="text" class="form-control" placeholder="User Name" name="username" required autofocus> 
+										</div>
+										
+										<div class="form-group">
+											<input type="password" class="form-control" placeholder="Password" name="password"required>
+										</div>
+
+										<p>
+											<small>You are logging in as...</small>
+										</p>
+										
+										<label class="radio-inline">
+											<input type="radio" name="role" id="STAFF" value="STAFF" checked> Staff
+										</label>
+										<label class="radio-inline">
+											<input type="radio" name="role" id="VOLUNTEER" value="VOLUNTEER"> Volunteer
+										</label>							
+									</div>
+								</div>
+							  </div>
+							  <div class="panel-footer">
+							  	<p>
+									<input class="btn btn-md btn-primary pull-right" type="submit" value="Sign In"></input>
+									<div class="clearfix"></div>
+								</p>
+							  </div>
 							</div>
 						</div>
 						<div class="row">

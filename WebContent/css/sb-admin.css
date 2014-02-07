@@ -163,7 +163,7 @@ table td, table th{
   /* Wrappers */
 
   #wrapper {
-	padding-left: 200px;
+	margin-left: 200px;
   }
 
   /* Side Nav */
@@ -259,6 +259,6 @@ table td, table th{
 	
 	#page-wrapper {
 		width: 100%;
- 		padding: 5px 15px 150px 15px;
+ 		padding: 30px 15px 150px 15px;
 	}
 }

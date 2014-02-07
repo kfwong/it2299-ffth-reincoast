@@ -3,6 +3,7 @@ package com.it2299.reincoast.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import org.hibernate.envers.query.AuditQuery;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.it2299.ffth.reincoast.dao.ProductDao;
 import com.it2299.ffth.reincoast.dto.Audit;
 import com.it2299.ffth.reincoast.dto.Product;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
@@ -47,9 +49,7 @@ public class TestServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(UUID.randomUUID().toString().substring(0, 8));
 		
-		/*
 		List<Audit> audits = new ArrayList<Audit>();
 
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -80,7 +80,7 @@ public class TestServlet extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		out.print(json);
-		*/
+
 	}
 
 }

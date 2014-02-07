@@ -61,13 +61,14 @@ public class ProductViewServlet extends HttpServlet {
 			}
 		} finally {
 			Calendar calendar = Calendar.getInstance();
-			calendar.add(Calendar.DAY_OF_MONTH, -7);
+			calendar.add(Calendar.DAY_OF_MONTH, -30);
 			Date date = calendar.getTime();
 
 			request.setAttribute("p_category", "\"" + StringUtils.join(productDao.getCategories(), "\",\"") + "\"");
 			request.setAttribute("product", product);
 			request.setAttribute("p_audits", productDao.getAuditsById(product.getId()));
-			request.setAttribute("p_audits_past_7_days", productDao.getAuditsById(product.getId(), date));
+			request.setAttribute("p_movement_graph_data", productDao.getMovementGraphData());
+			request.setAttribute("p_audits_past_30_days", productDao.getAuditsById(product.getId(), date));
 			
 			System.out.println(productDao.getInboundDeliveryAuditsTotal(date));
 			//request.setAttribute("now", new Date());
