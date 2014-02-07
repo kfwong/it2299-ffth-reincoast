@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,6 +26,7 @@ import org.hibernate.envers.query.criteria.AuditProperty;
 
 import com.it2299.ffth.reincoast.dto.Audit;
 import com.it2299.ffth.reincoast.dto.Product;
+import com.it2299.ffth.reincoast.dto.ProductBatch;
 import com.it2299.ffth.reincoast.dto.ProductMeta;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 
@@ -41,7 +43,7 @@ import com.it2299.ffth.reincoast.util.HibernateUtil;
  */
 /**
  * @author kfwong
- *
+ * 
  */
 public class ProductDao implements Dao<Product> {
 
@@ -210,27 +212,96 @@ public class ProductDao implements Dao<Product> {
 
 			audits.add(audit);
 		}
-		
+
 		return audits;
 	}
-	
-	
-	
+
 	/**
 	 * @param date
-	 * @return the sum of inbound delivery audits total over a span of duration (long) since today.
+	 * @return the sum of inbound delivery audits total over a span of duration
+	 *         (long) since today.
 	 */
-	public int getInboundDeliveryAuditsTotal(Date date){
+	public int getInboundDeliveryAuditsTotal(Date date) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 
 		Query query = session.createSQLQuery("SELECT SUM(QUANTITY) FROM `INBOUND_LINE_ITEM_AUD` WHERE PRODUCT_ID = 1 GROUP BY PRODUCT_ID");
+
+		Object result = query.uniqueResult();
+
+		session.close();
+
+		if (result == null) {
+			return 0;
+		} else {
+			return ((BigDecimal) result).intValue();
+		}
+	}
+	
+	public String getMovementGraphData(){
+		String data = "";
 		
-		int inboundDeliveryAuditsTotal = ((BigDecimal) query.uniqueResult()).intValue();
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+
+		Query query = session.createSQLQuery("SELECT `MONTHS`.MONTH AS MONTH, COALESCE(`INBOUNDS`.TOTAL, 0) AS INBOUND_TOTAL, COALESCE(`OUTBOUNDS`.TOTAL, 0) AS OUTBOUND_TOTAL FROM "
+				+ "("
+				+ "SELECT DATE_FORMAT(now() - INTERVAL 11 MONTH, '%b %y') AS `MONTH` "
+				+ "UNION "
+				+ "SELECT DATE_FORMAT(now() - INTERVAL 10 MONTH, '%b %y') AS `MONTH` "
+				+ "UNION "
+				+ "SELECT DATE_FORMAT(now() - INTERVAL 9 MONTH, '%b %y') AS `MONTH` "
+				+ "UNION "
+				+ "SELECT DATE_FORMAT(now() - INTERVAL 8 MONTH, '%b %y') AS `MONTH` "
+				+ "UNION "
+				+ "SELECT DATE_FORMAT(now() - INTERVAL 7 MONTH, '%b %y') AS `MONTH` "
+				+ "UNION "
+				+ "SELECT DATE_FORMAT(now() - INTERVAL 6 MONTH, '%b %y') AS `MONTH` "
+				+ "UNION "
+				+ "SELECT DATE_FORMAT(now() - INTERVAL 5 MONTH, '%b %y') AS `MONTH` "
+				+ "UNION "
+				+ "SELECT DATE_FORMAT(now() - INTERVAL 4 MONTH, '%b %y') AS `MONTH` "
+				+ "UNION "
+				+ "SELECT DATE_FORMAT(now() - INTERVAL 3 MONTH, '%b %y') AS `MONTH` "
+				+ "UNION "
+				+ "SELECT DATE_FORMAT(now() - INTERVAL 2 MONTH, '%b %y') AS `MONTH` "
+				+ "UNION "
+				+ "SELECT DATE_FORMAT(now() - INTERVAL 1 MONTH, '%b %y') AS `MONTH` "
+				+ "UNION "
+				+ "SELECT DATE_FORMAT(now(), '%b %y') AS `MONTH`) AS `MONTHS` "
+				+ "LEFT JOIN "
+				+ "( "
+				+ "SELECT DATE_FORMAT(DATE(FROM_UNIXTIME(REVINFO.REVTSTMP/1000)), '%b %y') AS `MONTH`, COUNT(*) AS `TOTAL` FROM INBOUND_LINE_ITEM_AUD "
+				+ "INNER JOIN REVINFO ON INBOUND_LINE_ITEM_AUD.REV = REVINFO.REV "
+				+ "WHERE PRODUCT_ID = 46 AND DATE(FROM_UNIXTIME(REVINFO.REVTSTMP/1000)) > NOW() - INTERVAL 12 MONTH "
+				+ "GROUP BY `MONTH` "
+				+ ") AS `INBOUNDS` "
+				+ "ON `MONTHS`.MONTH = `INBOUNDS`.MONTH "
+				+ "LEFT JOIN "
+				+ "( "
+				+ "SELECT DATE_FORMAT(DATE(FROM_UNIXTIME(REVINFO.REVTSTMP/1000)), '%b %y') AS `MONTH`, COUNT(*) AS `TOTAL` FROM OUTBOUND_LINE_ITEM_AUD "
+				+ "INNER JOIN REVINFO ON OUTBOUND_LINE_ITEM_AUD.REV = REVINFO.REV "
+				+ "WHERE PRODUCT_ID = 46 AND DATE(FROM_UNIXTIME(REVINFO.REVTSTMP/1000)) > NOW() - INTERVAL 12 MONTH "
+				+ "GROUP BY `MONTH` "
+				+ ") AS `OUTBOUNDS` "
+				+ "ON `MONTHS`.MONTH = `OUTBOUNDS`.MONTH");
+		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+
+		List list = query.list();
 		
+		for(Object object : list){
+			Map map = (Map) object;
+			data += "{ m: '" + map.get("MONTH") + "', inbound: "+ map.get("INBOUND_TOTAL") +", outbound: "+ map.get("OUTBOUND_TOTAL") +" },";
+		}
+		
+		// remove last comma from string
+		if (data.length() > 0 && data.charAt(data.length()-1)==',') {
+		    data = data.substring(0, data.length()-1);
+		}
+
 		session.close();
 		
-		return inboundDeliveryAuditsTotal;
+		return data;
 	}
 
 	public List<Audit> getAudits() {
@@ -314,6 +385,36 @@ public class ProductDao implements Dao<Product> {
 		session.getTransaction().commit();
 		session.close();
 	}
+	
+	public void increaseQuantity(int id, int increment, Date expiryDate) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+
+		session.beginTransaction();
+
+		Product product = (Product) session.get(Product.class, id);
+		product.setQuantity(product.getQuantity() + increment);
+		
+		ProductBatch productBatch = new ProductBatch();
+		productBatch.setProductId(id);
+		productBatch.setExpiryDate(expiryDate);
+		productBatch = (ProductBatch) session.get(ProductBatch.class, productBatch);
+		
+		if(productBatch == null){
+			productBatch = new ProductBatch();
+			productBatch.setProductId(id);
+			productBatch.setExpiryDate(expiryDate);
+			productBatch.setQuantity(increment);
+		}else{
+			productBatch.setQuantity(productBatch.getQuantity() + increment);
+		}
+		
+		session.update(product);
+		session.saveOrUpdate(productBatch);
+
+		session.getTransaction().commit();
+		session.close();
+	}
 
 	public void decreaseQuantity(int id, int decrement) {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -325,6 +426,33 @@ public class ProductDao implements Dao<Product> {
 		product.setQuantity(product.getQuantity() - decrement);
 
 		session.update(product);
+
+		session.getTransaction().commit();
+		session.close();
+	}
+	
+	public void decreaseQuantity(int id, int decrement, Date expiryDate) {
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+
+		session.beginTransaction();
+
+		Product product = (Product) session.get(Product.class, id);
+		product.setQuantity(product.getQuantity() - decrement);
+		
+		ProductBatch productBatch = new ProductBatch();
+		productBatch.setProductId(id);
+		productBatch.setExpiryDate(expiryDate);
+		productBatch = (ProductBatch) session.get(ProductBatch.class, productBatch);
+		
+		if(productBatch == null){
+			// no record, do nothing. NOT SUPPOSE TO BE HERE ANYWAY
+		}else{
+			productBatch.setQuantity(productBatch.getQuantity() - decrement);
+		}
+
+		session.update(product);
+		session.update(productBatch);
 
 		session.getTransaction().commit();
 		session.close();

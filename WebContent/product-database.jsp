@@ -36,7 +36,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 					<li class="active">Product Database</li>
 				</ol>
 				<div class="row">
-					<div class="col-lg-8">
+					<div class="col-lg-7">
 						<div class="panel panel-default">
 							<div class="panel-body">
 								<div class="row">
@@ -98,7 +98,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-5">
 							<div class="panel panel-default">
 								<div class="panel-body">
 									<div class="row">

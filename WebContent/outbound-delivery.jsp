@@ -25,75 +25,58 @@
 				<li class="active"><i class="icon-dashboard"></i> Outbound
 					Delivery</li>
 			</ol>
-
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						<i class="icon-bar-chart"></i> Metadata
+						<i class="icon-bar-chart"></i> Food Drive (Outbound)
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal" role="form" method="post"
-						action="OutboundServlet">
-						<div class="form-group" style="padding: 0px 10px 0px 10px;">
-							<div class="btn-group">
-								<button type="button" class="btn btn-xs btn-default">
-									<i class="icon-ok"></i> Save
-								</button>
+					<form class="form-horizontal" role="form" method="post" action="OutboundServlet">
+						<div class="form-group">
+							<label class="col-lg-1 control-label">DeliveryDate</label>
+							<div class="col-lg-5">
+								<input class="form-control datepicker" type="text" name="deliveryDate" readonly />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-lg-2 control-label">DeliveryDate</label>
-							<div class="col-lg-4">
-								<input class="form-control datepicker" type="text"
-									name="deliveryDate" readonly />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-lg-2 control-label">Package Type</label>
-							<div class="col-lg-4">
-								<select class="form-control" id="PackageType" name=Type>
-
-
-								</select>
-							</div>
-							<div class="col-lg-1">
-								<button type="button" class="btn btn-xs btn-default"
-									id="addPackage">
-									<i class="icon-plus"></i> Add Package
-								</button>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-lg-2 control-label">Collection location</label>
-							<div class="col-lg-4">
+							<label class="col-lg-1 control-label">Collectionlocation</label>
+							<div class="col-lg-5">
 								<input class="form-control" type="text" id="collect"
 									name="collectLoc" />
-							</div>
-						</div>
+									</div>
+							</div>										
 						<div class="form-group">
-							<label class="col-lg-2 control-label">Item Search</label>
-							<div class="col-lg-4">
+							<label class="col-lg-1 control-label">PackageType</label>
+								<div class="col-lg-5">
+								<select class="form-control" id="PackageType" name=Type>
+								</select>
+								</div>	
+								<button type="button" class="btn btn-xs btn-default" id="addPackage">
+									<i class="icon-plus"></i> AddItemList
+								</button>
+								
+							</div>
+						<div class="form-group">
+							<label class="col-lg-1 control-label">ItemSearch</label>
+							<div class="col-lg-5">
 								<select class="form-control" id="productName" class="selectedProduct">
 									
 								</select>
-							</div>
-							<div class="col-lg-1">
-								<button type="button" class="btn btn-xs btn-default" id="addRow">
-									<i class="icon-plus"></i> Add row
+							</div>				
+								<button type="button" class="btn btn-xs btn-default" id="addItem">
+									<i class="icon-plus"></i> AddItem
 								</button>
-							</div>
-						</div>
+						</div>	
 						<div class="table-responsive" id="tableRec">
 							<table
 								class="table table-hover table-striped tablesorter table-condensed">
 								<thead id="addHeader">
 									<tr>
-										<th class="col-lg-1">#<i class="icon-sort"></i></th>
-										<th class="col-lg-2">Item Code <i class="icon-sort"></i></th>
+										<th class="col-lg-1">Item Code <i class="icon-sort"></i></th>
 										<th class="col-lg-2">Item Name<i class="icon-sort"></i></th>
+										<th class="col-lg-1">Expiry Date<i class="icon-sort"></i></th>
 										<th class="col-lg-1">Quantity<i class="icon-sort"></i></th>
-										<th class="col-lg-1">Unit Price<i class="icon-sort"></i></th>
 									</tr>
 								</thead>
 								<tbody id="add-list">
@@ -111,6 +94,8 @@
 				</div>
 			</div>
 		</div>
+		
+		
 	</div>
 </div>
 <!-- /.row -->
@@ -130,7 +115,8 @@
 
 		});
 		getProductName();
-		$("#addRow").on('click', function() {
+		
+		$("#addItem").on('click', function() {
 			
 				if (count == 0) {
 					$("#notice").remove();
@@ -162,29 +148,19 @@
 	});
 	function getPackageItem() {
 		var packID = $("#PackageType option:selected").val();
-		$
-				.ajax({
+		$.ajax({
 					type : "POST",
 					url : "GetPackageListItem",
 					data : {
 						packID : packID
 					}
-				})
-				.done(
-						function(data) {
-							$
-									.each(
-											$.parseJSON(data),
-											function() {
-												$("#add-list")
-														.append(
-																'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id" value="'
-																		+ count
-																		+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
+				}).done(function(data) {
+							$.each($.parseJSON(data),function() {
+												$("#add-list").append('<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
 																		+ this.id
-																		+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-name" value="'
+																		+ '" readonly/></td><td>'
 																		+ this.name
-																		+ '" readonly /></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
+																		+ '</td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
 																		+ "0"
 																		+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
 																		+ this.price
@@ -194,36 +170,30 @@
 						});
 
 	}
+	
 	function getItem() {
 
 		var itemCode = $('#productName :selected').val();
 
-		$
-				.ajax({
+		$.ajax({
 					type : "POST",
 					url : "GetItemServlet",
 					data : {
 						itemCode : itemCode
 					}
-				})
-				.done(
+				}).done(
 						function(data) {
 							var obj = $.parseJSON(data);
-							$("#add-list")
-									.append(
-											'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id" value="'
-													+ count
-													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
+							$("#add-list").append(
+											'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
 													+ obj.id
-													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-name" value="'
+													+ '" readonly/></td><td>'
 													+ obj.name
-													+ '" readonly /></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
+													+ '</td><td><select class="form-control" id="item" name=ExpiryDate>'
+													+ '</select></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value=" '
 													+ "0"
-													+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
-													+ obj.price
-													+ '" readonly/></td></tr>');
-							getDate().datepicker("refresh");
-						
+													+ '" /></td></tr>');
+							getExpiryList();
 						});
 	}
 	function getProductName(){
@@ -239,6 +209,22 @@
 			});
 		});
 	}
+	
+	function getExpiryList(){
+		var itemCode = $('#productName :selected').val();
+		
+		$.ajax({
+			type:"POST",
+			url: "GetProductExpiryListServlet",
+			data: {
+				itemCode : itemCode
+			}
+		}).done(function(data){
+			$.each($.parseJSON(data), function(){
+				$("#item").append('<option  value="'+ this.ExpiryDate +'">'+ this.ExpiryDate +' Qty('+ this.Quantity +') </option>');
+			});
+		});
+	}
 	function getPackageName(){
 		var packCode =1;
 		$.ajax({
@@ -249,7 +235,7 @@
 			}
 		}).done(function(data){
 			$.each($.parseJSON(data), function(){
-				$("#PackageType").append('<option value='+this.id + '>'+ this.name +' </option>');
+				$("#productName").append('<option value='+this.ExpiryDate + '>'+ this.ExpiryDate + '('+ this.Quantity + ')' +' </option>');
 			});
 		});
 	}

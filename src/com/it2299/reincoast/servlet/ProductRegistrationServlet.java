@@ -52,7 +52,26 @@ public class ProductRegistrationServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ProductDao productDao = new ProductDao();
 		Product product = new Product();
+
+		switch (request.getParameter("p_action")) {
+		case "Submit":
+			//nothing
+			break;
+		case "Update":
+			product = productDao.get(Integer.parseInt(request.getParameter("p_id")));
+
+			if (!request.getParameter("p_meta_id_removals").isEmpty()) {
+				String[] metaIdRemovals = request.getParameter("p_meta_id_removals").split(",");
+				ProductMetaDao productMetaDao = new ProductMetaDao();
+				for (String metaIdRemoval : metaIdRemovals) {
+					productMetaDao.deleteById(Integer.parseInt(metaIdRemoval));
+				}
+			}
+			break;
+		}
+		
 		product.setCategory(StringUtils.join(request.getParameterValues("p_category"), ","));
 		product.setCode(request.getParameter("p_code"));
 		product.setDateRegistered(new Date());
@@ -64,23 +83,6 @@ public class ProductRegistrationServlet extends HttpServlet {
 		product.setUnitOfMeasure(request.getParameter("p_unit_of_measure"));
 		product.setWeight(Double.parseDouble(request.getParameter("p_weight")));
 		product.setImageUrl(request.getParameter("p_image_url")); //HOT LINK TO NTUC RESOURCE, NOT GOOOD!!!!! for convenience only..
-
-		switch (request.getParameter("p_action")) {
-		case "Submit":
-			// do nothing
-			break;
-		case "Update":
-			product.setId(Integer.parseInt(request.getParameter("p_id")));
-
-			if (!request.getParameter("p_meta_id_removals").isEmpty()) {
-				String[] metaIdRemovals = request.getParameter("p_meta_id_removals").split(",");
-				ProductMetaDao productMetaDao = new ProductMetaDao();
-				for (String metaIdRemoval : metaIdRemovals) {
-					productMetaDao.deleteById(Integer.parseInt(metaIdRemoval));
-				}
-			}
-			break;
-		}
 
 		String[] metaIds = request.getParameterValues("p_meta_id");
 		String[] metaKeys = request.getParameterValues("p_meta_key");
@@ -109,8 +111,6 @@ public class ProductRegistrationServlet extends HttpServlet {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-
-		ProductDao productDao = new ProductDao();
 		productDao.saveOrUpdate(product);
 
 		response.sendRedirect("ProductViewServlet?id=" + product.getId());

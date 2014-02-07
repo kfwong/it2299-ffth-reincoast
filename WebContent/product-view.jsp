@@ -54,42 +54,102 @@
 								</div>
 							</div>
 						</h4>
-						<div class="form-group">
-							<label class="control-label">Name</label> 
-							<p><small>${product.name}</small></p>
-						</div>
-
-						<div class="form-group">
-							<label>Description</label>
-							<p><small>${product.description}</small></p>
-						</div>
 						
-						<div class="form-group">
-							<label class="control-label">Code</label> 
-							<p><small>${product.code}</small></p>
-						</div>
-
-						<div class="form-group">
-							<label>Unit of Measure</label> 
-							<p><small>${product.unitOfMeasure}</small></p>
-						</div>
-
-						<div class="form-group">
-							<label>Price</label> 
-							<p><small>${product.price}</small></p>
-						</div>
-						<div class="form-group">
-							<label>Weight</label> 
-							<p><small>${product.weight}</small></p>
-						</div>
-						<div class="form-group">
-							<label>Category</label>
-							<p>
-								<c:set var="categories" value="${fn:split(product.category, ',')}" />
-							    <c:forEach items="${categories}" var="category">
-							    	<span class="badge">${category }</span>
-							    </c:forEach>
-							</p>
+						<div class="row">
+							<div class="col-lg-9">
+								<div class="form-group">
+									<div class="row">
+										<div class="col-lg-3">
+											<label>Name</label>	
+										</div>
+										<div class="col-lg-9">
+											<small>${product.name}</small>
+										</div>
+									</div>
+								</div>
+		
+								<div class="form-group">
+									<div class="row">
+										<div class="col-lg-3">
+											<label>Description</label>
+										</div>
+										<div class="col-lg-9">
+											<small>${product.description}</small>
+										</div>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="row">
+										<div class="col-lg-3">
+											<label>Code</label>
+										</div>
+										<div class="col-lg-9">
+											<small>${product.code}</small>
+										</div>
+									</div>
+								</div>
+		
+								<div class="form-group">
+									<div class="row">
+										<div class="col-lg-3">
+											<label>Unit of Measure</label>
+										</div>
+										<div class="col-lg-9">							 
+											<small>${product.unitOfMeasure}</small>
+										</div>
+									</div>
+								</div>
+		
+								<div class="form-group">
+									<div class="row">
+										<div class="col-lg-3">
+											<label>Price</label>
+										</div>
+										<div class="col-lg-9">
+											<small>${product.price}</small>	
+										</div>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="row">
+										<div class="col-lg-3">
+											<label>Weight</label>
+										</div>
+										<div class="col-lg-9">
+											<small>${product.weight}</small>	
+										</div> 
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="row">
+										<div class="col-lg-3">
+											<label>Category</label>
+										</div>
+										<div class="col-lg-9">
+											<c:set var="categories" value="${fn:split(product.category, ',')}" />
+										    <c:forEach items="${categories}" var="category">
+										    	<span class="badge">${category }</span>
+										    </c:forEach>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="form-group">
+									<div class="row">
+										<div class="col-lg-12">
+											<div style="width:160px;height:160px;">
+												<a href="#" class="thumbnail">
+											      <img id="p_image" src="${product.imageUrl}">
+											    </a>
+											</div>	
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -116,7 +176,7 @@
 						<tbody id="p_meta_fields">
 							<c:forEach items="${product.productMetas}" var="productMeta">
 								<tr>
-									<td class="col-sm-3" style="border:none;">${productMeta.metaKey}</td>
+									<td class="col-sm-3" style="border:none;"><strong>${productMeta.metaKey}</strong></td>
 									<td style="border:none;">${productMeta.metaValue}</td>
 								</tr>
 							</c:forEach>
@@ -128,31 +188,6 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<h4>
-							<label>Image</label>
-						</h4>
-						<div class="row">
-							<div class="col-lg-7">
-								<p>Upload an image of this product.</p>
-								<small>
-									<ul>
-										<li>Recommend dimension is 160x160px.</li>
-										<li>Bigger image will be cropped.</li>
-									</ul>
-								</small>
-							</div>
-							<div class="col-lg-5">
-								<div style="width:160px;height:160px;">
-									<a href="#" class="thumbnail">
-								      <img id="p_image" src="${product.imageUrl}">
-								    </a>
-								</div>	
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<h4>
 							<label>Stock Status</label>
 						</h4>
 						<span>Displaying stock status.</span>
@@ -161,42 +196,27 @@
 						<tbody>
 							<tr>
 								<td class="col-lg-4">Currently Available</td>
-								<td>1098</td>
+								<td>${product.quantity }</td>
+								<td>&nbsp;</td>
 							</tr>
 							<tr>
-								<td class="col-lg-4">Total Inbound</td>
-								<td>2567</td>
+								<td class="col-lg-4">Last Inbound</td>
+								<td>34</td>
+								<td><i class="fa fa-calendar"></i>&nbsp;Fri Dec 20 03:14:34 SGT 2013</td>
 							</tr>
 							<tr>
-								<td class="col-lg-4">Total Outbound</td>
-								<td>1200</td>
+								<td class="col-lg-4">Last Outbound</td>
+								<td>34</td>
+								<td><i class="fa fa-calendar"></i>&nbsp;Fri Dec 20 03:14:34 SGT 2013</td>
 							</tr>
 						</tbody>
 					</table>
 					<div class="panel-footer">
 						<h4><label>Stock Graph</label></h4>
-						<div id="line-example"></div>
+						<div id="morris-stock-graph"></div>
 					</div>
 				</div>
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<h4>
-							<label>Modification Log</label>
-						</h4>
-						<span>Modification history of primary details of this product.</span>
-					</div>
-					<table class="table">
-						<tbody>
-							<c:forEach items="${p_audits}" var="p_audit">
-								<tr style="padding-bottom:5px;">
-									<td class="col-lg-1"><span class="badge">${p_audit.operation}</span></td>
-									<td><i class="fa fa-calendar"></i>&nbsp;${p_audit.date}</td>
-									<td><a class="audit" href="#" data-revision-id="${p_audit.revisionId }" data-poload="TestServlet">View Details</a></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
+				
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<h4>
@@ -225,13 +245,37 @@
 						<div id="holder"></div>
 					</div>
 				</div>
+				
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h4>
+							<label>Modification Log</label>
+						</h4>
+						<span>Modification history of primary details of this product.</span>
+					</div>
+					<table class="table">
+						<tbody>
+							<c:forEach items="${p_audits}" var="p_audit">
+								<tr style="padding-bottom:5px;">
+									<td class="col-lg-1"><span class="badge">${p_audit.operation}</span></td>
+									<td><span class="format-date"><fmt:formatDate pattern="yyyy-MM-dd'T'HH:mm:ss" value="${p_audit.date}" /></span>&nbsp;<i class="fa fa-calendar" title="${p_audit.date}" style="cursor:pointer;"></i></td>
+									<td><a class="audit" href="#" data-revision-id="${p_audit.revisionId }" data-poload="TestServlet">View Details</a></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</form>	
 </div>
 	<!-- sample-content.jsp -->
 	<script>
-	$(document).ready(function(){
+	$(document).ready(function(){		
+		$('.format-date').each(function (id, element) {
+			$(element).text($.format.prettyDate($(element).text()));
+		});
+		
 		$('.audit').on('click', function(event){
 			event.preventDefault();
 			var target = $(this);
@@ -270,30 +314,34 @@
 		Morris.Bar({
 		  element: 'holder',
 		  data: [
-			<c:forEach items="${p_audits_past_7_days}" var="p_audit" varStatus="status">
-		    { xkey: 'Mon', inbound: ${p_audit.entity.quantity}, outbound: ${p_audit.entity.quantity} }<c:if test="${!status.last}">,</c:if>
-		    </c:forEach>
+			${p_movement_graph_data}
 		  ],
-		  xkey: 'xkey',
+		  xkey: 'm',
 		  ykeys: ['inbound', 'outbound'],
-		  labels: ['Inbound', 'Outbound']
+		  labels: ['Inbound', 'Outbound'],
+		  xLabelMargin: 10,
+		  xLabelAngle: 60
 		});
 
 	    Morris.Line({
-    	  element: 'line-example',
+    	  element: 'morris-stock-graph',
     	  data: [
-    	    { y: '2006', a: 100, b: 90 },
-    	    { y: '2007', a: 75,  b: 65 },
-    	    { y: '2008', a: 50,  b: 40 },
-    	    { y: '2009', a: 75,  b: 65 },
-    	    { y: '2010', a: 50,  b: 40 },
-    	    { y: '2011', a: 75,  b: 65 },
-    	    { y: '2012', a: 100, b: 90 }
+			<jsp:useBean id="now" class="java.util.Date" />
+			<c:if test="${empty p_audits_past_30_days}">
+			{ date:${now.time}, quantity: null }
+			</c:if>
+			<c:forEach items="${p_audits_past_30_days}" var="p_audit" varStatus="status">
+			{ date: '${p_audit.date.time}', quantity: ${p_audit.entity.quantity } }<c:if test="${!status.last}">,</c:if>
+			</c:forEach>
     	  ],
-    	  xkey: 'y',
-    	  ykeys: ['a', 'b'],
-    	  labels: ['Series A', 'Series B'],
-    	  smooth: false
+    	  xkey: 'date',
+    	  ykeys: ['quantity'],
+    	  labels: ['Quantity'],
+    	  smooth: false,
+    	  parseTime: false,
+    	  xLabelFormat: function (x) { return $.format.date(new Date(parseInt(x.label)), "dd-MMM-yy"); },
+    	  xLabelMargin: 10,
+		  xLabelAngle: 60
     	});
 	});
 	
@@ -390,6 +438,7 @@
 		<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js" name="js" />
 		<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/graphael/0.5.1/g.raphael-min.js" name="js" />
 		<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.4.3/morris.min.js" name="js" />
+		<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/jquery-dateFormat/1.0/jquery.dateFormat.min.js" name="js" />
 		
 		<jsp:param value="js/jspdf/adler32cs.js" name="js" />
 		<jsp:param value="js/jspdf/deflate.js" name="js" />

@@ -23,6 +23,8 @@ import org.apache.solr.analysis.WordDelimiterFilterFactory;
 import org.apache.solr.analysis.NGramFilterFactory;
 import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
@@ -128,6 +130,7 @@ public class Product {
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="product")
 	@IndexedEmbedded
 	private List<ProductMeta> productMetas;
+
 
 	public int getId() {
 		return id;
@@ -240,5 +243,6 @@ public class Product {
 	public void setProductMetas(List<ProductMeta> productMetas) {
 		this.productMetas = productMetas;
 	}
+	
 
 }

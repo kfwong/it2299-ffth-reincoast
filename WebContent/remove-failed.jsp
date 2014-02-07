@@ -3,7 +3,7 @@
 
 
 <!-- header.jsp -->
-<meta http-equiv="refresh" content="5;URL=GetInboundDeliveryListServlet">
+<meta http-equiv="refresh" content="5;URL=GetInboundDeliveryListServlet?page=1">
 <jsp:include page="header.jsp">
 	<jsp:param value="/path/to/css1" name="css" />
 	<jsp:param value="/path/to/css2" name="css" />
