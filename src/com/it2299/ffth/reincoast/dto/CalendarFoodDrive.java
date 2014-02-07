@@ -22,6 +22,10 @@ public class CalendarFoodDrive {
 	private String title;
 	
 	private Date start;
+	
+	private Date end;
+	
+	private boolean allDay;
 
 	public int getId() {
 		return id;
@@ -43,9 +47,9 @@ public class CalendarFoodDrive {
 		return start;
 	}
 
-	public void setStart(String start) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String dateInString = start;
+	public void setStart(String dateStr) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String dateInString = dateStr;
 		Date date = null;
 		try {
 			date = sdf.parse(dateInString);
@@ -54,5 +58,37 @@ public class CalendarFoodDrive {
 			e.printStackTrace();
 		}
 		this.start = date;
+	}
+
+	public Date getEnd() {
+		return end;
+	}
+
+	public void setEnd(String dateStr) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String dateInString = dateStr;
+		Date date = null;
+		try {
+			date = sdf.parse(dateInString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.end = date;
+	}
+
+	public boolean isAllDay() {
+		return allDay;
+	}
+
+	public void setAllDay(String allDayStr) {
+		boolean allDay;
+		if(allDayStr != null && allDayStr.equals("true")){
+			allDay = true;
+		}
+		else{
+			allDay = false;
+		}
+		this.allDay = allDay;
 	}
 }

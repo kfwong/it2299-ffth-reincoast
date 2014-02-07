@@ -26,22 +26,37 @@
 		      <div class="modal-body">
 				<div class="form-group">
 				  <label for="title">Title</label>
-				  <input type="text" class="form-control" id="title" name = "title" required placeholder="Example: Serangoon S.C.C.">
+				  <input type="text" class="form-control title" id="title" name = "title" required autofocus>
 				</div>
-				<div class="form-group">
-
-				  <input type="hidden" class="form-control" id="start" name = "start">
+				<div class="checkbox">
+				    <label>
+				      <input class="allDay" type="checkbox" name="allDay" value="true" checked> All day event
+				    </label>
 				</div>
-				<div class="form-group">
-
-				  <input type="hidden" class="form-control" id="end" name = "end">
+				<div class="date">
+					<div class="form-group">
+						<label for="start-date">Start date</label>
+					  	<input type="text" class="form-control start-date" id="start-date" name = "start">
+					</div>
+				</div>
+				<div class="date-time hide">
+					<div class="form-group">
+						<label for="start">Start time</label>
+					  	<input type="text" class="form-control start" id="start" name = "start">
+					</div>
+					<div class="form-group">
+						<label for="end">End time</label>
+					  	<input type="text" class="form-control end" id="end" name = "end">
+					</div>
 				</div>
 		      </div>
 		      <div class="modal-footer">
+		     	<button type="button" class="btn btn-default pull-left delete-button">Delete</button>
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-		        <button type="submit" class="btn btn-primary confirm-create-button">Save</button>
+		        <button type="submit" class="btn btn-primary confirm-edit-button">Save</button>
 		      </div>
-		      <input type="hidden" name="action" value="create"/>
+		      <input type="hidden" name="action" value="edit"/>
+		      <input type="hidden" class="id" name="id" value=""/>
 			</form>
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
@@ -63,11 +78,16 @@
 				</div>
 				<div class="form-group">
 
-				  <input type="hidden" class="form-control" id="start" name = "start">
+				  <input type="hidden" class="form-control start" id="start" name = "start">
 				</div>
 				<div class="form-group">
 
-				  <input type="hidden" class="form-control" id="end" name = "end">
+				  <input type="hidden" class="form-control end" id="end" name = "end" value="">
+				</div>
+				<div class="checkbox">
+				    <label>
+				      <input type="checkbox" name="allDay" value="true" checked> All day event
+				    </label>
 				</div>
 		      </div>
 		      <div class="modal-footer">
@@ -81,8 +101,8 @@
 	</div><!-- /.modal -->
 	
 	<!-- Modal -->
-	<div class="modal delete-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
+	<div class="modal delete-modal bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-sm">
 	    <div class="modal-content">
 	    	<form role="form" method="post" action="CalendarFoodDriveServlet">
 		      <div class="modal-header">
@@ -113,24 +133,62 @@
 	$(document).ready(function(){
 		$('#calendar').fullCalendar({
 			editable: true,
-			allDayDefault: true,
 			header: {
 				left: 'prev,next today',
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			events: ${json},
+			events: "CalendarFoodDriveServlet?action=getCalendar",
 		
 			dayClick: function(date, jsEvent, view) {
+				
 		        $(".create-modal").modal();
-		        $("#start").val(date.format("YYYY-MM-DD"));
+		        $(".start").val(date.format("YYYY-MM-DD HH:mm:ss"));
+		        $(".end").val(date.add('days', 1).format("YYYY-MM-DD HH:mm:ss"));
+		        
+
 		    },
 		    
 		    eventClick: function(calEvent, jsEvent, view) {
-		        $(".delete-modal").modal();
-				$(".id").val(calEvent.id);
+		    	$.ajax({
+		    		type: "GET",
+		    		url: "CalendarFoodDriveServlet?action=view&id=" + calEvent.id,
+		    		success: function(json){
+						$(".view-modal").modal();
+						$(".id").val(json.id);
+						$(".title").val(json.title);
+						$(".start").val(json.start);
+						$(".end").val(json.end);
+		    		}
+		    	});
 		    }
 		});
+		
+        $(".allDay").on("click", function(){
+        	$(".date, .date-time").toggleClass("hide");
+        });
+        
+        $(".delete-button").on("click", function(){
+        	$(".delete-modal").modal();
+ 
+        });
+        
+        $('.delete-modal').on('show.bs.modal', function() {
+        	$('.view-modal').css('filter', 'brightness(50%)');
+            $('.view-modal').css('-webkit-filter', 'brightness(50%)');
+            $('.view-modal').css('-moz-transition', 'brightness(50%)');
+            $('.view-modal').css('-ms-transition', 'brightness(50%)');
+            $('.view-modal').css('-o-transition', 'brightness(50%)');
+        });
+        
+        $('.delete-modal').on('hide.bs.modal', function() {
+        	$('.view-modal').css('filter', 'brightness(100%)');
+        	$('.view-modal').css('-webkit-filter', 'brightness(100%)');
+        	$('.view-modal').css('-moz-transition', 'brightness(100%)');
+        	$('.view-modal').css('-ms-transition', 'brightness(100%)');
+        	$('.view-modal').css('-o-transition', 'brightness(100%)');
+        });
+        
 	});
 </script>
 
