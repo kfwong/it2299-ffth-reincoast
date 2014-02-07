@@ -189,7 +189,7 @@
 													+ obj.id
 													+ '" readonly/></td><td>'
 													+ obj.name
-													+ '</td><td><select class="form-control" id="item" name=Type>'
+													+ '</td><td><select class="form-control" id="item" name=ExpiryDate>'
 													+ '</select></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value=" '
 													+ "0"
 													+ '" /></td></tr>');
@@ -221,7 +221,7 @@
 			}
 		}).done(function(data){
 			$.each($.parseJSON(data), function(){
-				$("#item").append('<option  value="'+ this.ExpiryDate +'">'+ this.ExpiryDate +'Qty('+ this.Quantity +') </option>');
+				$("#item").append('<option  value="'+ this.ExpiryDate +'">'+ this.ExpiryDate +' Qty('+ this.Quantity +') </option>');
 			});
 		});
 	}
