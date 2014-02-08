@@ -27,17 +27,6 @@ public class PackingLineItem {
 	@JoinColumn(name="PACKING_LIST_ID")
 	private Packing packings;
 	
-	@Column(name="QUANTITY")
-	private int quantity;
-	
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
 	public int getId() {
 		return id;
 	}

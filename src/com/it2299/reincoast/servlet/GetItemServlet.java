@@ -46,7 +46,7 @@ public class GetItemServlet extends HttpServlet {
 		map.put("code",Integer.toString(id));
 		map.put("id", Integer.toString(product.getId()));
 		map.put("price", Double.toString(product.getPrice()));
-		
+		map.put("unit", product.getUnitOfMeasure());
 		Gson gson = new GsonBuilder().create();
 		PrintWriter out = response.getWriter();
 		String itemGson = gson.toJson(map);

@@ -1,5 +1,7 @@
 package com.it2299.ffth.reincoast.dto;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,6 +34,17 @@ public class OutboundLineItem {
 	@ManyToOne
 	@JoinColumn(name="OUTBOUND_DELIVERY_ID")
 	private OutboundDelivery outboundDelivery;
+	
+	@JoinColumn(name ="OUTBOUND_ITEM_EXPIRY_DATE")
+	private Date expriyDate;
+	
+	public Date getExpriyDate() {
+		return expriyDate;
+	}
+
+	public void setExpriyDate(Date expriyDate) {
+		this.expriyDate = expriyDate;
+	}
 
 	public int getId() {
 		return id;

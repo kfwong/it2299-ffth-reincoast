@@ -38,11 +38,15 @@
 				<div class="panel-body">
 					<form class="form-horizontal" role="form" method="post"
 						action="/it2299-ffth-reincoast/InBoundServlet">
-						
+						<div class="form-group">
 						<div class ="col-lg-6">
 					<label class="col-lg-1 control-label">Category</label>
 								<select class="form-control" id="category" name=Type>
 								</select>
+								<button type="button" class="btn btn-xs btn-default" id="addItem">
+									<i class="icon-plus"></i> AddItem
+								</button>
+					</div>
 					</div>
 						<div class="table-responsive" id="tableRec">
 							<table

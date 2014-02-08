@@ -24,6 +24,17 @@ public class Packing {
 	
 	@OneToMany(fetch=FetchType.EAGER, mappedBy="packings" ,cascade=CascadeType.ALL)
 	private List<PackingLineItem> packItem;
+	
+	@Column(name="COLLECTION_CENTER")
+	private String col_center;
+	
+	public String getCol_center() {
+		return col_center;
+	}
+
+	public void setCol_center(String col_center) {
+		this.col_center = col_center;
+	}
 
 	public int getId() {
 		return id;

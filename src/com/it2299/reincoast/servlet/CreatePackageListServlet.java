@@ -36,18 +36,18 @@ public class CreatePackageListServlet extends HttpServlet {
 		packing.setPackageName(request.getParameter("packageName"));
 		
 		String[] id = request.getParameterValues("item-code");
-		String[] quantity = request.getParameterValues("item-quantity");
-		System.out.println(id.length);
+		String colCenter = request.getParameter("colCenter");
+		
 		for(int i=0; i< id.length;i++){
-			System.out.println(id[i]);
+			
 			PackingLineItem packingLineItem = new PackingLineItem();
 			packingLineItem.setPacking(packing);
 			Product product = new Product();
 			product.setId(Integer.parseInt(id[i]));
 			packingLineItem.setProduct(product);
-			packingLineItem.setQuantity(Integer.parseInt(quantity[i]));
 			packingLineItems.add(packingLineItem);
 		}
+		packing.setCol_center(colCenter);
 		packing.setPackItem(packingLineItems);
 		
 		PackingDao pListDao = new PackingDao();

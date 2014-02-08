@@ -58,7 +58,7 @@ public class OutboundServlet extends HttpServlet{
 			}
 			
 				if(productbd.get(productBatch).getQuantity() < Integer.parseInt(quantity[i])){
-					RequestDispatcher requestDispatcher = request.getRequestDispatcher("remove-outbound.jsp");
+					RequestDispatcher requestDispatcher = request.getRequestDispatcher("remove-failed.jsp");
 					requestDispatcher.forward(request, response);
 				}else{
 					OutboundDelivery outbound = new OutboundDelivery();
@@ -73,6 +73,7 @@ public class OutboundServlet extends HttpServlet{
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						
 						outDao.saveOrUpdate(outbound);
 						
 					for(int a=0; a<id.length; a++){
@@ -80,10 +81,10 @@ public class OutboundServlet extends HttpServlet{
 							
 						ItemDao itemDao = new ItemDao();
 						ProductDao productDao = new ProductDao();
-						
+						OutboundLineItem outboundItem = new OutboundLineItem();
 						try {
 							d = DateUtils.parseDate(ExpiryDate[a], "dd MMM yyyy");
-							
+							outboundItem.setExpriyDate(d);
 							productDao.decreaseQuantity(Integer.parseInt(id[a]), Integer.parseInt(quantity[a]), d);
 						} catch (ParseException e) {
 							// TODO Auto-generated catch block
@@ -91,20 +92,23 @@ public class OutboundServlet extends HttpServlet{
 						}
 
 						Product product = productDao.get(Integer.parseInt(id[a]));
-						OutboundLineItem outboundItem = new OutboundLineItem();
+						
 						outboundItem.setProduct(product);
 						outboundItem.setOutboundDelivery(outbound);
+						
 						outboundItem.setQuantity(Integer.parseInt(quantity[a]));
 						productDao.decreaseQuantity(product.getId(), outboundItem.getQuantity());
 						itemDao.saveOrUpdateOutbound(outboundItem);
 					}
 					
 					
-					RequestDispatcher requestDispatcher = request.getRequestDispatcher("success-outbound.jsp");
-					requestDispatcher.forward(request, response);
+					
 					
 			}
+				
 				}
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("success-outbound.jsp");
+			requestDispatcher.forward(request, response);
 					
 				}
 			}

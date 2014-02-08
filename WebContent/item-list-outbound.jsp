@@ -51,8 +51,9 @@
 									<tr>
 										
 										<th class="col-lg-2">Product Name</i></th>
+										<th class="col-lg-1">Quantity</th>
+										<th class="col-lg-2">Expiry Date</th>
 										<th class="col-lg-2">Unti of Measure</th>
-										<th class="col-lg-1">Price</th>
 									</tr>
 								</thead>
 								<tbody id="add-list">
@@ -63,10 +64,13 @@
 												${item.product.name}
 											</td>
 											<td>
-												${item.product.unitOfMeasure}
+												${item.quantity}
 											</td>
 											<td>
-												${item.quantity}
+												${item.expriyDate}
+											</td>
+											<td>
+												${item.product.unitOfMeasure}
 											</td>
 										</tr>
 									</c:forEach>
@@ -113,21 +117,24 @@ function demoFromHTML() {
 	);
 
 	//Create table
-	var table = tableToJson($('#item-table').get(0))
+	var table = tableToJson($('#item-table').get(0));
 	pdf.cellInitialize();
 	pdf.setFontSize(8);
-	pdf.cell(15, 150, 240, 20, "PRODUCT NAME", -1);
-	pdf.cell(15, 150, 150, 20, "UNIT OF MEASURE(IN GRAM)", -1);
-	pdf.cell(15, 150, 80, 20, "PRICE", -1);
+	pdf.cell(15, 150, 200, 20, "PRODUCT NAME", -1);
+	pdf.cell(15, 150, 100, 20, "Quantity", -1);
+	pdf.cell(15, 150, 150, 20, "Expiry Date", -1);
+	pdf.cell(15, 150, 100, 20, "Unit of Measure(grams)", -1);
 	$.each(table, function (i, row){
 	  $.each(row, function (j, cell){
 		
-		if(j == "price"){
-			 pdf.cell(15, 150, 80, 20, cell, i);
-		 }else if(j == "untiofmeasure"){
+		if(j == "expirydate"){
 			 pdf.cell(15, 150, 150, 20, cell, i);
-		 }else{
-			 pdf.cell(15, 150, 240, 20, cell, i);
+		 }else if(j == "untiofmeasure"){
+			 pdf.cell(15, 150, 100, 20, cell, i);
+		 }else if (j == "quantity"){
+			 pdf.cell(15, 100, 100, 20, cell, i);
+		 }else{	
+		 pdf.cell(15, 100, 200, 20, cell, i);
 		 }
 	  })
 	});

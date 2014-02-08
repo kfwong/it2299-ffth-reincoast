@@ -45,6 +45,12 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-lg-2 control-label">Collection Center</label>
+								<div class="col-lg-4">
+							<input class="form-control" type="text" id="colCenter" name="colCenter" />
+								</div>
+						</div>
+						<div class="form-group">
 							<label class="col-lg-2 control-label">Item Search</label>
 							<div class="col-lg-4">
 								<select class="form-control" id="productName" class="selectedProduct">
@@ -62,10 +68,9 @@
 								class="table table-hover table-striped tablesorter table-condensed">
 								<thead id="addHeader">
 									<tr>
-									<th class="col-lg-1">#<i class="icon-sort"></i></th>
-									<th class="col-lg-2">Item Code <i class="icon-sort"></i></th>
+									<th class="col-lg-1">Item Code <i class="icon-sort"></i></th>
 									<th class="col-lg-2">Item Name<i class="icon-sort"></i></th>
-									<th class="col-lg-1">Quantity<i class="icon-sort"></i></th>
+									<th class="col-lg-1">Unti Of Measure<i class="icon-sort"></i></th>
 									<th class="col-lg-1">Price<i class="icon-sort"></i></th>
 								</thead>
 								<tbody id="add-list">
@@ -120,15 +125,13 @@
 							var obj = $.parseJSON(data);
 							$("#add-list")
 									.append(
-											'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="id" value="'
-													+ count
-													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
+											'<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
 													+ obj.id
 													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-name" value="'
 													+ obj.name
-													+ '" readonly /></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
-													+ "0"
-													+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
+													+ '" readonly /></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-unit" value=" '
+													+ obj.unit
+													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
 													+ obj.price
 													+ '" readonly/></td></tr>');
 						});
@@ -136,7 +139,7 @@
 	function getProductName(){
 		var itemCode = 1;
 		$.ajax({	type : "POST",
-			url : "getProductNameServlet",
+			url : "GetProductNameServlet",
 			data : {
 				ItemCode : itemCode
 			}
