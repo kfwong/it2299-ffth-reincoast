@@ -53,10 +53,10 @@
 								class="table table-hover table-striped tablesorter table-condensed">
 								<thead id="addHeader">
 									<tr>
-									<th class="col-lg-1">Product ID<i class="icon-sort"></i></th>
-									<th class="col-lg-2">Product Name<i class="icon-sort"></i></th>
-									<th class="col-lg-1">Product Quantity<i class="icon-sort"></i></th>
-									<th class="col-lg-1">Product value<i class="icon-sort"></i></th>
+										<th class="col-lg-1">Product ID<i class="icon-sort"></i></th>
+										<th class="col-lg-2">Product Name<i class="icon-sort"></i></th>
+										<th class="col-lg-1">Product Quantity<i class="icon-sort"></i></th>
+										<th class="col-lg-1">Product value<i class="icon-sort"></i></th>
 									</tr>
 								</thead>
 								<tbody id="add-list">
