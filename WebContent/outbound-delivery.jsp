@@ -75,7 +75,7 @@
 									<tr>
 										<th class="col-lg-1">Item Code <i class="icon-sort"></i></th>
 										<th class="col-lg-2">Item Name<i class="icon-sort"></i></th>
-										<th class="col-lg-1">Expiry Date<i class="icon-sort"></i></th>
+										<th class="col-lg-1">Recommend Product Expiry Date<i class="icon-sort"></i></th>
 										<th class="col-lg-1">Quantity<i class="icon-sort"></i></th>
 									</tr>
 								</thead>

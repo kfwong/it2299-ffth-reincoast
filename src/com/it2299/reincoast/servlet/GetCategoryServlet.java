@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,14 +37,17 @@ public class GetCategoryServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProductDao productDao = new ProductDao();
-		List<String> categoryList = (List<String>) productDao.getCategories();
+		Set<String> categories = new HashSet<String>();
 		ArrayList<Map<String, String>> myMap = new ArrayList<Map<String, String>>();
-		for(int i=0; i< categoryList.size(); i++){
+		
+		categories =  productDao.getCategories();
+		for(Iterator<String> it = categories.iterator(); it.hasNext();){
 			Map<String, String> map = new HashMap<String, String>();
-			
-			map.put("name", categoryList.get(i));
+			map.put("name", it.next());
 			myMap.add(map);
 		}
+		
+
 		Gson gson = new GsonBuilder().create();
 		String packageGson = gson.toJson(myMap);
 		

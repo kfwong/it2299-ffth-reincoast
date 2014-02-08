@@ -131,7 +131,7 @@
 		$("#category").select2({
 
 		});
-		
+		getCategory();
 		$('#pagination').bootstrapPaginator({
 			bootstrapMajorVersion: 3,
 			size: 'normal',

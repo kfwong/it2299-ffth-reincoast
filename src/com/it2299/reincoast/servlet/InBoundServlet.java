@@ -82,7 +82,7 @@ public class InBoundServlet extends HttpServlet {
 		for(int i=0; i< id.length; i++){
 			ProductDao productDao = new ProductDao();
 			
-			productDao.increaseQuantity(Integer.parseInt(id[i]), Integer.parseInt(quantity[i]));
+			
 			Product product = new Product();
 			product.setId(Integer.parseInt(id[i]));
 			try {
