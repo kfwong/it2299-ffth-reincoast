@@ -92,6 +92,10 @@ public class CalendarFoodDriveServlet extends HttpServlet {
 				String end = request.getParameter("end");
 				String allDay = request.getParameter("allDay");
 				
+				if(allDay != null && allDay.equals(true)){
+					
+				}
+				
 				CalendarFoodDrive fd = new CalendarFoodDrive();
 				fd.setTitle(title);
 				fd.setStart(start);
@@ -104,17 +108,20 @@ public class CalendarFoodDriveServlet extends HttpServlet {
 			if(action.equals("edit")){
 				int id = Integer.parseInt(request.getParameter("id"));
 				
+				String title = request.getParameter("title");
+				String start = request.getParameter("start");
+				String end = request.getParameter("end");
+				String allDay = request.getParameter("allDay");
+				
 				CalendarFoodDrive fd = new CalendarFoodDrive();
+				fd.setId(id);
+				fd.setTitle(title);
+				fd.setStart(start);
+				fd.setEnd(end);
+				fd.setAllDay(allDay);
 				
 				CalendarFoodDriveDao dao = new CalendarFoodDriveDao();
-				fd = dao.get(id);
-				
-				Gson gson = new Gson();
-				String json = gson.toJson(fd);
-				
-				response.setContentType("application/json");
-				PrintWriter out = response.getWriter();
-				out.write(json);
+				dao.saveOrUpdate(fd);
 			}
 			if(action.equals("delete")){
 				int id  = Integer.parseInt(request.getParameter("id"));

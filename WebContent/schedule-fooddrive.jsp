@@ -36,7 +36,7 @@
 				<div class="date">
 					<div class="form-group">
 						<label for="start-date">Start date</label>
-					  	<input type="text" class="form-control start-date" id="start-date" name = "start" required>
+					  	<input type="text" class="form-control start-date" id="start-date" required>
 					</div>
 				</div>
 				<div class="date-time hide">
@@ -77,20 +77,31 @@
 		      <div class="modal-body">
 				<div class="form-group">
 				  <label for="title">Title</label>
-				  <input type="text" class="form-control" id="title" name = "title" required placeholder="Example: Serangoon S.C.C.">
-				</div>
-				<div class="form-group">
-
-				  <input type="hidden" class="form-control start" id="start" name = "start">
-				</div>
-				<div class="form-group">
-
-				  <input type="hidden" class="form-control end" id="end" name = "end" value="">
+				  <input type="text" class="form-control title" id="title" name = "title" required autofocus>
 				</div>
 				<div class="checkbox">
 				    <label>
-				      <input type="checkbox" name="allDay" value="true" checked> All day event
+				      <input class="allDay" type="checkbox" name="allDay" value="true" checked> All day event
 				    </label>
+				</div>
+				<div class="date">
+					<div class="form-group">
+						<label for="start-date">Start date</label>
+					  	<input type="text" class="form-control start-date" id="start-date" required>
+					</div>
+				</div>
+				<div class="date-time hide">
+					<div class="form-group">
+						<label for="start">Start time</label>
+					  	<input type="text" class="form-control start" id="start" name = "start" required>
+					  	<span class="add-on">
+						  <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+						</span>
+					</div>
+					<div class="form-group">
+						<label for="end">End time</label>
+					  	<input type="text" class="form-control end" id="end" name = "end" required>
+					</div>
 				</div>
 		      </div>
 		      <div class="modal-footer">
@@ -146,6 +157,7 @@
 			dayClick: function(date, jsEvent, view) {
 				
 		        $(".create-modal").modal();
+		        $(".start-date").val(date.format("YYYY-MM-DD"));
 		        $(".start").val(date.format("YYYY-MM-DD HH:mm:ss"));
 		        $(".end").val(date.add('days', 1).format("YYYY-MM-DD HH:mm:ss"));
 		        
@@ -180,6 +192,23 @@
 		
 		$(".allDay").on("click", function(){
 		  	$(".date, .date-time").toggleClass("hide");
+		});
+		
+		$(".confirm-create-button, .confirm-edit-button").on("click", function(event){
+		  	var button = event.target;
+		  	var form = $(button).parents("form");
+		  	var allDay = $(form).find(".allDay");
+		  	var startDate = $(form).find(".start-date");
+		  	var start = $(form).find(".start");
+		  	var end  = $(form).find(".end");
+		  	
+		  	if(allDay.prop("checked")){
+		  		var date = moment($(startDate).val());
+		  		start.val(date.format("YYYY-MM-DD HH:mm:ss"));
+		  		end.val(date.add('days', 1).format("YYYY-MM-DD HH:mm:ss"));
+		  	}
+		  	
+		 	$(this).trigger("click");
 		});
 		
         $(".delete-button").on("click", function(){
