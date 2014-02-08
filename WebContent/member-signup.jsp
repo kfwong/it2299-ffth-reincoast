@@ -11,6 +11,7 @@
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script
 	src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
 
 <style>
 body {
@@ -33,23 +34,33 @@ body {
 </style>
 </head>
 <body>
-	<form id="MSU" class="Member_SignUp" method="post" action="MemberSignUpServlet">
+	<form id="MSU" class="Member_SignUp" method="post"
+		action="MemberSignUpServlet">
 
 		<div id="page-wrapper">
 			<!-- forget password/sign up as volunteer/sign up as member -->
-				<div class="container">
-					<div class="col-lg-12">
-						<div class="row">
-							<div class="col-lg-offset-4 col-lg-4">
-								<br><br><br><br><br><br><br><br><br><br>
-								<div class="panel panel-default">
-								  <div class="panel-body">
-								    <div class="row">
+			<div class="container">
+				<div class="col-lg-12">
+					<div class="row">
+						<div class="col-lg-offset-4 col-lg-4">
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+							<div class="panel panel-default">
+								<div class="panel-body">
+									<div class="row">
 										<div class="col-lg-12">
-											<h1 style="text-align:center;">SignUp</h1>
-											
-											<hr/>
-											
+											<h1 style="text-align: center;">SignUp</h1>
+
+											<hr />
+
 
 											<div class="form-group">
 
@@ -60,64 +71,61 @@ body {
 													id="Name" required autofocus>
 
 												<!--------------------------------------NRIC -------------------------------------------->
-											
-													<label for="NRIC">NRIC</label> <input type="text"
-														class="form-control" placeholder="NRIC" name="NRIC" id="NRIC" required>
-												
+
+												<label for="NRIC">NRIC</label> <input type="text"
+													class="form-control" placeholder="NRIC" name="NRIC"
+													id="NRIC" required>
+
 
 												<!--------------------------------------GENDER -------------------------------------------->
-											
-													<label for="Gender">Gender</label> <br>
-													<div class="radio-inline">
-														<label> <input type="radio" name="Gender"
-															id="Male" value="Male"> Male
-														</label>
-													</div>
-													<div class="radio-inline">
-														<label> <input type="radio" name="Gender"
-															id="Female" value="Female">Female
-														</label>
-													</div>
+
+												<label for="Gender">Gender</label>
+												<div class="radio-inline">
+													<label> <input type="radio" name="Gender" id="Male"
+														value="Male"> Male
+													</label>
 												</div>
-										
+												<div class="radio-inline">
+													<label> <input type="radio" name="Gender"
+														id="Female" value="Female">Female
+													</label>
+												</div>
+											</div>
+
 											<div class="form-group">
 												<!--------------------------------------Contact Number -------------------------------------------->
-												
-													<label for="Contact_No">Contact No</label> <input
-														type="text" class="form-control"
-														placeholder="Contact Number" name="Tel" id="Tel" required>
-												
+
+												<label for="Contact_No">Contact No</label> <input
+													type="text" class="form-control"
+													placeholder="Contact Number" name="Tel" id="Tel" required>
+
 												<!--------------------------------------EMAIL  -------------------------------------------->
-												
-													<label for="Email">Email</label> <input type="text"
-														class="form-control" placeholder="Email" name="Email"
-														id="Email" required >
-												
+
+												<label for="Email">Email</label> <input type="text"
+													class="form-control" placeholder="Email" name="Email"
+													id="Email" required>
+
 												<!--------------------------------------Address  -------------------------------------------->
-												
 
-													<label for="Address">Address </label> <input type="text"
-														class="form-control" placeholder="Mailing Address"
-														name="Address" id="Address" required >
 
-												
-												
-													<label for="PostalCode">Postal Code </label> <input
-														type="text" class="form-control" placeholder="Postal Code"
-														name="PostalCode" id="PostalCode" required >
-												
-												<br>
+												<label for="Address">Address </label> <input type="text"
+													class="form-control" placeholder="Mailing Address"
+													name="Address" id="Address" required> <label
+													for="PostalCode">Postal Code </label> <input type="text"
+													class="form-control" placeholder="Postal Code"
+													name="PostalCode" id="PostalCode" required> <br>
 											</div>
 											<div class="form-group">
 												<!--------------------------------------UserName -------------------------------------------->
-												
-													<label for="Username">Username</label> <input type="text"
-														class="form-control" placeholder="Username"
-														name="Username" id="Username" required >
+
+												<label for="Username">Username</label> <input type="text"
+													class="form-control" placeholder="Username" name="Username"
+													id="Username" required>
 											</div>
 
-											<button class="btn btn-default" type="submit">SIGN UP</button>
-											<a class="btn btn-default" href="login.jsp">Cancel</a><br> 
+											<button class="btn btn-default" type="submit">SIGN
+												UP</button>
+											<a class="btn btn-default" href="login.jsp">Cancel</a><br>
 											<small>*Password for staff will be their NRIC</small> <br>
 										</div>
 
