@@ -26,6 +26,9 @@ public class AuthenticationFilter implements Filter {
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 
 		// Exclusion List
+		String bootstrapcss = httpRequest.getContextPath() + "/css/bootstrap.css";
+		String sbadmincss = httpRequest.getContextPath() + "/css/sb-admin.css";
+		String backgroundloginpng = httpRequest.getContextPath() + "/img/background-login.png"; 
 		String loginJSPURL = httpRequest.getContextPath() + "/login.jsp";
 		String signUpURL = httpRequest.getContextPath() + "/member-signup.jsp";
 		String signUp2URL = httpRequest.getContextPath() + "/volunteer-signup.jsp";
@@ -37,7 +40,7 @@ public class AuthenticationFilter implements Filter {
 		String authenticateAcctURL = httpRequest.getContextPath() + "/authenticate-account.jsp";
 		String authenticateAcctServlet = httpRequest.getContextPath() + "/AuthenticateAccountServlet";
 
-		if (httpRequest.getRequestURI().equals(authenticateAcctURL)||httpRequest.getRequestURI().equals(authenticateAcctServlet)||httpRequest.getRequestURI().equals(forgetpwdServletURL)||httpRequest.getRequestURI().equals(forgetpasswordURL) || httpRequest.getRequestURI().equals(signupServlet2URL) ||httpRequest.getRequestURI().equals(signupServletURL) ||httpRequest.getRequestURI().equals(signUp2URL) ||httpRequest.getRequestURI().equals(loginJSPURL) || httpRequest.getRequestURI().equals(loginServletURL) || httpRequest.getRequestURI().equals(signUpURL)) {
+		if (httpRequest.getRequestURI().equals(authenticateAcctURL)||httpRequest.getRequestURI().equals(authenticateAcctServlet)||httpRequest.getRequestURI().equals(forgetpwdServletURL)||httpRequest.getRequestURI().equals(forgetpasswordURL) || httpRequest.getRequestURI().equals(signupServlet2URL) ||httpRequest.getRequestURI().equals(signupServletURL) ||httpRequest.getRequestURI().equals(signUp2URL) ||httpRequest.getRequestURI().equals(loginJSPURL) || httpRequest.getRequestURI().equals(loginServletURL) || httpRequest.getRequestURI().equals(signUpURL) || httpRequest.getRequestURI().equals(bootstrapcss) || httpRequest.getRequestURI().equals(sbadmincss) || httpRequest.getRequestURI().equals(backgroundloginpng)) {
 			chain.doFilter(request, response);
 		} else if (httpRequest.getRequestURI().indexOf("/css") > 0) {
 			chain.doFilter(request, response);
@@ -48,9 +51,9 @@ public class AuthenticationFilter implements Filter {
 		} else {
 			HttpSession session = httpRequest.getSession(false);
 			if (session == null) {
-				httpResponse.sendRedirect("login.jsp?redirect="+URLEncoder.encode(httpRequest.getRequestURL().toString(), "UTF-8"));
+				httpResponse.sendRedirect(httpRequest.getContextPath()+ "/login.jsp");
 			} else if (session.getAttribute("current_user") == null) {
-				httpResponse.sendRedirect("login.jsp?redirect="+URLEncoder.encode(httpRequest.getRequestURL().toString(), "UTF-8"));
+				httpResponse.sendRedirect(httpRequest.getContextPath()+ "/login.jsp");
 			} else {
 				chain.doFilter(request, response);
 			}
