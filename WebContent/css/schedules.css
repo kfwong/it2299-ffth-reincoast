@@ -33,3 +33,7 @@
 #calendar{
 	width:80%;
 }
+
+table td, table th{
+	padding-left: 0px !important;
+}

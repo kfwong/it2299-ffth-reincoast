@@ -2,6 +2,7 @@
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
 	<jsp:param value="js/fullcalendar/fullcalendar/fullcalendar.css" name="css" />
+	<jsp:param value="js/bootstrap-datetimepicker/jquery.datetimepicker.css" name="css" />
 	<jsp:param value="css/schedules.css" name="css" />
 </jsp:include>
 <!-- header.jsp -->
@@ -13,7 +14,6 @@
 <!-- content -->
 <div id="page-wrapper">
 	<h1>Schedule <small>Food Drive</small></h1>
-	
 	<!-- Modal -->
 	<div class="modal view-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
@@ -36,17 +36,20 @@
 				<div class="date">
 					<div class="form-group">
 						<label for="start-date">Start date</label>
-					  	<input type="text" class="form-control start-date" id="start-date" name = "start">
+					  	<input type="text" class="form-control start-date" id="start-date" name = "start" required>
 					</div>
 				</div>
 				<div class="date-time hide">
 					<div class="form-group">
 						<label for="start">Start time</label>
-					  	<input type="text" class="form-control start" id="start" name = "start">
+					  	<input type="text" class="form-control start" id="start" name = "start" required>
+					  	<span class="add-on">
+						  <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+						</span>
 					</div>
 					<div class="form-group">
 						<label for="end">End time</label>
-					  	<input type="text" class="form-control end" id="end" name = "end">
+					  	<input type="text" class="form-control end" id="end" name = "end" required>
 					</div>
 				</div>
 		      </div>
@@ -157,17 +160,28 @@
 						$(".view-modal").modal();
 						$(".id").val(json.id);
 						$(".title").val(json.title);
+						$(".start-date").val(moment(json.start).format("YYYY-MM-DD"));
 						$(".start").val(json.start);
 						$(".end").val(json.end);
+						if(json.allDay == true){
+							$(".allDay").prop("checked", true);
+							$(".date").removeClass("hide");
+							$(".date-time").addClass("hide");
+						}
+						else{
+							$(".allDay").prop("checked", false);
+							$(".date-time").removeClass("hide");
+							$(".date").addClass("hide");
+						}	
 		    		}
 		    	});
 		    }
+		});   
+		
+		$(".allDay").on("click", function(){
+		  	$(".date, .date-time").toggleClass("hide");
 		});
 		
-        $(".allDay").on("click", function(){
-        	$(".date, .date-time").toggleClass("hide");
-        });
-        
         $(".delete-button").on("click", function(){
         	$(".delete-modal").modal();
  
@@ -189,6 +203,16 @@
         	$('.view-modal').css('-o-transition', 'brightness(100%)');
         });
         
+		$('.start-date').datetimepicker({
+        	
+            format:'Y-m-d',
+            timepicker: false,
+        }); 
+        
+        $('.start, .end').datetimepicker({
+        	
+            format:'Y-m-d H:i:s'
+        });   
 	});
 </script>
 
@@ -197,5 +221,6 @@
 	<jsp:param value="js/fullcalendar/lib/moment.min.js" name="js" />
 	<jsp:param value="js/fullcalendar/lib/jquery-ui.custom.min.js" name="js" />
 	<jsp:param value="js/fullcalendar/fullcalendar/fullcalendar.js" name="js" />
+	<jsp:param value="js/bootstrap-datetimepicker/jquery.datetimepicker.js" name="js" />
 </jsp:include>
 <!-- footer.jsp -->
