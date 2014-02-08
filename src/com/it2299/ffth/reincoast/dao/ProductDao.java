@@ -238,12 +238,18 @@ public class ProductDao implements Dao<Product> {
 		}
 	}
 	
-	public String getMovementGraphData(){
+	public String getMovementGraphData(int id){
 		String data = "";
 		
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 
+		// Generate column with past 12 months from now, left join with data with inbound and outbound total
+		// example result:
+		// __________________________________________
+		// | months | inbound_total | outbound_total |
+		// | Jan 14 | 3				| 5				 |
+		// ....
 		Query query = session.createSQLQuery("SELECT `MONTHS`.MONTH AS MONTH, COALESCE(`INBOUNDS`.TOTAL, 0) AS INBOUND_TOTAL, COALESCE(`OUTBOUNDS`.TOTAL, 0) AS OUTBOUND_TOTAL FROM "
 				+ "("
 				+ "SELECT DATE_FORMAT(now() - INTERVAL 11 MONTH, '%b %y') AS `MONTH` "
@@ -281,10 +287,11 @@ public class ProductDao implements Dao<Product> {
 				+ "( "
 				+ "SELECT DATE_FORMAT(DATE(FROM_UNIXTIME(REVINFO.REVTSTMP/1000)), '%b %y') AS `MONTH`, COUNT(*) AS `TOTAL` FROM OUTBOUND_LINE_ITEM_AUD "
 				+ "INNER JOIN REVINFO ON OUTBOUND_LINE_ITEM_AUD.REV = REVINFO.REV "
-				+ "WHERE PRODUCT_ID = 46 AND DATE(FROM_UNIXTIME(REVINFO.REVTSTMP/1000)) > NOW() - INTERVAL 12 MONTH "
+				+ "WHERE PRODUCT_ID = :id AND DATE(FROM_UNIXTIME(REVINFO.REVTSTMP/1000)) > NOW() - INTERVAL 12 MONTH "
 				+ "GROUP BY `MONTH` "
 				+ ") AS `OUTBOUNDS` "
 				+ "ON `MONTHS`.MONTH = `OUTBOUNDS`.MONTH");
+		query.setInteger("id",id);
 		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 
 		List list = query.list();
@@ -445,14 +452,19 @@ public class ProductDao implements Dao<Product> {
 		productBatch.setExpiryDate(expiryDate);
 		productBatch = (ProductBatch) session.get(ProductBatch.class, productBatch);
 		
-		if(productBatch == null){
-			// no record, do nothing. NOT SUPPOSE TO BE HERE ANYWAY
-		}else{
+		if(productBatch != null){
 			productBatch.setQuantity(productBatch.getQuantity() - decrement);
+			if(expiryDate != null){
+				session.update(productBatch);
+			}else{
+				System.out.println(id + ":" + expiryDate);
+			}
+		}else{
+			System.out.println(id + ":" + expiryDate);
 		}
-
+		
 		session.update(product);
-		session.update(productBatch);
+		
 
 		session.getTransaction().commit();
 		session.close();

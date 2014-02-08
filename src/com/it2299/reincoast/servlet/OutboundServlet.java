@@ -31,87 +31,56 @@ import com.it2299.ffth.reincoast.dto.ProductBatch;
 import com.it2299.ffth.reincoast.dto.Stock;
 
 @WebServlet("/OutboundServlet")
-public class OutboundServlet extends HttpServlet{
+public class OutboundServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	public OutboundServlet(){
+
+	public OutboundServlet() {
 		super();
 	}
-	
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		
-			String[] id = request.getParameterValues("item-code");
-			String[] quantity = request.getParameterValues("item-quantity");
-			String[] ExpiryDate = request.getParameterValues("ExpiryDate");
-			ProductBatchDao productbd = new ProductBatchDao();
-			for(int i=0; i< id.length; i++){
-			ProductBatch productBatch = new ProductBatch();
-			productBatch.setProductId(Integer.parseInt(id[i]));
-			Date d;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String[] id = request.getParameterValues("item-code");
+		String[] quantity = request.getParameterValues("item-quantity");
+		String[] ExpiryDate = request.getParameterValues("ExpiryDate");
+		ItemDao itemDao = new ItemDao();
+		ProductDao productDao = new ProductDao();
+		for (int i = 0; i < id.length; i++) {
+			Date d = null;
 			try {
 				d = DateUtils.parseDate(ExpiryDate[i], "dd MMM yyyy");
-				productBatch.setExpiryDate(d);
-			} catch (ParseException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-				if(productbd.get(productBatch).getQuantity() < Integer.parseInt(quantity[i])){
-					RequestDispatcher requestDispatcher = request.getRequestDispatcher("remove-failed.jsp");
-					requestDispatcher.forward(request, response);
-				}else{
-					OutboundDelivery outbound = new OutboundDelivery();
-					OutboundDeliveryDao outDao = new OutboundDeliveryDao();
-					outbound.setCollectionCenter(request.getParameter("collectLoc"));
-					
-						Date date;
-						try {
-							date = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH).parse(request.getParameter("deliveryDate"));
-							outbound.setDateDelivered(date);
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						
-						outDao.saveOrUpdate(outbound);
-						
-					for(int a=0; a<id.length; a++){
-						
-							
-						ItemDao itemDao = new ItemDao();
-						ProductDao productDao = new ProductDao();
-						OutboundLineItem outboundItem = new OutboundLineItem();
-						try {
-							d = DateUtils.parseDate(ExpiryDate[a], "dd MMM yyyy");
-							outboundItem.setExpriyDate(d);
-							productDao.decreaseQuantity(Integer.parseInt(id[a]), Integer.parseInt(quantity[a]), d);
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+			productDao.decreaseQuantity(Integer.parseInt(id[i]), Integer.parseInt(quantity[i]), d);
 
-						Product product = productDao.get(Integer.parseInt(id[a]));
-						
-						outboundItem.setProduct(product);
-						outboundItem.setOutboundDelivery(outbound);
-						
-						outboundItem.setQuantity(Integer.parseInt(quantity[a]));
-						productDao.decreaseQuantity(product.getId(), outboundItem.getQuantity());
-						itemDao.saveOrUpdateOutbound(outboundItem);
-					}
-					
-					
-					
-					
-			}
-				
-				}
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("success-outbound.jsp");
-			requestDispatcher.forward(request, response);
-					
-				}
-			}
-			 
-			
+			OutboundDelivery outbound = new OutboundDelivery();
+			OutboundDeliveryDao outDao = new OutboundDeliveryDao();
+			outbound.setCollectionCenter(request.getParameter("collectLoc"));
 
+			Date date;
+			try {
+				date = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH).parse(request.getParameter("deliveryDate"));
+				outbound.setDateDelivered(date);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			outDao.saveOrUpdate(outbound);
+
+			Product product = productDao.get(Integer.parseInt(id[i]));
+			OutboundLineItem outboundItem = new OutboundLineItem();
+			outboundItem.setProduct(product);
+			outboundItem.setOutboundDelivery(outbound);
+			outboundItem.setQuantity(Integer.parseInt(quantity[i]));
+			itemDao.saveOrUpdateOutbound(outboundItem);
+
+		}
+
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("success-outbound.jsp");
+		requestDispatcher.forward(request, response);
+
+	}
+}

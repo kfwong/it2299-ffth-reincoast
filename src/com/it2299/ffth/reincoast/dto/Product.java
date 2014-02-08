@@ -21,6 +21,7 @@ import org.apache.solr.analysis.LowerCaseFilterFactory;
 import org.apache.solr.analysis.SnowballPorterFilterFactory;
 import org.apache.solr.analysis.WordDelimiterFilterFactory;
 import org.apache.solr.analysis.NGramFilterFactory;
+import org.apache.solr.analysis.SynonymFilterFactory;
 import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
@@ -64,6 +65,10 @@ import org.hibernate.search.bridge.builtin.DoubleBridge;
 			@TokenFilterDef(factory = LowerCaseFilterFactory.class),
 			@TokenFilterDef(factory = SnowballPorterFilterFactory.class, params={
 				@Parameter(name="language", value="English")
+			}),
+			@TokenFilterDef(factory = SynonymFilterFactory.class, params = {
+                @Parameter(name = "synonyms", value = "synonyms.txt"),
+                @Parameter(name = "ignoreCase", value = "true")
 			})
 })
 // Declare this class as entity so that Hibernate will know this is to be taken

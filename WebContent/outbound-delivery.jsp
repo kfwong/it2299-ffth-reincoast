@@ -40,7 +40,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-lg-1 control-label">Collection Centre</label>
+							<label class="col-lg-1 control-label">Collectionlocation</label>
 							<div class="col-lg-5">
 								<input class="form-control" type="text" id="collect"
 									name="collectLoc" />
@@ -104,8 +104,7 @@
 <!-- Add row function -->
 <script>
 	var count = 0;
-	var counter =0;
-	
+
 	$(document).ready(function() {
 		getDate();
 		$("#PackageType").select2({
@@ -122,14 +121,12 @@
 				if (count == 0) {
 					$("#notice").remove();
 					$("#tableRec").append('<input type="submit" />');
-					getItem(counter);
+					getItem();
 					count++;
-					counter++;
 					$(document).scrollTop($(document).height());
 				} else {
-					getItem(counter);
+					getItem();
 					count++;
-					counter++;
 					$(document).scrollTop($(document).height());
 				}
 			
@@ -138,21 +135,18 @@
 			if (count == 0) {
 				$("#notice").remove();
 				$("#tableRec").append('<input type="submit" />');
-				getPackageItem(counter);
 				count++;
-				counter++;
-				
+				getPackageItem();
 				$(document).scrollTop($(document).height());
 			} else {
-				getPackageItem(counter);
 				count++;
-				counter++;
+				getPackageItem();
 				$(document).scrollTop($(document).height());
 			}
 
 		});
 	});
-	function getPackageItem(counter) {
+	function getPackageItem() {
 		var packID = $("#PackageType option:selected").val();
 		$.ajax({
 					type : "POST",
@@ -163,21 +157,22 @@
 				}).done(function(data) {
 							$.each($.parseJSON(data),function() {
 												$("#add-list").append('<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
-														+ this.id
-														+ '" readonly/></td><td>'
-														+ this.name
-														+ '</td><td><select class="expirySelection form-control" id="item'+ counter +'" name=ExpiryDate>'
-														+ '</select></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
-														+ "0"
-														+ '" /></td></tr>');
-												getExpiryListForPackage(this.id, counter);
+																		+ this.id
+																		+ '" readonly/></td><td>'
+																		+ this.name
+																		+ '</td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
+																		+ "0"
+																		+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
+																		+ this.price
+																		+ '" readonly/></td></tr>');
+												
 											});
 						});
 
 	}
 	
-	function getItem(counter) {
-		
+	function getItem() {
+
 		var itemCode = $('#productName :selected').val();
 
 		$.ajax({
@@ -194,11 +189,10 @@
 													+ obj.id
 													+ '" readonly/></td><td>'
 													+ obj.name
-													+ '</td><td><select class="expirySelection form-control" id="item'+counter +'" name=ExpiryDate>'
-													+ '</select></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
+													+ '</td><td class="expiry-date"><select class="form-control"  name="ExpiryDate"><option value="null" selected></option></select></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value=" '
 													+ "0"
 													+ '" /></td></tr>');
-							getExpiryList(obj.id, counter);
+							getExpiryList();
 						});
 	}
 	function getProductName(){
@@ -215,9 +209,9 @@
 		});
 	}
 	
-	function getExpiryList(id, counter){
+	function getExpiryList(){
 		var itemCode = $('#productName :selected').val();
-		alert(id);
+		
 		$.ajax({
 			type:"POST",
 			url: "GetProductExpiryListServlet",
@@ -225,23 +219,8 @@
 				itemCode : itemCode
 			}
 		}).done(function(data){
-			$.each($.parseJSON(data), function(){
-				$("#item" + counter).append('<option  value="'+ this.ExpiryDate +'">'+ this.ExpiryDate +' Qty('+ this.Quantity +') </option>');
-			});
-		});
-	}
-	
-	function getExpiryListForPackage(id, counter){
-		var itemCode = id;
-		$.ajax({
-			type:"POST",
-			url: "GetProductExpiryListServlet",
-			data : {
-				itemCode : itemCode 
-			}
-		}).done(function(data){
-			$.each($.parseJSON(data), function(){
-				$("#item" + counter).append('<option  value="'+ this.ExpiryDate +'">'+ this.ExpiryDate +' Qty('+ this.Quantity +') </option>');
+			$.each($.parseJSON(data), function(index, value){
+				$("#add-list tr:last-child").find('.expiry-date').first().children('select').append('<option  value="'+ this.ExpiryDate +'">'+ this.ExpiryDate +' Qty('+ this.Quantity +') </option>');
 			});
 		});
 	}
@@ -255,11 +234,10 @@
 			}
 		}).done(function(data){
 			$.each($.parseJSON(data), function(){
-				$("#PackageType").append('<option value='+this.id + '>'+ this.name+' </option>');
+				$("#productName").append('<option value='+this.ExpiryDate + '>'+ this.ExpiryDate + '('+ this.Quantity + ')' +' </option>');
 			});
 		});
 	}
-	
 	function getDate() {
 		$(".datepicker").datepicker();
 	}
