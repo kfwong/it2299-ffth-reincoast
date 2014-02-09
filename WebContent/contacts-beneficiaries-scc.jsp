@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
+	<jsp:param value="js/dataTables/dataTables.bootstrap.css" name="css" />
 	<jsp:param value="css/contacts.css" name="css" />
 </jsp:include>
 <!-- header.jsp -->
@@ -47,7 +48,7 @@
 		  </div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
 			
-		<table class="table table-hover table-striped table-bordered">
+		<table class="table table-hover table-striped table-bordered dataTables">
 			<thead>
 				<tr>
 					<th class="table-column-name">Name</th>
@@ -130,11 +131,24 @@
 			$("form").append('<input type="hidden" name="delete" value="true">');
 			$("form").submit();
 		});
+		
+		$('.dataTables').dataTable({
+
+			"sPaginationType": "bootstrap",
+			
+			"fnPreDrawCallback": function(oSettings, json) {
+                 $('.dataTables_filter input').addClass('form-control');
+                 $('.dataTables_filter input').css('width', '200px');
+                 $('.dataTables_length select').addClass('form-control');
+                 $('.dataTables_length select').css('width', '75px');
+          	}
+		});
 	});
 </script>
 
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
-		<jsp:param value="/path/to/js1" name="js" />
+	<jsp:param value="js/dataTables/jquery.dataTables.js" name="js" />
+	<jsp:param value="js/dataTables/dataTables.bootstrap.js" name="js" />
 </jsp:include>
 <!-- footer.jsp -->
