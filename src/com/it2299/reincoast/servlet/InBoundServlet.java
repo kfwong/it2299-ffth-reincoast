@@ -113,7 +113,7 @@ public class InBoundServlet extends HttpServlet {
 		
 
 		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("success.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/GetOutboundDeliveryServlet?page=1");
 		requestDispatcher.forward(request, response);
 	}
 

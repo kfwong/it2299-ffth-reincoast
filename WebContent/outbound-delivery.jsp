@@ -44,12 +44,13 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-lg-1 control-label">Collection location</label>
-							<div class="col-lg-4">
-								<input class="form-control" type="text" id="collect"
-									name="collectLoc" required/>
-									</div>
-							</div>										
+							<label class="col-lg-1 control-label">Collection Center</label>
+								<div class="col-lg-4">
+							<select class="form-control" id="collect" class="colCenter" name="collectLoc"required>
+									<option value="">Please select an Location</option>
+								</select>
+								</div>
+						</div>									
 						<div class="form-group">
 							<label class="col-lg-1 control-label">PackageType</label>
 								<div class="col-lg-4">
@@ -119,9 +120,12 @@
 		$("#productName").select2({
 
 		});
+		$("#collect").select2({
+
+		});
 		getProductName();
 		getPackageName();
-		
+		getCollectionCenter();
 		$("#addItem").on('click', function() {
 			
 				if (count == 0) {
@@ -152,7 +156,7 @@
 
 		});
 		jQuery.validator.setDefaults({
-			  debug: true,
+			  debug: false,
 			  success: "valid"
 			});
 		
@@ -265,6 +269,21 @@
 	return false;
 	}
 	return true;
+	}
+	
+	function getCollectionCenter(){
+		var type = 1;
+		$.ajax({
+			type:"POST",
+			url:"GetCollectionCenter",
+			data:{
+				type : type
+			}
+		}).done(function(data){
+			$.each($.parseJSON(data), function(){
+				$("#collect").append('<option value='+this.name + '>'+ this.name +' </option>');
+			});
+		});
 	}
 </script>
 <!-- footer.jsp -->

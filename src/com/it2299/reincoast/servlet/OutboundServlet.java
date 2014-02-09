@@ -73,13 +73,14 @@ public class OutboundServlet extends HttpServlet {
 			Product product = productDao.get(Integer.parseInt(id[i]));
 			OutboundLineItem outboundItem = new OutboundLineItem();
 			outboundItem.setProduct(product);
+			outboundItem.setExpriyDate(d);
 			outboundItem.setOutboundDelivery(outbound);
 			outboundItem.setQuantity(Integer.parseInt(quantity[i]));
 			itemDao.saveOrUpdateOutbound(outboundItem);
 
 		}
 
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("success-outbound.jsp");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/GetOutboundDeliveryServlet?page=1");
 		requestDispatcher.forward(request, response);
 
 	}

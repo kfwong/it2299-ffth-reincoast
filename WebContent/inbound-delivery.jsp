@@ -146,9 +146,11 @@
 												}
 											
 										});
+						
 						jQuery.validator.setDefaults({
-							  debug: true,
-							  success: "valid"
+							  debug: false,
+							  success: "valid",
+							  
 							});
 						
 							$("#inbound-form").validate({
@@ -156,7 +158,9 @@
 								  ExpiryDate: {
 							      required: true
 							    }
+								
 							  }
+							
 							});
 						
 					});
