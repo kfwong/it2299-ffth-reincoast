@@ -8,6 +8,7 @@
 	<jsp:param value="/path/to/css2" name="css" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.css" name="css" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2-bootstrap.css" name="css" />
+	<jsp:param value="http://jquery.bassistance.de/validate/demo/site-demos.css" name="css" />
 </jsp:include>
 <!-- header.jsp -->
 
@@ -24,11 +25,6 @@
 			<ol class="breadcrumb">
 				<li class="active"><i class="icon-dashboard"></i> Creating Package</li>
 			</ol>
-			<div class="alert alert-success alert-dismissable">
-				<button type="button" class="close" data-dismiss="alert"
-					aria-hidden="true">&times;</button>
-				Transaction completed successfully. T.Code: 6000864578
-			</div>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
@@ -47,7 +43,9 @@
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Collection Center</label>
 								<div class="col-lg-4">
-							<input class="form-control" type="text" id="colCenter" name="colCenter" required/>
+							<select class="form-control" id="colCenter" class="colCenter" required>
+									<option value="">Please select an Location</option>
+								</select>
 								</div>
 						</div>
 						<div class="form-group">
@@ -94,7 +92,11 @@
 		$("#productName").select2({
 
 		});
+		$("#colCenter").select2({
+
+		});
 		getProductName();
+		getCollectionCenter();
 						$("#addRow").on('click',
 										function() {
 											
@@ -109,8 +111,22 @@
 												}
 											
 										});
-						$("#createPackage").validate();
+						
+						jQuery.validator.setDefaults({
+							  debug: true,
+							  success: "valid"
+							});
+						
+						$("#createPackage").validate({
+							  rules: {
+								  ExpiryDate: {
+							      required: true
+							    }
+							  }
+							});
+						
 					});
+		
 	
 	function getItem() {
 
@@ -151,10 +167,27 @@
 			});
 		});
 	}
+	
+	function getCollectionCenter(){
+		var type = 1;
+		$.ajax({
+			type:"POST",
+			url:"GetCollectionCenter",
+			data:{
+				type : type
+			}
+		}).done(function(data){
+			$.each($.parseJSON(data), function(){
+				$("#colCenter").append('<option value='+this.name + '>'+ this.name +' </option>');
+			});
+		});
+	}
 </script>
 <!-- footer.jsp -->
-<jsp:include page="footer.jsp">
-<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.min.js" name="js" />
+	<jsp:include page="footer.jsp">
+	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.min.js" name="js" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js" name="js" />
+	<jsp:param value="http://jquery.bassistance.de/validate/jquery.validate.js" name="js"/>
+	<jsp:param value="http://jquery.bassistance.de/validate/additional-methods.js" name="js"/>
 </jsp:include>
 <!-- footer.jsp -->

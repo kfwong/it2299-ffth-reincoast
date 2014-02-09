@@ -36,20 +36,23 @@
 					<form class="form-horizontal" id="outbound-form" role="form" method="post" action="OutboundServlet">
 						<div class="form-group">
 							<label class="col-lg-1 control-label">DeliveryDate</label>
-							<div class="col-lg-5">
-								<input class="form-control datepicker" type="text" name="deliveryDate" id="dDate" readonly required/>
+							<div class="col-lg-4">
+							<div class="input-group input-group-sm">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+								<input class="form-control datepicker" type="text" name="deliveryDate" readonly required/>
+							</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-lg-1 control-label">Collection location</label>
-							<div class="col-lg-5">
+							<div class="col-lg-4">
 								<input class="form-control" type="text" id="collect"
 									name="collectLoc" required/>
 									</div>
 							</div>										
 						<div class="form-group">
 							<label class="col-lg-1 control-label">PackageType</label>
-								<div class="col-lg-5">
+								<div class="col-lg-4">
 								<select class="form-control" id="PackageType" name=Type>
 								</select>
 								</div>	
@@ -60,7 +63,7 @@
 							</div>
 						<div class="form-group">
 							<label class="col-lg-1 control-label">ItemSearch</label>
-							<div class="col-lg-5">
+							<div class="col-lg-4">
 								<select class="form-control" id="productName" class="selectedProduct">
 									
 								</select>

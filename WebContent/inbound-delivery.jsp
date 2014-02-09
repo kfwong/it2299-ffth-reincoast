@@ -40,7 +40,10 @@
 						<div class="form-group">
 							<label class="col-lg-2 control-label">DeliveryDate</label>
 							<div class="col-lg-4">
+							<div class="input-group input-group-sm">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 								<input class="form-control datepicker" type="text" name="deliveryDate" readonly required/>
+							</div>
 							</div>
 						</div>
 						<div class="form-group">
@@ -176,7 +179,11 @@
 													+ '" readonly /></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
 													+ '"name="quantity" required/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
 													+ obj.price
-													+ '" readonly/></td><td><p><input class="form-control input-sm datepicker" type="text" style="width: 100%;" name="expiry-date" readonly/></P></td></tr>');
+													+ '" readonly/></td><td>'
+													+ '<div class="input-group input-group-sm">'
+													+ '<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>'
+													+  '<input class="form-control input-sm datepicker" type="text" style="width: 100%;" name="expiry-date" readonly required/>'
+												    +   '</div></td></tr>');
 							getDate().datepicker("refresh");
 						});
 	}
