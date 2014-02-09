@@ -55,7 +55,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="#">Self Collection Centers</a></li>
 							<li><a href="schedule-fooddrive.jsp">Food Drive Schedule</a></li>
-							<li><a href="#">Event Planner</a></li>
+							<li><a href="schedule-eventplanner.jsp">Event Planner</a></li>
 						</ul>
 					</li>
 					<li><a href="#"><i class="fa fa-tasks"></i> Analysis Report</a></li>
