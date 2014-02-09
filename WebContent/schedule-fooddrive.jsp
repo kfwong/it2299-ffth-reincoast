@@ -11,7 +11,10 @@
 <!-- header.jsp -->
 
 <!-- sidebar.jsp -->
-<jsp:include page="sidebar.jsp"></jsp:include>
+<jsp:include page="sidebar.jsp">
+	<jsp:param value="Schedules" name="active" />
+	<jsp:param value="Food Drive Schedule" name="sub-active" />
+</jsp:include>
 <!-- sidebar.jsp -->
 
 <!-- content -->
