@@ -13,12 +13,14 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <strong><br>
+                
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="VolunteerViewProfileServlet"> ${current_user.name}</a>
+                <li class="fa fa-calendar"><a href="v-schedule-eventplanner.jsp">Event Calendar</a>
                     </li>
-                    <li><a href="#services">Event Calendar</a>
+                    <li class="fa fa-user"><a href="VolunteerViewProfileServlet"> ${current_user.name}</a>
                     </li>
-                    <li><a href="MemberSignOutServlet">SIGN OUT </a>
+                    
+                    <li class="fa fa-power-off"><a href="MemberSignOutServlet">SIGN OUT </a>
                     </li>
 				 </ul>
                  </strong>

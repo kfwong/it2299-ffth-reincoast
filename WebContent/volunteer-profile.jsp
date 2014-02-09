@@ -43,9 +43,11 @@
 			<br>
 			<br>
 			<br>
+
 			<div class="page-header">
 				<h1>Profile</h1>
 			</div>
+			
 			<ol class="breadcrumb">
 				<li><a href="v-dashboard.jsp"><i class="icon-dashboard"></i>Home</a></li>
 				<li class="active">Profile</li>
