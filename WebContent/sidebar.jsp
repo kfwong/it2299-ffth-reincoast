@@ -44,7 +44,7 @@
 							<li><a href="transaction-log.jsp">Delivery Log</a></li>
 						</ul>
 					</li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-group"></i> Contacts <b class="caret"></b></a>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-phone"></i> Contacts <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="ContactServlet?type=individual">Donors - Individual</a></li>
 							<li><a href="ContactServlet?type=corporate">Donors - Corporate</a></li>
@@ -60,6 +60,13 @@
 						</ul>
 					</li>
 					<li><a href="#"><i class="fa fa-tasks"></i> Analysis Report</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users"></i> Member Management <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="member-database.jsp">Member Database</a></li>
+							<li><a href="volunteer-database.jsp">Volunteer Database</a></li>
+						
+						</ul>
+					</li>
 				</ul>
 			</small>
 		</strong>
