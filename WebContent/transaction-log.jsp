@@ -3,8 +3,7 @@
 	
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
-	<jsp:param value="/path/to/css1" name="css" />
-	<jsp:param value="/path/to/css2" name="css" />
+	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/css/jquery.dataTables.min.css" name="css" />
 </jsp:include>
 <!-- header.jsp -->
 
@@ -35,6 +34,7 @@
 					
 					</tbody>
 				</table>
+				
 			</div>
 		</div>
 	</div>
@@ -42,6 +42,6 @@
 <!-- sample-content.jsp -->
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
-	<jsp:param value="/path/to/js1" name="js" />
+	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/datatables/1.9.4/jquery.dataTables.min.js" name="js" />
 </jsp:include>
 <!-- footer.jsp -->

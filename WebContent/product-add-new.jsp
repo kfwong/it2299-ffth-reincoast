@@ -44,7 +44,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 							<label>Primary Details</label>
 							<div class="form-group pull-right" style="padding: 0px 10px 0px 10px;">
 								<div class="btn-group">
-									<button id="p_import" type="button" class="btn btn-xs btn-default" data-content="<small><i class='glyphicon glyphicon-repeat'></i>&nbsp;Hacking NTUC database...<small>" data-toggle="modal" data-placement="left" data-html="true" data-container="body" data-trigger="manual" data-target="#myModal">
+									<button id="p_import" type="button" class="btn btn-xs btn-default" data-content="<small><i class='glyphicon glyphicon-repeat'></i>&nbsp;Extracting information...<small>" data-toggle="modal" data-placement="left" data-html="true" data-container="body" data-trigger="manual" data-target="#myModal">
 										<i class="glyphicon glyphicon-import"></i> Import
 									</button>
 									<button id="p_action" type="submit" class="btn btn-xs btn-default" name="p_action" value="Submit">

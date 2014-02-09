@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	
 		<link href="css/bootstrap.css" rel="stylesheet">
     	<link href="css/sb-admin.css" rel="stylesheet">
    		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">

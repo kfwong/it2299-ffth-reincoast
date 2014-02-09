@@ -49,7 +49,7 @@ public class ProductEditServlet extends HttpServlet {
 		
 		request.setAttribute("p_category", "\""+StringUtils.join(productDao.getCategories(), "\",\"")+"\"");	
 		request.setAttribute("product", product);
-		request.setAttribute("p_audit_trails", productDao.getAuditsById(id));
+		request.setAttribute("p_audits", productDao.getAuditsById(product.getId()));
 		
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/product-edit.jsp");
 		requestDispatcher.forward(request, response);

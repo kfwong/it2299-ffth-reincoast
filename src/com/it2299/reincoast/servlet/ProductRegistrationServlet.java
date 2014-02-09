@@ -20,6 +20,7 @@ import org.apache.commons.io.FileUtils;
 
 import com.it2299.ffth.reincoast.dao.ProductDao;
 import com.it2299.ffth.reincoast.dao.ProductMetaDao;
+import com.it2299.ffth.reincoast.dto.Member;
 import com.it2299.ffth.reincoast.dto.Product;
 import com.it2299.ffth.reincoast.dto.ProductMeta;
 
@@ -78,7 +79,7 @@ public class ProductRegistrationServlet extends HttpServlet {
 		product.setDescription(request.getParameter("p_description"));
 		product.setName(request.getParameter("p_name"));
 		product.setPrice(Double.parseDouble(request.getParameter("p_price")));
-		product.setRegisteredBy("Foo Bar");
+		product.setRegisteredBy(((Member)request.getSession().getAttribute("current_user")).getName());
 		product.setStatus(request.getParameter("p_status"));
 		product.setUnitOfMeasure(request.getParameter("p_unit_of_measure"));
 		product.setWeight(Double.parseDouble(request.getParameter("p_weight")));

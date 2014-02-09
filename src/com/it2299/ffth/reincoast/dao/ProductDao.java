@@ -25,6 +25,8 @@ import org.hibernate.envers.query.AuditQuery;
 import org.hibernate.envers.query.criteria.AuditProperty;
 
 import com.it2299.ffth.reincoast.dto.Audit;
+import com.it2299.ffth.reincoast.dto.InboundLineItem;
+import com.it2299.ffth.reincoast.dto.OutboundLineItem;
 import com.it2299.ffth.reincoast.dto.Product;
 import com.it2299.ffth.reincoast.dto.ProductBatch;
 import com.it2299.ffth.reincoast.dto.ProductMeta;
@@ -147,6 +149,8 @@ public class ProductDao implements Dao<Product> {
 
 		AuditQuery query = reader.createQuery().forRevisionsOfEntity(Product.class, false, true);
 		query.add(AuditEntity.id().eq(id));
+		query.addOrder(AuditEntity.revisionProperty("timestamp").desc());
+		query.setMaxResults(10);
 
 		List<Object[]> results = query.getResultList();
 
@@ -238,6 +242,20 @@ public class ProductDao implements Dao<Product> {
 		}
 	}
 	
+	public List<ProductBatch> getProductBatches(int id){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();
+
+		Query query = session.createQuery("FROM ProductBatch WHERE productId = :id");
+		query.setInteger("id", id);
+
+		List results = query.list();
+
+		session.close();
+
+		return results;
+	}
+	
 	public String getMovementGraphData(int id){
 		String data = "";
 		
@@ -246,9 +264,10 @@ public class ProductDao implements Dao<Product> {
 
 		// Generate column with past 12 months from now, left join with data with inbound and outbound total
 		// example result:
-		// __________________________________________
+		//  _________________________________________
 		// | months | inbound_total | outbound_total |
 		// | Jan 14 | 3				| 5				 |
+		// | Feb 14 | 0				| 16			 |
 		// ....
 		Query query = session.createSQLQuery("SELECT `MONTHS`.MONTH AS MONTH, COALESCE(`INBOUNDS`.TOTAL, 0) AS INBOUND_TOTAL, COALESCE(`OUTBOUNDS`.TOTAL, 0) AS OUTBOUND_TOTAL FROM "
 				+ "("
@@ -321,8 +340,7 @@ public class ProductDao implements Dao<Product> {
 		AuditReader reader = AuditReaderFactory.get(session);
 
 		AuditQuery query = reader.createQuery().forRevisionsOfEntity(Product.class, false, true);
-		query.addOrder(AuditEntity.property("dateRegistered").desc());
-		query.setMaxResults(30);
+		query.addOrder(AuditEntity.revisionProperty("timestamp").desc());
 
 		List<Object[]> results = query.getResultList();
 
@@ -376,6 +394,45 @@ public class ProductDao implements Dao<Product> {
 		query.add(AuditEntity.revisionType().eq(revisionType));
 
 		return ((Long) query.getSingleResult()).intValue();
+	}
+	
+	public Map getLatestInbound(int id){
+		
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();// this being
+														// HibernateDaoSupport
+
+		Query query = session.createSQLQuery("SELECT QUANTITY AS `quantity`, REVTSTMP AS `date` FROM INBOUND_LINE_ITEM_AUD "
+				+ "INNER JOIN REVINFO "
+				+ "ON REVINFO.REV = INBOUND_LINE_ITEM_AUD.REV "
+				+ "WHERE INBOUND_LINE_ITEM_AUD.REV = (SELECT MAX(REV) FROM INBOUND_LINE_ITEM_AUD WHERE PRODUCT_ID = :id)");
+		query.setInteger("id", id);
+		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+		
+		Map map = (Map) query.uniqueResult();
+		
+		session.close();
+		
+		return map;
+	}
+	
+	public Map getLatestOutbound(int id){
+		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+		Session session = sessionFactory.openSession();// this being
+														// HibernateDaoSupport
+
+		Query query = session.createSQLQuery("SELECT QUANTITY AS `quantity`, REVTSTMP AS `date` FROM OUTBOUND_LINE_ITEM_AUD "
+				+ "INNER JOIN REVINFO "
+				+ "ON REVINFO.REV = OUTBOUND_LINE_ITEM_AUD.REV "
+				+ "WHERE OUTBOUND_LINE_ITEM_AUD.REV = (SELECT MAX(REV) FROM OUTBOUND_LINE_ITEM_AUD WHERE PRODUCT_ID = :id)");
+		query.setInteger("id", id);
+		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+		
+		Map map = (Map) query.uniqueResult();
+		
+		session.close();
+
+		return map;
 	}
 
 	public void increaseQuantity(int id, int increment) {

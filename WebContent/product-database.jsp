@@ -70,7 +70,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 													    	<br/>
 													    	<small><strong><i class="fa fa-truck"></i>&nbsp;&nbsp;Weight:</strong> ${product.weight }</small>
 													    	<br/>
-													    	<small><strong><i class="fa fa-archive"></i>&nbsp;&nbsp;Stock Available:</strong> ${product.weight }</small>
+													    	<small><strong><i class="fa fa-archive"></i>&nbsp;&nbsp;Stock Available:</strong> ${product.quantity }</small>
 													    </p>
 											  		</div>
 											  		<div class="col-lg-1">
@@ -221,7 +221,7 @@ label.error{font-weight: normal;font-size:12px;color:red;font-style:italic;}
 											<div class="input-group">
 										      <div class="input-group-btn">
 										        <button id="s_stock_option" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Less than <span class="caret"></span></button>
-										        <input type="hidden" name="s_stock_option" value="LESS_THAN"/>
+										        <input type="hidden" name="s_stock_option" value="${s_stock_option}"/>
 										        <ul class="s_dropdown_options dropdown-menu">
 										          <li><input type="hidden" value="LESS_THAN"/><a href="#">Less than</a></li>
 										          <li><input type="hidden" value="LESS_THAN_OR_EQUAL"/><a href="#">Less than or equal</a></li>
