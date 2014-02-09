@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
 	<jsp:param value="js/fullcalendar/fullcalendar/fullcalendar.css" name="css" />
 	<jsp:param value="js/bootstrap-datetimepicker/jquery.datetimepicker.css" name="css" />
+	<jsp:param value="js/chosen/chosen.css" name="css" />
+	<jsp:param value="js/chosen/chosen-bootstrap.css" name="css" />
 	<jsp:param value="css/schedules.css" name="css" />
 </jsp:include>
 <!-- header.jsp -->
@@ -27,6 +30,12 @@
 				<div class="form-group">
 				  <label for="title">Title</label>
 				  <input type="text" class="form-control title" id="title" name = "title" required autofocus>
+				</div>
+				<div class="form-group">
+				  <label for="contact">Contact</label>
+				  	<select class="form-control contact" id="contact" name="contact">
+
+					</select>
 				</div>
 				<div class="checkbox">
 				    <label>
@@ -78,6 +87,12 @@
 				<div class="form-group">
 				  <label for="title">Title</label>
 				  <input type="text" class="form-control title" id="title" name = "title" required autofocus>
+				</div>
+				<div class="form-group">
+				  <label for="contact">Contact</label>
+				  	<select class="form-control contact" id="contact" name="contact">
+
+					</select>
 				</div>
 				<div class="checkbox">
 				    <label>
@@ -152,6 +167,7 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
+			
 			events: "CalendarFoodDriveServlet?action=getCalendar",
 		
 			dayClick: function(date, jsEvent, view) {
@@ -160,6 +176,7 @@
 		        $(".start-date").val(date.format("YYYY-MM-DD"));
 		        $(".start").val(date.format("YYYY-MM-DD HH:mm:ss"));
 		        $(".end").val(date.add('days', 1).format("YYYY-MM-DD HH:mm:ss"));
+		        
 		        
 
 		    },
@@ -175,6 +192,10 @@
 						$(".start-date").val(moment(json.start).format("YYYY-MM-DD"));
 						$(".start").val(json.start);
 						$(".end").val(json.end);
+						
+						$('.contact option[value="' + json.contact.id + '"]').attr("selected", true);
+						$('.contact').trigger("chosen:updated");
+						
 						if(json.allDay == true){
 							$(".allDay").prop("checked", true);
 							$(".date").removeClass("hide");
@@ -199,7 +220,8 @@
 		    	        title: event.title,
 		    	        start: event.start.format("YYYY-MM-DD HH:mm:ss"),
 		    	        end: event.end.format("YYYY-MM-DD HH:mm:ss"),
-		    	        allDay:event.allDay
+		    	        allDay:event.allDay,
+		    	        contact:event.contact.id
 		    	    }
 		    	});
 
@@ -258,6 +280,23 @@
         	
             format:'Y-m-d H:i:s'
         });   
+        
+        $.ajax({
+    		type: "GET",
+    		url: "CalendarFoodDriveServlet?action=getContacts",
+    		success: function(json){
+		        
+    			$.each(json, function(index, value){
+    				 $(".contact").append('<option value="' +  value.id + '">' + value.name + ' (' + value.organization + ')' + '</option');
+    			});
+		       
+				$('.contact').trigger("chosen:updated");
+    		}
+    	});
+        
+        $('.contact').chosen({
+        	width: "100%"
+        });
 	});
 </script>
 
@@ -267,5 +306,6 @@
 	<jsp:param value="js/fullcalendar/lib/jquery-ui.custom.min.js" name="js" />
 	<jsp:param value="js/fullcalendar/fullcalendar/fullcalendar.js" name="js" />
 	<jsp:param value="js/bootstrap-datetimepicker/jquery.datetimepicker.js" name="js" />
+	<jsp:param value="js/chosen/chosen.jquery.js" name="js" />
 </jsp:include>
 <!-- footer.jsp -->

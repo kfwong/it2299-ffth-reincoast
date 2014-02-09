@@ -75,6 +75,18 @@ public class CalendarFoodDriveServlet extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				out.write(json);
 			}
+			if(action.equals("getContacts")){	
+				ContactDao cd = new ContactDao();
+				ArrayList<Contact> contactArrayList= (ArrayList<Contact>) cd.getAllByType("school");
+				contactArrayList.addAll(cd.getAllByType("scc"));
+						
+				Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+				String json = gson.toJson(contactArrayList);
+				
+				response.setContentType("application/json");
+				PrintWriter out = response.getWriter();
+				out.write(json);
+			}
 		}
 		
 	}
@@ -121,6 +133,12 @@ public class CalendarFoodDriveServlet extends HttpServlet {
 				String start = request.getParameter("start");
 				String end = request.getParameter("end");
 				String allDay = request.getParameter("allDay");
+				int contactId = Integer.parseInt(request.getParameter("contact"));
+				
+				Contact contact = new Contact();
+				
+				ContactDao cd = new ContactDao();
+				contact = cd.get(contactId);
 				
 				CalendarFoodDrive fd = new CalendarFoodDrive();
 				fd.setId(id);
@@ -128,6 +146,7 @@ public class CalendarFoodDriveServlet extends HttpServlet {
 				fd.setStart(start);
 				fd.setEnd(end);
 				fd.setAllDay(allDay);
+				fd.setContact(contact);
 				
 				CalendarFoodDriveDao dao = new CalendarFoodDriveDao();
 				dao.saveOrUpdate(fd);
