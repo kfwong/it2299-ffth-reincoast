@@ -9,6 +9,7 @@
 	<jsp:param value= "//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/0.0.11/css/bootstrap-datetimepicker.min.css" name="css" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.css" name="css" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2-bootstrap.css" name="css" />
+	<jsp:param value="http://jquery.bassistance.de/validate/demo/site-demos.css" name="css" />
 </jsp:include>
 <!-- header.jsp -->
 
@@ -33,13 +34,16 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal" role="form" method="post"
+					<form class="form-horizontal" id="inbound-form" role="form" method="post"
 						action="InBoundServlet">
 						
 						<div class="form-group">
 							<label class="col-lg-2 control-label">DeliveryDate</label>
 							<div class="col-lg-4">
-								<input class="form-control datepicker" type="text" name="deliveryDate" readonly />
+							<div class="input-group input-group-sm">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+								<input class="form-control datepicker" type="text" name="deliveryDate" readonly required/>
+							</div>
 							</div>
 						</div>
 						<div class="form-group">
@@ -55,8 +59,8 @@
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Donor Name</label>
 							<div class="col-lg-4">
-								<select class="form-control" type="text" id="Donor" name="Donor" >
-								
+								<select class="form-control" type="text" id="Donor" name="Donor" required>
+								<option value="">Please select an Donor </option>
 								</select>
 							</div>
 						</div>
@@ -143,6 +147,21 @@
 											
 										});
 						
+						jQuery.validator.setDefaults({
+							  debug: false,
+							  success: "valid",
+							  
+							});
+						
+							$("#inbound-form").validate({
+							  rules: {
+								  ExpiryDate: {
+							      required: true
+							    }
+								
+							  }
+							
+							});
 						
 					});
 	
@@ -162,10 +181,13 @@
 													+ '" readonly/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-name" value="'
 													+ obj.name
 													+ '" readonly /></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
-													+ "0"
-													+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
+													+ '"name="quantity" required/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
 													+ obj.price
-													+ '" readonly/></td><td><p><input class="form-control input-sm datepicker" type="text" style="width: 100%;" name="expiry-date" readonly/></P></td></tr>');
+													+ '" readonly/></td><td>'
+													+ '<div class="input-group input-group-sm">'
+													+ '<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>'
+													+  '<input class="form-control input-sm datepicker" type="text" style="width: 100%;" name="expiry-date" readonly required/>'
+												    +   '</div></td></tr>');
 							getDate().datepicker("refresh");
 						});
 	}
@@ -211,5 +233,7 @@
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/0.0.11/js/bootstrap-datetimepicker.min.js" name="js" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.min.js" name="js" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js" name="js" />
+	<jsp:param value="http://jquery.bassistance.de/validate/jquery.validate.js" name="js"/>
+		<jsp:param value="http://jquery.bassistance.de/validate/additional-methods.js" name="js"/>
 </jsp:include>
 <!-- footer.jsp -->

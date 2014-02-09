@@ -8,6 +8,7 @@
 	<jsp:param value="/path/to/css2" name="css" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.css" name="css" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2-bootstrap.css" name="css" />
+	<jsp:param value="http://jquery.bassistance.de/validate/demo/site-demos.css" name="css" />
 </jsp:include>
 <!-- header.jsp -->
 
@@ -24,11 +25,6 @@
 			<ol class="breadcrumb">
 				<li class="active"><i class="icon-dashboard"></i> Creating Package</li>
 			</ol>
-			<div class="alert alert-success alert-dismissable">
-				<button type="button" class="close" data-dismiss="alert"
-					aria-hidden="true">&times;</button>
-				Transaction completed successfully. T.Code: 6000864578
-			</div>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">
@@ -36,19 +32,13 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal" role="form" method="post" action="CreatePackageListServlet">
+					<form class="form-horizontal" id="createPackage" role="form" method="post" action="CreatePackageListServlet">
 						
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Package Name</label>
 							<div class="col-lg-4">
-								<input class="form-control" type="text" id="pName" name="packageName" />
+								<input class="form-control" type="text" id="pName" name="packageName" required/>
 							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-lg-2 control-label">Collection Center</label>
-								<div class="col-lg-4">
-							<input class="form-control" type="text" id="colCenter" name="colCenter" />
-								</div>
 						</div>
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Item Search</label>
@@ -88,11 +78,13 @@
 <!-- sample-content.jsp -->
 <!-- Add row function -->
 <script>
+
 	var count =0;
 	$(document).ready(function() {
 		$("#productName").select2({
 
 		});
+		
 		getProductName();
 						$("#addRow").on('click',
 										function() {
@@ -108,7 +100,22 @@
 												}
 											
 										});
+						
+						jQuery.validator.setDefaults({
+							  debug: true,
+							  success: "valid"
+							});
+						
+						$("#createPackage").validate({
+							  rules: {
+								  ExpiryDate: {
+							      required: true
+							    }
+							  }
+							});
+						
 					});
+		
 	
 	function getItem() {
 
@@ -151,8 +158,10 @@
 	}
 </script>
 <!-- footer.jsp -->
-<jsp:include page="footer.jsp">
-<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.min.js" name="js" />
+	<jsp:include page="footer.jsp">
+	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.min.js" name="js" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js" name="js" />
+	<jsp:param value="http://jquery.bassistance.de/validate/jquery.validate.js" name="js"/>
+	<jsp:param value="http://jquery.bassistance.de/validate/additional-methods.js" name="js"/>
 </jsp:include>
 <!-- footer.jsp -->

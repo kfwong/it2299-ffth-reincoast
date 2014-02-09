@@ -1,19 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- header.jsp -->
 <jsp:include page="header.jsp">
 	<jsp:param value="js/fullcalendar/fullcalendar/fullcalendar.css" name="css" />
+	<jsp:param value="js/bootstrap-datetimepicker/jquery.datetimepicker.css" name="css" />
+	<jsp:param value="js/chosen/chosen.css" name="css" />
+	<jsp:param value="js/chosen/chosen-bootstrap.css" name="css" />
 	<jsp:param value="css/schedules.css" name="css" />
 </jsp:include>
 <!-- header.jsp -->
 
 <!-- sidebar.jsp -->
-<jsp:include page="sidebar.jsp"></jsp:include>
+<jsp:include page="sidebar.jsp">
+	<jsp:param value="Schedules" name="active" />
+	<jsp:param value="Food Drive Schedule" name="sub-active" />
+</jsp:include>
 <!-- sidebar.jsp -->
 
 <!-- content -->
 <div id="page-wrapper">
 	<h1>Schedule <small>Food Drive</small></h1>
-	
 	<!-- Modal -->
 	<div class="modal view-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
@@ -28,6 +34,12 @@
 				  <label for="title">Title</label>
 				  <input type="text" class="form-control title" id="title" name = "title" required autofocus>
 				</div>
+				<div class="form-group">
+				  <label for="contact">Contact</label>
+				  	<select class="form-control contact" id="contact" name="contact">
+
+					</select>
+				</div>
 				<div class="checkbox">
 				    <label>
 				      <input class="allDay" type="checkbox" name="allDay" value="true" checked> All day event
@@ -36,17 +48,20 @@
 				<div class="date">
 					<div class="form-group">
 						<label for="start-date">Start date</label>
-					  	<input type="text" class="form-control start-date" id="start-date" name = "start">
+					  	<input type="text" class="form-control start-date" id="start-date" required>
 					</div>
 				</div>
 				<div class="date-time hide">
 					<div class="form-group">
 						<label for="start">Start time</label>
-					  	<input type="text" class="form-control start" id="start" name = "start">
+					  	<input type="text" class="form-control start" id="start" name = "start" required>
+					  	<span class="add-on">
+						  <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+						</span>
 					</div>
 					<div class="form-group">
 						<label for="end">End time</label>
-					  	<input type="text" class="form-control end" id="end" name = "end">
+					  	<input type="text" class="form-control end" id="end" name = "end" required>
 					</div>
 				</div>
 		      </div>
@@ -74,20 +89,37 @@
 		      <div class="modal-body">
 				<div class="form-group">
 				  <label for="title">Title</label>
-				  <input type="text" class="form-control" id="title" name = "title" required placeholder="Example: Serangoon S.C.C.">
+				  <input type="text" class="form-control title" id="title" name = "title" required autofocus>
 				</div>
 				<div class="form-group">
+				  <label for="contact">Contact</label>
+				  	<select class="form-control contact" id="contact" name="contact">
 
-				  <input type="hidden" class="form-control start" id="start" name = "start">
-				</div>
-				<div class="form-group">
-
-				  <input type="hidden" class="form-control end" id="end" name = "end" value="">
+					</select>
 				</div>
 				<div class="checkbox">
 				    <label>
-				      <input type="checkbox" name="allDay" value="true" checked> All day event
+				      <input class="allDay" type="checkbox" name="allDay" value="true" checked> All day event
 				    </label>
+				</div>
+				<div class="date">
+					<div class="form-group">
+						<label for="start-date">Start date</label>
+					  	<input type="text" class="form-control start-date" id="start-date" required>
+					</div>
+				</div>
+				<div class="date-time hide">
+					<div class="form-group">
+						<label for="start">Start time</label>
+					  	<input type="text" class="form-control start" id="start" name = "start" required>
+					  	<span class="add-on">
+						  <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+						</span>
+					</div>
+					<div class="form-group">
+						<label for="end">End time</label>
+					  	<input type="text" class="form-control end" id="end" name = "end" required>
+					</div>
 				</div>
 		      </div>
 		      <div class="modal-footer">
@@ -138,13 +170,16 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
+			
 			events: "CalendarFoodDriveServlet?action=getCalendar",
 		
 			dayClick: function(date, jsEvent, view) {
 				
 		        $(".create-modal").modal();
+		        $(".start-date").val(date.format("YYYY-MM-DD"));
 		        $(".start").val(date.format("YYYY-MM-DD HH:mm:ss"));
 		        $(".end").val(date.add('days', 1).format("YYYY-MM-DD HH:mm:ss"));
+		        
 		        
 
 		    },
@@ -157,17 +192,66 @@
 						$(".view-modal").modal();
 						$(".id").val(json.id);
 						$(".title").val(json.title);
+						$(".start-date").val(moment(json.start).format("YYYY-MM-DD"));
 						$(".start").val(json.start);
 						$(".end").val(json.end);
+						
+						$('.contact option[value="' + json.contact.id + '"]').attr("selected", true);
+						$('.contact').trigger("chosen:updated");
+						
+						if(json.allDay == true){
+							$(".allDay").prop("checked", true);
+							$(".date").removeClass("hide");
+							$(".date-time").addClass("hide");
+						}
+						else{
+							$(".allDay").prop("checked", false);
+							$(".date-time").removeClass("hide");
+							$(".date").addClass("hide");
+						}	
 		    		}
 		    	});
+		    },
+		    
+		    eventDrop: function(event, revertFunc) {
+		    	$.ajax({
+		    		type: "POST",
+		    		url: "CalendarFoodDriveServlet",
+		    		data: {
+		    			action:"edit",
+		    	        id: event.id,
+		    	        title: event.title,
+		    	        start: event.start.format("YYYY-MM-DD HH:mm:ss"),
+		    	        end: event.end.format("YYYY-MM-DD HH:mm:ss"),
+		    	        allDay:event.allDay,
+		    	        contact:event.contact.id
+		    	    }
+		    	});
+
 		    }
+		});   
+		
+		$(".allDay").on("click", function(){
+		  	$(".date, .date-time").toggleClass("hide");
 		});
 		
-        $(".allDay").on("click", function(){
-        	$(".date, .date-time").toggleClass("hide");
-        });
-        
+		$(".confirm-create-button, .confirm-edit-button").on("click", function(event){
+		  	var button = event.target;
+		  	var form = $(button).parents("form");
+		  	var allDay = $(form).find(".allDay");
+		  	var startDate = $(form).find(".start-date");
+		  	var start = $(form).find(".start");
+		  	var end  = $(form).find(".end");
+		  	
+		  	if(allDay.prop("checked")){
+		  		var date = moment($(startDate).val());
+		  		start.val(date.format("YYYY-MM-DD HH:mm:ss"));
+		  		end.val(date.add('days', 1).format("YYYY-MM-DD HH:mm:ss"));
+		  	}
+		  	
+		 	$(this).trigger("click");
+		});
+		
         $(".delete-button").on("click", function(){
         	$(".delete-modal").modal();
  
@@ -189,6 +273,33 @@
         	$('.view-modal').css('-o-transition', 'brightness(100%)');
         });
         
+		$('.start-date').datetimepicker({
+        	
+            format:'Y-m-d',
+            timepicker: false,
+        }); 
+        
+        $('.start, .end').datetimepicker({
+        	
+            format:'Y-m-d H:i:s'
+        });   
+        
+        $.ajax({
+    		type: "GET",
+    		url: "CalendarFoodDriveServlet?action=getContacts",
+    		success: function(json){
+		        
+    			$.each(json, function(index, value){
+    				 $(".contact").append('<option value="' +  value.id + '">' + value.name + ' (' + value.organization + ')' + '</option');
+    			});
+		       
+				$('.contact').trigger("chosen:updated");
+    		}
+    	});
+        
+        $('.contact').chosen({
+        	width: "100%"
+        });
 	});
 </script>
 
@@ -197,5 +308,7 @@
 	<jsp:param value="js/fullcalendar/lib/moment.min.js" name="js" />
 	<jsp:param value="js/fullcalendar/lib/jquery-ui.custom.min.js" name="js" />
 	<jsp:param value="js/fullcalendar/fullcalendar/fullcalendar.js" name="js" />
+	<jsp:param value="js/bootstrap-datetimepicker/jquery.datetimepicker.js" name="js" />
+	<jsp:param value="js/chosen/chosen.jquery.js" name="js" />
 </jsp:include>
 <!-- footer.jsp -->

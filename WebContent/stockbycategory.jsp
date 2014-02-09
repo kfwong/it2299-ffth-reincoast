@@ -91,7 +91,15 @@
 						</h4>
 						<span>Displaying stock status.</span>
 					</div>
-					
+					<table class="table ">
+						<tbody>
+							<tr>
+								<td class="col-lg-4">Currently Available</td>
+								<td>${totalQuan}</td>
+							</tr>
+							
+						</tbody>
+					</table>
 					<div class="panel-footer">
 						<h4><label>Stock Graph</label></h4>
 						
@@ -122,31 +130,33 @@
 	<input type="hidden" name="category" id="hiddenType" />
 </form>
 <script>
-
+var category = <%= session.getAttribute( "category" ) %>
 	$(document).ready(function(){
 		
+		alert(itemType);
 		$("#ViewType").on('click', function(){
-			var itemType = $('#category :selected').val();
-			var page = 1;
 			
+			var page = 1;
+			category = $('#hiddenType').val(itemType);
 			$('#hiddenPage').val(page);
 			$('#hiddenType').val(itemType);
 			$('#hiddenForm').submit();
+			
 		});
 		
 		$("#category").select2({
-			
+
 		});
 		getCategory();
+		${sel_value};
 		$('#pagination').bootstrapPaginator({
-			
 			bootstrapMajorVersion: 3,
 			size: 'normal',
+			category: category.val(), 
 			currentPage: "${current_page}",
-			totalPages: Math.ceil(${(total_item)/5}),
-			pageUrl: function( type, page, current){
-				
-				 return "${s_url}"+page;
+			totalPages: Math.ceil(${(total_item)/4}),
+			pageUrl: function( type, page, current, category){
+				 return "${s_url}"+page + "&${url_type}" + category;
 			}
 		});
 		

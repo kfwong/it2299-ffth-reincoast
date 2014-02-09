@@ -43,11 +43,11 @@
 			<tbody class="table-new-contact">
 				<c:forEach var="contact" items="${contactArray}">
 				<tr class="table-row">
-					<td class="table-column-name"><input type="text" class="form-control" name="name" value="${contact.name}" ></td>
-					<td class="table-column-address"><input type="text" class="form-control" name="address" value="${contact.address}" ></td>
-					<td class="table-column-number"><input type="text" class="form-control" name="number" value="${contact.contactNumber}" ></td>
-					<td class="table-column-email"><input type="text" class="form-control" name="email" value="${contact.email}" ></td>	
-					<td class="table-column-organization"><input type="text" class="form-control" name="organization" value="${contact.organization}"></td>
+					<td class="table-column-name"><input type="text" class="form-control" name="name" value="${contact.name}" required></td>
+					<td class="table-column-address"><input type="text" class="form-control" name="address" value="${contact.address}" required></td>
+					<td class="table-column-number"><input type="text" class="form-control" name="number" value="${contact.contactNumber}" required></td>
+					<td class="table-column-email"><input type="text" class="form-control" name="email" value="${contact.email}" required></td>	
+					<td class="table-column-organization"><input type="text" class="form-control" name="organization" value="${contact.organization}" required></td>
 					<input type="hidden" name="type" value="scc"/>
 					<input class="id" type="hidden" name="id" value="${contact.id}">
 				</tr>
@@ -75,11 +75,11 @@
 		$(".new-contact-button").on("click", function(){
 			$(".table-new-contact").prepend(
 				'<tr>'+
-				'<td class="table-column-name"><input type="text" class="form-control" name="name"></td>'+
-				'<td class="table-column-address"><input type="text" class="form-control" name="address"></td>'+
-				'<td class="table-column-number"><input type="text" class="form-control" name="number"></td>' +
-				'<td class="table-column-email"><input type="text" class="form-control" name="email"></td>' +
-				'<td class="table-column-organization"><input type="text" class="form-control" name="organization"></td>' +
+				'<td class="table-column-name"><input type="text" class="form-control" name="name" required></td>'+
+				'<td class="table-column-address"><input type="text" class="form-control" name="address" required></td>'+
+				'<td class="table-column-number"><input type="text" class="form-control" name="number" required></td>' +
+				'<td class="table-column-email"><input type="text" class="form-control" name="email" required></td>' +
+				'<td class="table-column-organization"><input type="text" class="form-control" name="organization" required></td>' +
 				'<input class="id" type="hidden" name="id" value="-1">' +
 				'<input type="hidden" name="type" value="scc"' +
 				'</tr>'

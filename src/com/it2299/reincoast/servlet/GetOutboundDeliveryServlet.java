@@ -64,9 +64,19 @@ public class GetOutboundDeliveryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+		int page = Integer.parseInt(request.getParameter("page"));
 		OutboundDeliveryDao outboundDao = new OutboundDeliveryDao();
-		List<OutboundDelivery> outboundList = outboundDao.getAll();
+		
+		request.setAttribute("total_item", outboundDao.getAll().size());
+		if(page != 1){
+			request.setAttribute("current_page", page);
+			request.setAttribute("s_url", "http://localhost:8080/j2EE-it2299-ffth-reincoast/GetOutboundDeliveryServlet?page=");
+		}else{
+			request.setAttribute("current_page", 1);
+			request.setAttribute("s_url", "http://localhost:8080/j2EE-it2299-ffth-reincoast/GetOutboundDeliveryServlet?page=");
+		}
+		
+		List<OutboundDelivery> outboundList = outboundPaginator(page);
 		request.setAttribute("outboundList", outboundList);
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/outbound-record.jsp");
 		requestDispatcher.forward(request, response);

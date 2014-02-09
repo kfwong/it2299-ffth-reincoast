@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,7 +54,7 @@ public class CreatePackageListServlet extends HttpServlet {
 		PackingDao pListDao = new PackingDao();
 		pListDao.saveOrUpdate(packing);
 		
-		PrintWriter out = response.getWriter();
-		out.print("ok");
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/outbound-delivery.jsp");
+		requestDispatcher.forward(request, response);
 	}
 }
