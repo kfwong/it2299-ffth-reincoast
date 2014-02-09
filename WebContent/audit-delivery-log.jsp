@@ -7,11 +7,20 @@
 	<jsp:param value="css/datatables.css" name="css" />
 </jsp:include>
 <!-- header.jsp -->
+<style>
+.INBOUND{
+background-color:rgb(91, 192, 222);
+}
+
+.OUTBOUND{
+background-color:rgb(210, 50, 45);
+}
+</style>
 
 <!-- sidebar.jsp -->
 <jsp:include page="sidebar.jsp">
 	<jsp:param value="Audit" name="active" />
-	<jsp:param value="Product Log" name="sub-active" />
+	<jsp:param value="Delivery Log" name="sub-active" />
 </jsp:include>
 <!-- sidebar.jsp -->
 
@@ -44,8 +53,10 @@
 				<thead>
 					<tr>
 						<th class="col-lg-1">Operation</th>
+						<th class="col-lg-1">Delivery Id</th>
 						<th class="col-lg-1">Code</th>
 						<th>Product Name<i class="icon-sort"></i></th>
+						<th>Quantity</th>
 						<th class="col-lg-3">Date Authored<i class="icon-sort"></i></th>
 						<th class="col-lg-2">Options</th>
 					</tr>
@@ -53,10 +64,12 @@
 				<tbody id="tran-list">
 					<c:forEach items="${audits}" var="audit">
 					   <tr>
-					   	<td><span class="badge badge-${fn:toLowerCase(audit.operation) }">${audit.operation}</span></td>
-					   	<td>${audit.entity.code}</td>
-					   	<td>${audit.entity.name}</td>
-					   	<td><i class="fa fa-calendar" title="${audit.date}" style="cursor:pointer;"></i>&nbsp;<span class="format-date"><fmt:formatDate pattern="yyyy-MM-dd'T'HH:mm:ss" value="${audit.date}" /></span>&nbsp;<span style="color:#aaa;">authored by</span>&nbsp;${audit.entity.registeredBy }</td>
+					   	<td><span class="badge ${audit.type}">${audit.type}</span></td>
+					   	<td>${audit.id}</td>
+					   	<td>${audit.code}</td>
+					   	<td>${audit.name}</td>
+					   	<td>${audit.quantity }</td>
+					   	<td><i class="fa fa-calendar" title="${audit.date}" style="cursor:pointer;"></i>&nbsp;<span class="format-date">${audit.date}</span></td>
 					   	<td><a href="AuditProductSnapshot?entityId=${audit.entity.id}&revisionId=${audit.revisionId}">View Snapshot</a></td>
 					   </tr>
 					</c:forEach>
@@ -79,7 +92,9 @@
 <script>
 $(document).ready(function(){
 	$('.format-date').each(function (id, element) {
-		$(element).text($.format.prettyDate($(element).text()));
+		var date = parseInt($(element).text());
+		$(element).text($.format.prettyDate(new Date(date)));
+		console.log($(element).closest('td').children('i').attr('title', $.format.date(new Date(date), "dd MMM yyyy HH:mm:ss")));
 	});
 	
 	$('.table').dataTable({

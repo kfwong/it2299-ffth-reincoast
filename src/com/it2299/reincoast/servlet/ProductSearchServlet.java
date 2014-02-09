@@ -56,9 +56,11 @@ public class ProductSearchServlet extends HttpServlet {
 			String weightOption = request.getParameter("s_weight_option");
 			Double weight = tryParseDouble(request.getParameter("s_weight"));
 			Double weightTo = tryParseDouble(request.getParameter("s_weight_to"));
+			String stockOption = request.getParameter("s_stock_option");
+			Integer stock = tryParseInteger(request.getParameter("s_stock"));
+			Integer stockTo = tryParseInteger(request.getParameter("s_stock_to"));
 			String[] metaKeys = request.getParameterValues("s_meta_key");
 			String[] metaValues = request.getParameterValues("s_meta_value");
-			// String stockOption = request.getParameter("s_stock_option");
 			// double stock =
 			// Double.parseDouble(request.getParameter("s_stock"));
 			// double stockTo =
@@ -79,6 +81,9 @@ public class ProductSearchServlet extends HttpServlet {
 			request.setAttribute("s_weight_option", weightOption);
 			request.setAttribute("s_weight", weight);
 			request.setAttribute("s_weight_to", weightTo);
+			request.setAttribute("s_stock_option", stockOption);
+			request.setAttribute("s_stock", stock);
+			request.setAttribute("s_stock_to", stockTo);
 			request.setAttribute("s_meta_key", metaKeys);
 			request.setAttribute("s_meta_value", metaValues);
 
@@ -199,6 +204,40 @@ public class ProductSearchServlet extends HttpServlet {
 			} else {
 				weightQuery = queryBuilder.all().createQuery();
 			}
+			
+			// stock
+			org.apache.lucene.search.Query stockQuery = null;
+			if (stock != null) {
+				switch (stockOption) {
+				case "LESS_THAN":
+					stockQuery = queryBuilder.range().onField("quantity").below(stock).excludeLimit().createQuery();
+					break;
+				case "LESS_THAN_OR_EQUAL":
+					stockQuery = queryBuilder.range().onField("quantity").below(stock).createQuery();
+					break;
+				case "EQUAL":
+					stockQuery = queryBuilder.range().onField("quantity").from(stock).to(stock).createQuery();
+					break;
+				case "MORE_THAN_OR_EQUAL":
+					stockQuery = queryBuilder.range().onField("quantity").above(stock).createQuery();
+					break;
+				case "MORE_THAN":
+					stockQuery = queryBuilder.range().onField("quantity").above(stock).excludeLimit().createQuery();
+					break;
+				case "BETWEEN":
+					if (stockTo != null) {
+						stockQuery = queryBuilder.range().onField("quantity").from(stock).to(stockTo).createQuery();
+					} else {
+						stockQuery = queryBuilder.all().createQuery();
+					}
+					break;
+				default:
+					stockQuery = queryBuilder.all().createQuery();
+					break;
+				}
+			} else {
+				stockQuery = queryBuilder.all().createQuery();
+			}
 
 			// additional data (metaKey)
 			List<org.apache.lucene.search.Query> metaKeyQueries = new ArrayList<org.apache.lucene.search.Query>();
@@ -247,7 +286,7 @@ public class ProductSearchServlet extends HttpServlet {
 			}
 
 			// combined criteria			
-			MustJunction partialJunction = queryBuilder.bool().must(keywordQuery).must(categoryQuery).must(priceQuery).must(weightQuery);
+			MustJunction partialJunction = queryBuilder.bool().must(keywordQuery).must(categoryQuery).must(priceQuery).must(weightQuery).must(stockQuery);
 			for(org.apache.lucene.search.Query metaKeyQuery : metaKeyQueries){
 				partialJunction.must(metaKeyQuery);
 			}
@@ -297,6 +336,15 @@ public class ProductSearchServlet extends HttpServlet {
 	private Double tryParseDouble(String value) {
 		try {
 			return Double.parseDouble(value);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	
+	private Integer tryParseInteger(String value) {
+		try {
+			return Integer.parseInt(value);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return null;

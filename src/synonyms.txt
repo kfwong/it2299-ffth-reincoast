@@ -19,7 +19,7 @@ October, Oct
 Saturday, Sabbatum, Sat
 Spain, Kingdom of Spain, Espana
 Sunday, Lord's Day, Dominicus, Sun
-Thursday, Th
+Thursday, Th, Thu
 United Kingdom, UK, U.K., Britain, United Kingdom of Great Britain and Northern Ireland, Great Britain
 United States, United States of America, the States, US, U.S., USA, U.S.A.
 Wednesday, Midweek, Wed

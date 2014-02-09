@@ -1,10 +1,12 @@
 package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,6 +25,7 @@ import org.hibernate.envers.query.AuditQuery;
 
 import com.it2299.ffth.reincoast.dao.ProductDao;
 import com.it2299.ffth.reincoast.dto.Product;
+import com.it2299.ffth.reincoast.dto.ProductBatch;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 
 /**
@@ -69,10 +72,24 @@ public class ProductViewServlet extends HttpServlet {
 			request.setAttribute("p_audits", productDao.getAuditsById(product.getId()));
 			request.setAttribute("p_movement_graph_data", productDao.getMovementGraphData(product.getId()));
 			request.setAttribute("p_audits_past_30_days", productDao.getAuditsById(product.getId(), date));
-			
-			System.out.println(productDao.getInboundDeliveryAuditsTotal(date));
-			//request.setAttribute("now", new Date());
-			//request.setAttribute("past", new Date(new Date().getTime() - 86400000));
+			request.setAttribute("product_batches", productDao.getProductBatches(product.getId()));
+
+			Map latestInbound = productDao.getLatestInbound(product.getId());
+			Map latestOutbound = productDao.getLatestOutbound(product.getId());
+
+			try {
+				request.setAttribute("p_latest_inbound_quantity", latestInbound.get("quantity"));
+				request.setAttribute("p_latest_inbound_date", new Date(((BigInteger) latestInbound.get("date")).longValue()));
+			} catch (Exception ex) {
+				// none existence
+			}
+
+			try {
+				request.setAttribute("p_latest_outbound_quantity", latestOutbound.get("quantity"));
+				request.setAttribute("p_latest_outbound_date", new Date(((BigInteger) latestOutbound.get("date")).longValue()));
+			} catch (Exception ex) {
+				// none existence
+			}
 
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/product-view.jsp");
 			requestDispatcher.forward(request, response);

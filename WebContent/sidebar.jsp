@@ -39,9 +39,8 @@
 					</li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-paste"></i> Audit <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="transaction-overview.jsp">Overview</a></li>
 							<li><a href="AuditProductLog">Product Log</a></li>
-							<li><a href="transaction-log.jsp">Delivery Log</a></li>
+							<li><a href="AuditDeliveryLog">Delivery Log</a></li>
 						</ul>
 					</li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-phone"></i> Contacts <b class="caret"></b></a>

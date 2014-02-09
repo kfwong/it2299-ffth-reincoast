@@ -54,7 +54,7 @@
 								</div>
 							</div>
 						</h4>
-						
+						<p>General information about this product.</p>
 						<div class="row">
 							<div class="col-lg-9">
 								<div class="form-group">
@@ -165,6 +165,7 @@
 								</div>
 							</div>
 						</h4>
+						<p>User defined data, key & value pairs that belongs to this product.</p>
 					</div>
 					<table id="jspdf-p-meta-fields" class="table" style="border:none;background-color:rgb(245, 245, 245);">
 						<thead>
@@ -174,6 +175,9 @@
 							</tr>
 						</thead>
 						<tbody id="p_meta_fields">
+							<c:if test="${empty product.productMetas}">
+								<tr><td colspan="2">No records found.</td></tr>
+							</c:if>
 							<c:forEach items="${product.productMetas}" var="productMeta">
 								<tr>
 									<td class="col-sm-3" style="border:none;"><strong>${productMeta.metaKey}</strong></td>
@@ -182,6 +186,43 @@
 							</c:forEach>
 						</tbody>
 					</table>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-body" style="padding-bottom:0px;">
+						<h4>
+							<label>Expiry Dates</label>
+						</h4>
+						<p>Expiry dates that are associated with this product.</p>
+					</div>
+					<table id="jspdf-p-batches" class="table" style="border:none;background-color:rgb(245, 245, 245);">
+						<thead>
+							<tr>
+								<th>Expiry Date</th>
+								<th>Quantity</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${empty product_batches}">
+								<tr><td colspan="2">No records found.</td></tr>
+							</c:if>
+							<c:forEach items="${product_batches}" var="productBatch">
+								<tr>
+									<td class="col-sm-3" style="border:none;"><fmt:formatDate pattern="dd-MMM-yyyy" value="${productBatch.expiryDate}" /></td>
+									<td style="border:none;">${productBatch.quantity}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h4>
+							<label>Email Alerts</label>
+						</h4>
+					    <p><i class="fa fa-check-square-o"></i> Send me an email when this product information is being modified.</p>
+					    <p><i class="fa fa-square-o"></i> Send me an email when this product is low in stock.</p>
+					    <p><i class="fa fa-check-square-o"></i> Send me an email when there are stock movement.</p>
+					</div>
 				</div>
 			</div>
 			<div class="col-lg-5">
@@ -196,23 +237,13 @@
 						<tbody>
 							<tr>
 								<td class="col-lg-4">Currently Available</td>
-								<td>${product.quantity }</td>
+								<td>${product.quantity } units</td>
 								<td>&nbsp;</td>
-							</tr>
-							<tr>
-								<td class="col-lg-4">Last Inbound</td>
-								<td>34</td>
-								<td><i class="fa fa-calendar"></i>&nbsp;Fri Dec 20 03:14:34 SGT 2013</td>
-							</tr>
-							<tr>
-								<td class="col-lg-4">Last Outbound</td>
-								<td>34</td>
-								<td><i class="fa fa-calendar"></i>&nbsp;Fri Dec 20 03:14:34 SGT 2013</td>
 							</tr>
 						</tbody>
 					</table>
 					<div class="panel-footer">
-						<h4><label>Stock Graph</label></h4>
+						<h4><label>Stock Changes Graph</label></h4>
 						<div id="morris-stock-graph"></div>
 					</div>
 				</div>
@@ -226,44 +257,22 @@
 					</div>
 					<table class="table">
 						<tbody>
-							<tr style="padding-bottom:5px;">
-								<td class="col-lg-1"><span class="badge">INBOUND</span></td>
-								<td><i class="fa fa-calendar"></i>&nbsp;Fri Dec 20 03:14:34 SGT 2013</td>
+							<tr>
+								<td class="col-lg-4">Last Inbound</td>
+								<td>${p_latest_inbound_quantity} units</td>
+								<td><c:if test="${not empty p_latest_inbound_date}"><i class="fa fa-calendar"></i>&nbsp;${p_latest_inbound_date}</c:if></td>
 							</tr>
-							<tr style="padding-bottom:5px;">
-								<td class="col-lg-1"><span class="badge">INBOUND</span></td>
-								<td><i class="fa fa-calendar"></i>&nbsp;Fri Dec 20 03:14:34 SGT 2013</td>
-							</tr>
-							<tr style="padding-bottom:5px;">
-								<td class="col-lg-1"><span class="badge">OUTBOUND</span></td>
-								<td><i class="fa fa-calendar"></i>&nbsp;Fri Dec 20 03:14:34 SGT 2013</td>
+							<tr>
+								<td class="col-lg-4">Last Outbound</td>
+								<td>${p_latest_outbound_quantity} units</td>
+								<td><c:if test="${not empty p_latest_outbound_date}"><i class="fa fa-calendar"></i>&nbsp;${p_latest_outbound_date}</c:if></td>
 							</tr>
 						</tbody>
 					</table>
 					<div class="panel-footer">
-						<h4><label>Movement Graph</label></h4>
+						<h4><label>Inbound/Outbound Distribution Graph</label></h4>
 						<div id="holder"></div>
 					</div>
-				</div>
-				
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<h4>
-							<label>Modification Log</label>
-						</h4>
-						<span>Modification history of primary details of this product.</span>
-					</div>
-					<table class="table">
-						<tbody>
-							<c:forEach items="${p_audits}" var="p_audit">
-								<tr style="padding-bottom:5px;">
-									<td class="col-lg-1"><span class="badge">${p_audit.operation}</span></td>
-									<td><span class="format-date"><fmt:formatDate pattern="yyyy-MM-dd'T'HH:mm:ss" value="${p_audit.date}" /></span>&nbsp;<i class="fa fa-calendar" title="${p_audit.date}" style="cursor:pointer;"></i></td>
-									<td><a class="audit" href="#" data-revision-id="${p_audit.revisionId }" data-poload="TestServlet">View Details</a></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
 				</div>
 			</div>
 		</div>
@@ -271,36 +280,7 @@
 </div>
 	<!-- sample-content.jsp -->
 	<script>
-	$(document).ready(function(){		
-		$('.format-date').each(function (id, element) {
-			$(element).text($.format.prettyDate($(element).text()));
-		});
-		
-		$('.audit').on('click', function(event){
-			event.preventDefault();
-			var target = $(this);
-			
-			clearTimeout(window.timer);
-			window.timer=setTimeout(function(){
-				$.get(target.data('poload'), {
-					entityId: ${product.id},
-					revisionId: target.data("revision-id")
-				}).done(function(data) {
-					var audit = $.parseJSON(data);
-			    	target.popover({
-				    	html: true,
-				    	placement: 'left',
-				    	trigger: 'hover',
-				    	container: 'body',
-				    	content: "<label>"+audit.name+"</label>"+
-				    		"<p><small>"+audit.description+"</small></p>"+
-				    		"<p><small><strong>Price</strong>: "+audit.price+"</small></p>"+
-				    		"<p><small><strong>weight</strong>: "+audit.weight+"</small></p>"+
-				    		"<p><small><strong>Category</strong>: "+audit.category+"</small></p>"
-				    }).popover('show');
-			    });
-			}, 500);
-		});
+	$(document).ready(function(){
 		
 		$('#p_add_meta_field').on("click", function(e){
 			$('#p_meta_fields').append(

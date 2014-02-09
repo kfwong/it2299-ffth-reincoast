@@ -9,6 +9,12 @@
 </div>
 
 <script src="js/bootstrap.js"></script>
+
+<!-- 
+<script src="js/tablesorter/jquery.tablesorter.js"></script>
+<script src="js/tablesorter/tables.js"></script>
+-->
+
 <%
 String[] js = request.getParameterValues("js");
 for (String jss : js) {
