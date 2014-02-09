@@ -20,7 +20,9 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.it2299.ffth.reincoast.dao.CalendarFoodDriveDao;
+import com.it2299.ffth.reincoast.dao.ContactDao;
 import com.it2299.ffth.reincoast.dto.CalendarFoodDrive;
+import com.it2299.ffth.reincoast.dto.Contact;
 
 /**
  * Servlet implementation class CalendarFoodDriveServlet
@@ -91,6 +93,12 @@ public class CalendarFoodDriveServlet extends HttpServlet {
 				String start = request.getParameter("start");
 				String end = request.getParameter("end");
 				String allDay = request.getParameter("allDay");
+				int contactId = Integer.parseInt(request.getParameter("contact"));
+				
+				Contact contact = new Contact();
+				
+				ContactDao cd = new ContactDao();
+				contact = cd.get(contactId);
 				
 				if(allDay != null && allDay.equals(true)){
 					
@@ -101,6 +109,7 @@ public class CalendarFoodDriveServlet extends HttpServlet {
 				fd.setStart(start);
 				fd.setEnd(end);
 				fd.setAllDay(allDay);
+				fd.setContact(contact);
 				
 				CalendarFoodDriveDao dao = new CalendarFoodDriveDao();
 				dao.saveOrUpdate(fd);
