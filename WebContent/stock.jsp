@@ -91,15 +91,7 @@
 						</h4>
 						<span>Displaying stock status.</span>
 					</div>
-					<table class="table ">
-						<tbody>
-							<tr>
-								<td class="col-lg-4">Currently Available</td>
-								<td>${totalQuan}</td>
-							</tr>
-							
-						</tbody>
-					</table>
+					
 					<div class="panel-footer">
 						<h4><label>Stock Graph</label></h4>
 						
@@ -147,11 +139,13 @@
 		});
 		getCategory();
 		$('#pagination').bootstrapPaginator({
+			
 			bootstrapMajorVersion: 3,
 			size: 'normal',
 			currentPage: "${current_page}",
-			totalPages: Math.ceil(${(total_item)/4}),
+			totalPages: Math.ceil(${(total_item)/5}),
 			pageUrl: function( type, page, current){
+				
 				 return "${s_url}"+page;
 			}
 		});

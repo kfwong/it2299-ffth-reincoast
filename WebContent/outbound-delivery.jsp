@@ -8,6 +8,7 @@
 	<jsp:param value="/path/to/css2" name="css" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.css" name="css" />
 	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2-bootstrap.css" name="css" />
+	<jsp:param value="http://jquery.bassistance.de/validate/demo/site-demos.css" name="css" />
 </jsp:include>
 <!-- header.jsp -->
 
@@ -32,18 +33,18 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal" role="form" method="post" action="OutboundServlet">
+					<form class="form-horizontal" id="outbound-form" role="form" method="post" action="OutboundServlet">
 						<div class="form-group">
 							<label class="col-lg-1 control-label">DeliveryDate</label>
 							<div class="col-lg-5">
-								<input class="form-control datepicker" type="text" name="deliveryDate" readonly />
+								<input class="form-control datepicker" type="text" name="deliveryDate" id="dDate" readonly required/>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-lg-1 control-label">Collectionlocation</label>
+							<label class="col-lg-1 control-label">Collection location</label>
 							<div class="col-lg-5">
 								<input class="form-control" type="text" id="collect"
-									name="collectLoc" />
+									name="collectLoc" required/>
 									</div>
 							</div>										
 						<div class="form-group">
@@ -83,14 +84,14 @@
 								</tbody>
 							</table>
 						</div>
-					</form>
+					
 					<div id="notice">
 						<div class="alert alert-success alert-dismissable">
-							<button type="button" class="close" data-dismiss="alert"
-								aria-hidden="true">&times;</button>
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 							Please add Product
 						</div>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -107,6 +108,7 @@
 
 	$(document).ready(function() {
 		getDate();
+		
 		$("#PackageType").select2({
 
 		});
@@ -115,6 +117,7 @@
 
 		});
 		getProductName();
+		getPackageName();
 		
 		$("#addItem").on('click', function() {
 			
@@ -129,7 +132,7 @@
 					count++;
 					$(document).scrollTop($(document).height());
 				}
-			
+				
 		});
 		$("#addPackage").on('click', function() {
 			if (count == 0) {
@@ -145,6 +148,20 @@
 			}
 
 		});
+		jQuery.validator.setDefaults({
+			  debug: true,
+			  success: "valid"
+			});
+		
+			$("#outbound-form").validate({
+			  rules: {
+				  ExpiryDate: {
+			      required: true
+			    }
+			  }
+			});
+		
+		
 	});
 	function getPackageItem() {
 		var packID = $("#PackageType option:selected").val();
@@ -157,15 +174,12 @@
 				}).done(function(data) {
 							$.each($.parseJSON(data),function() {
 												$("#add-list").append('<tr><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-code" value="'
-																		+ this.id
-																		+ '" readonly/></td><td>'
-																		+ this.name
-																		+ '</td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
-																		+ "0"
-																		+ '"name="quantity"/></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-price" value=" '
-																		+ this.price
-																		+ '" readonly/></td></tr>');
-												
+														+ this.id
+														+ '" readonly/></td><td>'
+														+ this.name
+														+ '</td><td class="expiry-date"><select class="form-control"  id="ExpiryDate" name="ExpiryDate" required><option value="" selected></option></select></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
+														+ '" required/></td></tr>');
+												getExpiryList();
 											});
 						});
 
@@ -189,9 +203,8 @@
 													+ obj.id
 													+ '" readonly/></td><td>'
 													+ obj.name
-													+ '</td><td class="expiry-date"><select class="form-control"  name="ExpiryDate"><option value="null" selected></option></select></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value=" '
-													+ "0"
-													+ '" /></td></tr>');
+													+ '</td><td class="expiry-date"><select class="form-control"  id="ExpiryDate" name="ExpiryDate" required><option value="" selected></option></select></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
+													+ '" required/></td></tr>');
 							getExpiryList();
 						});
 	}
@@ -234,21 +247,28 @@
 			}
 		}).done(function(data){
 			$.each($.parseJSON(data), function(){
-				$("#productName").append('<option value='+this.ExpiryDate + '>'+ this.ExpiryDate + '('+ this.Quantity + ')' +' </option>');
+				$("#PackageType").append('<option value='+this.id + '>'+ this.name +' </option>');
 			});
 		});
 	}
 	function getDate() {
 		$(".datepicker").datepicker();
 	}
+	function JSFunctionValidate()
+	{
+	if(document.getElementById('.ExpiryDate').selectedIndex == 0)
+	{
+	alert("Please select ddl");
+	return false;
+	}
+	return true;
+	}
 </script>
 <!-- footer.jsp -->
 <jsp:include page="footer.jsp">
-	<jsp:param
-		value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.min.js"
-		name="js" />
-	<jsp:param
-		value="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"
-		name="js" />
+	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/select2/3.4.4/select2.min.js" name="js" />
+	<jsp:param value="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js" name="js" />
+		<jsp:param value="http://jquery.bassistance.de/validate/jquery.validate.js" name="js"/>
+		<jsp:param value="http://jquery.bassistance.de/validate/additional-methods.js" name="js"/>
 </jsp:include>
 <!-- footer.jsp -->

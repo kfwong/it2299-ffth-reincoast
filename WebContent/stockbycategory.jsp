@@ -130,9 +130,9 @@
 	<input type="hidden" name="category" id="hiddenType" />
 </form>
 <script>
-	
+var category = <%= session.getAttribute( "category" ) %>
 	$(document).ready(function(){
-		var category = <%= session.getAttribute( "category" ) %>
+		
 		alert(itemType);
 		$("#ViewType").on('click', function(){
 			
@@ -152,6 +152,7 @@
 		$('#pagination').bootstrapPaginator({
 			bootstrapMajorVersion: 3,
 			size: 'normal',
+			category: category.val(), 
 			currentPage: "${current_page}",
 			totalPages: Math.ceil(${(total_item)/4}),
 			pageUrl: function( type, page, current, category){

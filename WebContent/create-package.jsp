@@ -36,18 +36,18 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal" role="form" method="post" action="CreatePackageListServlet">
+					<form class="form-horizontal" id="createPackage" role="form" method="post" action="CreatePackageListServlet">
 						
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Package Name</label>
 							<div class="col-lg-4">
-								<input class="form-control" type="text" id="pName" name="packageName" />
+								<input class="form-control" type="text" id="pName" name="packageName" required/>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-lg-2 control-label">Collection Center</label>
 								<div class="col-lg-4">
-							<input class="form-control" type="text" id="colCenter" name="colCenter" />
+							<input class="form-control" type="text" id="colCenter" name="colCenter" required/>
 								</div>
 						</div>
 						<div class="form-group">
@@ -88,6 +88,7 @@
 <!-- sample-content.jsp -->
 <!-- Add row function -->
 <script>
+
 	var count =0;
 	$(document).ready(function() {
 		$("#productName").select2({
@@ -108,6 +109,7 @@
 												}
 											
 										});
+						$("#createPackage").validate();
 					});
 	
 	function getItem() {

@@ -41,7 +41,7 @@ public class GetStockByCategoryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
     	int page = Integer.parseInt(request.getParameter("page"));
 		String type = request.getParameter("category");
-		System.out.println(type);
+		
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("category", type);
@@ -107,13 +107,11 @@ public class GetStockByCategoryServlet extends HttpServlet {
 		
 		Query query= session.createQuery("FROM Product WHERE category = :category");
 		query.setParameter("category", type);
-		query.setFirstResult(4 *(page - 1));
-		query.setMaxResults(4);
+		query.setFirstResult(5 *(page - 1));
+		query.setMaxResults(5);
 		
 		List<Product> result = query.list();
-		for(int i=0; i<result.size(); i++){
-			System.out.println(result.get(i));
-		}
+		
 		session.close();
 		
 		return result;
