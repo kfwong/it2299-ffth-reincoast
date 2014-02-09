@@ -30,7 +30,7 @@ public class Email {
 		formData.add("from", from);
 		formData.add("to", to);
 		formData.add("subject", subject);
-		formData.add("text", message);
+		formData.add("html", message);
 
 		return webResource.type(MediaType.APPLICATION_FORM_URLENCODED).post(ClientResponse.class, formData);
 	}

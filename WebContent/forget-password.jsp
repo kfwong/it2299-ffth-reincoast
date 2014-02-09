@@ -76,6 +76,7 @@ body {
 
 												<button class="btn btn-default " type="submit">Send
 													me reset instructions</button> 
+												<a class="btn btn-default" href="login.jsp">Cancel</a>
 										</div>
 									</div>
 								</div>

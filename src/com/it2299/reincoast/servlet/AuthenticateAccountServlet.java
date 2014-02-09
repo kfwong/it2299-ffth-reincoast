@@ -53,7 +53,7 @@ public class AuthenticateAccountServlet extends HttpServlet {
 			MemberDao memberdao = new MemberDao();
 			Member member = memberdao.getByUsernameMember(userName);
 			System.out.println("Member name : " + member.getName());
-			if (member!=null && member.getrPwd()!=null && member.getrPwd()==tempPassword){
+			if (member!=null && member.getrPwd()!=null && member.getrPwd().equals(tempPassword)){
 				member.setPassword(pwd);
 				member.setrPwd(null);
 				memberdao.saveOrUpdate(member);
@@ -66,7 +66,7 @@ public class AuthenticateAccountServlet extends HttpServlet {
 				rd = request.getRequestDispatcher("/authenticate-account.jsp?msg=Please%20request%20%5Bchange%20password%20instruction%5D%20again.%20.&isType=alert-danger");
 				rd.forward(request, response);
 			}
-			else if(member!=null && member.getrPwd()!=null && member.getrPwd()!=tempPassword){
+			else if(member!=null && member.getrPwd()!=null && !member.getrPwd().equals(tempPassword)){
 				rd = request.getRequestDispatcher("/authenticate-account.jsp?msg=The%20unique%20code%20is%20wrongly%20entered.%20Please%20enter%20a%20valid%20unique%20code%2C%20it%20can%20be%20found%20in%20your%20email.&isType=alert-danger");
 				rd.forward(request, response);
 			}

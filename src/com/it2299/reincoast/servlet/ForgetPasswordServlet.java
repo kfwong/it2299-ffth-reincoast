@@ -47,10 +47,12 @@ public class ForgetPasswordServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = null;
+		
 		/******************************************/
 		UUID uuid = UUID.randomUUID();
 		String tempPwd = uuid.toString().substring(0, 8);
 		System.out.println("PASSWORD TEMP" + tempPwd);
+	
 		/******************************************/
 
 		String emailAdd = request.getParameter("email");
@@ -61,7 +63,10 @@ public class ForgetPasswordServlet extends HttpServlet {
 			MemberDao memberdao = new MemberDao();
 			Member member = memberdao.getByEmailMember(emailAdd);
 
+			String text = "Hi, Reincoast received a request to reset the password for your account.Copy the following url and paste in your brower to change your password" ;
 			
+			String url = "  http://localhost:8080/it2299-ffth-reincoast-project/authenticate-account.jsp ";
+			String pwdCode = "Code : " + (tempPwd);
 			if (member != null && member.getStatus().equals("ACTIVE")) {
 				// save a new password in RESET_PASSWORD
 				member.setrPwd(tempPwd);
@@ -71,7 +76,12 @@ public class ForgetPasswordServlet extends HttpServlet {
 				email.setFrom("REINCOAST Alert <alert@reincoast-kfwong.rhcloud.com>");
 				email.setTo(Memail);
 				email.setSubject("Testing for mailgun.");
-				email.setMessage("Password is " + tempPwd);
+				email.setMessage(text + url + pwdCode);
+				
+				
+				
+				
+				
 				System.out.println(" Email = " + email.send());
 
 				rd = request
