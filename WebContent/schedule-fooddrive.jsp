@@ -187,6 +187,22 @@
 						}	
 		    		}
 		    	});
+		    },
+		    
+		    eventDrop: function(event, revertFunc) {
+		    	$.ajax({
+		    		type: "POST",
+		    		url: "CalendarFoodDriveServlet",
+		    		data: {
+		    			action:"edit",
+		    	        id: event.id,
+		    	        title: event.title,
+		    	        start: event.start.format("YYYY-MM-DD HH:mm:ss"),
+		    	        end: event.end.format("YYYY-MM-DD HH:mm:ss"),
+		    	        allDay:event.allDay
+		    	    }
+		    	});
+
 		    }
 		});   
 		
