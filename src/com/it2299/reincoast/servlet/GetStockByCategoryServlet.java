@@ -1,13 +1,7 @@
 package com.it2299.reincoast.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,47 +9,45 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.search.FullTextQuery;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.it2299.ffth.reincoast.dao.InboundDeliveryDao;
-import com.it2299.ffth.reincoast.dao.OutboundDeliveryDao;
 import com.it2299.ffth.reincoast.dao.ProductDao;
-import com.it2299.ffth.reincoast.dao.StockDao;
-import com.it2299.ffth.reincoast.dto.Audit;
-import com.it2299.ffth.reincoast.dto.Contact;
-import com.it2299.ffth.reincoast.dto.InboundDelivery;
-import com.it2299.ffth.reincoast.dto.OutboundDelivery;
 import com.it2299.ffth.reincoast.dto.Product;
 import com.it2299.ffth.reincoast.util.HibernateUtil;
 
-
 /**
- * Servlet implementation class GetStockServlet
+ * Servlet implementation class GetStockByCategoryServlet
  */
-@WebServlet("/GetStockServlet")
-public class GetStockServlet extends HttpServlet {
+@WebServlet("/GetStockByCategoryServlet")
+public class GetStockByCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public GetStockByCategoryServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public GetStockServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
+   
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		int page = Integer.parseInt(request.getParameter("page"));
+    	int page = Integer.parseInt(request.getParameter("page"));
+		String type = request.getParameter("category");
+		System.out.println(type);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("category", type);
 		ProductDao productDao = new ProductDao();
 		
-		List<Product> productList =  productPaginator(page);
+		List<Product> productList =  productPaginator(page, type);
 				
 		int totalQuan =0;
 		
@@ -69,11 +61,11 @@ public class GetStockServlet extends HttpServlet {
 		if(page != 1){
 			
 			request.setAttribute("current_page", page);
-			request.setAttribute("s_url", "http://localhost:8080/j2EE-it2299-ffth-reincoast/GetStockServlet?page=");
+			request.setAttribute("s_url", "http://localhost:8080/j2EE-it2299-ffth-reincoast/GetStockByCategoryServlet?page=");
 			request.setAttribute("url_type", "&category=");
 		}else{
 			request.setAttribute("current_page", 1);
-			request.setAttribute("s_url", "http://localhost:8080/j2EE-it2299-ffth-reincoast/GetStockServlet?page=");
+			request.setAttribute("s_url", "http://localhost:8080/j2EE-it2299-ffth-reincoast/GetStockByCategoryServlet?page=");
 			request.setAttribute("url_type", "&category=");
 		}
 		
@@ -96,6 +88,7 @@ public class GetStockServlet extends HttpServlet {
 		
 	}
 	
+
 	private String generatedChart(List<Product> productList){
 		String chart = "";
 			for(int i=0; i<productList.size() ; i++){
@@ -107,22 +100,22 @@ public class GetStockServlet extends HttpServlet {
 			}
 		return chart;
 	}
-	
-	@SuppressWarnings({ "unchecked"})
-	private List<Product> productPaginator(int page){
+
+	private List<Product> productPaginator(int page, String type){
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		
-		Query query= session.createQuery("FROM Product");
+		Query query= session.createQuery("FROM Product WHERE category = :category");
+		query.setParameter("category", type);
 		query.setFirstResult(4 *(page - 1));
 		query.setMaxResults(4);
 		
 		List<Product> result = query.list();
-		
+		for(int i=0; i<result.size(); i++){
+			System.out.println(result.get(i));
+		}
 		session.close();
 		
 		return result;
 	}
-	
-	
 }

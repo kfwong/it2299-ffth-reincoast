@@ -130,29 +130,32 @@
 	<input type="hidden" name="category" id="hiddenType" />
 </form>
 <script>
-
+	
 	$(document).ready(function(){
-		
+		var category = <%= session.getAttribute( "category" ) %>
+		alert(itemType);
 		$("#ViewType").on('click', function(){
-			var itemType = $('#category :selected').val();
-			var page = 1;
 			
+			var page = 1;
+			category = $('#hiddenType').val(itemType);
 			$('#hiddenPage').val(page);
 			$('#hiddenType').val(itemType);
 			$('#hiddenForm').submit();
+			
 		});
 		
 		$("#category").select2({
-			
+
 		});
 		getCategory();
+		${sel_value};
 		$('#pagination').bootstrapPaginator({
 			bootstrapMajorVersion: 3,
 			size: 'normal',
 			currentPage: "${current_page}",
 			totalPages: Math.ceil(${(total_item)/4}),
-			pageUrl: function( type, page, current){
-				 return "${s_url}"+page;
+			pageUrl: function( type, page, current, category){
+				 return "${s_url}"+page + "&${url_type}" + category;
 			}
 		});
 		
