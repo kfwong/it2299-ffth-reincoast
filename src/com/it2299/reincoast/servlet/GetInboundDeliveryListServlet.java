@@ -40,10 +40,10 @@ public class GetInboundDeliveryListServlet extends HttpServlet {
 		request.setAttribute("total_item", inboundDao.getAll().size());
 		if(page != 1){
 			request.setAttribute("current_page", page);
-			request.setAttribute("s_url", "http://localhost:8080/j2EE-it2299-ffth-reincoast/GetInboundDeliveryListServlet?page=");
+			request.setAttribute("s_url", "GetInboundDeliveryListServlet?page=");
 		}else{
 			request.setAttribute("current_page", 1);
-			request.setAttribute("s_url", "http://localhost:8080/j2EE-it2299-ffth-reincoast/GetInboundDeliveryListServlet?page=");
+			request.setAttribute("s_url", "GetInboundDeliveryListServlet?page=");
 		}
 		List<InboundDelivery> inboundList = inboundPaginator(page);
 

@@ -186,7 +186,7 @@
 													+ '" readonly/></td><td>'
 													+ '<div class="input-group input-group-sm">'
 													+ '<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>'
-													+  '<input class="form-control input-sm datepicker" type="text" style="width: 100%;" name="expiry-date" readonly required/>'
+													+  '<input class="form-control input-sm datepicker" type="text" style="width: 100%;" name="expiry-date" readonly/>'
 												    +   '</div></td></tr>');
 							getDate().datepicker("refresh");
 						});

@@ -139,6 +139,18 @@
 					count++;
 					$(document).scrollTop($(document).height());
 				}
+				jQuery.validator.setDefaults({
+					  debug: false,
+					  success: "valid"
+					});
+				
+					$("#outbound-form").validate({
+					  rules: {
+						  ExpiryDate: {
+					      required: true
+					    }
+					  }
+					});
 				
 		});
 		$("#addPackage").on('click', function() {
@@ -155,18 +167,7 @@
 			}
 
 		});
-		jQuery.validator.setDefaults({
-			  debug: false,
-			  success: "valid"
-			});
-		
-			$("#outbound-form").validate({
-			  rules: {
-				  ExpiryDate: {
-			      required: true
-			    }
-			  }
-			});
+	
 		
 		
 	});
@@ -184,7 +185,7 @@
 														+ this.id
 														+ '" readonly/></td><td>'
 														+ this.name
-														+ '</td><td class="expiry-date"><select class="form-control"  id="ExpiryDate" name="ExpiryDate" required><option value="" selected></option></select></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
+														+ '</td><td class="expiry-date"><select class="form-control"  id="ExpiryDate" name="ExpiryDate"><option value="" selected></option></select></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
 														+ '" required/></td></tr>');
 												getExpiryList();
 											});
@@ -211,7 +212,7 @@
 													+ '" readonly/></td><td>'
 													+ obj.name
 													+ '</td><td class="expiry-date"><select class="form-control"  id="ExpiryDate" name="ExpiryDate" required><option value="" selected></option></select></td><td><input class="form-control input-sm" type="text" style="width: 100%;" name="item-quantity" value="'
-													+ '" required/></td></tr>');
+													+ '"/></td></tr>');
 							getExpiryList();
 						});
 	}

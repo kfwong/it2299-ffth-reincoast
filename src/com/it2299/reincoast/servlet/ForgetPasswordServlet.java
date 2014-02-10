@@ -65,7 +65,7 @@ public class ForgetPasswordServlet extends HttpServlet {
 
 			String text = "Hi, Reincoast received a request to reset the password for your account.Copy the following url and paste in your brower to change your password" ;
 			
-			String url = "  http://localhost:8080/it2299-ffth-reincoast-project/authenticate-account.jsp ";
+			String url = "http://reincoast-kfwong.rhcloud.com/authenticate-account.jsp ";
 			String pwdCode = "Code : " + (tempPwd);
 			if (member != null && member.getStatus().equals("ACTIVE")) {
 				// save a new password in RESET_PASSWORD

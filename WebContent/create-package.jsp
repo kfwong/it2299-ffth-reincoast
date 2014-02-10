@@ -102,7 +102,7 @@
 										});
 						
 						jQuery.validator.setDefaults({
-							  debug: true,
+							  debug: false,
 							  success: "valid"
 							});
 						

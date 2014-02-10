@@ -69,11 +69,11 @@ public class GetStockServlet extends HttpServlet {
 		if(page != 1){
 			
 			request.setAttribute("current_page", page);
-			request.setAttribute("s_url", "http://localhost:8080/j2EE-it2299-ffth-reincoast/GetStockServlet?page=");
+			request.setAttribute("s_url", "GetStockServlet?page=");
 			request.setAttribute("url_type", "&category=");
 		}else{
 			request.setAttribute("current_page", 1);
-			request.setAttribute("s_url", "http://localhost:8080/j2EE-it2299-ffth-reincoast/GetStockServlet?page=");
+			request.setAttribute("s_url", "GetStockServlet?page=");
 			request.setAttribute("url_type", "&category=");
 		}
 		

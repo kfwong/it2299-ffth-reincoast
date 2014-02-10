@@ -61,12 +61,12 @@ public class GetStockByCategoryServlet extends HttpServlet {
 		if(page != 1){
 			
 			request.setAttribute("current_page", page);
-			request.setAttribute("s_url", "http://localhost:8080/j2EE-it2299-ffth-reincoast/GetStockByCategoryServlet?page=");
-			request.setAttribute("url_type", "&category=");
+			request.setAttribute("s_url", "GetStockByCategoryServlet?page=");
+			request.setAttribute("url_type", "&category="+type);
 		}else{
 			request.setAttribute("current_page", 1);
-			request.setAttribute("s_url", "http://localhost:8080/j2EE-it2299-ffth-reincoast/GetStockByCategoryServlet?page=");
-			request.setAttribute("url_type", "&category=");
+			request.setAttribute("s_url", "GetStockByCategoryServlet?page=");
+			request.setAttribute("url_type", "&category="+type);
 		}
 		
 		String chart = "Morris.Bar({element: 'graph',";
