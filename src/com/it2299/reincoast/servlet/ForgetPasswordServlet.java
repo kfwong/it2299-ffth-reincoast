@@ -85,7 +85,7 @@ public class ForgetPasswordServlet extends HttpServlet {
 				System.out.println(" Email = " + email.send());
 
 				rd = request
-						.getRequestDispatcher("/forget-password.jsp?msg=Password%20reset%20instructions%20has%20been%20send%20to%20your%20Email.%20&isType=alert-success");
+						.getRequestDispatcher("/login.jsp?msg=Password%20reset%20instructions%20has%20been%20send%20to%20your%20Email.%20&isType=alert-success");
 				rd.forward(request, response);
 
 			}

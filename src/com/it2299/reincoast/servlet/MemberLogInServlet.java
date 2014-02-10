@@ -80,7 +80,7 @@ public class MemberLogInServlet extends HttpServlet {
 
 					session.setAttribute("current_user", volunteer);
 
-					rd = request.getRequestDispatcher("v-dashboard.jsp");
+					rd = request.getRequestDispatcher("v-schedule-eventplanner.jsp");
 					rd.forward(request, response);
 				}else 
 				{

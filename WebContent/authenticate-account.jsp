@@ -47,7 +47,10 @@
 								  <div class="panel-body">
 								    <div class="row">
 										<div class="col-lg-12">
-
+										<h1 style="text-align:center;">Retrieve</h1>
+										
+										<hr/>
+										
 											<div class="form-group">
 												<input type="text" class="form-control" placeholder="User Name" name="username" required autofocus> 
 											</div>
