@@ -11,10 +11,11 @@
 <!-- header.jsp -->
 
 <!-- sidebar.jsp -->
-<jsp:include page="sidebar.jsp">
+<jsp:include page="v-sidebar.jsp">
 	<jsp:param value="Schedules" name="active" />
 	<jsp:param value="Event Planner" name="sub-active" />
 </jsp:include>
+<br><br><br><br><br>
 <!-- sidebar.jsp -->
 
 <!-- content -->

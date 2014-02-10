@@ -15,12 +15,12 @@
                 <strong><br>
                 
                 <ul class="nav navbar-nav navbar-right">
-                <li class="fa fa-calendar"><a href="v-schedule-eventplanner.jsp">Event Calendar</a>
+                <li><a href="v-schedule-eventplanner.jsp">Event Calendar</a>
                     </li>
-                    <li class="fa fa-user"><a href="VolunteerViewProfileServlet"> ${current_user.name}</a>
+                    <li> <a href="VolunteerViewProfileServlet"> ${current_user.name}</a>
                     </li>
                     
-                    <li class="fa fa-power-off"><a href="MemberSignOutServlet">SIGN OUT </a>
+                    <li ><a href="MemberSignOutServlet">SIGN OUT </a>
                     </li>
 				 </ul>
                  </strong>
